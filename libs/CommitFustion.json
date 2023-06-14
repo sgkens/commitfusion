@@ -1,0 +1,217 @@
+{
+    "templateName": "Myset1",
+    "templateDescription": "My CI Set",
+    "templateVersion": "1.0.0",
+    "ciset": [
+        {
+            "Type": "changes",
+            "emoji": "💥",
+            "entity": "&#x1f4a5;",
+            "code": ":boom:",
+            "description": "Introduce breaking changes.",
+            "name": "boom",
+            "semver": "major",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "feature",
+            "emoji": "✨",
+            "entity": "&#x2728;",
+            "code": ":sparkles:",
+            "description": "Introduce new features.",
+            "name": "sparkles",
+            "semver": "minor",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "fix",
+            "emoji": "🐛",
+            "entity": "&#x1f41b;",
+            "code": ":bug:",
+            "description": "Fix a bug.",
+            "name": "bug",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "docs",
+            "emoji": "📝",
+            "entity": "&#x1f4dd;",
+            "code": ":memo:",
+            "description": "Write docs.",
+            "name": "memo",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "style",
+            "emoji": "💄",
+            "entity": "&#ff99cc;",
+            "code": ":lipstick:",
+            "description": "Update style.",
+            "name": "lipstick",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "refactor",
+            "emoji": "🎨",
+            "entity": "&#x1f3a8;",
+            "code": ":art:",
+            "description": "Refactor code.",
+            "name": "art",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "perf",
+            "emoji": "⚡️",
+            "entity": "&#x26a1;",
+            "code": ":zap:",
+            "description": "Improve performance.",
+            "name": "zap",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "test",
+            "emoji": "✅",
+            "entity": "&#x2705;",
+            "code": ":white_check_mark:",
+            "description": "Add tests.",
+            "name": "white_check_mark",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "build",
+            "emoji": "📦",
+            "entity": "&#x1f4e6;",
+            "code": ":package:",
+            "description": "Build system.",
+            "name": "package",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "ci",
+            "emoji": "👷",
+            "entity": "&#x1f477;",
+            "code": ":construction_worker:",
+            "description": "Continuous integration.",
+            "name": "construction_worker",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "chore",
+            "emoji": "🔧",
+            "entity": "&#x1f527;",
+            "code": ":wrench:",
+            "description": "Tooling.",
+            "name": "wrench",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "revert",
+            "emoji": "⏪",
+            "entity": "&#x23ea;",
+            "code": ":rewind:",
+            "description": "Revert changes.",
+            "name": "rewind",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "bookmark",
+            "emoji": "🔖",
+            "entity": "&#x1f516;",
+            "code": ":bookmark:",
+            "description": "Release / Version tags.",
+            "name": "bookmark",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "wip",
+            "emoji": "🚧",
+            "entity": "&#x1f6a7;",
+            "code": ":construction:",
+            "description": "Work in progress.",
+            "name": "construction",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "gitignore",
+            "emoji": "🙈",
+            "entity": "&#8bdfe7;",
+            "code": ":see_no_evil:",
+            "description": "Add or update a .gitignore file.",
+            "name": "see-no-evil",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        }
+    ]
+}

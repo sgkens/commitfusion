@@ -1,0 +1,252 @@
+{
+    "miscmojis": [
+        {
+            "emoji": "👤",
+            "entity": "&#x1F464;",
+            "code": ":person:",
+            "description": "Purple Person.",
+            "name": "Person",
+            "semver": null
+        },
+        {
+            "emoji": "📧",
+            "entity": "&#x1F4E7;",
+            "code": ":email:",
+            "description": "Email.",
+            "name": "Email",
+            "semver": null
+        },
+        {
+            "emoji": "📞",
+            "entity": "&#x1F4DE;",
+            "code": ":telephone_receiver:",
+            "description": "Telephone Receiver.",
+            "name": "Telephone",
+            "semver": null
+        },
+        {
+            "emoji": "🌍",
+            "entity": "&#x1F30D;",
+            "code": ":earth_americas:",
+            "description": "Globe Showing Americas.",
+            "name": "Globe",
+            "semver": null
+        },
+        {
+            "emoji": "📅",
+            "entity": "&#x1F4C5;",
+            "code": ":calendar:",
+            "description": "Calendar.",
+            "name": "Calendar",
+            "semver": null
+        },
+        {
+            "emoji": "✅",
+            "entity": "&#x2705;",
+            "code": ":white_check_mark:",
+            "description": "White Heavy Check Mark.",
+            "name": "Check Mark",
+            "semver": null
+        },
+        {
+            "emoji": "❌",
+            "entity": "&#x274C;",
+            "code": ":x:",
+            "description": "Cross Mark.",
+            "name": "Cross Mark",
+            "semver": null
+        },
+        {
+            "emoji": "🔍",
+            "entity": "&#x1F50D;",
+            "code": ":mag:",
+            "description": "Magnifying Glass Tilted Left.",
+            "name": "Magnifying Glass",
+            "semver": null
+        },
+        {
+            "emoji": "📖",
+            "entity": "&#x1F4D6;",
+            "code": ":book:",
+            "description": "Open Book.",
+            "name": "Book",
+            "semver": null
+        },
+        {
+            "emoji": "🔧",
+            "entity": "&#x1F527;",
+            "code": ":wrench:",
+            "description": "Wrench.",
+            "name": "Wrench",
+            "semver": null
+        },
+        {
+            "emoji": "💡",
+            "entity": "&#x1F4A1;",
+            "code": ":bulb:",
+            "description": "Light Bulb.",
+            "name": "Light Bulb",
+            "semver": null
+        },
+        {
+            "emoji": "📌",
+            "entity": "&#x1F4CC;",
+            "code": ":pushpin:",
+            "description": "Pushpin.",
+            "name": "Pushpin",
+            "semver": null
+        },
+        {
+            "emoji": "🔒",
+            "entity": "&#x1F512;",
+            "code": ":lock:",
+            "description": "Lock.",
+            "name": "Lock",
+            "semver": null
+        },
+        {
+            "emoji": "🔓",
+            "entity": "&#x1F513;",
+            "code": ":unlock:",
+            "description": "Open Lock.",
+            "name": "Unlock",
+            "semver": null
+        },
+        {
+            "emoji": "📁",
+            "entity": "&#x1F4C1;",
+            "code": ":file_folder:",
+            "description": "File Folder.",
+            "name": "File Folder",
+            "semver": null
+        },
+        {
+            "emoji": "📎",
+            "entity": "&#x1F4CE;",
+            "code": ":paperclip:",
+            "description": "Paperclip.",
+            "name": "Paperclip",
+            "semver": null
+        },
+        {
+            "emoji": "📋",
+            "entity": "&#x1F4CB;",
+            "code": ":clipboard:",
+            "description": "Clipboard.",
+            "name": "Clipboard",
+            "semver": null
+        },
+        {
+            "emoji": "💻",
+            "entity": "&#x1F4BB;",
+            "code": ":computer:",
+            "description": "Personal Computer.",
+            "name": "Computer",
+            "semver": null
+        },
+        {
+            "emoji": "🖊️",
+            "entity": "&#x1F58A;",
+            "code": ":pen:",
+            "description": "Pen.",
+            "name": "Pen",
+            "semver": null
+        },
+        {
+            "emoji": "📦",
+            "entity": "&#x1F4E6;",
+            "code": ":package:",
+            "description": "Package.",
+            "name": "Package",
+            "semver": null
+        },
+        {
+            "emoji": "•",
+            "entity": "&#x2022;",
+            "code": ":bullet_point:",
+            "description": "Bullet Point",
+            "name": "Bullet Point",
+            "semver": null
+        },
+        {
+            "emoji": "▪",
+            "entity": "&#x25AA;",
+            "code": ":black_small_square:",
+            "description": "Black Small Square",
+            "name": "Black Small Square",
+            "semver": null
+        },
+        {
+            "emoji": "▫",
+            "entity": "&#x25AB;",
+            "code": ":white_small_square:",
+            "description": "White Small Square",
+            "name": "White Small Square",
+            "semver": null
+        },
+        {
+            "emoji": "🔹",
+            "entity": "&#x1F539;",
+            "code": ":small_blue_diamond:",
+            "description": "Small Blue Diamond",
+            "name": "Small Blue Diamond",
+            "semver": null
+        },
+        {
+            "emoji": "🔸",
+            "entity": "&#x1F538;",
+            "code": ":small_orange_diamond:",
+            "description": "Small Orange Diamond",
+            "name": "Small Orange Diamond",
+            "semver": null
+        },
+        {
+            "emoji": "🔺",
+            "entity": "&#x1F53A;",
+            "code": ":small_red_triangle:",
+            "description": "Small Red Triangle",
+            "name": "Small Red Triangle",
+            "semver": null
+        },
+        {
+            "emoji": "🔻",
+            "entity": "&#x1F53B;",
+            "code": ":small_red_triangle_down:",
+            "description": "Small Red Triangle Down",
+            "name": "Small Red Triangle Down",
+            "semver": null
+        },
+        {
+            "emoji": "⚫",
+            "entity": "&#x26AB;",
+            "code": ":black_circle:",
+            "description": "Black Circle",
+            "name": "Black Circle",
+            "semver": null
+        },
+        {
+            "emoji": "⚪",
+            "entity": "&#x26AA;",
+            "code": ":white_circle:",
+            "description": "White Circle",
+            "name": "White Circle",
+            "semver": null
+        },
+        {
+            "emoji": "◾",
+            "entity": "&#x25FE;",
+            "code": ":black_medium_small_square:",
+            "description": "Black Medium Small Square",
+            "name": "Black Medium Small Square",
+            "semver": null
+        },
+        {
+            "emoji": "◽",
+            "entity": "&#x25FD;",
+            "code": ":white_medium_small_square:",
+            "description": "White Medium Small Square",
+            "name": "White Medium Small Square",
+            "semver": null
+        }
+    ]
+}
