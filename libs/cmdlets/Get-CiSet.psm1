@@ -1,9 +1,10 @@
-using module ..\CommitFusion_class.psm1
 Function Get-CiSet(){
     [CmdletBinding()]
+    [OutputType([psobject])]
+    [Alias("gcs")]
     param()
     process {
-        return  $global:commitfusion.GetCiSet() | Format-Table -AutoSize -wrap
+        return (Get-CommitFusionModuleInstance).GetCiSet()
     }
 
 }

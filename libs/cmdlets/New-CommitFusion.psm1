@@ -1,6 +1,8 @@
-using module ..\CommitFusion_class.psm1
+Using Module ..\CommitFusion_class.psm1
 Function New-CommitFusion() {
     [cmdletbinding()]
+    [OutputType([object])]
+    [Alias("ncf")]
     param()
 
     Begin { }

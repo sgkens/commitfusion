@@ -1,6 +1,6 @@
-using module ..\CommitFusion_class.psm1
 Function Update-ChangeLog(){
     [CmdletBinding()]
+    [OutputType([Void])]
     param(
         [Parameter(Mandatory)]
         [string]$logfile = "CHANGELOG-CF.md",
@@ -13,7 +13,7 @@ Function Update-ChangeLog(){
         [string]$WriteClMessage
     )
     process{
-        $global:commitfusion.WriteClMessage($logfile)
+        (Get-CommitFusionModuleInstance).WriteClMessage($logfile)
     }
     end {
 

@@ -1,10 +1,15 @@
-Using Module ..\CommitFusion_class.psm1
 Function New-ConventionalCommit {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
         # valuedateset Dynamic values
-        [validateset('build','ci','chore','docs','feat','fix','perf','refactor','revert','style','test','wip','gitmoji','changes','release','hotfix')]
+        [ValidateScript({
+            if($_ -in (Get-CiSetFusion).type){
+                $true
+            }else{
+                throw "Invalid Type value, please use one of the following values: $((Get-CiSetFusion).type -join ',')"
+            }
+        })]
         [string]$Type,
 
         [Parameter(Mandatory = $true, Position = 1)]
@@ -26,51 +31,58 @@ Function New-ConventionalCommit {
         [string]$GitGroup,
 
         [Parameter(Mandatory = $false)]
+        [string[]]$FeatureAddtions,
+            
+        [Parameter(Mandatory = $false)]
+        [string[]]$BugFixes,
+
+        [Parameter(Mandatory = $false)]
         [string[]]$FeatureNotes,
 
         [Parameter(Mandatory = $false)]
         [string[]]$BreakingChanges,
 
         [Parameter(Mandatory = $false, valuefrompipeline=$true)]
-        [switch]$String,
+        [switch]$AsString,
 
         [Parameter(Mandatory = $false, valuefrompipeline=$true)]
-        [switch]$Object,
+        [switch]$AsObject,
 
         [Parameter(Mandatory = $false, valuefrompipeline=$true)]
-        [switch]$Json,
+        [switch]$AsJson,
 
         [Parameter(Mandatory = $false, valuefrompipeline=$true)]
-        [switch]$Xml
+        [switch]$AsXml
     )
 
     process {
         
-        $global:commitfusion.ConventionalCommit(
-                    $Type,
-                    $Scope,
-                    $Description,
-                    $Body,
-                    $Footer,
-                    $GitUser,
-                    $GitGroup,
-                    $FeatureNotes,
-                    $BreakingChanges
-        )
-        if($string){
-            return $Global:commitfusion.AsStringForCommit()
+        (Get-CommitFusionModuleInstance).ConventionalCommit(
+            $Type,
+            $Scope,
+            $Description,
+            $Body,
+            $Footer,
+            $GitUser,
+            $GitGroup,
+            $FeatureAddtions,
+            $BugFixes,
+            $FeatureNotes,
+            $BreakingChanges);
+        if($AsString){
+            return (Get-CommitFusionModuleInstance).AsStringForCommit()
         }
-        if($Object){
-            return $Global:commitfusion.AsObject()
+        if($AsObject){
+            return (Get-CommitFusionModuleInstance).AsObject()
         }
-        if($Json){
-            return $Global:commitfusion.AsObject() | ConvertTo-Json
+        if($AsJson){
+            return (Get-CommitFusionModuleInstance).AsObject() | ConvertTo-Json
         }
-        if($Xml){
-            return $Global:commitfusion.AsObject() | ConvertTo-Xml
+        if($AsXml){
+            return (Get-CommitFusionModuleInstance).AsObject() | ConvertTo-Xml
         }
-        if(-not $string -and -not $Object -and -not $Json -and -not $Xml){
-            return $Global:commitfusion.AsString()
+        if(-not $AsString -and -not $AsObject -and -not $AsJson -and -not $AsXml){
+            return (Get-CommitFusionModuleInstance).AsStringForCommit()
         }
     }
     end {

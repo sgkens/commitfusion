@@ -1,4 +1,5 @@
 using module libs\CommitFusion_class.psm1
+using module libs\cmdlets\Get-CommitFusionModuleInstance.psm1
 using module libs\cmdlets\New-CommitFusion.psm1
 using module libs\cmdlets\New-ConventionalCommit.psm1
 using module libs\cmdlets\Get-CiSet.psm1
@@ -9,36 +10,19 @@ using module libs\cmdlets\Format-FusionMD.psm1
 using module libs\cmdlets\Get-CommitAsObject.psm1
 using module libs\cmdlets\Get-CommitAsString.psm1
 using module libs\cmdlets\Get-GitAutoVersion.psm1
-# using module libs\cmdlets\Out-Object.psm1
-# using module libs\cmdlets\Out-String.psm1
 using module libs\cmdlets\Update-ChangeLog.psm1
 
 
-<#
- * Set global instance for all cmdlets New-CommitFusion 
- * can be used to create a new instance outside of the global instance
-#>
-$global:commitfusion = New-Object CommitFusion
-#$global:commitfusion = New-Object CommitFusion -Argumentlist $pathtocustomconfigfile
-
-# Set the module root path
-$global:CommitFusionBaseModuleRoot = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
-write-host -ForegroundColor Green "Module CommitFuison loaded: ModuleRoot: $global:BaseModuleRoot"
-
-
-Export-ModuleMember -Function New-CommitFusion
-Export-ModuleMember -Function New-ConventionalCommit
-Export-ModuleMember -Function Get-CiSet
-Export-ModuleMember -Function Get-CiSetFusion
-Export-ModuleMember -Function Get-Emoji
-Export-ModuleMember -Function Get-EmojiIndex
-Export-ModuleMember -Function Get-CommitAsObject
-Export-ModuleMember -Function Get-CommitAsString
-Export-ModuleMember -Function Get-GitAutoVersion
-Export-ModuleMember -Function Format-FusionMD
-Export-ModuleMember -Function Update-Changelog
-# Export-ModuleMember -Function Out-Object
-# Export-ModuleMember -Function Out-String
+Export-ModuleMember -Function New-CommitFusion,
+                              Get-CommitFusionModuleInstance,
+                              New-ConventionalCommit,
+                              Get-CiSet,Get-CiSetFusion,
+                              Get-Emoji,Get-EmojiIndex,
+                              Get-CommitAsObject,
+                              Get-CommitAsString,
+                              Get-GitAutoVersion,
+                              Format-FusionMD,
+                              Update-Changelog
 
 
 <#

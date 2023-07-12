@@ -1,9 +1,11 @@
 using module .\difs.psm1
 using module .\PowerUnicode.psm1
 
-#Requires -PSEdition Core
-#Requires -Version 7.0
-# ns.utilies.commitfusion                                                                                                                                                                                                                                                                                                             
+
+#Reequiress -PSEdition desktop
+#Reeeuiress -Version 5.0
+
+# ns.utilies.commitfusion
 class CommitFusion {
         [String]   $Type
         [String]   $Scope
@@ -11,6 +13,8 @@ class CommitFusion {
         [string[]] $Body
         [String]   $Styledbody
         [String]   $Footer
+        [string[]] $FeatureAddtions
+        [string[]] $Bugfixes
         [string[]] $Breakingchanges
         [string[]] $Featurenotes
         [psobject] $EmojiIndex
@@ -19,33 +23,34 @@ class CommitFusion {
         [String]   $BodyBullet
         [String]   $GitUser
         [String]   $GitGroup
-        [String]   $DateNow 
+        [String]   $DateNow
         [String]   $MessageStringFormatted
-        [String]   $GitLabNameSpace
+        [String]   $GitNameSpace
         [PSObject] $CFConfig
         [PSObject] $ConstructMessageObject
         [String]   $ModuleRoot
         [String]   $FusionConfigPath
-        hidden [psobject] $puc # Hide this from the user
-        hidden [psobject] $gmo # Hide this from the user
-        
+        [PSObject] $IconSet
+        # hidden [psobject] $puc # Hide this from the user
+        # hidden [psobject] $gmo # Hide this from the user
         # CONSTRACTOR BASE ------
         CommitFusion( ) {
 
-                $this.DateNow = (Get-Date).ToString('h:mmtt, dddd d\t\ MMMM yyyy')
+                $this.DateNow = (Get-Date).ToString('h:mmtt, dddd d\t\h MMMM yyyy')
                 $this.ModuleRoot = (Get-Item -Path $PSScriptRoot).FullName
+                $OutputEncoding = [System.Text.Encoding]::UTF8
                 try{
                         $content_GitMojiIndex = Get-Content -path "$PSScriptroot\gitmojis.json" -Raw
                         $content_EmojiIndex   = Get-Content -Path "$PSScriptroot\Unicode-Index.json" -Raw
-                        $content_CFConfig     = Get-Content -Path "$PSScriptroot\CommitFustion.json" -Raw 
+                        $content_CFConfig     = Get-Content -Path "$PSScriptroot\CommitFustion.json" -Raw
                         # $cc.StringCleaner() # This still returns igredular white spaces with-in object with output to console
                         # Not a breaking issue but kinda annoying
                         # TODO: Fix this issue
                         # implimented .net lib json parser to fix this issue
-                        $this.GitMojiIndex = $this.StringCleaner($content_GitMojiIndex) | ConvertFrom-Json
-                        $this.EmojiIndex   = $this.StringCleaner($content_EmojiIndex) | ConvertFrom-Json
-                        $this.CFConfig     = $this.StringCleaner($content_CFConfig) | ConvertFrom-Json
-                        
+                        $this.GitMojiIndex = $content_GitMojiIndex | ConvertFrom-Json
+                        $this.EmojiIndex   = $content_EmojiIndex | ConvertFrom-Json
+                        $this.CFConfig     = $content_CFConfig | ConvertFrom-Json
+
                         #$this.EmojiIndex = Get-Content -Path "$($this.ModuleRoot)\Unicode-Index.json" -Raw | ConvertFrom-Json
                         #$this.CFConfig = Get-Content -Path "$($this.ModuleRoot)\CommitFustion.json" -Raw | ConvertFrom-Json
                 } catch [system.exception]{
@@ -53,47 +58,49 @@ class CommitFusion {
                         exit
                 }
         }
-        
+
         # CONSTRUCTOR OVERLOAD 1 Custom Config Path
         CommitFusion($configFile) {
-                
+
                 $this.DateNow = (Get-Date).ToString('h:mmtt, dddd d\t\ MMMM yyyy')
                 $this.ModuleRoot = (Get-Item -Path $PSScriptRoot).FullName
-                
+                $OutputEncoding = [System.Text.Encoding]::UTF8
+
                 try{
-                        $ConfigFilePath = (Get-item -path $configFile -ErrorAction Stop).FullName
+                        $ConfigFilePath       = (Get-item -path $configFile -ErrorAction Stop).FullName
                         $content_GitMojiIndex = Get-Content -path "$PSScriptroot\gitmojis.json" -Raw
                         $content_EmojiIndex   = Get-Content -Path "$PSScriptroot\Unicode-Index.json" -Raw
                         $content_CFConfig     = Get-Content -Path $ConfigFilePath -Raw
-                        
-                        $this.GitMojiIndex = $this.StringCleaner($content_GitMojiIndex) | ConvertFrom-Json 
-                        $this.EmojiIndex   = $this.StringCleaner($content_EmojiIndex) | ConvertFrom-Json
-                        $this.CFConfig     = $this.StringCleaner($content_CFConfig) | ConvertFrom-Json
-                        
-                        #$this.EmojiIndex = Get-Content -Path "$($this.ModuleRoot)\Unicode-Index.json" -Raw | ConvertFrom-Json
-                        #$this.CFConfig = Get-Content -Path "$($this.ModuleRoot)\CommitFustion.json" -Raw | ConvertFrom-Json
+
+                        $this.GitMojiIndex = $content_GitMojiIndex | ConvertFrom-Json
+                        $this.EmojiIndex   = $content_EmojiIndex | ConvertFrom-Json
+                        $this.CFConfig     = $content_CFConfig | ConvertFrom-Json
+
                 } catch [system.exception]{
+
                         Write-Host "Error: $($_.exception.message)" -ForegroundColor Red
                         exit
                 }
         }
 
-        ConventionalCommit( 
+        ConventionalCommit(
 
-                [String]    $Type, 
-                [String]    $Scope, 
-                [String]    $Description, 
-                [string[]]  $Body, 
-                [String]    $Footer = $null, 
+                [String]    $Type,
+                [String]    $Scope,
+                [String]    $Description,
+                [string[]]  $Body,
+                [String]    $Footer = $null,
                 [String]    $GitUser = $Null,
                 [String]    $GitGroup = $null,
-                [string[]]  $Featurenotes = $null,
-                [string[]]  $Breakingchanges = $null 
+                [string[]]  $FeatureAddtions = $null,
+                [string[]]  $bugfixes = $null,
+                [string[]]  $FeatureNotes = $null,
+                [string[]]  $BreakingChanges = $null
 
                 ) {
-                
+
                 # CONSTRUCTOR -------------------------------------------------------------------
-                
+
                 $this.type = $type
                 $this.scope = $scope
                 $this.description = $description
@@ -103,10 +110,12 @@ class CommitFusion {
                 $this.featurenotes = $featurenotes
                 $this.gituser = $gituser
                 $this.gitgroup   = $gitgroup
+                $this.FeatureAddtions = $FeatureAddtions
+                $this.bugfixes = $bugfixes
                 #$this.puc = [powerunicode]::new()
                 #$this.gmo = [gmo]::new()
                 #$this.BodyIndention = " " * 5 # number of spaces to use for body indention
-                 
+
                 if( $null -eq $this.gituser ){
                         Throw  [System.Exception]::new("GitUser is Required, please supply a git user name and try again")
                         exit
@@ -119,16 +128,58 @@ class CommitFusion {
                 }
                 if($null -ne $this.gitgroup){
                         $this.gitgroup = "$($this.gitgroup)"
-                        $this.GitLabNameSpace = $this.gitgroup
+                        $this.GitNameSpace = $this.gitgroup
                 }else{
-                        $this.GitLabNameSpace = $this.GitUser
+                        $this.GitNameSpace = $this.GitUser
                 }
-
                 $this.ConstructMessage();
-
         }
 
         hidden [void] ConstructMessage( ) {
+
+                <#& FEATURE ADDTIONS #>
+                if ($null -ne $this.FeatureAddtions ) {
+
+                        # Add if branch is not null
+                        $FeatureAddtionsVar = "$($this.GetEmoji("miscmojis","glowing_star")) FEATURE ADDTIONS: `n"
+                        $FeatureAddtionsVar += "`n"
+                        [int]$index = 1
+                        foreach ($faddtion in $this.FeatureAddtions){
+                                if($this.FeatureAddtions.count -ne $index -and $this.FeatureAddtions.count -ne 1){ 
+                                        $FeatureAddtionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion `n"
+                                }
+                                else{
+                                        $FeatureAddtionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion ..🖊"
+                                }
+                                $index++
+                        }
+                        $index = $null
+                        $FeatureAddtionsVar += "`n"
+                        $this.FeatureAddtions = $FeatureAddtionsVar
+                }
+                else { $this.FeatureAddtions = "" }
+
+                <#& BUGFIXES #>
+                if ($null -ne $this.bugfixes ) {
+
+                        # Add if branch is not null
+                        $bugfixessVar = "$($this.GetEmoji("miscmojis","bug")) BUGFIXES:  `n"
+                        $bugfixessVar += "`n"
+                        [int]$index = 1
+                        foreach ($bfixes in $this.bugfixes){
+                                if($this.bugfixes.count -ne $index -and $this.bugfixes.count -ne 1){ 
+                                        $bugfixessVar += "$($this.GetEmoji("miscmojis","microbe")) $bfixes `n"
+                                }
+                                else{
+                                        $bugfixessVar += "$($this.GetEmoji("miscmojis","microbe")) $bfixes ..🖊"
+                                }
+                                $index++
+                        }
+                        $index = $null
+                        $bugfixessVar += "`n"
+                        $this.bugfixes = $bugfixessVar
+                }
+                else { $this.bugfixes = "" }
 
                 <# /**----------o
                 ~breakingChanges     \
@@ -145,58 +196,68 @@ class CommitFusion {
                 if ($null -ne $this.breakingChanges ) {
 
                         # Add if branch is not null
-                        $breakingChangesVar = "$($this.GetEmoji("miscmojis","anger_symbol")) BREAKING CHANGES:  `n"
+                        $breakingChangesVar = "$($this.GetEmoji("miscmojis","anger_symbol")) BREAKING CHANGES: `n"
                         $breakingChangesVar += "`n"
+                        [int]$index = 1
                         foreach ($bchange in $this.breakingChanges){
-
-                                $breakingChangesVar += "| $($this.GetEmoji("miscmojis","eight_pointed_star")) $bchange  `r"
-
-                        } 
+                                if($this.breakingChanges.count -ne $index -and $this.breakingChanges.count -ne 1){ 
+                                        $breakingChangesVar += "$($this.GetEmoji("miscmojis","firecracker")) $bchange `n"
+                                }
+                                else{
+                                        $breakingChangesVar += "$($this.GetEmoji("miscmojis","firecracker")) $bchange ..🖊"
+                                }
+                                $index++
+                        }
+                        $index = $null
                         $breakingChangesVar += "`n"
                         $this.BreakingChanges = $breakingChangesVar
                 }
                 else { $this.BreakingChanges = "" }
-
+                
                 <#& FEATURE CHANGES #>
                 if ($null -ne $this.featurenotes ) {
 
                         $featurenotesBody = "$($this.GetEmoji("miscmojis","test_tube")) FEATURE UPDATES: `n"
                         $featurenotesBody += "`n"
-                        foreach ($fnote in $this.featurenotes){
-                                
-                                $featurenotesBody += "| $($this.GetEmoji("miscmojis","eight_spoked_asterisk")) $fnote `n"
-
+                        [int]$index = 1
+                        foreach ($fnote in $this.FeatureNotes){
+                                if($this.FeatureNotes.count -ne $index -and $this.FeatureNotes.count -ne 1){ 
+                                        $featurenotesBody += "$($this.GetEmoji("miscmojis","hammer")) $fnote `n"
+                                }
+                                else{
+                                        $featurenotesBody += "$($this.GetEmoji("miscmojis","hammer")) $fnote ..🖊"
+                                }
+                                $index++
                         }
+                        $index = $null
                         $featurenotesBody += "`n"
                         $this.featurenotes = $featurenotesBody
                 }
                 else { $this.BreakingChanges = "" }
 
-                <#& INJECT LIST NOTES INTO COMMIT BODY #>
-                $bodyvar = "| Notes: 🗣 |`n|----------|`n`n"
-                $bodyvar += "$($this.EmojiIndex.where({$_.label -eq "Pen"}).char) `r`n"
+                <#& INJECT LIST NOTES INTO COMMIT BODY #> 
+                $bodyvar = "| Notes: $($this.EmojiIndex.where({$_.label -eq "speaking_head"}).char) |`n|----------|`n`n"
+                #$bodyvar += "$($this.GetEmoji("miscmojis","memo"))_______ `r`n" 
 
-                foreach ($Note in $this.Body) { 
-                        # if ($note.Length -gt 50) {
-                        #         $Note = $Note.Substring(0, 50) + "`n            " + $Note.Substring(50)
-                        # }
-                        $bodyvar += "$($this.GetEmoji("miscmojis","wavy_dash")) $Note `r`n" 
+                foreach ($Note in $this.Body) {
+
+                        $bodyvar += "> $($this.GetEmoji("miscmojis","pencil")) $Note `n"
                 }
                 $this.styledbody = "$bodyvar"
-                
+
                 # Message object to be returned
                 #  $($this.emojiinex.where({$_.label -eq "cyclone"}).char)— #? Start Tag
                 [PSObject]$StringParts=@{
 
-                        Type            = "$($this.CFConfig.ciset.where({$_.Type -eq $this.type}).emoji) -$($this.Type)"
-                        Scope           = " ( $($this.Scope) )"
+                        Type            = "$($this.CFConfig.ciset.where({$_.Type -eq $this.type}).emoji) $($this.Type)"
+                        Scope           = " ( $($this.Scope) ):"
                         Description     = $this.Description
                         Body            = $this.styledbody
-                        Footer          = "$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "watch"}).char) $($this.DateNow) `n$($this.Footer)"
-                        BreakingChanges = "$($this.featurenotes)`n $($this.BreakingChanges)"
+                        Footer          = "$('`')$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $($this.DateNow)$('`') `n$($this.Footer)"
+                        BreakingChanges = "`n$($this.FeatureAddtions)`n`n$($this.BugFixes)`n`n$($this.FeatureNotes)`n`n$($this.BreakingChanges)"
                 }
                 $this.ConstructMessageObject = $StringParts
-                
+
         }
 
         # Returns the commit message as a string
@@ -204,15 +265,16 @@ class CommitFusion {
         # ? for use with git commit -m
         hidden [String] AsString( ) {
                 $ConstructMessage = $this.ConstructMessageObject
-                $ConstructMessage_contruct = " $($this.GetEmoji("miscmojis",'bullseye'))$($ConstructMessage.Type)$($ConstructMessage.Scope) "
+                $ConstructMessage_contruct = " $($this.GetEmoji("miscmojis",'bullseye'))-$($ConstructMessage.Type)$($ConstructMessage.Scope) "
                 $ConstructMessage_contruct += "$($ConstructMessage.Description)`n--------commit-id--------`n"
                 $ConstructMessage_contruct += "$($ConstructMessage.Body)`n"
                 $ConstructMessage_contruct += "$($ConstructMessage.BreakingChanges)`n`n"
                 $ConstructMessage_contruct += "$($ConstructMessage.Footer)`n----`n"
-                
+
                 return $ConstructMessage_contruct
 
         }
+
         hidden [String] AsStringForCommit( ) {
                 $ConstructMessage = $this.ConstructMessageObject
                 $ConstructMessage_contruct = "$($ConstructMessage.Type)$($ConstructMessage.Scope) "
@@ -223,6 +285,13 @@ class CommitFusion {
                 
                 return $ConstructMessage_contruct
 
+        }
+        [string] AsRawString(){
+                return $this.ConstructMessageObject.ToString() -join "`n"
+        }
+        # Returns the commit message as an object
+        [PSObject] AsObject() { 
+                return $this.ConstructMessageObject
         }
 
         [String] GetEmoji([String]$set, [String]$name) {
@@ -246,13 +315,8 @@ class CommitFusion {
                 }
                 return $IndexHolder
         }
-        # Returns the commit message as an object
-        [PSObject] AsObject() { 
-                return $this.ConstructMessageObject
-        
-        }
         # Returns the commit template
-        [PSObject[]] GetCiSet( ) { 
+        [pscustomobject[]] GetCiSet( ) { 
                 
                 return $this.GitMojiIndex.gitmojis
         
@@ -267,24 +331,22 @@ class CommitFusion {
         ?-KB: 
         - https://github.com/PowerShell/PowerShell/issues/8604
                 + Stephanevg
-        TODO: Extract and add this method the CFO C# code base for general use      
+        TODO: Extract and add this method the CFO C# code base for general use 
+        TODO: #! Remove from codebase     
         #>
         [String] StringCleaner($json){
                 $json = $json -replace '\s+','' -replace '`t','' -replace '`n','' -replace '`r',''
                 return $json.trim()
         }
         # Returns the CommitFusion config
-        [PSObject[]] GetCiSetFusion( ) { 
+        [pscustomobject[]] GetCiSetFusion( ) { 
                 
-                return $this.CFConfig.ciset | Format-Table -wrap -AutoSize 
+                return $this.CFConfig.ciset
         
         }
         # returns the commit message as a string
         # ? without the markdown tags and other styling elements
         [String] GetCommitMessage( ){
-               return $this.AsStringForCommit()
-        }
-        [String] GetRawCommitMessage( ){
                return $this.AsStringForCommit()
         }
         # Returns git version base on on the number of major, minor and patch commits
@@ -391,17 +453,17 @@ class CommitFusion {
                                         #~       - github https://github.com/(name|group)/(repo-name)/commit/(commit-id)
                                         #~       - bitbucket https://bitbucket.org/(name|group)/(repo-name)/commits/(commit-id)
                                         #~       - gitlab self hosted https://gitlab.(domain)/(name|group)/(repo-name)/-/commit/(commit-id)
-                                        $MessageString += "`n### ``Commit:`` [$CommitIdEmoji]» [$ShortedCommitid](https://gitlab.snowlab.tk/$($this.GitLabNameSpace)/$RepoName/-/commit/$CommitId) "
+                                        $MessageString += "`n### ``Commit:`` [$CommitIdEmoji]» [$ShortedCommitid](https://gitlab.snowlab.tk/$($this.GitNameSpace)/$RepoName/-/commit/$CommitId) "
                                         $MessageString += " $AutoBuildState"
                                 }
                                 if ( $ExplotedContent[$i] -match "(FEATURE UPDATES)" ) {
-                                        
-                                        $MessageString += "| $($ExplotedContent[$i]) |`n|-|"
-
+                                        $MessageString += "$($ExplotedContent[$i]) |`n|-|`n"
+                                } elseif ( $ExplotedContent[$i] -match "(FEATURE ADDTIONS)" ) {
+                                        $MessageString += "$($ExplotedContent[$i]) |`n|-|`n"
                                 } elseif ( $ExplotedContent[$i] -match "(BREAKING CHANGES)" ) {
-
-                                       
-                                        $MessageString += "|$($ExplotedContent[$i]) |`n|-|"
+                                        $MessageString += "$($ExplotedContent[$i]) |`n|-|`n"
+                                } elseif ( $ExplotedContent[$i] -match "(BUGFIXES)" ) {
+                                        $MessageString += "$($ExplotedContent[$i]) |`n|-|`n"
                                 } else{
                                         $MessageString += "$($ExplotedContent[$i]) `n"
                                 }
@@ -423,7 +485,7 @@ class CommitFusion {
                 return  $MessageString
         }
         
-        [void] WriteClMessage([String]$file){ 
+        [string] WriteClMessage([String]$file){ 
                 
                 try{ 
                         Write-host "Checking for changelog file: $file"
@@ -456,6 +518,8 @@ class CommitFusion {
                         # Write the content to the changelog file
                         write-host "Writing Template_final.md Contents to Changelog: $changelogfile"
                         $ChangeLogFinal | Set-Content -Path $changelogfile -Encoding utf8
+
+                        return "Successfully Updated ChangeLog: $changelogfile"
                 }
                 catch [system.exception]{
                         Write-Host "File not found $($_.exception.message)"

@@ -4434,18 +4434,6 @@
     "unicode": "#1F9A0"
   },
   {
-    "name": "microbe",
-    "label": "microbe",
-    "char": "🦠",
-    "unicode": "#1F9A0"
-  },
-  {
-    "name": "microbe",
-    "label": "microbe",
-    "char": "🦠",
-    "unicode": "#1F9A0"
-  },
-  {
     "name": "bouquet",
     "label": "bouquet",
     "char": "💐",
@@ -5676,7 +5664,7 @@
     "unicode": "#1F9F1"
   },
   {
-    "name": "rock",
+    "name": "c",
     "label": "rock",
     "char": "🪨",
     "unicode": "#1FAA8"
@@ -8632,18 +8620,6 @@
     "label": "crayon",
     "char": "🖍",
     "unicode": "#1F58D"
-  },
-  {
-    "name": "memo",
-    "label": "memo",
-    "char": "📝",
-    "unicode": "#1F4DD"
-  },
-  {
-    "name": "memo",
-    "label": "memo",
-    "char": "📝",
-    "unicode": "#1F4DD"
   },
   {
     "name": "memo",

@@ -1,4 +1,194 @@
  
+ 🎯  
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>major minor patch patch patch patch patch patch patch patch patch patch   </kbd> 
+ 
+ 
+ 
+ 
+---- 
+ 
+ 
+
+
+
+ 
+ 🎯  
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>major minor patch patch patch patch patch patch patch patch patch patch   </kbd> 
+ 
+ 
+ 
+ 
+---- 
+ 
+ 
+
+
+
+ 
+ 🎯  
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>major minor patch patch patch patch patch patch patch patch patch patch   </kbd> 
+ 
+ 
+ 
+ 
+---- 
+ 
+ 
+
+
+
+ 
+ 🎯  
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>major minor patch patch patch patch patch patch patch patch patch patch   </kbd> 
+ 
+ 
+ 
+ 
+---- 
+ 
+ 
+
+
+
+ 
+ 🎯  
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>major minor patch patch patch patch patch patch patch patch patch patch   </kbd> 
+ 
+ 
+ 
+ 
+---- 
+ 
+ 
+
+
+
+ 
+##  🎯✨ -feature ( CommitFusion ) Construct a Commit 
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>minor</kbd> 
+| Notes: 🗣 | 
+|----------| 
+ 
+🖊  
+〰 Body Item 1  
+〰 Body Item 2  
+ 
+| 🧪 FEATURE UPDATES:  |
+|-| 
+| ✳ Feature Note 1  
+| ✳ Feature Note 2  
+ 
+ 
+| 💢 BREAKING CHANGES:   |
+|-| 
+| ✴ Breaking Change 1  | ✴ Breaking Change 2   
+ 
+ 
+👤 @snoonx ⌚ 6:34PM, Friday 16t June 2023  
+> The Footer 
+---- 
+ 
+ 
+
+
+
+ 
+##  🎯✨ -feature ( CommitFusion ) Construct a Commit 
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>minor</kbd> 
+| Notes: 🗣 | 
+|----------| 
+ 
+🖊  
+〰 Body Item 1  
+〰 Body Item 2  
+ 
+| 🧪 FEATURE UPDATES:  |
+|-| 
+| ✳ Feature Note 1  
+| ✳ Feature Note 2  
+ 
+ 
+| 💢 BREAKING CHANGES:   |
+|-| 
+| ✴ Breaking Change 1  | ✴ Breaking Change 2   
+ 
+ 
+👤 @snoonx ⌚ 6:09PM, Friday 16t June 2023  
+> The Footer 
+---- 
+ 
+ 
+
+
+
+ 
+##  🎯✨ -feature ( CommitFusion ) Construct a Commit 
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>minor</kbd> 
+| Notes: 🗣 | 
+|----------| 
+ 
+🖊  
+〰 Body Item 1  
+〰 Body Item 2  
+ 
+| 🧪 FEATURE UPDATES:  |
+|-| 
+| ✳ Feature Note 1  
+| ✳ Feature Note 2  
+ 
+ 
+| 💢 BREAKING CHANGES:   |
+|-| 
+| ✴ Breaking Change 1  | ✴ Breaking Change 2   
+ 
+ 
+👤 @snoonx ⌚ 6:09PM, Friday 16t June 2023  
+> The Footer 
+---- 
+ 
+ 
+
+
+
+ 
+##  🎯✨ -feature ( CommitFusion ) Construct a Commit 
+
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk//CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>minor</kbd> 
+| Notes: 🗣 | 
+|----------| 
+ 
+🖊  
+〰 Body Item 1  
+〰 Body Item 2  
+ 
+| 🧪 FEATURE UPDATES:  |
+|-| 
+| ✳ Feature Note 1  
+| ✳ Feature Note 2  
+ 
+ 
+| 💢 BREAKING CHANGES:   |
+|-| 
+| ✴ Breaking Change 1  | ✴ Breaking Change 2   
+ 
+ 
+👤 @snoonx ⌚ 6:09PM, Friday 16t June 2023  
+> The Footer 
+---- 
+ 
+ 
+
+
+
+ 
 ##  🎯✨ -feature ( v0.1.0 ) Nullam tempor Phasellus sit tristique fermentum 
 
 ### `Commit:` [🆔]» [021048ff04](https://gitlab.snowlab.tk/PowerShell/ccommits/-/commit/021048ff0472e41974839d7c69159f5d29b5d1f4)  [🆎]» <kbd>minor</kbd> 
@@ -2637,6 +2827,24 @@
 ---- 
  
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

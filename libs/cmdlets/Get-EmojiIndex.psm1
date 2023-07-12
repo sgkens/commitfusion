@@ -1,4 +1,3 @@
-using module ..\CommitFusion_class.psm1
 Function Get-EmojiIndex(){
     [CmdletBinding()]
     [OutputType([PSObject])]
@@ -10,7 +9,7 @@ Function Get-EmojiIndex(){
     )
     try {
         # Return the CommitFusion object
-        return $global:commitfusion.GetEmojiIndex($emojiType)
+        return (Get-CommitFusionModuleInstance).GetEmojiIndex($emojiType)
     }
     catch [System.Exception] {
         Write-Host "An error occurred while creating CommitFusion: $_.Exception.Message"

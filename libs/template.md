@@ -1,32 +1,60 @@
  
-##  🎯✨ -feature ( v0.1.0 ) Nullam tempor Phasellus sit tristique fermentum 
+##  🎯-💥 changes ( `UserAdmin` ): CommitFusion PowerShell class library1 
 
-### `Commit:` [🆔]» [021048ff04](https://gitlab.snowlab.tk/PowerShell/ccommits/-/commit/021048ff0472e41974839d7c69159f5d29b5d1f4)  [🆎]» <kbd>minor</kbd> 
+### `Commit:` [🆔]» [5c695837d4](https://gitlab.snowlab.tk/Powershell/CommitFusion/-/commit/5c695837d4b0b64c41459ec1cf6c4c062da89bb6)  [🆎]» <kbd>major</kbd> 
 | Notes: 🗣 | 
 |----------| 
  
-🖊  
-〰 lobortis semper tempus, congue Ut tortor aliquet venenatis, tristique neque. blandit. aliquam ultricies Nullam tristique Nullam nec  
-〰 laoreet, tempor lacus dignissim placerat finibus Ut hendrerit. Phasellus pulvinar. ut ligula et dolor ante, tincidunt orci  
-〰 Mauris pulvinar metus non Aliquam laoreet ligula Mauris ut ac  
-〰 ultricies Vestibulum Phasellus aliquet. felis fringilla, sapien adipiscing consectetur. est  
-〰 Nunc sed nec lobortis Proin Nunc tristique, ultricies, tincidunt ante volutpat ligula vitae a magna,  
- 
-| 🧪 FEATURE UPDATES:  |
-|-| 
-| ✳ eu a a amet sed vitae scelerisque eros eros Nullam euismod eleifend. aliquet. ex fringilla ligula Aenean  
-| ✳ rhoncus finibus, lacus sit elit, lectus Morbi tristique eget leo, ultricies. Aliquam et tempus mi  
-| ✳ metus a non, interdum laoreet Nullam eget hendrerit. magna, nec sed nibh sapien  
-| ✳ scelerisque id lobortis pellentesque auctor lacinia. a pulvinar elementum. Ut laoreet lacus sit iaculis. vulputate nec quam scelerisque  
-| ✳ sapien, Sed faucibus. tincidunt quis vel Morbi laoreet dignissim. ligula  
+> ✏ Generate Conventionl Commit messages, with the ability to add custom messages  
+> ✏ Return string with or without markdown tags  
+> ✏ Return object commit string with commit components  
+> ✏ Write commit message to template file  
+> ✏ Prepend commit message to changelog file  
+> ✏ Append Changelog contents inbetween costom markers in the readme.md file  
+> ✏ Return Emoji Index as object array  
+> ✏ Return Gitmoji Index as object array  
+> ✏ Search gitMoji index for emoji by name return EmojiCon Icon  
+> ✏ Random feature note: create a random string of characters to use as a filename  
+> ✏ Random  
  
  
-| 💢 BREAKING CHANGES:   |
-|-| 
-| ✴ Quisque elit, dignissim. auctor eu fringilla. pulvinar Nunc tristique, consectetur vitae at nisl In Mauris scelerisque  | ✴ consectetur est, dolor pulvinar. sapien tempor ut laoreet eget est Etiam euismod Nunc et a mi  | ✴ nec tristique, aliquet nec vitae dignissim non Maecenas et Phasellus consequat, lacus, sapien tempor  | ✴ augue Maecenas sagittis laoreet rhoncus sed Sed Phasellus est est, placerat dui non ut  | ✴ orci sed lacinia. nunc. blandit. elit a id elementum. non semper, eu et ac hendrerit. tempor   
+🌟 FEATURE ADDTIONS:  |
+|-|
+ 
+🍠 featurenotes 1 Build Test Field agains modules versions older than 2.1.9  
+🍠 anotsaafher feature ..🖊 
  
  
-👤 @snoonx ⌚ 9:13PM, Wednesday 14t June 2023  
+🐛 BUGFIXES:   |
+|-|
+ 
+🦠 bugfixnotes 1 Build Test Field agains modules versions older than 2.1.9  
+🦠 anotsaafher bugfix ..🖊 
+ 
+ 
+🧪 FEATURE UPDATES:  |
+|-|
+ 
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: ***create*** a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name  
+🔨 Random feature note: create a random string of characters to use as a Directory name ..🖊 
+ 
+ 
+💢 BREAKING CHANGES:  |
+|-|
+ 
+🧨 breakingnotes 1 Build Test Field agains modules versions older than 2.1.9  
+🧨 anotsaafher breaking change ..🖊 
+ 
+ 
+`👤 @snoonx 📅 5:44PM, Wednesday 12th July 2023`  
 > Made with love! 
 ---- 
  

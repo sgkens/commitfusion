@@ -1,10 +1,9 @@
-using module ..\CommitFusion_class.psm1
 Function Get-CommitAsObject(){
     [CmdletBinding()]
     param ()
     try {
         # Return the CommitFusion object
-        return $global:commitfusion.AsObject()
+        return(Get-CommitFusionModuleInstance).AsObject()
     }
     catch [System.Exception] {
         Write-Host "An error occurred while creating CommitFusion: $_.Exception.Message"
