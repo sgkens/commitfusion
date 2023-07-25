@@ -11,7 +11,7 @@ using module libs\cmdlets\Get-CommitAsObject.psm1
 using module libs\cmdlets\Get-CommitAsString.psm1
 using module libs\cmdlets\Get-GitAutoVersion.psm1
 using module libs\cmdlets\Update-ChangeLog.psm1
-using module libs\cmdlets\Send-Commit.psm1
+using module libs\cmdlets\Set-Commit.psm1
 
 
 Export-ModuleMember -Function New-CommitFusion,
@@ -24,7 +24,7 @@ Export-ModuleMember -Function New-CommitFusion,
                               Get-GitAutoVersion,
                               Format-FusionMD,
                               Update-Changelog,
-                              Send-Commit
+                              Set-Commit
 
 
 <#

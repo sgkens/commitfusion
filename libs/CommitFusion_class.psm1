@@ -237,17 +237,17 @@ class CommitFusion {
                 <#& INJECT LIST NOTES INTO COMMIT BODY #> 
 
                 if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
-                        $AutoBuildState = "`n  $($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -match $this.type}).semver.ToUpper())`n`n"
+                        $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -match $this.type}).semver)`n"
                 }else{ 
                         $AutoBuildState = ""
                 }
                 [string]$bodyvar = "$AutoBuildState"
                 if($null -ne $this.Body -and $this.Body.count -ne 0){
-                        $bodyvar += "`n  $($this.GetEmoji("miscmojis","scroll")) NOTES: `n`n"
+                        $bodyvar += "`n$($this.GetEmoji("miscmojis","scroll")) NOTES: `n`n"
                 }
                 foreach ($Note in $this.Body) {
 
-                        $bodyvar += "    $($this.GetEmoji("miscmojis","pencil"))  $Note `n"
+                        $bodyvar += "$($this.GetEmoji("miscmojis","pencil"))  $Note `n"
                 }
                 $this.styledbody = "$bodyvar"
 
