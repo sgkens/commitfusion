@@ -121,10 +121,9 @@ class CommitFusion {
                         exit
                 }
                 if( $null -ne $this.footer ){
-                        $this.Footer = "> $($this.footer)"
-                }
-                else {
-                        $this.Footer = ""
+                        $this.Footer = "$($this.footer)"
+                }else{
+                        $this.Footer = $null
                 }
                 if($null -ne $this.gitgroup){
                         $this.gitgroup = "$($this.gitgroup)"
@@ -155,7 +154,7 @@ class CommitFusion {
                         }
                         $index = $null
                         $FeatureAddtionsVar += "`n"
-                        $this.FeatureAddtions = $FeatureAddtionsVar
+                        $this.FeatureAddtions = "$FeatureAddtionsVar`n`n"
                 }
                 else { $this.FeatureAddtions = "" }
 
@@ -177,7 +176,7 @@ class CommitFusion {
                         }
                         $index = $null
                         $bugfixessVar += "`n"
-                        $this.bugfixes = $bugfixessVar
+                        $this.bugfixes = "$bugfixessVar`n`n"
                 }
                 else { $this.bugfixes = "" }
 
@@ -210,7 +209,7 @@ class CommitFusion {
                         }
                         $index = $null
                         $breakingChangesVar += "`n"
-                        $this.BreakingChanges = $breakingChangesVar
+                        $this.BreakingChanges = "$breakingChangesVar`n"
                 }
                 else { $this.BreakingChanges = "" }
                 
@@ -231,17 +230,24 @@ class CommitFusion {
                         }
                         $index = $null
                         $featurenotesBody += "`n"
-                        $this.featurenotes = $featurenotesBody
+                        $this.featurenotes = "$featurenotesBody`n`n"
                 }
                 else { $this.BreakingChanges = "" }
 
                 <#& INJECT LIST NOTES INTO COMMIT BODY #> 
-                $bodyvar = "| Notes: $($this.EmojiIndex.where({$_.label -eq "speaking_head"}).char) |`n|----------|`n`n"
-                #$bodyvar += "$($this.GetEmoji("miscmojis","memo"))_______ `r`n" 
 
+                if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
+                        $AutoBuildState = "`n  $($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -match $this.type}).semver.ToUpper())`n`n"
+                }else{ 
+                        $AutoBuildState = ""
+                }
+                [string]$bodyvar = "$AutoBuildState"
+                if($null -ne $this.Body -and $this.Body.count -ne 0){
+                        $bodyvar += "`n  $($this.GetEmoji("miscmojis","scroll")) NOTES: `n`n"
+                }
                 foreach ($Note in $this.Body) {
 
-                        $bodyvar += "> $($this.GetEmoji("miscmojis","pencil")) $Note `n"
+                        $bodyvar += "    $($this.GetEmoji("miscmojis","pencil"))  $Note `n"
                 }
                 $this.styledbody = "$bodyvar"
 
@@ -250,11 +256,11 @@ class CommitFusion {
                 [PSObject]$StringParts=@{
 
                         Type            = "$($this.CFConfig.ciset.where({$_.Type -eq $this.type}).emoji) $($this.Type)"
-                        Scope           = " ( $($this.Scope) ):"
+                        Scope           = ": ( $($this.Scope) )"
                         Description     = $this.Description
                         Body            = $this.styledbody
-                        Footer          = "$('`')$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $($this.DateNow)$('`') `n$($this.Footer)"
-                        BreakingChanges = "`n$($this.FeatureAddtions)`n`n$($this.BugFixes)`n`n$($this.FeatureNotes)`n`n$($this.BreakingChanges)"
+                        Footer          = "$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $($this.DateNow)"
+                        BreakingChanges = "`n$($this.FeatureAddtions)$($this.BugFixes)$($this.FeatureNotes)$($this.BreakingChanges)"
                 }
                 $this.ConstructMessageObject = $StringParts
 
@@ -268,8 +274,8 @@ class CommitFusion {
                 $ConstructMessage_contruct = " $($this.GetEmoji("miscmojis",'bullseye'))-$($ConstructMessage.Type)$($ConstructMessage.Scope) "
                 $ConstructMessage_contruct += "$($ConstructMessage.Description)`n--------commit-id--------`n"
                 $ConstructMessage_contruct += "$($ConstructMessage.Body)`n"
-                $ConstructMessage_contruct += "$($ConstructMessage.BreakingChanges)`n`n"
-                $ConstructMessage_contruct += "$($ConstructMessage.Footer)`n----`n"
+                $ConstructMessage_contruct += "$($ConstructMessage.BreakingChanges)"
+                $ConstructMessage_contruct += "***$($ConstructMessage.Footer)***`n`n----"
 
                 return $ConstructMessage_contruct
 
@@ -279,9 +285,9 @@ class CommitFusion {
                 $ConstructMessage = $this.ConstructMessageObject
                 $ConstructMessage_contruct = "$($ConstructMessage.Type)$($ConstructMessage.Scope) "
                 $ConstructMessage_contruct += "$($ConstructMessage.Description)`n"
-                $ConstructMessage_contruct += "$($ConstructMessage.Body)`n"
-                $ConstructMessage_contruct += "$($ConstructMessage.BreakingChanges)`n`n"
-                $ConstructMessage_contruct += "$($ConstructMessage.Footer)"
+                $ConstructMessage_contruct += "$($ConstructMessage.Body)"
+                $ConstructMessage_contruct += "$($ConstructMessage.BreakingChanges)"
+                $ConstructMessage_contruct += "$($ConstructMessage.Footer)`n"
                 
                 return $ConstructMessage_contruct
 
@@ -350,7 +356,7 @@ class CommitFusion {
                return $this.AsStringForCommit()
         }
         # Returns git version base on on the number of major, minor and patch commits
-        [String] GitAutoVersion() {
+        [String] GitAutoVersion() { #TODO: Remove method and export to own cmdlet scriptfile manifest single function module
                 
                 [int]$major = 0
                 [int]$minor = 0
@@ -362,7 +368,7 @@ class CommitFusion {
                         throw "Git is not installed, please install git and try again"
                 }
                 else {
-                        $gitCommits = git log -oneline
+                        $gitCommits = git log -p
                         Foreach ($commit in $gitcommits) {
                                 if ($commit.contains("<kbd>major</kbd>")){
                                         $major++
@@ -440,7 +446,7 @@ class CommitFusion {
                                         $MessageString += "## "
                                 }
                                 if ( $ExplotedContent[$i] -match "(--------commit-id--------)" ) {
-                                        if($this.CFConfig.ciset.where({$_.type -match $this.type}).semver -ne $null){
+                                        if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
                                                 $AutoBuildState = "[$AutoBuildEmoji]» <kbd>$($this.CFConfig.ciset.where({$_.type -match $this.type}).semver)</kbd>"
                                         }else{ 
                                                 $AutoBuildState = ""
@@ -485,23 +491,21 @@ class CommitFusion {
                 return  $MessageString
         }
         
-        [string] WriteClMessage([String]$file){ 
-                
+        [string] WriteClMessage([String]$file) { 
                 try{ 
-                        Write-host "Checking for changelog file: $file"
-                        $ChangeLogfile = (Get-itemproperty -Path $file).FullName
+                        $ChangeLogfile = (Get-item -Path $file).FullName
+                        Write-host "Checking for changelog file: $ChangeLogfile"
                         
                         # Call the WriteTemplateFile() to create and write to the template.md
-                        
                         $this.WriteTemplateFile()
 
                         # Get the content of the template.md file
-                        $TemplateContent = Get-Content -Path "$($this.ModuleRoot)\template.md" -raw
                         write-host "Fetching Template Contents: $($this.ModuleRoot)\template.md"
+                        $TemplateContent = Get-Content -Path "$($this.ModuleRoot)\template.md" -raw
 
                         # get contents of changelog                9 file
-                        $ExistingContent = Get-Content -Path $changelogfile -raw
                         Write-host "Fetching Changelog Contents: $changelogfile"
+                        $ExistingContent = Get-Content -Path $changelogfile -raw
 
                         # Prepend the content of the template file to the changelog file
                         $AutoGenMessage += $TemplateContent + "`n`n" + $ExistingContent
@@ -509,22 +513,25 @@ class CommitFusion {
 
                         # Write the content to the template_final.md file
                         $AutoGenMessage | Set-Content -Path "$($this.ModuleRoot)\template_final.md" -Encoding utf8
-                        write-host "Writing Template Contents to Template_final.md: $($this.ModuleRoot)\template_final.md"
+                        write-host -ForegroundColor Yellow "Writing Template Contents to Template_final.md: $($this.ModuleRoot)\template_final.md"
                         
                         # # Get the content of the changelog file
                         $ChangeLogFinal = Get-Content -Path "$($this.ModuleRoot)\template_final.md" -raw
                         write-host "Fetching Template_final.md Contents: $($this.ModuleRoot)\template_final.md"
                         
                         # Write the content to the changelog file
-                        write-host "Writing Template_final.md Contents to Changelog: $changelogfile"
+                        write-host -ForegroundColor Green "Writing Template_final.md Contents to Changelog: $changelogfile"
                         $ChangeLogFinal | Set-Content -Path $changelogfile -Encoding utf8
 
-                        return "Successfully Updated ChangeLog: $changelogfile"
+                        return "{'reponse':'Successfully Updated ChangeLog','file':'$changelogfile}"
                 }
                 catch [system.exception]{
-                        Write-Host "File not found $($_.exception.message)"
+                        Write-Host "$($_.exception.message)"
                         exit
                 }
 
+        }
+        [void] SendCommit (){
+                i
         }
 }

@@ -7,7 +7,7 @@ Function New-ConventionalCommit {
             if($_ -in (Get-CiSetFusion).type){
                 $true
             }else{
-                throw "Invalid Type value, please use one of the following values: $((Get-CiSetFusion).type -join ',')"
+                throw "Invalid Type '$($_)', please use one of the following values: $((Get-CiSetFusion).type -join ',')"
             }
         })]
         [string]$Type,
@@ -56,6 +56,42 @@ Function New-ConventionalCommit {
     )
 
     process {
+        if($null -eq $Body){
+            $Body = $null
+        }
+        if($null -eq $FeatureAddtions){
+            $FeatureAddtions = $null
+        }
+        if($null -eq $BugFixes){
+            $BugFixes = $null
+        }
+        if($null -eq $FeatureNotes){
+            $FeatureNotes = $null
+        }
+        if($null -eq $BreakingChanges){
+            $BreakingChanges = $null
+        }
+        if($Footer -eq $null -or $Footer -eq ""){
+            $Footer = $null
+        }
+        if($GitUser -eq $null){
+            $GitUser = $null
+        }
+        if($GitGroup -eq $null){
+            $GitGroup = $null
+        }
+        if($AsString -and $AsObject){
+            throw "Cannot use both -AsString and -AsObject"
+        }
+        if($AsString -and $AsJson){
+            throw "Cannot use both -AsString and -AsJson"
+        }
+        if($AsString -and $AsXml){
+            throw "Cannot use both -AsString and -AsXml"
+        }
+        if($AsObject -and $AsJson){
+            throw "Cannot use both -AsObject and -AsJson"
+        }
         
         (Get-CommitFusionModuleInstance).ConventionalCommit(
             $Type,
@@ -69,6 +105,7 @@ Function New-ConventionalCommit {
             $BugFixes,
             $FeatureNotes,
             $BreakingChanges);
+
         if($AsString){
             return (Get-CommitFusionModuleInstance).AsStringForCommit()
         }

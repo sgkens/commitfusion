@@ -21,13 +21,13 @@ ModuleVersion = '0.1.0'
 GUID = 'c7e7262e-8c66-4c0d-9454-9927449c2927'
 
 # Author of this module
-Author = 'snoonx'
+Author = 'sgkens'
 
 # Company or vendor of this module
 CompanyName = 'CobaShell'
 
 # Copyright statement for this module
-Copyright = '2023 snoonx. All rights reserved.'
+Copyright = '2023 sgkens. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Commit Fusion is a PowerShell module that allows you to create conventional commits with ease.'
@@ -80,8 +80,9 @@ FunctionsToExport = @(
     'Get-EmojiIndex',
     'New-CommitFusion',
     'New-ConventionalCommit',
-    'Write-FusionMD',
-    'Update-Changelog'
+    'Format-FusionMD',
+    'Update-Changelog',
+    'Get-GitAutoVersion'
 
     )
 
@@ -109,22 +110,22 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'automation', 'git', 'conventional-commits', 'conventional', 'commits', 'commit', 'conventional-commit'
+        Tags = 'automation', 'git', 'conventional-commits', 'conventional', 'commits', 'commit', 'free', 'free-ware','github','gitlab'
 
         # A URL to the license for this module.
         LicenseUri = 'https://choosealicense.com/licenses/mit'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://gitlab.snowlab.tk/powershell/ccommits.git'
+        ProjectUri = 'https://gitlab.snowlab.tk/powershell/commitfusion.git'
 
         # A URL to an icon representing this module.
-        IconUri = 'https://gitlab.snowlab.tk/powershell/ccommits/-/blob/main/logo.svg'
+        IconUri = 'https://gitlab.snowlab.tk/powershell/commitfusion/-/blob/main/logo.svg'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'https://gitlab.snowlab.tk/powershell/ccommits/-/blob/main/Releases.md'
+        ReleaseNotes = 'https://gitlab.snowlab.tk/powershell/commitfusion/-/blob/main/Releases.md'
 
         # Prerelease string of this module
-        # Prerelease = 'alpha1'
+        # Prerelease = 'beta'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
