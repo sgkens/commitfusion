@@ -4,9 +4,9 @@ Function Get-GitAutoVersion {
     [OutputType([Pscustomobject])]
     param ()
     process {
-        [int]$major = 0
-        [int]$minor = 0
-        [int]$patch = 0
+        [int]$major =  0
+        [int]$minor =  0
+        [int]$patch =  0
 
         try {
             # Check for git installation
@@ -19,26 +19,26 @@ Function Get-GitAutoVersion {
                 $MinorNotation = [regex]::Matches($gitCommits, "Build: Minor", [RegexOptions]::IgnoreCase)
                 $PatchNotation = [regex]::Matches($gitCommits, "Build: Patch", [RegexOptions]::IgnoreCase)
 
-                $majorTags = $MajorNotation.Count
-                $minorTags = $MinorNotation.Count
-                $patchTags = $PatchNotation.Count
-                if ($major -eq 0 -and $minor -eq 0 -and $patch -eq 0) {
-                    $minor = 1
-                }
-                if ($MajorNotation.count -gt 0) {
+                [int]$majorTags = $MajorNotation.Count -1
+                [int]$minorTags = $MinorNotation.Count -1
+                [int]$patchTags = $PatchNotation.Count -1
+                if ($MajorNotation.count -ne 1) {
                     foreach($tag in $MajorNotation){
                         $major++
                     }
                 }
-                if ($MinorNotation.count -gt 0) {
+                if ($MinorNotation.count -ne 1 ) {
                     foreach($tag in $MinorNotation){
                         $minor++
                     }
                 }
-                if ($PatchNotation.count -gt 0) {
+                if ($PatchNotation.count -ne 1) {
                     foreach($tag in $PatchNotation){
                         $patch++
                     }
+                }
+                if ($major -eq 0 -and $minor -eq 0 -and $patch -eq 0) {
+                    $minor = 1
                 }
                 return [PSCustomObject]@{ 
                     NewVersion="$major.$minor.$patch";
