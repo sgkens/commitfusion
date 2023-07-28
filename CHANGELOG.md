@@ -1,4 +1,52 @@
  
+##  🎯-🎨 Improve: ( Get-CiSetFusion ) Added addtional parameter switches `-NoSemver`, `-Major`, `-Minor`, `-Patch` 
+
+> [🆔]» [47f7ba894b](https://gitlab.snowlab.tk//CommitFusion/-/commit/47f7ba894bfb75478ececf5c9b75f5eee29707a4) 
+ 
+📜 NOTES:  
+ 
+✏  -NoSemVer: Returns CiSet items that have a type value of ''  
+✏  -Major: Returns CiSet Items That have Type Value of 'Major'  
+✏  -Minor: Returns CiSet items that have a type value of 'Minor'  
+✏  -Patch: Returns CiSet items that have a type value of 'Patch'  
+ 
+ 
+*👤 @sgkens 📅 9:33PM, Friday 28th July 2023* 
+ 
+---- 
+ 
+
+
+
+ 
+##  🎯-🎨 improve: ( formatting ) Fixed Output and emoji displayed 
+
+> [🆔]» [6fa73be00b](https://gitlab.snowlab.tk/powershell/CommitFusion/-/commit/6fa73be00be11e3d7c31e02f49c368231078f94c)\ 
+ 
+ 
+***👤 @sgkens 📅 10:13PM, Wednesday 26th July 2023*** 
+ 
+---- 
+ 
+
+
+
+ 
+##  🎯-📝 docs: ( Update ) Changelog 
+
+### `Commit:` [🆔]» [593d19d439](https://gitlab.snowlab.tk/powershell/CommitFusion/-/commit/593d19d4395bdc1b6c3f356ca51110e724047773)  [🆎]» <kbd>patch</kbd> 
+ 
+🧰 Build: patch 
+ 
+ 
+***👤 @sgkens 📅 3:32AM, Wednesday 26th July 2023*** 
+ 
+---- 
+ 
+
+
+
+ 
 ##  🎯-♻️ refactor: ( Generated Commit String ) changed spaceing for commit string 
 
 ### `Commit:` [🆔]» [76c1a08665](https://gitlab.snowlab.tk/powershell/CommitFusion/-/commit/76c1a0866555b17a507c42e9b2fa226cd0f3c6da)   
@@ -70,6 +118,12 @@
 ***👤 @sgkens 📅 2:27AM, Wednesday 26th July 2023*** 
  
 ----
+
+
+
+
+
+
 
 
 
