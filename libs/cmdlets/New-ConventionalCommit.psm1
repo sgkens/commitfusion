@@ -12,7 +12,7 @@ Function New-ConventionalCommit {
         })]
         [string]$Type,
 
-        [Parameter(Mandatory = $true, Position = 1)]
+        [Parameter(Mandatory = $false, Position = 1)]
         [string]$Scope,
 
         [Parameter(Mandatory = $true, Position = 2)]
@@ -79,6 +79,9 @@ Function New-ConventionalCommit {
         }
         if($GitGroup -eq $null){
             $GitGroup = $null
+        }
+        if($Scope -eq $null){
+            $Scope = $null
         }
         if($AsString -and $AsObject){
             throw "Cannot use both -AsString and -AsObject"

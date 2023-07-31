@@ -1,13 +1,13 @@
 <div align="center" >
  <!--Logo-->
-    <img src="./ccommits-logo.svg"/>
+    <img src="https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/ccommits-logo.svg"/>
 </div>
  <!--Project Name-->
 <div align="center">
-    <img src="./CommitFusion-title.png"><br>
+    <img src="https://github.com/sgkens/resources/raw/main/modules/CommitFusion/CommitFusion-title.svg"><br>
 </div>
 <div align="center" >
-    <img src="./llline_v2-800x53.svg"> 
+    <img src="https://github.com/sgkens/resources/raw/main/modules/CommitFusion/llline_v2-800x53.svg"> 
 </div>
 
 <div align="center">
@@ -41,8 +41,7 @@ CommitFusion is a PowerShell module designed to streamline the process of handli
 
 # 🟩 Features
 
-🏐 **Conventional Commits:** CommitFusion adheres to [🧷The Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) , ensuring consistency and clarity in your commit messages.
-
+🏐 **Conventional Commits:** CommitFusion adheres to [🧷The Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) , ensuring consistency and clarity in your commit messages. \
 🏐 **Customizable Commit Messages:** `New-ConventionalCommit` *cmdlet* takes several parameters generating a customizable commit message, the commit message is broken up into several main parts: Type, Scope, Description, **Body**(_notes,featurenotes,featureaddtions,bugfixes,breakingchanges_), and Footer
 
 ### 🥏 **Parameters** `New-ConventionalCommit`
@@ -111,8 +110,7 @@ CommitFusion is a PowerShell module designed to streamline the process of handli
     [e] GitUser @ [e] DateTime
     ```
 
-🏐 **SemVer:** `semver` is added into the body if specified `type` has an `semver` property value
-
+🏐 **SemVer:** `semver` is added into the body if specified `type` has an `semver` property value \
 🏐 **Markdown Formatting:** CommitFusion parses commit messages and adds Markdown formatting to them. Usefull if you would like to add the commit message to the change log
 
 ```powershell
@@ -120,12 +118,9 @@ CommitFusion is a PowerShell module designed to streamline the process of handli
 New-ConventionalCommit @params | Format_FustionMD
 ```
     
-🏐 **Changelog Integration:** Commit messages are written to a template file and joined with the current contents of the `CHANGELOG.md` file. This allows for easy management and tracking of changes over time.
-
-🏐 **Gitmoji Standard Schema:** Commits in CommitFusion utilize the Gitmoji standard schema, making it easy to visually identify the purpose of each commit.
-
-🏐 **Version Incrementation:** The module parses Gitmoji's JSON file to determine the appropriate version increment for your build (minor, major, or 0.0.0). This version information can be used with GitLab CI/CD to automate release and build processes based on your Git history.
-
+🏐 **Changelog Integration:** Commit messages are written to a template file and joined with the current contents of the `CHANGELOG.md` file. This allows for easy management and tracking of changes over time.\
+🏐 **Gitmoji Standard Schema:** Commits in CommitFusion utilize the Gitmoji standard schema, making it easy to visually identify the purpose of each commit. \
+🏐 **Version Incrementation:** The module parses Gitmoji's JSON file to determine the appropriate version increment for your build (minor, major, or 0.0.0). This version information can be used with GitLab CI/CD to automate release and build processes based on your Git history. \
 🏐 **Advanced Commit Manipulation:** CommitFusion provides additional manipulation options for the commit body. This includes multi-line listing and styling within the commit message, which can differ from the markdown written to the `template.md` file.
 
 ## 🥏 Additional Module Functionality
@@ -177,14 +172,14 @@ Import-Module -Name commitfusion
 [How to Install Choloc](https) `choco.com/packages`
 
 # 🟪 Using  CommitFusion's cmdlets/functions
-
-🟣 Import the CommitFusion module
 ```powershell
+# Import the CommitFusion module
 Import-Module CommitFusion
 ```
 
 🟣 Generate a basic Commit Message
 ```powershell
+# Generate a commit message, returns a string with formatted n`
 New-ConventionalCommit -Type feature -Description "My New Commit Message"
 
 # output
@@ -211,25 +206,28 @@ New-ConventionalCommit -Type docs -Description "My New Commit Message" -Scope "a
 ```
 
 
-🟣 Generate a `bugfix` Commit Message with `scope` and some `notes` 
+🟣 Generate a Commit Message with `scope` and some `notes` 
 ```powershell
-New-ConventionalCommit -Type fix -Description "Fixed Bug" -Scope "#234" -BugFixes "Fixed Bug #234"
+# Generate a commit message, returns a string with formatted n`
+New-ConventionalCommit -Type feature -Description "My New Commit Message" -scope "v0.1.0" -body "Note 1","Note 2"
 
 # output
-🐛 fix(`#234): Fixed Bug
+✨ feature(v0.1.0): My New Commit Message
 
-🧰 Build: patch
+🧰 Build: minor
 
-🐛 BUGFIXES:
+📜 NOTES:
 
-🦠 Fixed Bug #234 ..🖊
+✏  Note 1
+✏  Note 2
 
-👤 @ 📅 10:44AM, Monday 31th July 2023
+👤 @ 📅 12:16AM, Monday 31th July 2023
 ```
 
-🟣 Generate a Commit Message with `scope`, `notes`, and a `feature addtion` 
+🟣 Generate a Commit Message with `scope`, `notes`, and a feature addtion 
 ```powershell
-New-ConventionalCommit -Type feature -Description "My New Commit Message" -Scope "v0.1.0"  -Body "Note 1","Note 2  -FeatureAddtions "Feature Addtion 1","Feature Addtion 2"
+# Generate a commit message, returns a string with formatted n`
+New-ConventionalCommit -Type feature -Description "My New Commit Message" -scope "v0.1.0"  -body "Note 1","Note 2  -FeatureAddtions "Feature Addtion 1","Feature Addtion 2"
 
 # output
 ✨ feature(v0.1.0): My New Commit Message
@@ -250,90 +248,16 @@ New-ConventionalCommit -Type feature -Description "My New Commit Message" -Scope
 👤 @ 📅 12:16AM, Monday 31th July 2023
 ```
 
-🟣 Generate a Commit Message with `scope`, `notes`, `feature addtions`, `Feature Notes`, `Breaking Changes`,`Bug Fix` 
-```powershell
-New-ConventionalCommit -Type feature -Description "My New Commit Message" -Scope "v0.1.0"  -Body "Note 1","Note 2"  -FeatureAddtions "Feature Addtion 1","Feature Addtion 2" -FeatureNotes "Feature Note 1","Feature Note 2" -BugFixes "bugFix #234", "fixes #23" -BreakingChanges "Breaking Change 1"
-
-#Output
-✨ feature(v0.1.0): My New Commit Message
-
-🧰 Build: minor
-
-📜 NOTES:
-
-✏  Note 1
-✏  Note 2
-
-🌟 FEATURE ADDTIONS:
-
-🍠 Feature Addtion 1
-🍠 Feature Addtion 2 ..🖊
-
-
-🐛 BUGFIXES:
-
-🦠 bugFix #234
-🦠 fixes #23 ..🖊
-
-
-🧪 FEATURE UPDATES:
-
-🔨 Feature Note 1
-🔨 Feature Note 2 ..🖊
-
-
-💢 BREAKING CHANGES:
-
-🧨 Breaking Change 1 ..🖊
-
-👤 @ 📅 10:44AM, Monday 31th July 2023
-
-```
-🟣 Apply Commit Message, you can **PIPE** `New-ConventionalCommit` into `Set-Commit` wich just run `git commit -m $message`
-
-```Powershell
-New-ConventionalCommit @params | Set-Commit
-```
-
-🟣 Format in Markdown, you can **PIPE** `New-ConventionalCommit` into `Format-FusionMD`
-```Powershell
-New-ConventionalCommit @params | Format-FusionMD
-```
-
-🟣 Adding Commit Message to changelog, you can **PIPE** `New-ConventionalCommit` into `Format-FusionMD` into `Update-ChangeLog -logfile $file`
-```Powershell
-New-ConventionalCommit @params | Format-FusionMD | Update-Changelog -logfile .\changelog.md
-```
-🟣 Using all **PIPES**
-```Powershell
-New-ConventionalCommit @params | Format-FusionMD | Update-Changelog -logfile .\changelog.md | Set-Commite
-```
-
-🟡 Retreiving the CI-SET List `Git Mojis`
-
-```Powershell
-Get-CISetFusion -NoSemVer # Returns Types that have no Semver value
-Get-CISetFusion -Major # Returns Types that have a Semver value of Major
-Get-CISetFusion -Minor # Returns Types that have a Semver value of Minor
-Get-CISetFusion -Patch # Returns Types that have a Semver value of Patch
-```
-
-🟡 Retreiving the CI-SET FUSION List `Git Mojis`
-  
-```Powershell
-Get-CISet # Returns PSObject of all Git Mojis
-```
-
 ### Parameter List `New-ConventionalCommit`
 ```powershell
 Write-LTMessage
-  [[alias -T]-Type [String]]
-  [[alias -S]-Scope [String]]
-  [[alias -T]-Description [String]]
-  [[alias -uc]-Body [String]"#code"]
-  [[alias -sm ]-FeatureNotes [String]]
-  [[alias -ndt]-NoDatTime [Switch]]
-  [[alias -nli]-NoLogIcon [Switch]]
+  [[alias -n]-Name [String]] # Optional
+  [[alias -m]-Message [String]] # Manditory
+  [[alias -t]-Type [String][Action|Info|Success|Complete|Error]] # Optional Default info
+  [[alias -uc]-UniCode [String]"#code"] # Optional Default 'ltm' eg. [🐽-ltm⏰00:00:00]🌟❱
+  [[alias -sm ]-SubMessage [Switch]]# Default $false adds indentation and removes execution time
+  [[alias -ndt]-NoDatTime [Switch]] # Default $false eg. [🐽-ltm]🌟❱
+  [[alias -nli]-NoLogIcon [Switch]] # Default $false eg. [ltm]🌟❱
 ```
 
 For more information on the available functions and their parameters, please refer to the module documentation.

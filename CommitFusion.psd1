@@ -12,7 +12,7 @@
 RootModule    = 'CommitFusion.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.0'
+ModuleVersion = '0.1.4.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -24,10 +24,10 @@ GUID = 'c7e7262e-8c66-4c0d-9454-9927449c2927'
 Author = 'sgkens'
 
 # Company or vendor of this module
-CompanyName = 'CobaShell'
+CompanyName = 'Devlion'
 
 # Copyright statement for this module
-Copyright = '2023 sgkens. All rights reserved.'
+Copyright = '2023 Garvey K. Snow. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Commit Fusion is a PowerShell module that allows you to create conventional commits with ease.'
@@ -82,8 +82,8 @@ FunctionsToExport = @(
     'New-ConventionalCommit',
     'Format-FusionMD',
     'Update-Changelog',
-    'Get-GitAutoVersion'
-
+    'Get-GitAutoVersion',
+    'Set-Commit'
     )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -116,10 +116,10 @@ PrivateData = @{
         LicenseUri = 'https://choosealicense.com/licenses/mit'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://gitlab.snowlab.tk/powershell/commitfusion.git'
+        ProjectUri = 'https://github.com/sgkens/commitfusion.git'
 
         # A URL to an icon representing this module.
-        IconUri = 'https://gitlab.snowlab.tk/powershell/commitfusion/-/blob/main/logo.svg'
+        IconUri  = 'https://gitlab.snowlab.tk/sgkens/resources/-/blob/main/modules/CommitFusion/dist/v1/ccommits-logo_GitIcon_51.20dpi.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = 'https://gitlab.snowlab.tk/powershell/commitfusion/-/blob/main/Releases.md'

@@ -14,20 +14,20 @@ Function Get-GitAutoVersion {
                 throw "Git is not installed, please install git and try again"
             }
             else {
-                $gitCommits = git log -p
+                $gitCommits = git log --pretty=format:"%s%n%b"
 
-                for($l=$gitcommits.count; $l -gt 0; $l--) {
-                    if ([regex]::Matches($gitCommits[$l], "Build: Patch", [RegexOptions]::IgnoreCase)) {
-                        $patch++
-                    }
-                    if ([regex]::Matches($gitCommits[$l], "Build: Minor", [RegexOptions]::IgnoreCase)) {
-                        $patch=0
-                        $minor++
-                    }
-                    if ([regex]::Matches($gitCommits[$l], "Build: Major", [RegexOptions]::IgnoreCase)) {
-                        $patch=0
-                        $minor=0
+                for($l=$gitcommits.count -1; $l -gt 0; $l--) {
+                    if ([regex]::Matches($gitCommits[$l], "Build: major", [RegexOptions]::IgnoreCase)) {
                         $major++
+                        $patch = 0
+                        $minor = 0
+                    }
+                    if ([regex]::Matches($gitCommits[$l], "Build: minor", [RegexOptions]::IgnoreCase)) {
+                        $minor++
+                        $patch = 0
+                    }
+                    if ([regex]::Matches($gitCommits[$l], "Build: patch", [RegexOptions]::IgnoreCase)) {
+                        $patch++
                     }
                 }
                 # $MajorNotation = [regex]::Matches($gitCommits, "Build: Major", [RegexOptions]::IgnoreCase)
@@ -53,7 +53,7 @@ Function Get-GitAutoVersion {
                 #     $minor = 1
                 # }
                 return [PSCustomObject]@{ 
-                    NewVersion="$major.$minor.$patch";
+                    Version="$major.$minor.$patch";
                     ParsedLines = "$($gitCommits.count.tostring())" 
                 }
             }

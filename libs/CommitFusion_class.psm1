@@ -1,10 +1,6 @@
 using module .\difs.psm1
 using module .\PowerUnicode.psm1
 
-
-#Reequiress -PSEdition desktop
-#Reeeuiress -Version 5.0
-
 # ns.utilies.commitfusion
 class CommitFusion {
         [String]   $Type
@@ -46,7 +42,8 @@ class CommitFusion {
                         # $cc.StringCleaner() # This still returns igredular white spaces with-in object with output to console
                         # Not a breaking issue but kinda annoying
                         # TODO: Fix this issue
-                        # implimented .net lib json parser to fix this issue
+                        # TODO: implimented .net lib json parser to fix this issue
+                        # TODO: Use SimpleSpectreWrapper to fix this issue and .trim() the output
                         $this.GitMojiIndex = $content_GitMojiIndex | ConvertFrom-Json
                         $this.EmojiIndex   = $content_EmojiIndex | ConvertFrom-Json
                         $this.CFConfig     = $content_CFConfig | ConvertFrom-Json
@@ -86,7 +83,7 @@ class CommitFusion {
         ConventionalCommit(
 
                 [String]    $Type,
-                [String]    $Scope,
+                [String]    $Scope = $null,
                 [String]    $Description,
                 [string[]]  $Body,
                 [String]    $Footer = $null,
@@ -131,6 +128,13 @@ class CommitFusion {
                 }else{
                         $this.GitNameSpace = $this.GitUser
                 }
+                if($null -eq $this.scope -or $this.scope.length -eq 0){
+                        $this.scope = ":"
+                }else{
+                        $this.scope = "($($this.scope)):"
+                }
+                
+                # Call the ConstructMessage method to build the commit message object
                 $this.ConstructMessage();
         }
 
@@ -237,7 +241,7 @@ class CommitFusion {
                 <#& INJECT LIST NOTES INTO COMMIT BODY #> 
 
                 if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
-                        $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -match $this.type}).semver)`n"
+                        $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -eq $this.type}).semver)`n"
                 }else{ 
                         $AutoBuildState = ""
                 }
@@ -250,15 +254,15 @@ class CommitFusion {
                         $bodyvar += "$($this.GetEmoji("miscmojis","pencil"))  $Note `n"
                 }
                 $this.styledbody = "$bodyvar"
-
+                
                 # Message object to be returned
                 #  $($this.emojiinex.where({$_.label -eq "cyclone"}).char)— #? Start Tag
                 [PSObject]$StringParts=@{
 
                         Type            = "$($this.CFConfig.ciset.where({$_.Type -eq $this.type}).emoji) $($this.Type)"
-                        Scope           = ": ( $($this.Scope) )"
-                        Description     = $this.Description
-                        Body            = $this.styledbody
+                        Scope           = "$($this.Scope)"
+                        Description     = "$($this.Description)"
+                        Body            = "$($this.styledbody)"
                         Footer          = "$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $($this.DateNow)"
                         BreakingChanges = "`n$($this.FeatureAddtions)$($this.BugFixes)$($this.FeatureNotes)$($this.BreakingChanges)"
                 }
@@ -275,7 +279,7 @@ class CommitFusion {
                 $ConstructMessage_contruct += "$($ConstructMessage.Description)`n--------commit-id--------`n"
                 $ConstructMessage_contruct += "$($ConstructMessage.Body)`n"
                 $ConstructMessage_contruct += "$($ConstructMessage.BreakingChanges)"
-                $ConstructMessage_contruct += "***$($ConstructMessage.Footer)***`n`n----"
+                $ConstructMessage_contruct += "*$($ConstructMessage.Footer)*`n`n----"
 
                 return $ConstructMessage_contruct
 
@@ -356,34 +360,34 @@ class CommitFusion {
                return $this.AsStringForCommit()
         }
         # Returns git version base on on the number of major, minor and patch commits
-        [String] GitAutoVersion() { #TODO: Remove method and export to own cmdlet scriptfile manifest single function module
+        # [String] GitAutoVersion() { #TODO: Remove method and export to own cmdlet scriptfile manifest single function module
                 
-                [int]$major = 0
-                [int]$minor = 0
-                [int]$patch = 0
-                #[String]$version = ""
+        #         [int]$major = 0
+        #         [int]$minor = 0
+        #         [int]$patch = 0
+        #         #[String]$version = ""
 
-                # Check for git installation
-                if ($null -eq (Get-Command git -ErrorAction SilentlyContinue)) {
-                        throw "Git is not installed, please install git and try again"
-                }
-                else {
-                        $gitCommits = git log -p
-                        Foreach ($commit in $gitcommits) {
-                                if ($commit.contains("<kbd>major</kbd>")){
-                                        $major++
-                                }
-                                if ($commit.contains("<kbd>minor</kbd>")){
-                                        $minor++
-                                }
-                                if ($commit.contains("<kbd>patch</kbd>")){
-                                        $patch++
-                                }
-                        }
+        #         # Check for git installation
+        #         if ($null -eq (Get-Command git -ErrorAction SilentlyContinue)) {
+        #                 throw "Git is not installed, please install git and try again"
+        #         }
+        #         else {
+        #                 $gitCommits = git log -p
+        #                 Foreach ($commit in $gitcommits) {
+        #                         if ($commit.contains("<kbd>major</kbd>")){
+        #                                 $major++
+        #                         }
+        #                         if ($commit.contains("<kbd>minor</kbd>")){
+        #                                 $minor++
+        #                         }
+        #                         if ($commit.contains("<kbd>patch</kbd>")){
+        #                                 $patch++
+        #                         }
+        #                 }
                          
-                        return "$major.$minor.$patch"
-                }
-        }
+        #                 return "$major.$minor.$patch"
+        #         }
+        # }
         # Returns The Commit String and along with the commit template
         [String] WriteTemplateFile() {
 
@@ -436,9 +440,10 @@ class CommitFusion {
                         #TODO: Add auto checking feature like -gitlab -github -bitbucket -gitlabsh
                         $ExplotedContent = $existingContent -split "`n"
                         $MessageString   = ""
+                        $AutoBuildState = ""
                         $ciset_list   = ($this.CFConfig.ciset.properties.name) -join "|"
                         #Catch the AB emoji and commit id emoji
-                        $AutoBuildEmoji = $this.GetEmoji("miscmojis","ab_button_blood_type")
+                        $AutoBuildEmoji = $this.GetEmoji("miscmojis","toolbox")
                         $CommitIdEmoji  = $this.GetEmoji("miscmojis","id_button")
                         for( $i=-1;$i -lt $ExplotedContent.count; $i++ ){
 
@@ -446,11 +451,11 @@ class CommitFusion {
                                         $MessageString += "## "
                                 }
                                 if ( $ExplotedContent[$i] -match "(--------commit-id--------)" ) {
-                                        if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
-                                                $AutoBuildState = "[$AutoBuildEmoji]» <kbd>$($this.CFConfig.ciset.where({$_.type -match $this.type}).semver)</kbd>"
-                                        }else{ 
-                                                $AutoBuildState = ""
-                                        }
+                                        # if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
+                                        #         $AutoBuildState = "[$AutoBuildEmoji]» <kbd>$($this.CFConfig.ciset.where({$_.type -match $this.type}).semver)</kbd>"
+                                        # }else{ 
+                                        #         $AutoBuildState = ""
+                                        # }
                                         $ExplotedContent[$i] = ""
                                         # ! *NOTE*
                                         #   TODO:
@@ -459,8 +464,11 @@ class CommitFusion {
                                         #~       - github https://github.com/(name|group)/(repo-name)/commit/(commit-id)
                                         #~       - bitbucket https://bitbucket.org/(name|group)/(repo-name)/commits/(commit-id)
                                         #~       - gitlab self hosted https://gitlab.(domain)/(name|group)/(repo-name)/-/commit/(commit-id)
-                                        $MessageString += "`n### ``Commit:`` [$CommitIdEmoji]» [$ShortedCommitid](https://gitlab.snowlab.tk/$($this.GitNameSpace)/$RepoName/-/commit/$CommitId) "
-                                        $MessageString += " $AutoBuildState"
+                                        $MessageString += "`n> [$CommitIdEmoji]» [$ShortedCommitid](https://gitlab.snowlab.tk/$($this.GitNameSpace)/$RepoName/-/commit/$CommitId)"     
+                                }
+                                if($ExplotedContent[$i] -match "(Build: Major|Build: Minor|Build: Patch)"){
+                                        $ExplotedContent[$i] = $null # Replace line with styped
+                                        $MessageString += "> [$AutoBuildEmoji]» <kbd>$($this.CFConfig.ciset.where({$_.type -match $this.type}).semver.ToUpper())</kbd>"
                                 }
                                 if ( $ExplotedContent[$i] -match "(FEATURE UPDATES)" ) {
                                         $MessageString += "$($ExplotedContent[$i]) |`n|-|`n"
