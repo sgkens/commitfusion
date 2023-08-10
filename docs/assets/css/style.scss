@@ -1,0 +1,346 @@
+---
+---
+
+@import "{{ site.theme }}";
+// Above Required
+
+#main_content_wrap{
+  background-color: #262430;
+}
+
+#main_content_wrap h1,h3,h6,p{
+  color: #fff;
+}
+
+#main_content_wrap h4{
+  color: #2972c6e0;
+  font-size: 18px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+#main_content_wrap h5{
+  color: #fff;
+}
+#main_content_wrap h1{
+    font-family: 'Yatra One', cursive;
+}
+/*override markdown italic*/
+#main_content_wrap em{
+  color: rgba(255, 149, 11, 0.765);
+  font-family: 'Yatra One', cursive;
+}
+
+#main_content_wrap strong{
+  color: rgb(117, 111, 185);
+    font-family: 'Asap Condensed', sans-serif;
+}
+
+#main_content h2{
+  color: #929df1c4;
+  font-size: 30px;
+  font-family: 'Special Elite', cursive;
+}
+#main_content blockquote{
+  border-left: 8px solid green;
+}
+#main_content blockquote > ul {
+  color: #847a7a ;
+}
+
+#project_title{
+  display:flex;
+  font-size: 40px;
+  color:#eceaf2ae;
+  padding-top: 20px;
+  font-family: 'Major Mono Display', monospace;
+  font-weight: 800;
+}
+
+#project_tagline{
+  display:flex;
+  font-size: 20px;
+  font-style: italic;
+  color:#cec9e8;
+  margin-top: -20px;
+  color: rgb(106, 207, 99);
+  font-family: 'Asap Condensed', sans-serif;
+}
+
+#header_wrap {
+  width: 100%;
+  border-bottom: 3px solid #666464;
+}
+
+#header_wrap .inner {
+  background-color:transparent;
+  background-size: contain;
+  background-size: cover;
+  background-image: url("../images/commitfusion-banner-1-bg.jpg");
+  max-width: 900px;
+}
+
+#main_content{
+  max-width: 900px; 
+}
+
+#main_content ol {
+  list-style: none;
+  counter-reset: steps;
+  color: rgb(155, 151, 151);
+}
+#main_content ol li {
+  counter-increment: steps;
+}
+
+#main_content ol li::before {
+  content: counter(steps);
+  margin-right: 0.5rem;
+  background: #006aff;
+  color: white;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  line-height: 1.2em;
+}
+#main_content ol ol li::before {
+  background: darkorchid;
+}
+
+#main_content ul {
+  color: #fff;
+  list-style-type: "🔹"
+}
+// #main_content ul li {
+  
+// }
+// #main_content ul ul li {
+  
+// }
+
+#footer_wrap {
+  color:#fff
+}
+#footer_wrap > footer {
+  max-width: 900px; 
+}
+#footer_wrap strong{
+  color:rgb(72, 139, 210);
+  font-family: 'Asap Condensed', sans-serif;
+}
+#footer_wrap em a {
+  font-family: 'Yatra One', cursive;
+  color: rgb(224, 151, 67)
+}
+#footer_wrap .footerlogo {
+  box-shadow: none;
+  border:none;
+  width: 36px;
+  position: relative;
+  float: left;
+}
+/*
+Typed Js Styling for rogue for jekyll base16.dark theme
+*/
+.typed{
+  min-height: 300px;
+  border-top: 10px solid gray;
+}
+.typed .poweredby{
+  position: relative;
+  font-size: 12px;
+  border-left: 10px solid rgb(16, 36, 184);
+  padding: 2px;
+
+}
+
+.applogo{
+  position: relative;
+  float: left;
+  margin-right: 10px;
+}
+.applogo > img {
+  border:none;
+  box-shadow: none;
+  transform: scaleY(-1);
+}
+
+/* pipeline and version*/
+.pipeline{
+  margin-left: 0px;
+  padding-left: 0px;
+  padding-bottom: 5px;
+}
+.pipeline img{
+  padding:0px;
+}
+.noshad img{
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border:none;
+}
+
+/* Table of Contents */
+.toc{
+  padding-left: 10px;
+  padding: 10px;
+  display: block;
+  
+}
+.toc li{
+  margin-left: 30px;
+}
+.toc li a{
+  font-size : 18px;
+  text-decoration: none;
+}
+.toc li a:hover{
+  color: orange;
+}
+.mtoc{
+  list-style: none;
+  list-style-position: outside; 
+}
+.subtoc {
+  padding-left: 20px;
+  font-size : 15px;
+  list-style-type: square; 
+}
+.smtoc{
+  padding-left: 10px;
+  list-style-type: none; 
+}
+.smtoc > a {
+  color: #958cb5;
+}
+
+/* menu styling*/
+.menu{
+  margin-left: 0px;
+  margin-top: -14px;
+  border-bottom: 10px solid #2417d0;
+  padding-bottom: 4px;
+}
+
+/* Code Highlighting inline */
+.highlighter-rouge{
+  background-color: #101010;
+  // border: 1px solid #2b2a2a;
+  border-radius: 0.3em;
+  color: #e0630a;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+.highlighter-rouge code{
+  background-color: #131515;
+  border-radius: 1.3em;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+.highlighter-rouge .highlight{
+    border-radius: 0.3em;
+    background-color: #131515;
+
+}
+.highlighter-rouge pre{
+    border-radius: 0.3em;
+    background-color: #131515;
+
+}
+
+/*Download Links */
+.zip_download_link{
+  background: url(/assets/images/zip-file.png) no-repeat center;
+  background-size: 70%;
+  padding: 0px;
+  margin: 0px;
+  transition: 0.2s ease-in-out;
+}
+.zip_download_link:hover{
+  background: url(/assets/images/zip-file-a.png) no-repeat center;
+  background-size: 73%;
+  opacity: 0.6;
+}
+.tar_download_link{
+  background: url(/assets/images/tar-file.png) no-repeat center;
+  transition: 0.2s ease-in-out;
+  background-size: 70%;
+  margin-left: -15px;
+}
+.tar_download_link:hover{
+  background: url(/assets/images/tar-file-a.png) no-repeat center;
+  background-size: 73%;
+  opacity: 0.6;
+}
+
+/* Base16.Dark Syntax overides*/
+.highlight .n {
+  color: #5964a9;
+}
+.highlight .nf {
+  color: #94a320;
+}
+.highlight .nt {
+  color: #7b3949;
+}
+
+
+/* CSS */
+.button-29 {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 32px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 16px;
+}
+
+.button-29:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.button-29:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-29:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+.button-page-active{
+  //border:2px solid red;
+  background-image: radial-gradient(100% 100% at 100% 0, #ef6b32 0, #5468ff 100%);
+}
+/*
+Font Families
+
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Yatra+One&display=swap" rel="stylesheet">
+font-family: 'Yatra One', cursive;
+
+
+*/
