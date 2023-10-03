@@ -1,17 +1,19 @@
-using module .\Logtastic.psm1
-
-BeforeAll {}
-
-Describe "LogTastic Instance Properites" {
-  it "LogTate should be true" {
-    $logtastic = Get-LogTasticModuleInstance  
-    $logtastic.EnableLogDate()
-    $logtastic.LogDate | should -be $true
-  }
-
-  it "LogTate should be false" {
-    $logtastic = Get-LogTasticModuleInstance  
-    $logtastic.DisableLogDate()
-    $logtastic.LogDate | should -be $false
-  }
-}
+# Pester Configration settings
+# _----------------------------_
+# ------------------------------
+# Invoke-Pester -CodeCoverage .\libs\*.psm1 -CodeCoverageOutputFile 'Coverage.xml' -CodeCoverageOutputFileFormat JaCoCo -script .\BT0-CI-Test-Pester.ps1 -PassThru
+$pesterConfig = New-PesterConfiguration -hashtable @{
+    CodeCoverage = @{ Enabled = $true;
+                      OutputFormat = 'JaCoCo';
+                      OutputPath = 'coverage.xml'
+                      OutputEncoding = 'utf8'
+                      CoveragePercentTarget = 100;
+                      path = @('.\libs\cmdlets\*.psm1', '.\libs\commitfusion_class.psm1')
+                    }
+    Run         = @{
+                      #PassThru = $true
+                      #scriptblock = {'.\test\Test-Unit-Pester.ps1'}
+                      Path = '.\test\Test-Unit-Pester.ps1'
+                    }
+    }
+Invoke-Pester -Configuration $pesterConfig

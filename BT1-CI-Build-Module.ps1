@@ -1,7 +1,9 @@
 using module ..\PSMPacker\PSMPacker.psm1 
 using module .\libs\cmdlets\Get-GitAutoVersion.psm1
 
-$AutoVersion = (Get-GitAutoVersion).NewVersion
+$AutoVersion = (Get-GitAutoVersion).Version
+
+Remove-Item -Path .\dist\CommitFusion -Recurse -Force -ErrorAction SilentlyContinue
 
 Build-Module -SourcePath .\ `
              -DestinationPath .\dist `

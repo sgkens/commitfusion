@@ -5,26 +5,37 @@ using module ..\NuPSForge\libs\New-NupkgPacakge.psm1
 # ? But Nuget and CHoc Does
 $Additional_descriptions = @"
 ♦- Conventional Commits: CommitFusion adheres to the Conventional Commits specification, ensuring consistency and clarity in your commit messages.
-♦- Flexible Commit Messages: The module takes server parameters and generates commit messages that can be customized by the user or automatically created by the module itself.
+♦- Customizable Commit Messages: `New-ConventionalCommit` *cmdlet* takes several parameters generating a customizable commit message, the commit message is broken up into several main parts: Type, Scope, Description, **Body**(_notes,featurenotes,featureaddtions,bugfixes,breakingchanges_), and Footer
+ Commit Messages: The module takes server parameters and generates commit messages that can be customized by the user or automatically created by the module itself.
 ♦- Markdown Formatting: CommitFusion parses commit messages and adds Markdown formatting to them. This enables easy integration with GitLab and enhances the readability of your commit history.
 ♦- Changelog Integration: Commit messages are written to a template file and joined with the current contents of the CHANGELOG.md file. This allows for easy management and tracking of changes over time.
 ♦- Gitmoji Standard Schema: Commits in CommitFusion utilize the Gitmoji standard schema, making it easy to visually identify the purpose of each commit.
-♦- Version Incrementation: The module parses Gitmoji's JSON file to determine the appropriate version increment for your build (minor, major, or 0.0.0). This version information can be used with GitLab CI/CD to automate release and build processes based on your Git history.
-♦- Advanced Commit Manipulation: CommitFusion provides additional manipulation options for the commit body. This includes multi-line listing and styling within the commit message, which can differ from the markdown written to the template.md file.
 
 # Parameters
-Parameters for the module
+Parameters for the module *minmal params*
 Compose a commit message with the following parameters:
-new-ConventionalCommit -type improve `
-                       -Scope "formatting" `
+New-ConventionalCommit -type improve `
                        -Description "Fixed Output and emoji displayed" `
-                       -GitUser sgkens `
-                       -GitGroup powershell
+# Parameters
+Parameters for the module *all params*
+Compose a commit message with the following parameters:
+New-ConventionalCommit -type improve `
+                       -Description "Fixed Output and emoji displayed" `
+                       -Scope "Module" `
+                       -Body "Added a new cmdlet called Get-Emoji" `
+                       -Footer "Added a new cmdlet called Get-Emoji" `
+                       -GitUser "sgkens" `
+                       -GitGroup "ccharp" `
+                       -FeatureAddtions "Exposes all methods and properties of the Table and Rule class" `
+                       -BugFixes "Fixed Output and emoji displayed" `
+                       -BreakingChanges "Fixed Output and emoji displayed" `
+                       -FeatureNotes "Fixed Output and emoji displayed" `
+                       -AsString $true
 ```
 "@
 
 # --Config--
-$ModuleManifest = Test-ModuleManifest -path .\dist\logtastic\logtastic.psd1
+$ModuleManifest = Test-ModuleManifest -path .\dist\CommitFusion\CommitFusion.psd1
 
 $NuSpecParams = @{
   path=".\dist\CommitFusion"
