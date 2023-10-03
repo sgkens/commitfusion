@@ -1,10 +1,9 @@
-# <i class="fa-solid fa-code" style="color: #04376a;"></i> Cmdlets/Functions
+# <i class="fa-solid fa-code" style="color: #04376a;"></i> Cmdlets
 Commit fusion provides number cmdlets to help with the creation of conventional commits, changelog updates and semver version generator.
 
 ---
 
-# <i class="fa-solid fa-book" style="color: #5e5911;"></i> **Sections**
-<div class="toc">
+<div id ="toc" class="toc">
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> New-ConventionalCommit</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#format-fusionmd"> Format-FustionMD</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#update-changelog"> Update-ChangeLog</a></li>
@@ -12,20 +11,23 @@ Commit fusion provides number cmdlets to help with the creation of conventional 
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-gitautoversion"> Get-GitAutoVersion</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-ciset"> Get-CiSet </a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-cisetfusion"> Get-CiSetFusion</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> Get-EmojiIndex</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> Get-Emoji</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> New-CommitFusion</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> New-CommitFusionModuleInstance</a></li>
 </div>
 
 ## New-ConventionalCommit
-This function takes `11` **parameters**, `2` of which are mandatory: `type` and `Description`.
+**New-ConventionalCommit** takes `11` **Parameters**, `2` of which are *Mandatory* `type` and `Description`.
 
-##### 🥏 **Parameter List**
+*🥏 Parameter List*
 
-1. **Type** `[String]` Parameter values are imported from `$moduleroot/libs/CommitFustion.json` at module Import, additional types can be added to the `CommitFustion.json` file if needed. It follows the [🧷 Carlos Cuesta Gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) @ [🧷 gitmoji.dev](https://gitmoji.dev) with additional `type` and `cfa` added to the object array items - <span style="color:magenta;">PARAMETER REQUIRED</span>
+1. **Type** `[String]` Parameter values are imported from `$moduleroot/libs/CommitFustion.json` at module Import.
+  > *Note!* \
+  > ♦ - Additional types can be added to `CommitFustion.json` file if needed. Schema follows [🧷 Carlos Cuesta Gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) @ [🧷 gitmoji.dev](https://gitmoji.dev) with additional `type` and `cfa` added to the object array items. \
+  > <span style="color:magenta;">PARAMETER REQUIRED</span>
+
 2. **Scope** `[String]` The Scope of the commit, User specified, placed between brackets after the `Type` - <span style="color:green;">OPTIONAL</span>
-3.🔸**Description** `[String]` The Commit Description, User specified, placed after the `scope` - <span style="color:magenta;">PARAMERTER REQUIRED</span>
+3. **Description** `[String]` The Commit Description, User specified, placed after the `scope` - <span style="color:magenta;">PARAMERTER REQUIRED</span>
 4. **Body** `[String[]]` Array of text and will ouput under the `NOTES:` area inside the body - <span style="color:green;">OPTIONAL</span>
 5. **BugFixes** `[String[]]` Array of text and will ouput under the `BUG FIXES:` area inside the body - <span style="color:green;">OPTIONAL</span>
 6. **FeatureNotes** `[String[]]` Array of text and will ouput under the `FEATURE NOTES:` area inside the body, - <span style="color:green;">OPTIONAL</span>
@@ -38,6 +40,11 @@ This function takes `11` **parameters**, `2` of which are mandatory: `type` and 
 > #### For Example:
 
 ```powershell
+
+# Minimal Required Parameters Example 
+New-ConventionalCommit -Type feat -Description "Added new feature"
+
+# All Parameters Example
 New-ConventionalCommit -Type feat `
                        -Description "Added new feature" `
                        -Scope "add" `
@@ -89,108 +96,121 @@ New-ConventionalCommit -Type feat `
 👤 @GitUser 📅 9:41PM, Friday 4th August 2023
 ```
 
-<a href="/cmdlets#-sections"><i class="fa-solid fa-circle-up"></i></a>
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
 ----
 
 ## Format-FusionMD
-The function currently takes `4` *optional* *parameters*, default **github** commit link is used if no parameters are specified.
+The function currently takes `4` **optional** parameters, default **github** commit link is used if no parameters are specified.
 
-##### 🥏 **Parameter List**
+*🥏 Parameter List*
 
-1. **Group** `[Switch]` The repository namespace either *GitUsername*, *org*, or *groupname* - <span style="color:green;">OPTIONAL</span>
-2. **Gitlab** `[Switch]` Sets the Commit link to *Gitlab* e.g. 
-```
-https://gitlab.com/($user|$group)/$project/-/commit/$commitid
-```
-3. **Github** - `[Switch]` Sets the Commit link to *Github* e.g. 
-```
-https://github.com/($user|$group)/$project/-/commit/$commitid
-```
-4. **GitLabSelfHosted** - `[String]` Sets the Commit link to *GitlabSE* e.g. 
-```
-https://($SelfHostedUrl)/($user|$group)/$project/-/commit/$commitid
-```
+1. **BitBucket** `[Switch]` Sets the Commit link to *BitBucket* e.g.
+> `https://bitbucket.org/($user|$group)/$project/commits/$commitid`
+
+2. **Gitlab** `[Switch]` Sets the Commit link to *Gitlab* e.g.
+> `https://gitlab.com/($user|$group)/$project/-/commit/$commitid`
+
+3. **Github** - `[Switch]` Sets the Commit link to *Github* e.g.
+> `https://github.com/($user|$group)/$project/-/commit/$commitid`
+
+4. **GitLabSE** - `[String]` Sets the Commit link to *GitlabSE* e.g.
+> `https://($SelfHostedUrl)/($user|$group)/$project/-/commit/$commitid`
 
 
 > #### For Example:
 
 ```powershell
-New-ConventionalCommit @params | Format-FusionMD
+New-ConventionalCommit -Type feat `
+                       -Description "Added new feature" `
+                       -Scope "add" `
+                       -Body "Note 1","Note 2" `
+                       -BugFixes "BugFixes 1","BugFixes 2" `
+                       -FeatureNotes "FeatureNotes 1","FeatureNotes 2" `
+                       -FeatureAddtions "FeatureAddtions 1","FeatureAddtions 2" `
+                       -BreakingChanges "BreakingChanges 1","BreakingChanges 2" `
+                       -GitUser "GitUser" `
+                       -GitGroup "GitGroup" `
+                       -Footer | Format-FusionMD
 ```
 
 > #### *Will Ouput*
 
 ```text
-##  🎯-✨ feat(add): Added new feature
+## 🎯-✨ feat(add):Added new feature
 
-> [🆔]» [75fc3c7656](https://($giturl))/$($GitGroup)/$($reponame)/-/commit/$($commidid))
 
 > [🧰]» <kbd>MINOR</kbd>
 
 📜 NOTES:
 
-✏  Note 1
-✏  Note 2
+✏  Note 1 \
+✏  Note 2 ..🖊
 
-|🌟 FEATURE ADDTIONS:  |
+🌟 FEATURE ADDTIONS:  |
 |-|
 
-🍠 FeatureAddtions 1
+🍠 FeatureAddtions 1 \
 🍠 FeatureAddtions 2 ..🖊
 
 
-|🐛 BUGFIXES:   |
+🐛 BUG FIXES:  |
 |-|
 
-🦠 BugFixes 1  |
-|-|
-🦠 BugFixes 2 ..🖊 |
-|-|
+🦠 BugFixes 1 \
+🦠 BugFixes 2 ..🖊
 
 
-|🧪 FEATURE UPDATES:  |
+🧪 FEATURE UPDATES:  |
 |-|
 
-🔨 FeatureNotes 1
+🔨 FeatureNotes 1 \
 🔨 FeatureNotes 2 ..🖊
 
 
-|💢 BREAKING CHANGES:  |
+💢 BREAKING CHANGES:  |
 |-|
 
-🧨 BreakingChanges 1
+🧨 BreakingChanges 1 \
 🧨 BreakingChanges 2 ..🖊
 
-*👤 @GitUser 📅 1:48AM, Saturday 5th August 2023*
+👤 @GitUser 📅 8:28AM, Monday 14th August 2023
 ```
 
-<a href="/cmdlets#-sections"><i class="fa-solid fa-circle-up"></i></a>
-
----
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
 ## Update-ChangeLog
-This function takes `1` **Parameter**:
+**Update-ChangeLog** takes `1` **Optional** Parameter:
 
-1. `logfile`: (optional) Specifies the relative path to the changelog file. If not specified, it will look for `CHANGELOG.md` in the current directory. If the file is not found, it will create one. The function will attempt to pre-pend the output from `Format-FusionMD` to the file.
+*🥏 Parameter List*
+
+1. `logfile`: (*optional*) Specifies the relative path to the changelog file. If not specified, it will look for `CHANGELOG.md` in the current directory. If the file is not found, it will create one. The function will attempt to pre-pend the output from `Format-FusionMD` to the file.
 
 > #### For Example:
 
 ```powershell
-New-ConventionalCommit @params | Format-FusionMD | Update-ChangeLog -logfile "CHANGELOG.md"
+New-ConventionalCommit New-ConventionalCommit -Type feat `
+                       -Description "Added new feature" `
+                       -Scope "add" `
+                       -Body "Note 1","Note 2" `
+                       -BugFixes "BugFixes 1","BugFixes 2" `
+                       -FeatureNotes "FeatureNotes 1","FeatureNotes 2" `
+                       -FeatureAddtions "FeatureAddtions 1","FeatureAddtions 2" `
+                       -BreakingChanges "BreakingChanges 1","BreakingChanges 2" `
+                       -GitUser "GitUser" `
+                       -GitGroup "GitGroup" `
+                       -Footer | Format-FusionMD | Update-ChangeLog -logfile "CHANGELOG.md"
 ```
-<a href="/cmdlets#-sections"><i class="fa-solid fa-circle-up"></i></a>
-
----
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
 ## Set-Commit
-This function takes `0` **Parameters**, will simple run `git commit -m $commitmessage` and will use the output from `New-ConventionalCommit` as the commit message.
+**Set-Commit** takes `0` **Parameters**, will simple run `git commit -m $commitmessage` and will use the output from `New-ConventionalCommit` as the commit message.
 
 > Asummptions:
 > - You are in a git repository
 > - You have staged files
 
-#### Get-GitAutoVersion
+## Get-GitAutoVersion
 This function takes `0` **Parameters**, it will parse the git log see [**semver-version-generator**](/index#semver-version-generator) for more information on the logic of function.
 
 > #### For Example:
@@ -213,12 +233,10 @@ Version Parsedlines
 ------- -----------
 0.1.0   3
 ```
-<a href="/cmdlets#-sections"><i class="fa-solid fa-circle-up"></i></a>
-
----
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
 ## Get-CiSet
-This function simplifies the [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) JSON file as a PSObject, making it helpful if you wish to utilize custom types in your commit messages. The `$moduleroot/libs/Gitmojis.json` file serves as a reference, but you have the flexibility to customize it according to your preferences, as long as the schema remains consistent. Additionally, it's worth noting that the `type` and `cfa` additions are the same as those found in the `$moduleroot/libs/CommitFusion.json` file.
+**Get-CiSet** parses [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) JSON file and return as a PSObject, making it helpful if you wish to utilize custom types in your commit messages. The `$moduleroot/libs/Gitmojis.json` file serves as a reference, but you have the flexibility to customize it according to your preferences, as long as the schema remains consistent. Additionally, it's worth noting that the `type` and `cfa` additions are the same as those found in the `$moduleroot/libs/CommitFusion.json` file.
 
 
 ```powershell
@@ -240,12 +258,12 @@ emoji entity    code        description                             name      se
 🎉    &#127881; :tada:      Begin a project.                        tada
 ```
 
-<a href="/cmdlets#-sections"><i class="fa-solid fa-circle-up"></i></a>
-
----
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
 ## Get-CiSetFusion
-Takes 4 optional **Parameters** and will return PSObject, it will parse and return the types from the `$moduleroot/libs/CommitFusion.json` file. The types can be further filtered by the following parameters:
+*Get-CiSetFusion* Takes `4` optional **Parameters**, it will parse and write to console the types from the `$moduleroot/libs/CommitFusion.json` file. The types can be further filtered by the following parameters:
+
+*🥏 Parameter List*
 
 1. `-NoSemver`: Filters types without semantic versioning.
 2. `-Major`: Filters types of major version changes.
@@ -262,31 +280,21 @@ If you would like to return the PSObject as this function renders the result usi
 Get-CiSetFusion -NoSemver -NoRender | Select-Object -First 10 | FT -Wrap
 ```
 
-<a href="/cmdlets#-sections"><i class="fa-solid fa-circle-up"></i></a>
-
----
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
 ## Get-Emoji
-Takes `2` **Parameters**:
+**Get-Emoji** take `2` optional Parameters:
 
+*🥏 Parameter List*
 1. `-Type`: Specify either **miscmojis** or **gitmojis** to select the desired type. 
 2. `-Name` (optional): If specified, it will return the emoji with the specified name. If not specified, it will return all the emojis of the specified type.
 
----
-
-## Get-EmojiIndex *Pending Removal* `Git-Emoji` Replaces
-Takes `0` **Parameters**, it will parse the `$moduleroot/libs/Emoji.json` file and return a PSObject, which can be piped into `Format-Table` or `Out-GridView` for example, default is rendered using *Spectre.Console* via *SimpleSpectreWrapper*.
-
----
-
 ## New-CommitFusion
-Takes `0` **Parameters** it will return a new instance of the commit fusion class.
+**New-CommitFusion** `0` **Parameters** it will return a new instance of the commit fusion class.
 
 > **Note!** if you want to use the `commitfusion_class.psm1` lib directly see `$moduleroot/libs/commitfusion_class.lib` for more information.
 
----
-
 ## Get-CommitFusionModuleInstance
-This function takes `0` Parameters and will return the module instance initiated at module import. See `$moduleroot/libs/cmdlets/Get-CommitFusionModuleInstance.psm1`.
+**Get-CommitFusionModuleInstance** takes `0` Parameters and will return the module instance initiated at module import. See `$moduleroot/libs/cmdlets/Get-CommitFusionModuleInstance.psm1`, used by all the cmdlets to interact with the class instance.
 
-<a href="/cmdlets#-sections"><i class="fa-solid fa-circle-up"></i></a>
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>

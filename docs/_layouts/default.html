@@ -26,18 +26,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Tangerine&display=swap" >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Yatra+One&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" > 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Special+Elite&display=swap"> 
     <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@600&display=swap" rel="stylesheet">
     
 
     <!-- Site CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <!-- Site JS -->
-    <script src="./assets/js/main.js?v="></script>
+    <script src="{{ '/assets/js/main.js?v=' | append: site.github.build_revision | relative_url }}"></script>
 
     {% seo %}
     
@@ -51,10 +48,14 @@
     <div id="header_wrap" class="outer">
         <header class="inner">
 
-          {% include applogo.html %} 
-          
+          {% if site.custom.logo %}
+            <div class="fadeIn applogo"> <img src="{{ site.custom.logo }}"/> </div>
+          {% endif %}
+
           {% if site.github.is_project_page %}
-            <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
+            <div class="forkme_banner_wrap">
+              <a class="forkme" id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
+            </div>
           {% endif %}
 
           <h1 id="project_title">{{ site.title | default: site.github.repository_name }}</h1>
@@ -73,8 +74,27 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        {% include dateupdated.html %}
-        {% include pipeline.html %}
+
+        {% if site.show_downloads %}
+          <div id="dateupdated">
+            <em>Last Updated</em> 
+            <strong> - </strong> 
+            <strong>{{ site.custom.dateupdated }}</strong>
+          </div>
+        {% endif %}
+      
+        {% if site.custom.license %}
+          <div class="pipeline noshad">
+          
+              <a href="https://github.com/sgkens/commitfusion/">
+                <img src="{{ site.custom.license }}">
+              </a>
+              <a href="https://github.com/sgkens/commitfusion/">
+                <img src="{{ site.custom.version }}">
+              </a>
+          </div>
+        {% endif %}
+
         {% include menu.html %}
         {{ content }}
       </section>

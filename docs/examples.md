@@ -1,16 +1,26 @@
-# Examples
-There a number of methods to import or use this module. The most common is to import the module from the PowerShell Gallery or Chocolatey. The other methods are cloning the repository or embedding the module into your PowerShell profile.
+# <i class="fa-solid fa-code" style="color: #04376a;"></i> Examples
 
-
-## Sections
 <div class="toc">
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> New-ConventionalCommit Examples</a></li>
-  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> Example 1 - Minimal Commit Message</a></li>
-  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> Example 2 - Documentation type Commit Message</a></li>
-  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> Example 3 - BugFix type Commit Message</a></li>
-  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> Example 4 - Feature type Commit Message</a></li>
-  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> Example 5 - Feature, type Commit Message</a></li>
-  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> Example 6 - changes, type Commit Message</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
+    <a href="#new-conventionalcommit-examples"> New-ConventionalCommit Examples</a>
+  </li>
+  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
+    <a href="#new-conventionalcommit"> Example - Minimal chore Commit Message</a>
+  </li>
+  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
+  <a href="#new-conventionalcommit"> Example 2 - Documentation type Commit Message</a>
+  </li>
+  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
+  <a href="#new-conventionalcommit"> Example 3 - BugFix type Commit Message</a>
+  </li>
+  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
+  <a href="#new-conventionalcommit"> Example 4 - Feature type Commit Message</a>
+  </li>
+  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
+  <a href="#new-conventionalcommit"> Example 5 - Feature, type Commit Message</a>
+  </li>
+  <li class="smtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
+  <a href="#new-conventionalcommit"> Example 6 - changes, type Commit Message</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#format-fusionmd"> Format-FustionMD</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#update-changelog"> Update-ChangeLog</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#set-commit"> Set-Commit</a></li>
@@ -21,10 +31,10 @@ There a number of methods to import or use this module. The most common is to im
 </div>
 
 
-## <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Importing the module
+## Importing the module
 
 ```powershell
-# Import the CommitFusion module if from psgallary or choco
+# Import the CommitFusion module if from PSGallary or chocolatey
 Import-Module CommitFusion
 
 # OTHER IMPORT METHODS
@@ -36,39 +46,35 @@ Import-Module -Name .\CommitFusion.psd1
 Import-Module -Name .\CommitFusion.psm1
 
 # Embed the module into your powershell profile
-using module CommitFusion.psm1
+using module .\CommitFusion.psm1
 ```
 
 ## New-ConventionalCommit Examples
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - *Minimal* Commit Message
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *chore* Commit Message **Minimum Parameters**
 
-> Generate a basic commit message with `2` *required* parameters `Type` and `Description`
+> Generate a *chore* commit message with the `2` *required* parameters `Type` and `Description`
 
 ```powershell
-New-ConventionalCommit -Type feature -Description "My New Commit Message"
+New-ConventionalCommit -Type chore -Description "Performing a chore"
 ```
 
-> #### *Will Ouput*
+#### Will Ouput
 
 ```text
-✨ feature: My commit message
-
-🧰 Build: minor
-
-👤 @ 📅 12:16AM, Monday 31th July 2023
+🔧 chore(update):Documentation
 ```
 
-__ <i class="fa-solid fa-pen" style="color: #326dd2;"></i>
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *docs* `type` Commit Message
+> Generate a *docs* type commit message add `notes` in the body. The `docs` type doesn't have a `semver` property value and is omitted
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - *Documentation* `type` Commit Message
-> Generate a `docs` type commit message with the `Git User` and `notes` in  the body `docs` type doesn't have a `semver` property value and is omitted
+> **Note:** The `-Footer` switch is used to include the footer, use `-GitUser` to include the git user in the footer after `@`
 
 ```powershell
 New-ConventionalCommit -Type docs -Description "Documentation" -Scope "add"  -Body "Note 1","Note 2"  -GitUser sgkens -Footer
 ```
 
-> #### *Will Ouput*
+#### Will Ouput
 
 ```text
 📝 docs(add): Documentation
@@ -81,16 +87,14 @@ New-ConventionalCommit -Type docs -Description "Documentation" -Scope "add"  -Bo
 👤 @sgkens 📅 10:25AM, Monday 31th July 2023
 ```
 
-__ <i class="fa-solid fa-pen" style="color: #326dd2;"></i>
-
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - *BugFix* `type` Commit Message
-> Generate a *bug fix* commit message with *scope*. the bugfix type `semver` property is `patch` and is automatically included, include Git User
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *BugFix* `type` Commit Message
+> Generate a *bugfix* commit message with `scope`. the bugfix type `semver` property is `patch` and is automatically included.
 
 ```powershell
-New-ConventionalCommit -Type fix -Description "Fixed Bug" -Scope "#234" -BugFixes "Fixed Bug #234" -GitUser sgkens
+New-ConventionalCommit -Type fix -Description "Fixed Bug" -Scope "#234" -BugFixes "Fixed Bug #234"
 ```
 
-##### Will Ouput
+#### Will Ouput
 
 ```text
 🐛 fix(#234): Fixed Bug
@@ -100,20 +104,16 @@ New-ConventionalCommit -Type fix -Description "Fixed Bug" -Scope "#234" -BugFixe
 🐛 BUGFIXES:
 
 🦠 Fixed Bug #234 ..🖊
-
-👤 @sgkens 📅 10:44AM, Monday 31th July 2023
 ```
 
-__ <i class="fa-solid fa-pen" style="color: #326dd2;"></i>
-
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - *Feature* `type` Commit Message
-> Generate a `feature` commit message with `scope`, `notes`, gituser with no footer and feature additions
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *Feat* `type` Commit Message 1
+> Generate a *feat* commit message with `scope`, `notes`, `bugfixes`
 
 ```powershell
-New-ConventionalCommit -Type feature -Description "Feature Addition" -scope "v0.1.0" -body "Note 1","Note 2"
+New-ConventionalCommit -Type feat -Description "Feature Addition" -scope "v0.1.0" -body "Note 1","Note 2"
 ```
 
-> #### *Will Ouput*
+#### Will Ouput
 
 ```text
 ✨ feature(v0.1.0): Feature Addition
@@ -126,16 +126,14 @@ New-ConventionalCommit -Type feature -Description "Feature Addition" -scope "v0.
 ✏  Note 2
 ```
 
-__ <i class="fa-solid fa-pen" style="color: #326dd2;"></i>
-
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example 2 - *Feature*, `type` Commit Message
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *Feat*, `type` Commit Message 2
 > Generate a Changes ***Type*** Commit Message with `scope`, `notes`, `feature addition`, `gituser` and `footer`
 
 ```powershell
-New-ConventionalCommit -Type feature -Description "Feature Additions" -scope "v0.1.0"  -body "Note 1","Note 2"  -FeatureAdditions "Feature Addition 1","Feature Addition 2" -GitUser sgklens -Footer
+New-ConventionalCommit -Type feat -Description "Feature Additions" -scope "v0.1.0"  -body "Note 1","Note 2"  -FeatureAdditions "Feature Addition 1","Feature Addition 2" -GitUser sgkens -Footer
 ```
 
-> #### *Will Ouput*
+#### Will Ouput
 
 ```text
 ✨ feature(v0.1.0): Feature Additions
@@ -152,20 +150,17 @@ New-ConventionalCommit -Type feature -Description "Feature Additions" -scope "v0
 🍠 Feature Addtion 1
 🍠 Feature Addtion 2 ..🖊
 
-
 👤 @sgklens 📅 12:16AM, Monday 31th July 2023
 ```
 
-__ <i class="fa-solid fa-pen" style="color: #326dd2;"></i>
-
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example 2 - *changes*, `type` Commit Message
-> Generate a Commit message with type `changes` with `scope`, `notes`, `feature addition`, `Feature Updates`, `Bracking Changes`, `gituser` and `footer`, changes type is a `Major` and will have a semver value of `major`
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i>  *changes*, `type` Commit Message
+> Generate a *changes* Commit message with type `changes` with `scope`, `notes`, `feature addition`, `Feature Updates`, `Bracking Changes`, `gituser` and `footer`, changes type is a `Major` and will have a semver value of `major`
 
 ```powershell
 New-ConventionalCommit -Type feature -Description "My New Commit Message" -Scope "v0.1.0"  -Body "Note 1","Note 2"  -FeatureAdditions "Feature Addtion 1","Feature Addtion 2" -FeatureNotes "Feature Note 1","Feature Note 2" -BugFixes "bugFix #234", "fixes #23" -BreakingChanges "Breaking Change 1" -GitUser sgkens -Footer
 ```
 
-> #### *Will Ouput*
+#### Will Ouput
 
 ```text
 ✨ feature(v0.1.0): My New Commit Message
@@ -203,27 +198,27 @@ New-ConventionalCommit -Type feature -Description "My New Commit Message" -Scope
 
 ```
 
-#### Set-Commit
+## Set-Commit Example
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Set-Commit - Apply Commit Message
-> Apply Commit Message, you can **PIPE** `New-ConventionalCommit` into `Set-Commit` wich just run `git commit -m $message`, `New-ConventionalCommit` will return a `string` that can be piped into `Set-Commit`
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i>  Example - Appling Commit Message
+> To Apply Commit Message, you can **PIPE** `New-ConventionalCommit` into `Set-Commit` wich just run `git commit -m $message`, `New-ConventionalCommit` will return a `string` that can be piped into `Set-Commit`
 
 ```powershell
 New-ConventionalCommit @params | Set-Commit
 ```
 
-## Format-FusionMD
+## Format-FusionMD Example
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Format-FusionMD - Format in Markdown
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i>  Example - Format-FusionMD - Format in Markdown
 > Format in Markdown, you can **PIPE** `New-ConventionalCommit` into `Format-FusionMD`
 
 ```powershell
 New-ConventionalCommit @params | Format-FusionMD
 ```
 
-## Update-Changelog
+## Update-Changelog Example
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Update-Changelog - Adding Commit Message to changelog
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i>  Example - Update-Changelog - Adding Commit Message to changelog
 > Adding Commit Message to changelog, you can **PIPE** `New-ConventionalCommit` into `Format-FusionMD` into `Update-ChangeLog -logfile $file` by default the file is `changelog.md` if you want to change the file name you can use the `-logfile` parameter. Message is pre-pended to the file
 
 ```powershell
@@ -231,62 +226,79 @@ New-ConventionalCommit @params | Format-FusionMD | Update-Changelog -logfile .\c
 ```
 
 
-## Get-CISetFusion
+## Get-CISetFusion Example
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-CISetFusion - Retreiving the `CI-SET` List `Git Mojis` 
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-CISetFusion - Retreiving the `CI-SET` List `Git Mojis` 
 > Retreiving the *Types* from the `CommistFusion.json` file, you can use the `-NoSemVer`, `-Major`, `-Minor`, `-Patch` parameters to filter the list
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-CISetFusion `Types` with `semver` **None**
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-CISetFusion `Types` with `semver` **None**
 ```powershell
 Get-CISetFusion -NoSemVer # Returns Types that have no Semver value
 ```
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-CISetFusion `Types` with `semver` **Major**
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-CISetFusion `Types` with `semver` **Major**
 ```powershell
 Get-CISetFusion -Major # Returns Types that have a Semver value of Major
 ```
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-CISetFusion `Types` with `semver` **Minor**
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-CISetFusion `Types` with `semver` **Minor**
 ```powershell
 Get-CISetFusion -Minor # Returns Types that have a Semver value of Minor
 ```
-
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-CISetFusion `Types` with `semver` **patch**
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-CISetFusion `Types` with `semver` **patch**
 ```powershell
 Get-CISetFusion -Patch # Returns Types that have a Semver value of Patch
 ```
 
-## Git-Emoji
+## Git-Emoji Example
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-Emoji `🐛` from the `GitMojis.json` file.
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-Emoji `🐛` from the `GitMojis.json` file.
 ```powershell
 Get-Emoji -Type gitmojis -name bug
 ```
 
-> #### *Will Ouput*
+#### Will Ouput
 
 ```text
 🐛
 ```
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-Emoji `🧑` the `miscmojis.json` file.
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-Emoji `🧑` the `miscmojis.json` file.
 ```powershell
  Get-Emoji -Type miscmojis -name person
 ```
 
-> #### *Will Ouput*
+#### Will Ouput
 
 ```text
 🧑
 ```
 
 
-##### <i class="fa-solid fa-layer-group" style="color: #d3660d;"></i> Example - Get-Emoji from the `GitMojis.json` file with
-
-## Get-GitAutoVersion 
+### <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Get-Emoji
+Get-Emoji from the `GitMojis.json` or `miscmojis.json` file.
 
 ```powershell
+Get-Emoji -Type gitmojis -name bug
+```
+
+#### Will Ouput
+
+```text
+🐛
+```
+
+
+## Get-GitAutoVersion 
+```powershell
 Get-GitAutoVersion
+```
+
+#### Will Ouput EG:
+```text
+Version ParsedLines
+------- -----------
+0.1.4   105
 ```
 
 ## Using all *cmdlets* with **PIPES**

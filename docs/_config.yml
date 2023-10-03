@@ -1,9 +1,16 @@
 repository: pages-themes/slate
 #author: # [name, email, web]
 remote_theme: pages-themes/slate@v0.2.0
-title: [Commit-Fusion] # Used Front Matter property
-description: [Conventional Commit Message Generator] # Used Front Matter property
+title: [Commit-Fusion] 
+description: [Conventional Commit Message Generator]
 show_downloads: true  # ["true" or "false" (unquoted) to indicate whether to provide a download URL]
+custom:
+  logo: 'https://github.com/sgkens/resources/raw/main/modules/CommitFusion/logo-v1-black.svg' 
+  dateupdated: 'Monday, 14 August 2023 7:51:22 AM' 
+  license: 'https://img.shields.io/badge/MIT-License-blue?style=for-the-badge&logo=unlicense&color=#36013f' 
+  version: 'https://img.shields.io/badge/version-v0.3.2-blue?style=for-the-badge&logo=Version&color=%23004481'
+
+
 #google_analytics: [Your Google Analytics tracking ID]
 plugins:
   - jekyll-remote-theme # add this line to the plugins list if you already have one
