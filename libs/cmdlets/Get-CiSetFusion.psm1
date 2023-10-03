@@ -1,7 +1,26 @@
+<#
+.SYNOPSIS
+Get The Commitfusion Ci Type Set base on Commitfusion
+.DESCRIPTION
+Returns Commitfusion Ci Type Set base on Commitfusion as a PSObject
+.EXAMPLE
+Get-CiSetFusion
+Get-CiSetFusion -NoSemver
+Get-CiSetFusion -Patch
+Get-CiSetFusion -Minor
+Get-CiSetFusion -Major
+.INPUTS
+none.
+.OUTPUTS
+PSObject
+.NOTES
+- 
+.LINK
+CommitFusion (Module): https://github.com/sgkens/Commitfusion/main/readme.md#Get-CiSetFusion
+#>
 Function Get-CiSetFusion() {
     [CmdletBinding()]
-    [OutputType([psobject])]
-    [Alias("gcsf")]
+    [OutputType([PSObject])]
     param (
         [parameter(
             Mandatory = $false,

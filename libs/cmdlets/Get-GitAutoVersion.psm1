@@ -16,7 +16,7 @@ Function Get-GitAutoVersion {
             else {
                 $gitCommits = git log --pretty=format:"%s%n%b"
 
-                for($l=$gitcommits.count -1; $l -gt 0; $l--) {
+                for( $l=$gitcommits.count -1; $l -gt 0; $l-- ) {
                     if ([regex]::Matches($gitCommits[$l], "Build: major", [RegexOptions]::IgnoreCase)) {
                         $major++
                         $patch = 0
@@ -52,9 +52,9 @@ Function Get-GitAutoVersion {
                 # if ($major -eq 0 -and $minor -eq 0 -and $patch -eq 0) {
                 #     $minor = 1
                 # }
-                return [PSCustomObject]@{ 
+                return [PSCustomObject]@{
                     Version="$major.$minor.$patch";
-                    ParsedLines = "$($gitCommits.count.tostring())" 
+                    ParsedLines = "$($gitCommits.count.tostring())"
                 }
             }
         }

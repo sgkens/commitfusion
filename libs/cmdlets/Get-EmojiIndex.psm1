@@ -1,3 +1,20 @@
+<#
+.SYNOPSIS
+Returns the emoji object array from the gitmojis or miscmojis json file
+.DESCRIPTION
+This cmdlet returns the emoji object array from the gitmojis or miscmojis json file
+.EXAMPLE
+Get-EmojiIndex -Type gitmojis
+Get-EmojiIndex -Type miscmojis
+.INPUTS
+Type: gitmojis or miscmojis
+.OUTPUTS
+PSObject
+.NOTES
+- 
+.LINK
+CommitFusion (Module): https://github.com/sgkens/Commitfusion/main/readme.md#Get-CiSet
+#>
 Function Get-EmojiIndex(){
     [CmdletBinding()]
     [OutputType([PSObject])]

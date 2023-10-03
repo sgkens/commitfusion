@@ -1,5 +1,39 @@
+<#
+.SYNOPSIS
+This function returns a string representing a conventional commit.
+
+.DESCRIPTION
+This function returns a string representing a conventional commit.
+
+.EXAMPLE
+New-ConventionalCommit -Type "feat" -Scope "myScope" -Description "myDescription" -Body "myBody" -Footer -GitUser "myGitUser" -GitGroup "myGitGroup" -FeatureAddtions "myFeatureAddtions" -BugFixes "myBugFixes" -FeatureNotes "myFeatureNotes" -BreakingChanges "myBreakingChanges"
+
+.INPUTS
+Type: string
+Scope: string
+Description: string
+Body: string
+Footer: switch
+GitUser: string
+GitGroup: string
+FeatureAddtions: string
+BugFixes: string
+FeatureNotes: string
+BreakingChanges: string
+
+.OUTPUTS
+string
+
+.NOTES
+- 
+
+.LINK
+CommitFusion (Module): https://github.com/sgkens/Commitfusion/readme.md#New-ConventionalCommit
+#>
+
 Function New-ConventionalCommit {
     [CmdletBinding()]
+    [OutputType([string])]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
         # valuedateset Dynamic values
@@ -12,17 +46,17 @@ Function New-ConventionalCommit {
         })]
         [string]$Type,
 
-        [Parameter(Mandatory = $false, Position = 1)]
+        [Parameter(Mandatory = $false)]
         [string]$Scope,
 
-        [Parameter(Mandatory = $true, Position = 2)]
+        [Parameter(Mandatory = $false)]
         [string]$Description,
 
         [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
         [string[]]$Body,
 
-        [Parameter(Mandatory = $false)]
-        [string]$Footer,
+        [Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [switch]$Footer = $false,
 
         [Parameter(Mandatory = $false)]
         [string]$GitUser,
@@ -56,31 +90,31 @@ Function New-ConventionalCommit {
     )
 
     process {
-        if($null -eq $Body){
+        if($Body.count -eq 0){
             $Body = $null
         }
-        if($null -eq $FeatureAddtions){
+        if($description.length -eq 0){
+            $description = $null
+        }
+        if($FeatureAddtions.count -eq 0){
             $FeatureAddtions = $null
         }
-        if($null -eq $BugFixes){
+        if($BugFixes.count -eq 0){
             $BugFixes = $null
         }
-        if($null -eq $FeatureNotes){
+        if($FeatureNotes.count -eq 0){
             $FeatureNotes = $null
         }
-        if($null -eq $BreakingChanges){
+        if($BreakingChanges.count -eq 0){
             $BreakingChanges = $null
         }
-        if($Footer -eq $null -or $Footer -eq ""){
-            $Footer = $null
-        }
-        if($GitUser -eq $null){
+        if($GitUser.length -eq 0){
             $GitUser = $null
         }
-        if($GitGroup -eq $null){
+        if($GitGroup.length -eq 0){
             $GitGroup = $null
         }
-        if($Scope -eq $null){
+        if($Scope.length -eq 0){
             $Scope = $null
         }
         if($AsString -and $AsObject){
@@ -113,7 +147,8 @@ Function New-ConventionalCommit {
             return (Get-CommitFusionModuleInstance).AsStringForCommit()
         }
         if($AsObject){
-            return (Get-CommitFusionModuleInstance).AsObject()
+            return (Get-CommitFusionModuleInstance).AsObject() #TODO: For some reason this is returned as an hashtable, not a PSObject
+                                                               #TODO: may need its only cmdlet with explicit return type [PSObject
         }
         if($AsJson){
             return (Get-CommitFusionModuleInstance).AsObject() | ConvertTo-Json
