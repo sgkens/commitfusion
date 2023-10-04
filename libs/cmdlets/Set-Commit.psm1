@@ -1,6 +1,6 @@
+Using Module ..\CommitFusion_class.psm1
 Function Set-Commit(){
   [CmdletBinding()]
-  [OutputType([void])]
   param(
     [parameter(
       Mandatory=$true,
@@ -19,7 +19,7 @@ Function Set-Commit(){
           git log -1
         }
         catch [system.exception] {
-            write-error $_.Exception.Message
+            throw $_.Exception.Message
         }
   }
 }

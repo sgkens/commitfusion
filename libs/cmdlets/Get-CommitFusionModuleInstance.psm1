@@ -1,24 +1,33 @@
-using module ..\CommitFusion_class.psm1
+Using Module ..\CommitFusion_class.psm1
 <#
 .SYNOPSIS
-Get The Commitfusion Module Instance
+Returns and instance of the Commitfusion class.
+
 .DESCRIPTION
-This Cmdlet returns the Commitfusion Module Instance for use in other Cmdlets
+Returns and instance of the Commitfusion class, providing access to the Commitfusion methods.
+
 .EXAMPLE
-Get-CommitFusionModuleInstance
+$logtastic = Get-CommitfusionModuleInstance
+
+This example returns an instance of the Commitfusion class.
+
 .INPUTS
 None.
+
 .OUTPUTS
-Object of type CommitFusion
+none.
+
 .NOTES
 - 
+
 .LINK
-CommitFusion (Module): https://github.com/sgkens/Commitfusion/main/readme.md#Get-CommitFusionModuleInstance
+logtastic (Module): https://github.com/sgkens/Commitfusion
 #>
 
 $commitfusion_instance = New-Object CommitFusion
 
 Function Get-CommitFusionModuleInstance() {
+  [alias("gcfmi")]
   [CmdletBinding()]
   [OutPutType([object])]
   param()
@@ -26,5 +35,4 @@ Function Get-CommitFusionModuleInstance() {
     return $commitfusion_instance
   }
 }
-
 Export-ModuleMember -Function Get-CommitFusionModuleInstance
