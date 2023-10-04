@@ -1,9 +1,13 @@
+<#
+  Commit Fusion template file
+  use to create large detailed commits
+#>
 using module g:\devspace\projects\powershell\_repos\CommitFusion\CommitFusion.psm1
 
 $Params = @{
   Type = "refactor";
-  Scope = "``Main Class``";
-  Description = "Fix spacing and newlines ouput";
+  Scope = "``Module``";
+  Description = "Updated the CommitFusion module to include a new ``cmdlet`` called ``Send-Commit``";
   Body = @(
     "Changed spacing for ``bodyvar``",
     "AsStringForCommit now returns a clean spaced string for git commit",
@@ -12,6 +16,9 @@ $Params = @{
     "Updated Git-AutoVersion ``cmdlet``",
     "Refactored Send-Commit ``cmdlet``",
     "purged template.md and template_final.md file contents",
+    "Removed Write-FusionToLog ``cmdlet``",
+    "Adding Commit-Helper script file",
+    "Changed ``Send-Commit`` to ``Set-Commit``"
   );
   #Footer = "";
   GitUser = "sgkens";
@@ -26,5 +33,14 @@ $Params = @{
   #AsString = $true #Default is $true
 }
 
+# ACTIONS
+# -------
 
-New-ConventionalCommit @Params #| Format-FusionMD | Update-ChangeLog -logfile .\changelog.md | send-commit
+# ConventionalCommit with params sent commit
+New-ConventionalCommit @Params
+
+# ConventionalCommit with params sent commit
+#New-ConventionalCommit @Params | Set-Commit
+
+# ConventionalCommit with params, written to changelog and sent commit
+#New-ConventionalCommit @Params | Format-FusionMD | Update-ChangeLog -logfile .\changelog.md | Set-Commit
