@@ -1,3 +1,0 @@
-https://stackoverflow.com/questions/5596982/using-powershell-to-write-a-file-in-utf-8-without-the-bom
-
-- Missing BOM encoding for non-ASCII encoded file on_class.p  'CommitFusion_class.psm1'

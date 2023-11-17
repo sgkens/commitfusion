@@ -1,4 +1,0 @@
-Class ConventionalCommit
-This class defines a ConventionalCommit object with properties for each of the components of a Conventional Commit message: Type, Scope, Description, Body, and Footer. The class also provides a ToString method that returns the commit message as a string in the Conventional Commits format.
-
-In the example usage, a new ConventionalCommit object is created and its properties are set. The ToString method is then called to generate the commit message, which can be passed as the argument to the -m option in the git commit command.
