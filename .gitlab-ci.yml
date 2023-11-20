@@ -14,8 +14,7 @@ stages:
 pester_test_job:
   stage: PesterTest
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh 
   script:
     - pwsh
     - install-module -name pester -Scope CurrentUser -Force -SkipPublisherCheck
@@ -26,8 +25,7 @@ pester_test_job:
 build_module_job:
   stage: BuildModule
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh 
   script:
     - pwsh
     - Test-ModuleManifest -Path ./dist/commitfusion/commitfusion.psd1
@@ -40,8 +38,7 @@ build_module_job:
 script_analyzer_test_job:
   stage: ScriptAnalyzerTest
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh 
   rules:
     - if: '$CI_BUILD_STAGE == "BuildModule" && $CI_BUILD_STATUS == "success"'
   script:
@@ -57,8 +54,7 @@ script_analyzer_test_job:
 create_nuget_package_job:
   stage: CreateNugetPackage
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh 
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "ScriptAnalyzerTest" && $CI_BUILD_STATUS == "success"'
   script:
@@ -75,8 +71,7 @@ create_nuget_package_job:
 deploy_gitlab_package_job:
   stage: DeployGitlabPackage
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh 
   script:
     - pwsh.exe
     - .\bt3-ci-deploy-pushtogitlab.ps1
@@ -87,8 +82,7 @@ deploy_gitlab_package_job:
 deploy_proget_packages_job:
   stage: DeployProgetPackages
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh
   script:
     - pwsh.exe
     - .\bt4-ci-deploy-pushtoproget.ps1
@@ -99,8 +93,7 @@ deploy_proget_packages_job:
 deploy_chocolatey_package_job:
   stage: DeployChocolateyPackage
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh 
   script:
     - pwsh.exe
     - .\BT5-CI-deploy-PushToChoco.ps1
@@ -111,8 +104,7 @@ deploy_chocolatey_package_job:
 deploy_psgallary_package_job:
   stage: DeployPsgallaryPackage
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh
   script:
     - pwsh.exe
     - .\bt6-ci-deploy-psgallary.ps1
@@ -123,8 +115,7 @@ deploy_psgallary_package_job:
 deploy_coverage_coverails_job:
   stage: DeployCoverageToCoverails
   tags:
-    - win64
-    - linux-x64
+    - win-x64-pwsh
   script:
     - pwsh.exe
     - .\bt8-ci-deploy-coveralls-report.ps1
@@ -134,6 +125,8 @@ deploy_coverage_coverails_job:
 # Create Release Stage
 create_release_job:
   stage: CreateRelease
+  tags:
+    - win-x64-pwsh
   script: 
     - pwsh.exe
     - Compress-Archive -Path .\ -DestinationPath Build.gz
