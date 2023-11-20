@@ -7,20 +7,17 @@ using module libs\cmdlets\Get-CiSetFusion.psm1
 using module libs\cmdlets\Get-Emoji.psm1
 using module libs\cmdlets\Get-EmojiIndex.psm1
 using module libs\cmdlets\Format-FusionMD.psm1
-using module libs\cmdlets\Get-CommitAsObject.psm1
-using module libs\cmdlets\Get-CommitAsString.psm1
 using module libs\cmdlets\Get-GitAutoVersion.psm1
 using module libs\cmdlets\Update-ChangeLog.psm1
 using module libs\cmdlets\Set-Commit.psm1
 
-
 Export-ModuleMember -Function New-CommitFusion,
                               Get-CommitFusionModuleInstance,
                               New-ConventionalCommit,
-                              Get-CiSet,Get-CiSetFusion,
-                              Get-Emoji,Get-EmojiIndex,
-                              Get-CommitAsObject,
-                              Get-CommitAsString,
+                              Get-CiSet,
+                              Get-CiSetFusion,
+                              Get-Emoji,
+                              Get-EmojiIndex,
                               Get-GitAutoVersion,
                               Format-FusionMD,
                               Update-Changelog,
@@ -30,14 +27,14 @@ Export-ModuleMember -Function New-CommitFusion,
 <#
 ---------------------------------------------------------------------------------------------------------------------------------------
 !    ___                              _)  |    ____|           _) 
-?  |       _ \  __ `__ \   __ `__ \   |  __|  |   |   |   __|  |   _ \  __ \  
-? |      (   | |   |   |  |   |   |  |  |    __| |   | \__ \  |  (   | |   | 
+?  |       _  \  __ `__ \   __ `__ \   |  __|  |   |   |   __|  |   _ \  __ \  
+? |      (    | |   |   |  |   |   |  |  |    __| |   | \__ \  |  (   | |   | 
 ! \____| \___/ _|  _|  _| _|  _|  _| _| \__| _|  \__,_| ____/ _| \___/ _|  _| 
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ? NOTES
-This class is still in development and is not ready for production use.
+This Module is still in development and is not ready for production use.
 @Colorful comments vscode url: 
 - #? https://marketplace.visualstudio.com/items?itemName=bierner.colorful-comments
 
@@ -53,22 +50,24 @@ This class is still in development and is not ready for production use.
     easier to understand the purpose and impact of each commit. Here are the 
     main properties defined by Conventional Commits:
     &VALUES
-        ^- Type
-        ^- Scope
-        ^- Description
+        ^- Type parameter input validation parsed from commitfusion.json allows dynamic updating of the commit types
+        ^- Scope (UserDefined) - Allows for user defined scopes
+        ^- Description Default(commitfusion.json > DesCription or (user defined) - Allows for user defined descriptions))
         ^- Body
-        ^- Footer
-    This module provides a class that can be used to create Conventional 
-    Commits. It also provides a cmdlet that can be used to create Conventional
-    Commits from the command line. it them parses the commit message and injecting 
-    the commit message into the commit template, m before returning the commit message
+            ^- Notes(Default Body) - Change body to Notes
+            ^- Breaking Changes
+            ^- FeatureNotes
+            ^- BugFixes
+            ^- FeatureAddtions
+        ^- Footer (gituser|user @ DateTime)
     ! * * NOTE**
-    TODO - Add support for the commit template
-    TODO - Add Support for just generating and return commit string
+    //TODO - Add support for the commit template
+    //TODO - Add Support for just generating and return commit string
     ? DEPENDANCIES:
-        ~ ColorTune
-        ~ Write-Inexco #? Colortune Replaces this
-        ~ powerunicode
+        ~ ColorTune - Embedded in this module
+        ~ Write-Inexco #? Colortune Replaces this #TODO: Replace and use SimpleSpectreWrapper and ColorTune
+        ? powerunicode - Embedded in this module
+        ! SimpleSpectreWrapper - Embedded in this module
     ^ BUILD ENV---: BUILD: Powershellcore 7.3.1
     ^ SUPPORTED VERSIONS
         Powerhshell 5.1^

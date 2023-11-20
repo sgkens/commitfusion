@@ -1,3 +1,28 @@
+<#
+.SYNOPSIS
+Return Gitmojis or miscmojis json array as a psoject
+
+.DESCRIPTION
+Return Gitmojis or miscmojis json array as a psoject
+
+.EXAMPLE
+# From the json File miscmojis.json
+Get-Emoji -Type miscmojis -name person 
+
+# From the json file gitmojis.json
+Get-Emoji -Type gitmojis -name animation
+.INPUTS
+- Type
+- Name
+
+.OUTPUTS
+[PsCustomObject]
+
+.NOTES
+- 
+
+.LINK
+#>
 Function Get-Emoji(){
     [CmdletBinding()]
     [OutputType([PSObject])]

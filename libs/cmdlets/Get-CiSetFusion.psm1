@@ -1,3 +1,32 @@
+<#
+.SYNOPSIS
+Returns Commitfusion Types json file converted to psobject output to console
+
+.DESCRIPTION
+Returns Commitfusion Types json file converted to psobject output to console
+
+.EXAMPLE
+Get-CiSetFusion -NoSemVer
+Get-CiSetFusion -Major
+Get-CiSetFusion -Minor
+Get-CiSetFusion -Patch
+
+This example returns object array of commitfusion gitmojis types
+
+.INPUTS
+- NoSemVer - filter commitfusion types with SemVer Value of none
+- Major    - filter commitfusion types with SemVer Value of Major
+- Minor    - filter commitfusion types with SemVer Value of Minor
+- Patch    - filter commitfusion types with SemVer Value of Patch
+
+.OUTPUTS
+[Psobject]
+
+.NOTES
+- 
+
+.LINK
+#>
 Function Get-CiSetFusion() {
     [CmdletBinding()]
     [OutputType([psobject])]
@@ -30,24 +59,46 @@ Function Get-CiSetFusion() {
             ValueFromPipeline = $true,
             HelpMessage = "Will Return all CiSets that have a semver of Major"
         )]
-        [switch]$Major
+        [switch]$Major,
+        [parameter(
+            Mandatory = $false,
+            Position = 4,
+            ValueFromPipeline = $true,
+            HelpMessage = "Will Return return psobject unformatted"
+        )]
+        [switch]$Raw
     )
     process {
-        if (!$noSEMVer -and !$Patch -and !$Minor -and !$major) {
-            (Get-CommitFusionModuleInstance).GetCiSetFusion() ## Format-table returns a different object type so we can't use it here
-        }
-        else {
+        if (!$noSEMVer -and !$Patch -and !$Minor -and !$major -and !$raw) {
+            (Get-CommitFusionModuleInstance).GetCiSetFusion() | 
+                Select-Object Type, Description, Semver, cfa, emoji | 
+                    format-table -autosize -wrap
+        }elseif($Raw){
+            (Get-CommitFusionModuleInstance).GetCiSetFusion()
+        }else {
             if ($noSEMVer) {
-                (Get-CommitFusionModuleInstance).GetCiSetFusion() | Where-Object { $_.semver.length -eq 0 -or $_.semver -eq "" } | Format-Table -Wrap -AutoSize
+                (Get-CommitFusionModuleInstance).GetCiSetFusion() | 
+                    Where-Object { $_.semver.length -eq 0 -or $_.semver -eq "" } | 
+                        Select-Object Type, Description, Semver, cfa, emoji | 
+                            format-table -autosize -wrap
             }
             if ($Patch) {
-                (Get-CommitFusionModuleInstance).GetCiSetFusion() | Where-Object { $_.semver.length -ne 0 -and $_.semver.trim() -match "patch" } | Format-Table -Wrap -AutoSize
+                (Get-CommitFusionModuleInstance).GetCiSetFusion() | 
+                    Where-Object { $_.semver.length -ne 0 -and $_.semver.trim() -match "patch" } | 
+                        Select-Object Type, Description, Semver, cfa, emoji | 
+                            format-table -autosize -wrap
             }
             if ($Minor) {
-                (Get-CommitFusionModuleInstance).GetCiSetFusion() | Where-Object { $_.semver.length -ne 0 -and $_.semver.trim() -match "Minor" } | Format-Table -Wrap -AutoSize
+                (Get-CommitFusionModuleInstance).GetCiSetFusion() | 
+                    Where-Object { $_.semver.length -ne 0 -and $_.semver.trim() -match "Minor" } | 
+                        Select-Object Type, Description, Semver, cfs, emoji | 
+                            format-table -autosize -wrap
             }
             if ($major) {
-                (Get-CommitFusionModuleInstance).GetCiSetFusion() | Where-Object { $_.semver.length -ne 0 -and $_.semver.trim() -match "major" } | Format-Table -Wrap -AutoSize
+                (Get-CommitFusionModuleInstance).GetCiSetFusion() | 
+                    Where-Object { $_.semver.length -ne 0 -and $_.semver.trim() -match "major" } | 
+                        Select-Object Type, Description, Semver, cfs, emoji | 
+                            format-table -autosize -wrap
             }
         }
     }

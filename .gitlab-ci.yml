@@ -1,103 +1,144 @@
-# author: mnoxx @ proton me
-# date: Saturday, 24 September 2022 2:24:20 AM
-# version: v1.1
-# env: powershell(5.x), pwsh(7.x)
 stages:
-  - Build-Module # Copy Module files for build
-  - Test-Module # Testing Module againsts predefined scripts
-  - Test-PSM # Test .psd1 profile
-  - Test-PSA # Run Module files through PSScriptAnalyzer
-  - Create-Nuget-Package # Create nupkg Package from build
-  - Deploy-Gitlab-Package # Deploy Package to gitlab nuget
-  - Deploy-Proget-Packages # Deploy Package to Proget[nuget,psgallary,chocolatey] feeds 
-  - Deploy-PSGallary-Package # Deploy Package to PSGallary
-  - Deploy-Chocolatey # Deploy Package to Chocolatey
-  - Deploy-Coverage-Coverails # Deploy Coverage to Coverails.io
-  - Create-Release # Create Release
-build-job:
-  stage: build
+  - PesterTest
+  - BuildModule
+  - ScriptAnalyzerTest
+  - CreateNugetPackage
+  - DeployGitlabPackage
+  - DeployProgetPackages
+  - DeployChocolateyPackage
+  - DeployPsgallaryPackage
+  - DeployCoverageToCoverails
+  - CreateRelease
+
+# Pester Test Stage
+pester_test_job:
+  stage: PesterTest
   tags:
-    - windows
-    - pwsh-core
-  script:
-    - pwsh
-    - Test-ModuleManifest -Path ./disk/commitfusion/commitfusion.psd1
-    - ./CI-Build-Module.ps1
-  artifacts:
-    paths:
-    - ./dist/commiffusion
-#    expire_in: 20 minutes
-
-Test-ScriptAnalyzer-job:
-  stage: Test-PSM
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "Build-Module" && $CI_BUILD_STATUS == "success"'
-  script:
-    - pwsh
-    - install-module -name PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
-    - import-module -name PSScriptAnalyzer -Force
-    - Invoke-ScriptAnalyzer -Path ./dist/commitfusion/*.ps1
-    - Invoke-ScriptAnalyzer -Path ./dist/commitfusion/*.psm1
-  artifacts:
-    paths:
-    - ./dist/commitfusion
-#    expire_in: 20 minutes
-
-Test-Pester-job:
-  stage: Test-PSA
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "Test-PSM" && $CI_BUILD_STATUS == "success"'
+    - win64
+    - linux-x64
   script:
     - pwsh
     - install-module -name pester -Scope CurrentUser -Force -SkipPublisherCheck
     - import-module -name pester -Force
+    - invoke-Pester -Script .\bt0-ci-test-pester.ps1
+
+# Build Module Stage
+build_module_job:
+  stage: BuildModule
+  tags:
+    - win64
+    - linux-x64
+  script:
+    - pwsh
+    - Test-ModuleManifest -Path ./dist/commitfusion/commitfusion.psd1
+    - ./bt1-ci-build-module.ps1
+  artifacts:
+    paths:
+    - ./dist/commiffusion
+
+# Script Analyzer Test Stage
+script_analyzer_test_job:
+  stage: ScriptAnalyzerTest
+  tags:
+    - win64
+    - linux-x64
+  rules:
+    - if: '$CI_BUILD_STAGE == "BuildModule" && $CI_BUILD_STATUS == "success"'
+  script:
+    - pwsh
+    - install-module -name PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
+    - import-module -name PSScriptAnalyzer -Force
+    - .\bt1-p2-ci-test-pssa.ps1
   artifacts:
     paths:
     - ./dist/commitfusion
-#    expire_in: 20 minutes
 
-Create-Nuget-Package-job:
-  stage: Create-Nuget-Package
+# Create Nuget Package Stage
+create_nuget_package_job:
+  stage: CreateNugetPackage
+  tags:
+    - win64
+    - linux-x64
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "Test-PSA" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "ScriptAnalyzerTest" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh.exe
-    - .\ci-build-nupkg.ps1
+    - .\bt2-ci-create-packages.ps1
   artifacts:
     paths:
     - ./dist/commitfusion
     - ./dist/choco
     - ./dist/psgal
     - ./dist/nuget
-#    expire_in: 20 minutes
 
-Deploy-Gitlab-Package-job:
-  stage: Deploy-Gitlab-Package
+# Deploy GitLab Package Stage
+deploy_gitlab_package_job:
+  stage: DeployGitlabPackage
+  tags:
+    - win64
+    - linux-x64
   script:
     - pwsh.exe
-    - .\CI-Build-PushToGitlab.ps1
+    - .\bt3-ci-deploy-pushtogitlab.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "test_pscore" && $CI_BUILD_STATUS == "success"'
-    
-deploy-nugetgitlab-job:
-  stage: deploy_nugetgitlab
-  script:
-    - pwsh.exe
-    - .\CI-Send-PushToGitlab.ps1
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "test_pscore" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "CreateNugetPackage" && $CI_BUILD_STATUS == "success"'
 
-manual-deploy-psgallary-job:
-  stage: manual_deploy_psgallary
-  when: manual
+# Deploy Proget Packages Stage
+deploy_proget_packages_job:
+  stage: DeployProgetPackages
+  tags:
+    - win64
+    - linux-x64
   script:
     - pwsh.exe
-    - write-host -f green "template ci/cd config successful"
+    - .\bt4-ci-deploy-pushtoproget.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploy_nugetgitlab" && $CI_BUILD_STATUS == "success"'
-# Release a Package
-package:
-  script: Compress-Archive -Path .\Build -DestinationPath Build.gz
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployGitlabPackage" && $CI_BUILD_STATUS == "success"'
+
+# Deploy Chocolatey Package Stage
+deploy_chocolatey_package_job:
+  stage: DeployChocolateyPackage
+  tags:
+    - win64
+    - linux-x64
+  script:
+    - pwsh.exe
+    - .\BT5-CI-deploy-PushToChoco.ps1
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployProgetPackages" && $CI_BUILD_STATUS == "success"'
+
+# Deploy PSGallary Package Stage
+deploy_psgallary_package_job:
+  stage: DeployPsgallaryPackage
+  tags:
+    - win64
+    - linux-x64
+  script:
+    - pwsh.exe
+    - .\bt6-ci-deploy-psgallary.ps1
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployChocolateyPackage" && $CI_BUILD_STATUS == "success"'
+
+# Deploy Coverage to Coverails.io Stage
+deploy_coverage_coverails_job:
+  stage: DeployCoverageToCoverails
+  tags:
+    - win64
+    - linux-x64
+  script:
+    - pwsh.exe
+    - .\bt8-ci-deploy-coveralls-report.ps1
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployPsgallaryPackage" && $CI_BUILD_STATUS == "success"'
+
+# Create Release Stage
+create_release_job:
+  stage: CreateRelease
+  script: 
+    - pwsh.exe
+    - Compress-Archive -Path .\ -DestinationPath Build.gz
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployPsgallaryPackage" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
-    - Build.gz
+      - Build.gz

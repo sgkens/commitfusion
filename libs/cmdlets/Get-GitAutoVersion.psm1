@@ -1,4 +1,27 @@
 using namespace System.Text.RegularExpressions
+<#
+.SYNOPSIS
+Generates and return SemVer Version number and return it as a Pscustomobject
+
+.DESCRIPTION
+Generates and return SemVer Version number and return it as a Pscustomobject
+
+.EXAMPLE
+Get-GitAutoVersion | Select Version
+(Get-GitAutoVersion).Version
+
+.INPUTS
+- Type
+- Name
+
+.OUTPUTS
+[PsCustomObject]
+
+.NOTES
+- 
+
+.LINK
+#>
 Function Get-GitAutoVersion {
     [CmdletBinding()]
     [OutputType([Pscustomobject])]

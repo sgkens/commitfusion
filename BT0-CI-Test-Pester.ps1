@@ -8,7 +8,7 @@ $pesterConfig = New-PesterConfiguration -hashtable @{
                       OutputPath = 'coverage.xml'
                       OutputEncoding = 'utf8'
                       CoveragePercentTarget = 100;
-                      path = @('.\libs\cmdlets\*.psm1', '.\libs\commitfusion_class.psm1')
+                      path = @('.\libs\*.psm1')
                     }
     Run         = @{
                       #PassThru = $true

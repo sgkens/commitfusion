@@ -555,7 +555,7 @@
         },
         {
             "emoji": "🧑‍💻",
-            "entity": "&#129489;&#8205;&#128187;",
+            "entity": "&#129489;",
             "code": ":technologist:",
             "description": "Improve developer experience.",
             "name": "technologist",

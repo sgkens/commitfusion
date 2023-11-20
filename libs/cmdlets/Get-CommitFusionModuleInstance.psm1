@@ -1,4 +1,4 @@
-Using Module ..\CommitFusion_class.psm1
+using module ..\CommitFusion_class.psm1
 <#
 .SYNOPSIS
 Returns and instance of the Commitfusion class.
@@ -7,7 +7,7 @@ Returns and instance of the Commitfusion class.
 Returns and instance of the Commitfusion class, providing access to the Commitfusion methods.
 
 .EXAMPLE
-$logtastic = Get-CommitfusionModuleInstance
+$commitfusion = Get-CommitfusionModuleInstance
 
 This example returns an instance of the Commitfusion class.
 
@@ -21,7 +21,6 @@ none.
 - 
 
 .LINK
-logtastic (Module): https://github.com/sgkens/Commitfusion
 #>
 
 $commitfusion_instance = New-Object CommitFusion

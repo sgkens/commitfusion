@@ -2,32 +2,38 @@
   Commit Fusion template file
   use to create large detailed commits
 #>
-using module g:\devspace\projects\powershell\_repos\CommitFusion\CommitFusion.psm1
-
 $Params = @{
-  Type = "refactor";
-  Scope = "``Module``";
-  Description = "Updated the CommitFusion module to include a new ``cmdlet`` called ``Send-Commit``";
-  Body = @(
-    "Changed spacing for ``bodyvar``",
-    "AsStringForCommit now returns a clean spaced string for git commit",
-    "Updated psd1 module file",
-    "Updated psm1 module root file",
-    "Updated Git-AutoVersion ``cmdlet``",
-    "Refactored Send-Commit ``cmdlet``",
-    "purged template.md and template_final.md file contents",
-    "Removed Write-FusionToLog ``cmdlet``",
-    "Adding Commit-Helper script file",
-    "Changed ``Send-Commit`` to ``Set-Commit``"
+  Type = "improve";
+  Scope = "Module";
+  Description = "Core functionality";
+  Notes = @(
+    "Updated 'constructmessage' to set an additional class property styledbodyRaw as markdown is not required.",
+    "Updated cmdlets to reflect changes in class logic.",
+    "Created and added commit generate script - to test individual styling between GitLabSE, GitLab, GitHub, Bitbucket, Gitea.",
+    "Updated description; if no description is provided, the default value is used. See `get-citsetfusion` to view the base type description values.",
+    "Updated commit-fusion default types in the JSON file to reflect Gitmoji's base with some changes.",
+    "Updated CI scripts; added Coveralls integration.",
+    "Added Pester coverage report generation.",
+    "Updated tests for cmdlets and class logic...",
+    "Refactored final commit message, adjusted spacing, and positioning.",
+    "Changed ``body` to ``notes` in class and cmdlet logic.",
+    "Removed CommitFusion class lib for cmdlets that don't depend.",
+    "Updated cmdlets header help information.",
+    "Added GitHub action for Coveralls, configured.",
+    "Added additional types to ``$`moduleroot/libs/commitfusion.Types.Json`.",
+    "Changed output for cmdlets to consistent spacing when outputting types, emojis, cisets to console."
   );
-  #Footer = "";
+  #Footer=$true
   GitUser = "sgkens";
-  GitGroup = "ccharp";
+  GitGroup = "powershell";
   # FeatureAddtions = @(
   #   "Exposes all methods and properties of the Table and Rule class"
   #   "``New-Object Spectre.Console.Table`` and ``New-Object Spectre.Console.Rule``"
   # );
-  #BugFixes = @();
+  BugFixes = @(
+    "- Emojis that were output to the console within a PSObject disrupt the alignment of the object, throwing other field alignments off, not all emoji's are the same size that are the same size.",
+    "- Used `Select-Object` to manually output in order so that emoji is last; this fixed the alignment."
+  );
   #BreakingChanges = @();
   #FeatureNotes = @();
   #AsString = $true #Default is $true
@@ -37,7 +43,7 @@ $Params = @{
 # -------
 
 # ConventionalCommit with params sent commit
-New-ConventionalCommit @Params
+New-ConventionalCommit @params
 
 # ConventionalCommit with params sent commit
 #New-ConventionalCommit @Params | Set-Commit

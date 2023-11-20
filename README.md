@@ -13,23 +13,23 @@
     <img src="https://img.shields.io/badge/MIT-License-blue?style=&logo=unlicense&color=%23004481">
   </a>
   <!--Code Coverage-->
-  <a href="https://gitlab.snowlab.tk/powershell/ccommits/-/commits/main">
+  <a href="https://gitlab.lab.davilion.online/powershell/ccommits/-/commits/main">
     <img src="https://gitlab.snowlab.tk/powershell/ccommits/badgesmain/coverage.svg">
   </a>
   <!--Release-->
-  <a href="https://gitlab.snowlab.tk/powershell/ccommits/-/releases">
-    <img src="https://gitlab.snowlab.tk/powershell/ccommits/-/badges/release.svg">
+  <a href="https://gitlab.lab.davilion.online/powershell/ccommits/-/releases">
+    <img src="https://gitlab.lab.davilion.online/powershell/ccommits/-/badges/release.svg">
   </a>
   
 </div>
 
 <div style="font-weight:bold;" align="center" >
   <!--Module Build -->
-  <img width="13" src="https://gitlab.snowlab.tk/sgkens/resources/-/raw/main/modules/logtastic/dist/Generic-powershell-24x23.png">
+  <img width="13" src="https://gitlab.lab.davilion.online/sgkens/resources/-/raw/main/modules/logtastic/dist/Generic-powershell-24x23.png">
   PowerShell Module
 
   <!--Pipline-->
-  <a href="https://gitlab.snowlab.tk/powershell/logtastic">
+  <a href="https://gitlab.lab.davilion.online/powershell/logtastic">
     <img src="https://img.shields.io/gitlab/pipeline-status/powershell%2Flogtastic?gitlab_url=https%3A%2F%2Fgitlab.snowlab.tk&branch=main&logo=gitlab&label=build">
   </a>
 
@@ -40,26 +40,66 @@
 
 ---
 
-*CommitFusion* is a **PowerShell** module designed to simplify the process of generating structured and consistent commit messages following the [🧷Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) for your `git` repository. It leverages the [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) (available at [🧷gitmoji.dev](https://gitmoji.dev)).
+*CommitFusion* is a PowerShell module crafted to streamline the creation of well-organized and uniform commit messages in adherence to the [🧷Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) for your `git` repository. 
 
-#### You can read the full documention <img width="12px" src="https://raw.githubusercontent.com/sgkens/resources/main/modules/readme-1.png"> [Here]() 
+A custom version of the [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) (accessible at [🧷gitmoji.dev](https://gitmoji.dev)) is used to define the emojis, scope, and default description of the commit string.
 
-### For Example
+
+
+
+### Full documention <img width="12px" src="https://raw.githubusercontent.com/sgkens/resources/main/modules/readme-1.png"> [Here]() 
+
+### Installation Guide <img width="12px" src="https://raw.githubusercontent.com/sgkens/resources/main/modules/readme-1.png"> [Here]()
+
+## Basic Examples
+Generate a `docs` type commit message
 ```powershell
-New-ConventionalCommit -Type docs -Scope "update" -Description "Documentation"
+# Custom docs type commit message with custom description
+New-ConventionalCommit -Type docs
 ```
+
 *Ouput*
 ```text
-📝 docs(update): Documentation
+📝 docs(update):Documentation
+```
+Check witch types have a semver value or `minor`
+```powershell
+Get-CiSetFusion -semver minor
+```
+*Ouput*
+
+```
+type emoji entity        code       description             name     semver cfa
+--------------------------------------------------------------------------
+feat ✨     &#x2728; :sparkles: Introduce new features. sparkles minor  {@{action=}}
 ```
 
-> Assuming you have staged files, you can use the following to commit the changes:
+Create a new `feature` commit with some notes, and a feature addition. 
+```powershell
+New-ConventionalCommit -Type feat -Body "Updated module logic", "updated readme" -FeatureAddtions "Provided New Module Functionally via new CMDLET"
+```
+*Output*
+```text
+✨ feat:Introduce new features.
+
+🧰 Build: minor
+
+📜 NOTES:
+
+✏  Updated module logic \
+✏  updated readme ..🖊
+
+🌟 FEATURE ADDTIONS:
+
+🍠 Provided New Module Functionally via new CMDLET ..🖊
+```
+Assuming you have staged files, you can use the following to commit the changes:
 
 ```powershell
 New-ConventionalCommit -Type docs -Scope "update" -Description "Documentation" | Set-Commit
 ```
 
-> Message can be piped into `Format-FusionMD` to generate a markdown version of the commit message
+Message can be piped into `Format-FusionMD` to generate a markdown version of the commit message
 
 ```powershell
 New-ConventionalCommit -Type docs -Scope "update" -Description "Documentation" | Format-FusionMD
@@ -95,5 +135,3 @@ Depre     🗑️    &#x1F5D1; :wastebasket:             Remove deprecate code. 
 
 
 # 📌 Changelog
-
- 
