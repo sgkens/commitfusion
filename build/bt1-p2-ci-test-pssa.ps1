@@ -1,0 +1,1 @@
+Invoke-ScriptAnalyzer -Path ..\dist\CommitFusion\ -Recurse -severity warning -excluderule PSUseBOMForUnicodeEncodedFile,PSAvoidUsingWriteHost
