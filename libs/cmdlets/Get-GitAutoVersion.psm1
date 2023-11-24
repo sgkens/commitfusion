@@ -28,7 +28,7 @@ Function Get-GitAutoVersion {
     param ()
     process {
         [int]$major =  0
-        [int]$minor =  0
+        [int]$minor =  1
         [int]$patch =  0
 
         try {
