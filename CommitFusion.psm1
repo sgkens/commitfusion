@@ -39,9 +39,6 @@ This Module is still in development and is not ready for production use.
 - #? https://marketplace.visualstudio.com/items?itemName=bierner.colorful-comments
 
 & CLASS: [CommitFusion]
-~ VERSION: 0.1.0
-- AUTHOR: snoonx
-- LICENSE: MIT   
 * DESCRIPTION:   
     ^_Conventional Commits 
     is a specification that defines a standard convention 
@@ -60,9 +57,6 @@ This Module is still in development and is not ready for production use.
             ^- BugFixes
             ^- FeatureAddtions
         ^- Footer (gituser|user @ DateTime)
-    ! * * NOTE**
-    //TODO - Add support for the commit template
-    //TODO - Add Support for just generating and return commit string
     ? DEPENDANCIES:
         ~ ColorTune - Embedded in this module
         ~ Write-Inexco #? Colortune Replaces this #TODO: Replace and use SimpleSpectreWrapper and ColorTune
