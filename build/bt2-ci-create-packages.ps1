@@ -1,47 +1,93 @@
-using module ..\..\NuPSForge\libs\New-NuspecPacakgeFile.psm1
-using module ..\..\NuPSForge\libs\New-NupkgPacakge.psm1
+#---CONFIG----------------------------
 
-# ? Powershell Gallery Description Does not support markdown indenting
-# ? But Nuget and Choco Does
+$ModuleName = "commitfusion"
+$nupsforge_v = "0.2.0"
+
+#---CONFIG----------------------------
+
+
+
+
+#------------------------------------
+if (Get-Module -ListAvailable -name 'nupsforge' | Where-Object { $_.version -eq "$nupsforge_v.0" }) {
+  install-module -name psmpacker -repository powershell -MinimumVersion 0.1.5
+}
+import-module -name 'nupsforge' -MinimumVersion $nupsforge_v
+
+#----Special Config Choco --------------------------------
+# Choco supports markdown nuget and psgallary done
 $Additional_descriptions = @"
-
-*CommitFusion* is a PowerShell module crafted to streamline the creation of well-organized and uniform commit messages in adherence to the [🧷Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) for your `git` repository. 
+*CommitFusion* is a PowerShell module crafted to streamline the creation of well-organized and uniform commit messages in adherence to the [🧷Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) for your `git` repository.
 
 A custom version of the [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) (accessible at [🧷gitmoji.dev](https://gitmoji.dev)) is used to define the emojis, scope, and default description of the commit string.
 
 ### Features
-♦- Conventional Commit specification.
-♦- Custom commit Types
-♦- Fully Customizable Commit Messages.
-♦- Update Changelog Automatictly.
-♦- Version Generator using SemVer and git log --pretty
 
-### Example 1
-Parameters for the module *minimal paramaters*
-Compose a commit message with the following parameters:
-New-ConventionalCommit -type improve `
-                       -Description "Fixed Output and emoji displayed" `
+- Conventional Commit specification.
+- Custom commit Types.
+- Customizable Commit Messages.
+- Changelog auto-updater.
+- Semver(*Semantic Versioning specification*).
+- Emoji parser.
+- Gitmoji parser.
+- Auto Commit
+
+## Example 1
+
+Minimal **Paramaters** to compose a commit message.
+
+```powershell
+# Feature commit message returns a string
+New-ConventionalCommit -Type improve
+
+```
+
+Ouput
+
+<pre>
+
+improve: Improve structure / format of the code.
+
+🧰 Build: patch
+</pre>
+
+## Example 2
+```powershell
+# Get the available commit types with semver value of patch
+Get-CiSetFusion
+```
+
+Output
+
+<pre>
+
+Type    description                 semver cfs emoji
+----    -----------                 ------ --- -----
+changes Introduce breaking changes. major      💥
+</pre>
+
+
 ### Example 2
-Parameters for the module *all params*
-Compose a commit message with the following parameters:
+
+Parameters for the module *all params* Compose a commit message with the following parameters:
+
+```powershell
 New-ConventionalCommit -type improve `
                        -Description "Fixed Output and emoji displayed" `
                        -Scope "Module" `
                        -Body "Added a new cmdlet called Get-Emoji" `
                        -Footer "Added a new cmdlet called Get-Emoji" `
                        -GitUser "sgkens" `
-                       -GitGroup "ccharp" `
+                       -GitGroup "ccharp" ` 
                        -FeatureAddtions "Exposes all methods and properties of the Table and Rule class" `
                        -BugFixes "Fixed Output and emoji displayed" `
                        -BreakingChanges "Fixed Output and emoji displayed" `
                        -FeatureNotes "Fixed Output and emoji displayed" `
                        -AsString $true
+```
 "@
-
-# --Config--
-$ModuleName = "commitfusion"
-$ModuleManifest = Test-ModuleManifest -path ..\dist\CommitFusion\CommitFusion.psd1
-
+#----Special Config Choco --------------------------------
+$ModuleManifest = Test-ModuleManifest -path ..\dist\$modulename\$modulename.psd1
 $NuSpecParams = @{
   path=".\dist\$ModuleName"
   ModuleName = $ModuleName
@@ -77,6 +123,7 @@ write-host -foregroundColor Yellow "Creating Zip File for PSGallery"
 $zipFileName = "$($NuSpecParams.ModuleName).zip"
 compress-archive -path ..\dist\$ModuleName\* -destinationpath ..\dist\psgal\$zipFileName -compressionlevel optimal -update
 
+# Create
 New-NuspecPacakgeFile @NuSpecParams
 Start-sleep -Seconds 1 # Wait for file to be created
 New-NupkgPacakge -path ..\dist\$ModuleName  -outpath .\dist\nuget

@@ -1,20 +1,26 @@
-# ---[ CONFIG ]
+#---CONFIG----------------------------
 
-$ModuleName = "psmpacker"
-$GITLAB_NUGET_PROJECT_TOKEN = 'QuKeQXyos8vHSpGzT6rE'
-$Gitlab_Username = "sgkens"
-$Gitlab_uri = "https://gitlab.lab.davilion.online"
-$projectid = "182"
+$ModuleName                 = "psmpacker"
+$gitlab_nuget_project_token = 'QuKeQXyos8vHSpGzT6rE'
+$gitlab_username            = "sgkens"
+$gitlab_uri                 = "https://gitlab.lab.davilion.online"
+$projectid                  = "182"
 
-# ---[ ------ ]
+#---CONFIG----------------------------
 
-$ModuleManifest = Test-ModuleManifest -path "..\dist\$ModuleName\$ModuleName.psd1"
-$SemVerVersion = $ModuleManifest.Version -replace "\.\d+$", ""
+
+
+
+
+
+#------------------------------------
+$ModuleManifest   = Test-ModuleManifest -path "..\dist\$ModuleName\$ModuleName.psd1"
+$SemVerVersion    = $ModuleManifest.Version -replace "\.\d+$", ""
 $NugetProjectPath = "api/v4/projects/$projectid/packages/nuget/index.json"
 
 try {
   Write-host -foregroundcolor yellow "Attempting to Register Gitlab: $gitlab_uri@$Gitlab_Username"
-  dotnet nuget add source $gitlab_uri/$NugetProjectPath --name gitlab --username $GitLab_Username --password $GITLAB_NUGET_PROJECT_TOKEN
+  dotnet nuget add source $gitlab_uri/$NugetProjectPath --name gitlab --username $GitLab_Username --password $gitlab_nuget_project_token
   Write-host -foregroundcolor green "Complete"
 }
 catch [system.exception] {
