@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
+<report name="Pester (11/28/2023 20:47:17)">
+  <sessioninfo id="this" start="1701204434526" dump="1701204437791" />
+  <package name="CommitFusion">
+    <class name="CommitFusion/commitFusion" sourcefilename="commitFusion.psm1">
+      <method name="&lt;script&gt;" desc="()" line="14">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="1" covered="0" />
+      <counter type="LINE" missed="1" covered="0" />
+      <counter type="METHOD" missed="1" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <sourcefile name="commitFusion.psm1">
+      <line nr="14" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="1" covered="0" />
+      <counter type="LINE" missed="1" covered="0" />
+      <counter type="METHOD" missed="1" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <counter type="INSTRUCTION" missed="1" covered="0" />
+    <counter type="LINE" missed="1" covered="0" />
+    <counter type="METHOD" missed="1" covered="0" />
+    <counter type="CLASS" missed="1" covered="0" />
+  </package>
+  <package name="CommitFusion/libs">
+    <class name="CommitFusion/libs/CommitFusion_class" sourcefilename="libs/CommitFusion_class.psm1">
+      <method name="CommitFusion" desc="()" line="32">
+        <counter type="INSTRUCTION" missed="16" covered="0" />
+        <counter type="LINE" missed="10" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="ConventionalCommit" desc="()" line="97">
+        <counter type="INSTRUCTION" missed="27" covered="0" />
+        <counter type="LINE" missed="22" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="ConstructMessage" desc="()" line="142">
+        <counter type="INSTRUCTION" missed="112" covered="0" />
+        <counter type="LINE" missed="76" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="AsString" desc="()" line="286">
+        <counter type="INSTRUCTION" missed="14" covered="0" />
+        <counter type="LINE" missed="7" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="AsStringForCommit" desc="()" line="304">
+        <counter type="INSTRUCTION" missed="13" covered="0" />
+        <counter type="LINE" missed="7" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="AsRawString" desc="()" line="321">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="AsObject" desc="()" line="332">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="GetEmoji" desc="()" line="346">
+        <counter type="INSTRUCTION" missed="8" covered="0" />
+        <counter type="LINE" missed="6" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="GetEmojiIndex" desc="()" line="366">
+        <counter type="INSTRUCTION" missed="6" covered="0" />
+        <counter type="LINE" missed="6" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="GetCiSet" desc="()" line="384">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="GetCiSetFusion" desc="()" line="395">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="WriteTemplateFile" desc="()" line="408">
+        <counter type="INSTRUCTION" missed="65" covered="0" />
+        <counter type="LINE" missed="42" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="WriteClMessage" desc="()" line="530">
+        <counter type="INSTRUCTION" missed="36" covered="0" />
+        <counter type="LINE" missed="23" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="301" covered="0" />
+      <counter type="LINE" missed="203" covered="0" />
+      <counter type="METHOD" missed="13" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <sourcefile name="libs/CommitFusion_class.psm1">
+      <line nr="32" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="33" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="34" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="36" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="37" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="38" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="44" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="45" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="46" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="52" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="97" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="98" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="99" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="100" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="101" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="102" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="103" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="104" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="105" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="106" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="107" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="109" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="110" mi="5" ci="0" mb="0" cb="0" />
+      <line nr="119" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="120" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="121" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="122" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="124" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="128" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="129" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="131" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="136" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="142" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="144" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="145" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="146" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="147" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="148" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="149" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="152" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="154" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="156" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="157" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="158" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="160" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="163" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="166" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="167" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="168" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="169" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="170" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="171" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="173" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="175" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="177" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="178" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="179" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="181" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="195" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="197" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="198" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="199" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="200" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="201" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="202" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="205" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="207" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="209" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="210" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="211" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="212" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="215" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="216" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="217" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="218" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="219" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="220" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="221" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="223" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="225" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="227" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="228" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="229" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="231" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="235" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="236" mi="4" ci="0" mb="0" cb="0" />
+      <line nr="238" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="240" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="241" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="242" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="244" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="245" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="246" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="247" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="250" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="252" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="254" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="256" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="257" mi="7" ci="0" mb="0" cb="0" />
+      <line nr="259" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="263" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="265" mi="4" ci="0" mb="0" cb="0" />
+      <line nr="266" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="267" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="268" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="269" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="270" mi="5" ci="0" mb="0" cb="0" />
+      <line nr="272" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="286" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="287" mi="4" ci="0" mb="0" cb="0" />
+      <line nr="288" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="289" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="290" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="291" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="293" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="304" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="305" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="306" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="307" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="308" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="309" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="311" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="321" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="332" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="346" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="347" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="348" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="349" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="350" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="353" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="366" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="367" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="368" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="369" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="370" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="372" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="384" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="395" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="408" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="409" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="413" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="414" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="415" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="416" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="417" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="418" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="422" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="437" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="439" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="441" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="449" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="450" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="453" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="454" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="455" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="456" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="457" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="458" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="464" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="472" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="474" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="477" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="480" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="483" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="488" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="489" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="490" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="495" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="496" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="497" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="498" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="499" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="500" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="501" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="502" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="504" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="509" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="511" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="515" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="519" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="530" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="531" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="534" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="535" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="538" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="539" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="542" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="543" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="546" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="547" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="550" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="551" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="554" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="555" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="558" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="559" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="562" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="563" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="564" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="565" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="567" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="571" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="572" mi="2" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="301" covered="0" />
+      <counter type="LINE" missed="203" covered="0" />
+      <counter type="METHOD" missed="13" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <counter type="INSTRUCTION" missed="301" covered="0" />
+    <counter type="LINE" missed="203" covered="0" />
+    <counter type="METHOD" missed="13" covered="0" />
+    <counter type="CLASS" missed="1" covered="0" />
+  </package>
+  <package name="CommitFusion/libs/cmdlets">
+    <class name="CommitFusion/libs/cmdlets/Format-FusionMD" sourcefilename="libs/cmdlets/Format-FusionMD.psm1">
+      <method name="Format-FusionMD" desc="()" line="28">
+        <counter type="INSTRUCTION" missed="2" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="32">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="3" covered="0" />
+      <counter type="LINE" missed="2" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Get-CiSet" sourcefilename="libs/cmdlets/Get-CiSet.psm1">
+      <method name="Get-CiSet" desc="()" line="30">
+        <counter type="INSTRUCTION" missed="4" covered="0" />
+        <counter type="LINE" missed="3" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="36">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="5" covered="0" />
+      <counter type="LINE" missed="4" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Get-CommitFusionModuleInstance" sourcefilename="libs/cmdlets/Get-CommitFusionModuleInstance.psm1">
+      <method name="&lt;script&gt;" desc="()" line="26">
+        <counter type="INSTRUCTION" missed="2" covered="0" />
+        <counter type="LINE" missed="2" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="Get-CommitFusionModuleInstance" desc="()" line="34">
+        <counter type="INSTRUCTION" missed="0" covered="1" />
+        <counter type="LINE" missed="0" covered="1" />
+        <counter type="METHOD" missed="0" covered="1" />
+      </method>
+      <counter type="INSTRUCTION" missed="2" covered="1" />
+      <counter type="LINE" missed="2" covered="1" />
+      <counter type="METHOD" missed="1" covered="1" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Get-CommitTypes" sourcefilename="libs/cmdlets/Get-CommitTypes.psm1">
+      <method name="Get-CiSetFusion" desc="()" line="72">
+        <counter type="INSTRUCTION" missed="36" covered="0" />
+        <counter type="LINE" missed="26" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="106">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="37" covered="0" />
+      <counter type="LINE" missed="27" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Get-Emoji" sourcefilename="libs/cmdlets/Get-Emoji.psm1">
+      <method name="Get-Emoji" desc="()" line="39">
+        <counter type="INSTRUCTION" missed="3" covered="0" />
+        <counter type="LINE" missed="2" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="46">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="4" covered="0" />
+      <counter type="LINE" missed="3" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Get-EmojiIndex" sourcefilename="libs/cmdlets/Get-EmojiIndex.psm1">
+      <method name="Get-EmojiIndex" desc="()" line="38">
+        <counter type="INSTRUCTION" missed="8" covered="0" />
+        <counter type="LINE" missed="5" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="53">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="9" covered="0" />
+      <counter type="LINE" missed="6" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Get-GitAutoVersion" sourcefilename="libs/cmdlets/Get-GitAutoVersion.psm1">
+      <method name="Get-GitAutoVersion" desc="()" line="30">
+        <counter type="INSTRUCTION" missed="25" covered="0" />
+        <counter type="LINE" missed="20" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="91">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="26" covered="0" />
+      <counter type="LINE" missed="21" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/New-Commit" sourcefilename="libs/cmdlets/New-Commit.psm1">
+      <method name="New-Commit" desc="()" line="45">
+        <counter type="INSTRUCTION" missed="38" covered="0" />
+        <counter type="LINE" missed="30" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="149">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="39" covered="0" />
+      <counter type="LINE" missed="31" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/New-CommitFusion" sourcefilename="libs/cmdlets/New-CommitFusion.psm1">
+      <method name="New-CommitFusion" desc="()" line="37">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="42">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="2" covered="0" />
+      <counter type="LINE" missed="2" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Set-Commit" sourcefilename="libs/cmdlets/Set-Commit.psm1">
+      <method name="Set-Commit" desc="()" line="39">
+        <counter type="INSTRUCTION" missed="7" covered="0" />
+        <counter type="LINE" missed="5" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="49">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="8" covered="0" />
+      <counter type="LINE" missed="6" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <class name="CommitFusion/libs/cmdlets/Update-Changelog" sourcefilename="libs/cmdlets/Update-Changelog.psm1">
+      <method name="Update-ChangeLog" desc="()" line="33">
+        <counter type="INSTRUCTION" missed="4" covered="0" />
+        <counter type="LINE" missed="2" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <method name="&lt;script&gt;" desc="()" line="40">
+        <counter type="INSTRUCTION" missed="1" covered="0" />
+        <counter type="LINE" missed="1" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="5" covered="0" />
+      <counter type="LINE" missed="3" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <sourcefile name="libs/cmdlets/Format-FusionMD.psm1">
+      <line nr="28" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="32" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="3" covered="0" />
+      <counter type="LINE" missed="2" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Get-CiSet.psm1">
+      <line nr="30" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="31" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="32" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="36" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="5" covered="0" />
+      <counter type="LINE" missed="4" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Get-CommitFusionModuleInstance.psm1">
+      <line nr="26" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="34" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="37" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="2" covered="1" />
+      <counter type="LINE" missed="2" covered="1" />
+      <counter type="METHOD" missed="1" covered="1" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Get-CommitTypes.psm1">
+      <line nr="72" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="73" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="74" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="75" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="76" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="77" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="79" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="80" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="81" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="82" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="83" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="85" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="86" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="87" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="88" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="89" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="91" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="92" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="93" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="94" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="95" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="97" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="98" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="99" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="100" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="101" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="106" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="37" covered="0" />
+      <counter type="LINE" missed="27" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Get-Emoji.psm1">
+      <line nr="39" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="42" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="46" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="4" covered="0" />
+      <counter type="LINE" missed="3" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Get-EmojiIndex.psm1">
+      <line nr="38" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="40" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="43" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="46" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="49" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="53" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="9" covered="0" />
+      <counter type="LINE" missed="6" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Get-GitAutoVersion.psm1">
+      <line nr="30" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="31" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="32" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="36" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="37" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="40" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="42" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="43" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="44" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="45" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="46" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="48" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="49" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="50" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="52" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="53" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="78" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="79" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="80" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="85" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="91" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="26" covered="0" />
+      <counter type="LINE" missed="21" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/New-Commit.psm1">
+      <line nr="45" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="46" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="48" mi="4" ci="0" mb="0" cb="0" />
+      <line nr="91" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="92" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="94" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="95" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="97" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="98" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="100" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="101" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="103" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="104" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="106" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="107" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="109" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="110" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="112" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="113" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="115" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="116" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="118" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="119" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="122" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="135" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="136" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="138" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="139" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="141" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="142" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="149" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="39" covered="0" />
+      <counter type="LINE" missed="31" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/New-CommitFusion.psm1">
+      <line nr="37" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="42" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="2" covered="0" />
+      <counter type="LINE" missed="2" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Set-Commit.psm1">
+      <line nr="39" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="40" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="41" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="42" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="45" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="49" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="8" covered="0" />
+      <counter type="LINE" missed="6" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <sourcefile name="libs/cmdlets/Update-Changelog.psm1">
+      <line nr="33" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="34" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="40" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="5" covered="0" />
+      <counter type="LINE" missed="3" covered="0" />
+      <counter type="METHOD" missed="2" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <counter type="INSTRUCTION" missed="140" covered="1" />
+    <counter type="LINE" missed="107" covered="1" />
+    <counter type="METHOD" missed="21" covered="1" />
+    <counter type="CLASS" missed="11" covered="0" />
+  </package>
+  <counter type="INSTRUCTION" missed="442" covered="1" />
+  <counter type="LINE" missed="311" covered="1" />
+  <counter type="METHOD" missed="35" covered="1" />
+  <counter type="CLASS" missed="13" covered="0" />
+</report>
