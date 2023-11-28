@@ -417,7 +417,7 @@
             "code": ":thread:",
             "description": "Add or update code related to multithreading or concurrency.",
             "name": "thread",
-            "semver": "minor",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""

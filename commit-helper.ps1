@@ -21,7 +21,10 @@ $Params = @{
     "Updated cmdlets header help information.",
     "Added GitHub action for Coveralls, configured.",
     "Added additional types to ``$`moduleroot/libs/commitfusion.Types.Json`.",
-    "Changed output for cmdlets to consistent spacing when outputting types, emojis, cisets to console."
+    "Changed output for cmdlets to consistent spacing when outputting types, emojis, cisets to console.",
+    "Updated readme",
+    "updated ci-build scripts"
+    "updated .nupkg package Icon"
   );
   #Footer=$true
   GitUser = "sgkens";
@@ -31,8 +34,8 @@ $Params = @{
   #   "``New-Object Spectre.Console.Table`` and ``New-Object Spectre.Console.Rule``"
   # );
   BugFixes = @(
-    "- Emojis that were output to the console within a PSObject disrupt the alignment of the object, throwing other field alignments off, not all emoji's are the same size that are the same size.",
-    "- Used `Select-Object` to manually output in order so that emoji is last; this fixed the alignment."
+    "- Emojis that were output to the console within a PSObject disrupt the alignment of the object, throwing other field alignments off.",
+    "- FIX: `Select-Object` to manually output in order so that emoji is last; this fixed the alignment."
   );
   #BreakingChanges = @();
   #FeatureNotes = @();
@@ -43,7 +46,7 @@ $Params = @{
 # -------
 
 # ConventionalCommit with params sent commit
-New-ConventionalCommit @params
+New-ConventionalCommit @params | set-commit
 
 # ConventionalCommit with params sent commit
 #New-ConventionalCommit @Params | Set-Commit
