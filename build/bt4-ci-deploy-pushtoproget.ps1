@@ -15,10 +15,10 @@ $ProGet_PSGalInstance = 'powershell'
 
 #------------------------------------
 # Output FileNames
-$ModuleManifest       = Test-ModuleManifest -path "..\dist\$ModuleName\$ModuleName`.psd1"
-$nupkgFileName        = "$($ModuleManifest.CompanyName).$ModuleName.$SemVerVersion.nupkg"
+$ModuleManifest       = Test-ModuleManifest -path ".\dist\$ModuleName\$ModuleName`.psd1"
 $zipFileName          = "$($ModuleName).zip"
 $SemVerVersion        = $ModuleManifest.Version -replace "\.\d+$",""
+$nupkgFileName        = "$($ModuleManifest.CompanyName).$ModuleName.$SemVerVersion.nupkg"
 
 # Force Tls12
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -72,7 +72,6 @@ if($ModuleManifest){
     -ReleaseNotes $ModuleManifest.ReleaseNotes `
     -Tags $ModuleManifest.Tags `
     -Verbose
-  Unregister-PSRepository -Name 'pscore_Local_instance'
 }
 
 

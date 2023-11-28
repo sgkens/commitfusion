@@ -8,11 +8,6 @@ $projectid                  = "182"
 
 #---CONFIG----------------------------
 
-
-
-
-
-
 #------------------------------------
 $ModuleManifest   = Test-ModuleManifest -path ".\dist\$ModuleName\$ModuleName.psd1"
 $SemVerVersion    = $ModuleManifest.Version -replace "\.\d+$", ""
