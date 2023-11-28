@@ -1,7 +1,7 @@
 using module libs\CommitFusion_class.psm1
 using module libs\cmdlets\Get-CommitFusionModuleInstance.psm1
 using module libs\cmdlets\New-CommitFusion.psm1
-using module libs\cmdlets\New-ConventionalCommit.psm1
+using module libs\cmdlets\New-Commit.psm1
 using module libs\cmdlets\Get-CiSet.psm1
 using module libs\cmdlets\Get-CiSetFusion.psm1
 using module libs\cmdlets\Get-Emoji.psm1
@@ -13,7 +13,7 @@ using module libs\cmdlets\Set-Commit.psm1
 
 Export-ModuleMember -Function New-CommitFusion,
                               Get-CommitFusionModuleInstance,
-                              New-ConventionalCommit,
+                              New-Commit,
                               Get-CiSet,
                               Get-CiSetFusion,
                               Get-Emoji,
