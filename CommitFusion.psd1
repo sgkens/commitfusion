@@ -4,7 +4,7 @@
 RootModule    = 'CommitFusion.psm1'
 
 # Version number of this module.
-ModuleVersion     = '0.2.10.0'
+ModuleVersion     = '0.2.9.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -22,7 +22,7 @@ CompanyName = 'davilion'
 Copyright = '2023 sgkens. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'CommitFusion is a powershell module used to generate Conventional Commit Message'
+Description = 'Commit-Fusion - Conventional Commit Generator'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '7.0'
@@ -69,7 +69,7 @@ FunctionsToExport = @(
     'Get-Emoji',
     'Get-EmojiIndex',
     'New-CommitFusion',
-    'New-Commit',
+    'New-ConventionalCommit',
     'Format-FusionMD',
     'Update-Changelog',
     'Get-GitAutoVersion',
