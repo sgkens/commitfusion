@@ -65,11 +65,11 @@ PowerShellVersion = '7.0'
 FunctionsToExport = @(
     'Get-CommitFusionModuleInstance',
     'Get-CiSet',
-    'Get-CiSetFusion',
+    'Get-CommitTypes',
     'Get-Emoji',
     'Get-EmojiIndex',
     'New-CommitFusion',
-    'New-ConventionalCommit',
+    'New-Commit',
     'Format-FusionMD',
     'Update-Changelog',
     'Get-GitAutoVersion',

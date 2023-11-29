@@ -564,7 +564,7 @@ class CommitFusion{
             Set-Content -Path "$($this.ModuleRoot)\template_final.md" -Value ""
             [Console]::WriteLine("Done.")
 
-            return "{'response':'success','file':'$changelogfile'}"
+            return "{'response':'success','message':'$changelogfile'}"
 
         }catch [system.exception]{
 

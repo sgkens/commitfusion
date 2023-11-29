@@ -6,10 +6,10 @@ Returns Commitfusion Types json file converted to psobject output to console
 Returns Commitfusion Types json file converted to psobject output to console
 
 .EXAMPLE
-Get-CiSetFusion -NoSemVer
-Get-CiSetFusion -Major
-Get-CiSetFusion -Minor
-Get-CiSetFusion -Patch
+Get-CommitTypes -NoSemVer
+Get-CommitTypes -Major
+Get-CommitTypes -Minor
+Get-CommitTypes -Patch
 
 This example returns object array of commitfusion gitmojis types
 
@@ -27,7 +27,7 @@ This example returns object array of commitfusion gitmojis types
 
 .LINK
 #>
-Function Get-CiSetFusion() {
+Function Get-CommitTypes() {
     [CmdletBinding()]
     [OutputType([psobject])]
     [Alias("gcsf")]
@@ -103,4 +103,4 @@ Function Get-CiSetFusion() {
         }
     }
 }
-Export-ModuleMember -Function Get-CiSetFusion
+Export-ModuleMember -Function Get-CommitTypes
