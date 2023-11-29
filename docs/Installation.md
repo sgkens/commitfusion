@@ -1,5 +1,7 @@
 # <i class="fa-solid fa-window-maximize" style="color: #d07711;"></i> Installation Methods
 
+---
+
 ### 💾 Source
 
 🎫 Clone the repository from GitHub `git clone https://github.com/sgkens/commitfusion.git` \

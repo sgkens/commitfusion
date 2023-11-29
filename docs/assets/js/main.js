@@ -24,27 +24,32 @@ window.onload = function() {
   if (document.getElementById("typed-cf")) {
 
       var ConventionalCommitTypedMinimal =
-        '<span class="c"> # Generate a new feat commit message with the minimum required parameters</span></br>';
+        '<span class="c"> # Generate a new feature commit message with the minimum required parameters</span></br>';
       ConventionalCommitTypedMinimal +=
         '^1000 <span>pwsh></span> <span class="n">New-ConvenstionalCommit</span> <span class="nt">-Type</span> feat <span class="nt">-Description</span> "Adding <b>New</b> Features" </br></br>';
-      ConventionalCommitTypedMinimal += "^200 `✨ feat: Adding New Features`";
+      ConventionalCommitTypedMinimal += 
+        "^200 `✨ feat: Adding New Features`";
       ConventionalCommitTypedMinimal +=
-        '^5000 </br></br><span class="c"># Happy with the commit message apply commit message, Apply it</span>';
+        '^5000 </br></br><span class="c"># Apply the commit by using "Set-Commit"</span>';
       ConventionalCommitTypedMinimal +=
         '^1000 </br><span class="n">New-ConvenstionalCommit</span> <span class="nt">-Type</span> feat <span class="nt">-Description</span> "Adding <b>New</b> Features" | <span class="n">Set-Commit</span></br></br>';
-      ConventionalCommitTypedMinimal += "^5000";
+      ConventionalCommitTypedMinimal +=
+        "^100Git Commit cli output..."
+      ConventionalCommitTypedMinimal +=
+        "^5000";
 
       var ConventionalCommitTypedFeature =
-        '<span class="c"> # Generate a new feat commit message with FeatureAddtions</span></br>';
+        '<span class="c"> # Generate a new feature commit message with Feature Addtions</span></br>';
       ConventionalCommitTypedFeature +=
-        '^1000 <span>pwsh></span> <span class="n">New-ConvenstionalCommit</span> <span class="nt">-Type</span> feat <span class="nt">-Scope</span> "add" <span class="nt">-Description</span> "Adding New Features"</br></br>';
+        '^1000 <span>pwsh></span> <span class="n">New-ConvenstionalCommit</span> <span class="nt">-Type</span> feat <span class="nt">-Scope</span> "add" <span class="nt">-Description</span> "Adding New Features" -FeatureAdditions "Feature 1", "Feature 2"</br></br>';
       ConventionalCommitTypedFeature +=
         "^200 `✨ feat(Addition): Adding New Features</br></br>🌟 FEATURE ADDTIONS:</br></br>🍠 Feature 1</br></br>🍠 Feature 2 ..🖊`";
       ConventionalCommitTypedFeature +=
         '^1000 </br></br><span class="c"># Happy with the commit message apply commit message, Apply it</span>';
       ConventionalCommitTypedFeature +=
         '^1000 </br><span class="n">New-ConvenstionalCommit</span> <span class="nt">-Type</span> feat <span class="nt">-Scope</span> "add" <span class="nt">-Description</span> "Adding New Features" | <span class="n">Set-Commit</span></br></br>';
-      ConventionalCommitTypedFeature += "^5000";
+      ConventionalCommitTypedFeature += 
+        "^5000";
 
     var typed6 = new Typed("#typed-cf", {
       strings: [ConventionalCommitTypedMinimal, ConventionalCommitTypedFeature],

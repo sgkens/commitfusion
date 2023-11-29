@@ -1,5 +1,7 @@
 # <i class="fa-solid fa-code" style="color: #04376a;"></i> Examples
 
+---
+
 <div class="toc">
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> 
     <a href="#new-conventionalcommit-examples"> New-ConventionalCommit Examples</a>

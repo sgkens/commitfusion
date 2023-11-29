@@ -1,97 +1,93 @@
 stages:
-  - PesterTest
-  - BuildModule
-  - ScriptAnalyzerTest
-  - CreateNugetPackage
-  - DeployGitlabPackage
-  - DeployProgetPackages
-  - DeployChocolateyPackage
-  - DeployPsgallaryPackage
-  - DeployCoverageToCoverails
-  - CreateRelease
+  - tests
+  - build
+  - deploylocal
+  - deploy
+  - release
 
 # Pester Test Stage
 pester_test_job:
-  stage: PesterTest
+  stage: tests
   tags:
     - windows
   script:
     - pwsh
     - install-module -name pester -Scope CurrentUser -Force -SkipPublisherCheck
-    - import-module -name pester -Force
+    - import-module -name pester
     - invoke-Pester -Script .\bt0-ci-test-pester.ps1
-
-# Build Module Stage
-build_module_job:
-  stage: BuildModule
-  tags:
-    - windows
-  script:
-    - pwsh
-    - Test-ModuleManifest -Path ./dist/commitfusion/commitfusion.psd1
-    - ./bt1-ci-build-module.ps1
-  artifacts:
-    paths:
-    - ./dist/commiffusion
 
 # Script Analyzer Test Stage
 script_analyzer_test_job:
-  stage: ScriptAnalyzerTest
+  stage: tests
   tags:
     - windows
   rules:
-    - if: '$CI_BUILD_STAGE == "BuildModule" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh
     - install-module -name PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
     - import-module -name PSScriptAnalyzer -Force
     - .\bt1-p2-ci-test-pssa.ps1
-  artifacts:
-    paths:
-    - ./dist/commitfusion
 
-# Create Nuget Package Stage
-create_nuget_package_job:
-  stage: CreateNugetPackage
+# Build Module Stage
+build_module:
+  stage: build
   tags:
     - windows
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "ScriptAnalyzerTest" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
+  script:
+    - pwsh
+    - ./bt1-ci-build-module.ps1
+  artifacts:
+    paths:
+    - ./dist
+
+# Create Nuget Package Stage
+create_nuget:
+  stage: build
+  tags:
+    - windows
+  rules:
+    - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh.exe
     - .\bt2-ci-create-packages.ps1
   artifacts:
     paths:
-    - ./dist/commitfusion
-    - ./dist/choco
-    - ./dist/psgal
-    - ./dist/nuget
+    - ./dist
 
 # Deploy GitLab Package Stage
-deploy_gitlab_package_job:
-  stage: DeployGitlabPackage
+deploy_gitlab:
+  stage: deploylocal
   tags:
     - windows
   script:
     - pwsh.exe
     - .\bt3-ci-deploy-pushtogitlab.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "CreateNugetPackage" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
+  artifacts:
+    paths:
+    - ./dist
 
 # Deploy Proget Packages Stage
-deploy_proget_packages_job:
-  stage: DeployProgetPackages
+deploy_proget:
+  stage: deploylocal
   tags:
     - windows
   script:
     - pwsh.exe
     - .\bt4-ci-deploy-pushtoproget.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployGitlabPackage" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
+  artifacts:
+    paths:
+    - ./dist
 
 # Deploy Chocolatey Package Stage
-deploy_chocolatey_package_job:
-  stage: DeployChocolateyPackage
+deploy_chocolatey:
+  stage: deploy
   tags:
     - windows
   script:
@@ -99,10 +95,13 @@ deploy_chocolatey_package_job:
     - .\BT5-CI-deploy-PushToChoco.ps1
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployProgetPackages" && $CI_BUILD_STATUS == "success"'
+  artifacts:
+    paths:
+    - ./dist
 
 # Deploy PSGallary Package Stage
-deploy_psgallary_package_job:
-  stage: DeployPsgallaryPackage
+deploy_psgallary:
+  stage: deploy
   tags:
     - windows
   script:
@@ -111,20 +110,9 @@ deploy_psgallary_package_job:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployChocolateyPackage" && $CI_BUILD_STATUS == "success"'
 
-# Deploy Coverage to Coverails.io Stage
-deploy_coverage_coverails_job:
-  stage: DeployCoverageToCoverails
-  tags:
-    - windows
-  script:
-    - pwsh.exe
-    - .\bt8-ci-deploy-coveralls-report.ps1
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployPsgallaryPackage" && $CI_BUILD_STATUS == "success"'
-
 # Create Release Stage
-create_release_job:
-  stage: CreateRelease
+create_release:
+  stage: release
   tags:
     - windows
   script: 
@@ -135,3 +123,18 @@ create_release_job:
   artifacts:
     paths:
       - Build.gz
+      - ./dist/psgal
+      - ./dist/nuget
+      - ./dist/choco
+
+# Deploy Coverage to Coverails.io Stage
+deploy_coverage:
+  stage: release
+  tags:
+    - windows
+  script:
+    - pwsh.exe
+    - .\bt8-ci-deploy-coveralls-report.ps1
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployPsgallaryPackage" && $CI_BUILD_STATUS == "success"'
+
