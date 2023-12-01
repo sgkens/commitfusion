@@ -42,11 +42,11 @@ Function New-Commit {
         [Parameter(Mandatory = $true, Position = 0)]
         # valuedateset Dynamic values
         [ValidateScript({
-                if ($_ -in (Get-CiSetFusion -Raw).type) {
+                if ($_ -in (Get-CommitTypes -Raw).type) {
                     $true
                 }
                 else {
-                    throw "Invalid Type '$($_)', please use one of the following values: $((Get-CiSetFusion).type -join ',')"
+                    throw "Invalid Type '$($_)', please use one of the following values: $((Get-CommitTypes -Raw).type -join ',')"
                 }
             })]
         [string]$Type,

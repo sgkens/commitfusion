@@ -28,7 +28,7 @@ Function Get-CiSet(){
     param()
     process {
         return (Get-CommitFusionModuleInstance).GetCiSet() |
-            Select-Object Name, Description,Semver,Code,Entity,Emoji |
+            Select-Object Name,Description,Semver,Emoji |
                 Format-Table -autosize -wrap
     }
 
