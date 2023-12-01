@@ -14,7 +14,7 @@ pester_test_job:
     - pwsh
     - install-module -name pester -Scope CurrentUser -Force -SkipPublisherCheck
     - import-module -name pester
-    - invoke-Pester -Script .\bt0-ci-test-pester.ps1
+    - invoke-Pester -Script .\build\bt0-ci-test-pester.ps1
 
 # Script Analyzer Test Stage
 script_analyzer_test_job:
@@ -27,7 +27,7 @@ script_analyzer_test_job:
     - pwsh
     - install-module -name PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
     - import-module -name PSScriptAnalyzer -Force
-    - .\bt1-p2-ci-test-pssa.ps1
+    - .\build\bt1-p2-ci-test-pssa.ps1
 
 # Build Module Stage
 build_module:
@@ -38,7 +38,7 @@ build_module:
     - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh
-    - ./bt1-ci-build-module.ps1
+    - .\build\bt1-ci-build-module.ps1
   artifacts:
     paths:
     - ./dist
@@ -52,7 +52,7 @@ create_nuget:
     - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh.exe
-    - .\bt2-ci-create-packages.ps1
+    - .\build\bt2-ci-create-packages.ps1
   artifacts:
     paths:
     - ./dist
@@ -64,7 +64,7 @@ deploy_gitlab:
     - windows
   script:
     - pwsh.exe
-    - .\bt3-ci-deploy-pushtogitlab.ps1
+    - .\build\bt3-ci-deploy-pushtogitlab.ps1
   rules:
     - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
   artifacts:
@@ -78,7 +78,7 @@ deploy_proget:
     - windows
   script:
     - pwsh.exe
-    - .\bt4-ci-deploy-pushtoproget.ps1
+    - .\build\bt4-ci-deploy-pushtoproget.ps1
   rules:
     - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
   artifacts:
@@ -92,9 +92,9 @@ deploy_chocolatey:
     - windows
   script:
     - pwsh.exe
-    - .\BT5-CI-deploy-PushToChoco.ps1
+    - .\build\BT5-CI-deploy-PushToChoco.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployProgetPackages" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploylocal" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
     - ./dist
@@ -106,9 +106,9 @@ deploy_psgallary:
     - windows
   script:
     - pwsh.exe
-    - .\bt6-ci-deploy-psgallary.ps1
+    - .\build\bt6-ci-deploy-psgallary.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployChocolateyPackage" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploylocal" && $CI_BUILD_STATUS == "success"'
 
 # Create Release Stage
 create_release:
@@ -119,7 +119,7 @@ create_release:
     - pwsh.exe
     - Compress-Archive -Path .\ -DestinationPath Build.gz
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployPsgallaryPackage" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploy" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
       - Build.gz
@@ -136,5 +136,5 @@ deploy_coverage:
     - pwsh.exe
     - .\bt8-ci-deploy-coveralls-report.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "DeployPsgallaryPackage" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploy" && $CI_BUILD_STATUS == "success"'
 
