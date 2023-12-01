@@ -49,7 +49,7 @@ build_module:
     - .\build\bt1-ci-build-module.ps1
   artifacts:
     paths:
-    - ./dist
+    - ./dist/*
     - ./coverage.xml
 
 # Create Nuget Package Stage
@@ -64,7 +64,7 @@ create_nuget:
     - .\build\bt2-ci-create-packages.ps1
   artifacts:
     paths:
-    - ./dist
+    - ./dist/*
     - ./coverage.xml
 
 # Deploy GitLab Package Stage
@@ -79,7 +79,7 @@ deploy_gitlab:
     - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
-    - ./dist
+    - ./dist/*
     - ./coverage.xml
 
 # Deploy Proget Packages Stage
@@ -94,7 +94,7 @@ deploy_proget:
     - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
-    - ./dist
+    - ./dist/*
     - ./coverage.xml
 
 # Deploy Chocolatey Package Stage
@@ -109,7 +109,7 @@ deploy_chocolatey:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploylocal" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
-    - ./dist
+    - ./dist/*
     - ./coverage.xml
 
 # Deploy PSGallary Package Stage
@@ -136,7 +136,7 @@ create_release:
   artifacts:
     paths:
       - Build.gz
-      - ./dist
+      - ./dist/*
 
 # Deploy Coverage to Coverails.io Stage
 deploy_coverage:
