@@ -9,9 +9,6 @@ $exclude     = "Issue#1.txt"
 
 #---CONFIG----------------------------
 
-Find-Module -name 'psmpacker' -repository 'powershell' | install-Module -force
-import-module -name 'psmpacker'
-
 $AutoVersion = (Get-GitAutoVersion).Version
 
 Remove-Item -Path .\dist\$moduleName -Recurse -Force -ErrorAction SilentlyContinue

@@ -11,6 +11,8 @@ pester_test:
     - windows
   script:
     - pwsh
+    - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallary' -confirm:$false
+    - Import-Module -name pester
     - invoke-Pester -Script .\test\Test-Unit-Pester.ps1.ps1
 
 # Pester Test Stage
@@ -20,6 +22,8 @@ pester_test_coverage:
     - windows
   script:
     - pwsh
+    - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallary' -confirm:$false
+    - Import-Module -name pester
     - invoke-Pester -Script .\build\bt0-ci-test-pester.ps1
   artifacts:
     paths:
@@ -32,6 +36,8 @@ script_analyzer:
     - windows
   script:
     - pwsh
+    - find-module -name PSScriptAnalyzer -Repository PSGallery | install-module -Scope CurrentUser -Force -SkipPublisherCheck
+    - Import-Module -Name PSScriptAnalyzer   
     - .\build\bt1-p2-ci-test-pssa.ps1
   artifacts:
     paths:
@@ -46,6 +52,8 @@ build_module:
     - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh
+    - Find-Module -name 'psmpacker' -repository 'powershell' | install-Module -force
+    - import-module -name 'psmpacker'
     - .\build\bt1-ci-build-module.ps1
   artifacts:
     paths:
@@ -61,6 +69,8 @@ create_nuget:
     - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh.exe
+    - find-Module -Repository 'powershell' -Name 'nupsforge' | Install-module -force
+    - Import-Module -Name 'nupsforge' -force
     - .\build\bt2-ci-create-packages.ps1
   artifacts:
     paths:

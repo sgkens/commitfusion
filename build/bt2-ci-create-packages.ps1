@@ -3,9 +3,6 @@
 $ModuleName = "commitfusion"
 
 #---CONFIG----------------------------
-
-find-Module -Repository 'powershell' -Name 'nupsforge' | Install-module -force
-Import-Module -Name 'nupsforge' -force
 $ModuleManifest = Test-ModuleManifest -path .\dist\$modulename\$modulename.psd1
 
 #----Special Config Choco --------------------------------
