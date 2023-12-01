@@ -1,23 +1,23 @@
 # <i class="fa-solid fa-code" style="color: #04376a;"></i> Cmdlets
-Commit fusion provides number cmdlets to help with the creation of conventional commits, changelog updates and semver version generator.
+Commitfusion provides a number cmdlets to help with the creation of conventional commits, changelog updates and semver version generator.
 
 ---
 
 <div id ="toc" class="toc">
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#new-conventionalcommit"> New-ConventionalCommit</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#New-Commit"> New-Commit</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#format-fusionmd"> Format-FustionMD</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#update-changelog"> Update-ChangeLog</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#set-commit"> Set-Commit</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-gitautoversion"> Get-GitAutoVersion</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-ciset"> Get-CiSet </a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-cisetfusion"> Get-CiSetFusion</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#Get-CommitTypes">Get-CommitTypes</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> Get-Emoji</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> New-CommitFusion</a></li>
   <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> New-CommitFusionModuleInstance</a></li>
 </div>
 
-## New-ConventionalCommit
-**New-ConventionalCommit** takes `11` **Parameters**, `2` of which are *Mandatory* `type` and `Description`.
+## New-Commit
+`New-Commit` takes `11` **Parameters**, `2` of which are *Mandatory* `type` and `Description`.
 
 *🥏 Parameter List*
 
@@ -26,26 +26,26 @@ Commit fusion provides number cmdlets to help with the creation of conventional 
   > ♦ - Additional types can be added to `CommitFustion.json` file if needed. Schema follows [🧷 Carlos Cuesta Gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) @ [🧷 gitmoji.dev](https://gitmoji.dev) with additional `type` and `cfa` added to the object array items. \
   > <span style="color:magenta;">PARAMETER REQUIRED</span>
 
-2. **Scope** `[String]` The Scope of the commit, User specified, placed between brackets after the `Type` - <span style="color:green;">OPTIONAL</span>
-3. **Description** `[String]` The Commit Description, User specified, placed after the `scope` - <span style="color:magenta;">PARAMERTER REQUIRED</span>
-4. **Body** `[String[]]` Array of text and will ouput under the `NOTES:` area inside the body - <span style="color:green;">OPTIONAL</span>
-5. **BugFixes** `[String[]]` Array of text and will ouput under the `BUG FIXES:` area inside the body - <span style="color:green;">OPTIONAL</span>
-6. **FeatureNotes** `[String[]]` Array of text and will ouput under the `FEATURE NOTES:` area inside the body, - <span style="color:green;">OPTIONAL</span>
-7. **FeatureAddtions** `[String[]]` Array of text and will ouput under the `FEATURE ADDTIONS:` area inside the body - <span style="color:green;">OPTIONAL</span>
-8. **BreakingChanges** `[String[]]` Array of text and will ouput under the `BREAKING CHANGES:` area inside the body - <span style="color:green;">OPTIONAL</span>
+2. **Scope** `[string]` The Scope of the commit, User specified, placed between brackets after the `Type` - <span style="color:green;">OPTIONAL</span>
+3. **Description** `[string]` The Commit Description, User specified, placed after the `scope` - <span style="color:magenta;">PARAMERTER REQUIRED</span>
+4. **Body** `[string[]]` Array of text and will ouput under the `NOTES:` area inside the body - <span style="color:green;">OPTIONAL</span>
+5. **BugFixes** `[string[]]` Array of text and will ouput under the `BUG FIXES:` area inside the body - <span style="color:green;">OPTIONAL</span>
+6. **FeatureNotes** `[string[]]` Array of text and will ouput under the `FEATURE NOTES:` area inside the body, - <span style="color:green;">OPTIONAL</span>
+7. **FeatureAddtions** `[string[]]` Array of text and will ouput under the `FEATURE ADDTIONS:` area inside the body - <span style="color:green;">OPTIONAL</span>
+8. **BreakingChanges** `[string[]]` Array of text and will ouput under the `BREAKING CHANGES:` area inside the body - <span style="color:green;">OPTIONAL</span>
 9. **Footer** `[switch]` Display Footer if specified will output **GitUser** and **DateTime**  <span style="color:green;">OPTIONAL</span>
 10. **GitUser** `[String]` Use with footer and the generated commit link when using `Format-FustionMD` *cmdlet* - <span style="color:green;">OPTIONAL</span>
-11. **GitGroup** `[String]` Use to generated commit link when using the `Format-FustionMD` *cmdlet* - <span style="color:green;">OPTIONAL</span>
+11. **GitGroup** `[string]` Use to generated commit link when using the `Format-FustionMD` *cmdlet* - <span style="color:green;">OPTIONAL</span>
 
 > #### For Example:
 
 ```powershell
 
 # Minimal Required Parameters Example 
-New-ConventionalCommit -Type feat -Description "Added new feature"
+New-Commit -Type feat -Description "Added new feature"
 
 # All Parameters Example
-New-ConventionalCommit -Type feat `
+New-Commit -Type feat `
                        -Description "Added new feature" `
                        -Scope "add" `
                        -Body "Note 1","Note 2" `
@@ -101,27 +101,12 @@ New-ConventionalCommit -Type feat `
 ----
 
 ## Format-FusionMD
-The function currently takes `4` **optional** parameters, default **github** commit link is used if no parameters are specified.
-
-*🥏 Parameter List*
-
-1. **BitBucket** `[Switch]` Sets the Commit link to *BitBucket* e.g.
-> `https://bitbucket.org/($user|$group)/$project/commits/$commitid`
-
-2. **Gitlab** `[Switch]` Sets the Commit link to *Gitlab* e.g.
-> `https://gitlab.com/($user|$group)/$project/-/commit/$commitid`
-
-3. **Github** - `[Switch]` Sets the Commit link to *Github* e.g.
-> `https://github.com/($user|$group)/$project/-/commit/$commitid`
-
-4. **GitLabSE** - `[String]` Sets the Commit link to *GitlabSE* e.g.
-> `https://($SelfHostedUrl)/($user|$group)/$project/-/commit/$commitid`
-
+The function currently takes `0` parameters. It reads the output from `New-Commit` and formats it into Markdown format ready for documentation or changelog updates.
 
 > #### For Example:
 
 ```powershell
-New-ConventionalCommit -Type feat `
+New-Commit -Type feat `
                        -Description "Added new feature" `
                        -Scope "add" `
                        -Body "Note 1","Note 2" `
@@ -189,7 +174,7 @@ New-ConventionalCommit -Type feat `
 > #### For Example:
 
 ```powershell
-New-ConventionalCommit New-ConventionalCommit -Type feat `
+New-Commit New-Commit -Type feat `
                        -Description "Added new feature" `
                        -Scope "add" `
                        -Body "Note 1","Note 2" `
@@ -204,7 +189,7 @@ New-ConventionalCommit New-ConventionalCommit -Type feat `
 <a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
 ## Set-Commit
-**Set-Commit** takes `0` **Parameters**, will simple run `git commit -m $commitmessage` and will use the output from `New-ConventionalCommit` as the commit message.
+**Set-Commit** takes `0` **Parameters**, will simple run `git commit -m $commitmessage` and will use the output from `New-Commit` as the commit message.
 
 > Asummptions:
 > - You are in a git repository
@@ -244,23 +229,23 @@ Get-CiSet | Select-Object -First 10 | FT -Wrap
 ```
 
 ```bash
-emoji entity    code        description                             name      semver
------ ------    ----        -----------                             ----      ------
-🎨    &#x1f3a8; :art:       Improve structure / format of the code. art
-⚡️    &#x26a1;  :zap:       Improve performance.                    zap       patch
-🔥    &#x1f525; :fire:      Remove code or files.                   fire
-🐛    &#x1f41b; :bug:       Fix a bug.                              bug       patch
-🚑️   &#128657; :ambulance: Critical hotfix.                        ambulance patch
-✨     &#x2728;  :sparkles:  Introduce new features.                 sparkles  minor
-📝    &#x1f4dd; :memo:      Add or update documentation.            memo
-🚀    &#x1f680; :rocket:    Deploy stuff.                           rocket
-💄    &#ff99cc; :lipstick:  Add or update the UI and style files.   lipstick  patch
-🎉    &#127881; :tada:      Begin a project.                        tada
+name                      description                                                   semver code                        entity    emoji
+----                      -----------                                                   ------ ----                        ------    -----
+art                       Improve structure / format of the code.                              :art:                       &#x1f3a8; 🎨
+zap                       Improve performance.                                          patch  :zap:                       &#x26a1;  ⚡️
+fire                      Remove code or files.                                                :fire:                      &#x1f525; 🔥
+bug                       Fix a bug.                                                    patch  :bug:                       &#x1f41b; 🐛
+ambulance                 Critical hotfix.                                              patch  :ambulance:                 &#128657; 🚑️
+sparkles                  Introduce new features.                                       minor  :sparkles:                  &#x2728;  ✨
+memo                      Add or update documentation.                                         :memo:                      &#x1f4dd; 📝
+rocket                    Deploy stuff.                                                        :rocket:                    &#x1f680; 🚀
+lipstick                  Add or update the UI and style files.                         patch  :lipstick:                  &#ff99cc; 💄
+tada                      Begin a project.                                                     :tada:                      &#127881; 🎉
 ```
 
 <a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
-## Get-CiSetFusion
+## Get-CommitTypes
 *Get-CiSetFusion* Takes `4` optional **Parameters**, it will parse and write to console the types from the `$moduleroot/libs/CommitFusion.json` file. The types can be further filtered by the following parameters:
 
 *🥏 Parameter List*
@@ -269,12 +254,49 @@ emoji entity    code        description                             name      se
 2. `-Major`: Filters types of major version changes.
 3. `-Minor`: Filters types of minor version changes.
 4. `-Patch`: Filters types of patch version changes.
+4. `-Patch`: returns `psobject`
 
 If no parameters are specified, it will return all the types.
 
-If you would like to return the PSObject as this function renders the result using Spectre.Console via SimpleSpectreWrapper, you can use the `-NoRender` parameter to return the PSObject instead.
+If you would like to return the PSObject as this function renders the result using Spectre.Console via SimpleSpectreWrapper, you can use the `-raw` parameter to return the PSObject instead.
 
-**Note!** You can modify the `$moduleroot/libs/CommitFusion.json` file to add your own types, using the GitMojis. See [New-ConventionalCommit](/cmdlets#new-conventionalcommit) **Types** for more information.
+```
+Type        description                                                  semver cfa          emoji
+----        -----------                                                  ------ ---          -----
+changes     Introduce breaking changes.                                  major  {@{action=}} 💥
+feat        Introduce new features.                                      minor  {@{action=}} ✨
+fix         Fixed bugs.                                                  patch  {@{action=}} 🐛
+docs        Update Documentation.                                               {@{action=}} 📝
+style       Update style.                                                patch  {@{action=}} 💄
+perf        Improve performance.                                         patch  {@{action=}} ⚡️
+test        Add tests.                                                          {@{action=}} ✅
+build       Build.                                                       patch  {@{action=}} 📦
+ci          Continuous integration.                                             {@{action=}} 👷
+chore       Tooling, Generic commit                                             {@{action=}} 🔧
+revert      Revert changes.                                              patch  {@{action=}} ⏪
+bookmark    Release / Version tags.                                             {@{action=}} 🔖
+wip         Work in progress.                                                   {@{action=}} 🚧
+gitignore   Add or update a .gitignore file.                                    {@{action=}} 🙈
+flag        Add, update, or remove feature flags.                               {@{action=}} 🚩
+improve     Improve structure / format of the code.                      patch  {@{action=}} 🎨
+hotfix      Critical hotfix.                                             patch  {@{action=}} 🚑️
+deploy      Deploy stuff.                                                       {@{action=}} 🚀
+project     Begin a project.                                                    {@{action=}} 🎉
+security    Fix security issues.                                         patch  {@{action=}} 🔒️
+refactor    Refactor code.                                                      {@{action=}} ♻️
+depadd      Add a dependency.                                            patch  {@{action=}} ➕
+depdell     Remove a dependency.                                         patch  {@{action=}} ➖
+config      Add or update configuration files.                           patch  {@{action=}} 🔧
+typos       Fix typos.                                                   patch  {@{action=}} ✏️
+resources   Move or rename resources (e.g.: files, paths, routes).              {@{action=}} 🚚
+fix-s       Simple fix for a non-critical issue.                         patch  {@{action=}} 🩹
+deadcode    Remove dead code.                                                   {@{action=}} ⚰️
+Depre       Remove deprecate code.                                              {@{action=}} 🗑️
+concurrency Add or update code related to multithreading or concurrency.        {@{action=}} 🧵
+Infra       Infrastructure related changes.                              patch  {@{action=}} 🧱
+```
+
+**Note!** You can modify the `$moduleroot/libs/CommitFusion.json` file to add your own types, using the GitMojis. See [New-Commit](/cmdlets#New-Commit) **Types** for more information.
 
 ```powershell
 Get-CiSetFusion -NoSemver -NoRender | Select-Object -First 10 | FT -Wrap
