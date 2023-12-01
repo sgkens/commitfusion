@@ -5,8 +5,18 @@ stages:
   - deploy
   - release
 
+pester_test:
+  stage: tests
+  tags:
+    - windows
+  script:
+    - pwsh
+    - install-module -name pester -Scope CurrentUser -Force -SkipPublisherCheck
+    - import-module -name pester
+    - invoke-Pester -Script .\test\Test-Unit-Pester.ps1.ps1
+
 # Pester Test Stage
-pester_test_job:
+pester_test_coverage:
   stage: tests
   tags:
     - windows
@@ -15,19 +25,23 @@ pester_test_job:
     - install-module -name pester -Scope CurrentUser -Force -SkipPublisherCheck
     - import-module -name pester
     - invoke-Pester -Script .\build\bt0-ci-test-pester.ps1
+  artifacts:
+    paths:
+    - ./coverage.xml
 
 # Script Analyzer Test Stage
-script_analyzer_test_job:
+script_analyzer_test:
   stage: tests
   tags:
     - windows
-  rules:
-    - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh
     - install-module -name PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
-    - import-module -name PSScriptAnalyzer -Force
+    - import-module -name PSScriptAnalyzer
     - .\build\bt1-p2-ci-test-pssa.ps1
+  artifacts:
+    paths:
+    - ./coverage.xml
 
 # Build Module Stage
 build_module:
@@ -42,6 +56,7 @@ build_module:
   artifacts:
     paths:
     - ./dist
+    - ./coverage.xml
 
 # Create Nuget Package Stage
 create_nuget:
@@ -56,6 +71,7 @@ create_nuget:
   artifacts:
     paths:
     - ./dist
+    - ./coverage.xml
 
 # Deploy GitLab Package Stage
 deploy_gitlab:
@@ -70,6 +86,7 @@ deploy_gitlab:
   artifacts:
     paths:
     - ./dist
+    - ./coverage.xml
 
 # Deploy Proget Packages Stage
 deploy_proget:
@@ -84,6 +101,7 @@ deploy_proget:
   artifacts:
     paths:
     - ./dist
+    - ./coverage.xml
 
 # Deploy Chocolatey Package Stage
 deploy_chocolatey:
@@ -98,6 +116,7 @@ deploy_chocolatey:
   artifacts:
     paths:
     - ./dist
+    - ./coverage.xml
 
 # Deploy PSGallary Package Stage
 deploy_psgallary:
@@ -123,10 +142,8 @@ create_release:
   artifacts:
     paths:
       - Build.gz
-      - ./dist/psgal
-      - ./dist/nuget
-      - ./dist/choco
-
+      - ./dist
+      
 # Deploy Coverage to Coverails.io Stage
 deploy_coverage:
   stage: release
