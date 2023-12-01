@@ -10,6 +10,7 @@ $SemVerVersion        = $ModuleManifest.Version -replace "\.\d+$",""
 if(Get-command choco.exe){
   write-host "Chocolatey is installed, skipping install"
   write-host "Pushing to chocolatey https://community.chocolatey.org/"
+  choco apikey --key $CHOCO_API_KEY --source https://push.chocolatey.org/
   choco.exe push .\dist\$ModuleName.$SemVerVersion.nupkg --source 'https://community.chocolatey.org/'
   write-host "Pushed to chocolatey - Complete"
 }else{
