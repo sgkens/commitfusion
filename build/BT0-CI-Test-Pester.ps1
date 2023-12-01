@@ -28,7 +28,7 @@ $pesterConfig = New-PesterConfiguration -hashtable @{
     path                  = "libs\*.psm1","*.psm1"
   }
   Run = @{
-    #PassThru = $true
+    PassThru = $true
     #scriptblock = {'.\test\Test-Unit-Pester.ps1'}
     Path = '.\test\Test-Unit-Pester.ps1';
   }
