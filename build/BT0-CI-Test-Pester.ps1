@@ -25,12 +25,12 @@ $pesterConfig = New-PesterConfiguration -hashtable @{
     OutputPath            = 'Coverage.xml'
     OutputEncoding        = 'utf8'
     CoveragePercentTarget = 85
-    path                  = "libs\*.psm1","*.psm1"
+    path                  = ".\libs\*.psm1",".\*.psm1"
   }
   Run = @{
-    PassThru = $true
+    # PassThru = $true
     #scriptblock = {'.\test\Test-Unit-Pester.ps1'}
-    Path = '.\test\Test-Unit-Pester.ps1';
+    Path     = '.\test\Test-Unit-Pester.ps1';
   }
 }
 Invoke-Pester -Configuration $pesterConfig
