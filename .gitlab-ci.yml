@@ -13,7 +13,7 @@ pester_test:
     - pwsh
     - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallery' -confirm:$false
     - Import-Module -name pester -RequiredVersion '5.5.0'
-    - invoke-Pester -Script .\test\Test-Unit-Pester.ps1.ps1
+    - invoke-Pester -Script .\test\Test-Unit-Pester.ps1
 
 # Pester Test Stage
 pester_test_coverage:
