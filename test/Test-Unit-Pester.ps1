@@ -72,7 +72,7 @@ Describe "cmdlets" {
     #TODO: Unsure if this function is needed, but it is here for now
     New-Commit @params | 
     Format-FusionMD | 
-    Update-Changelog -logfile .\CHANGELOG-Test.md | should -match "{'response':'success','message':'(.*?)'}"
+    Update-Changelog -logfile .\tools\CHANGELOG-Test.md | should -match "{'response':'success','message':'(.*?)'}"
   }
 
   it "Set-commit - Should Return [String]" {

@@ -11,8 +11,6 @@ $exclude     = "Issue#1.txt"
 
 $AutoVersion = (Get-GitAutoVersion).Version
 
-Remove-Item -Path .\dist\$moduleName -Recurse -Force -ErrorAction SilentlyContinue
-
 Build-Module -SourcePath .\ `
              -DestinationPath .\dist `
              -Name $moduleName  `
