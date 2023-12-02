@@ -17,4 +17,4 @@ $pesterConfig = New-PesterConfiguration -hashtable @{
     Path     = '.\test\Test-Unit-Pester.ps1';
   }
 }
-Invoke-Pester -Configuration $pesterConfig
+Invoke-Pester -Configuration $pesterConfig -CI || exit 1
