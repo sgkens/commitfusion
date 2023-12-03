@@ -11,6 +11,11 @@
 git clone https://github.com/sgkens/commitfusion.git
 cd commitfusion
 Import-Module -Name commitfusion
+Get-Module -Name CommitFustion
+
+# Check imported Module Functions
+Get-Module -Name commitfusion | Select-Object -expand ExportedFunctions
+Get-Module -Name commitfusion | select-object version
 ```
 
 ### 💼 Releases
