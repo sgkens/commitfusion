@@ -328,4 +328,4 @@ Get-CiSetFusion -NoSemver -NoRender | Select-Object -First 10 | FT -Wrap
 ## Get-CommitFusionModuleInstance
 **Get-CommitFusionModuleInstance** takes `0` Parameters and will return the module instance initiated at module import. See `$moduleroot/libs/cmdlets/Get-CommitFusionModuleInstance.psm1`, used by all the cmdlets to interact with the class instance.
 
-<a href="commitfusion/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
+<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>

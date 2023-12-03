@@ -66,5 +66,5 @@
 - Parses scraped version of [🧷unicode.org](https://unicode.org/emoji/charts/emoji-list.html) icon set, returns `PSObject`, Miscellaneous function.
 
 <div align="right">
-  <a href="commitfusion/installation"> Installing Commit Fusion </a>
+  <a href="/install"> Installing Commit Fusion </a>
 </div>

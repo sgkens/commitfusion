@@ -51,5 +51,5 @@ Import-Module -Name commitfusion
 
 
 <div align="right">
-  <a href="commitfusion/cmdlets"> Using Commitfusion's cmdlets </a>
+  <a href="/cmdlets"> Using Commitfusion's cmdlets </a>
 </div>
