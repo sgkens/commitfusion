@@ -1,15 +1,14 @@
 import-module -name .\commitfusion.psd1
 import-module -name .\tools\GLIPParagraph\Write-GLIPParagraph.psm1
 
-
 BeforeAll {
   $Notes = @()
   for ($x = -1; $x -lt $randomNotes; $x++) {
     $Notes += Write-GLIPParagraph -Length (get-random -minimum 10 -maximum 20)
   }
-  $FeatureAddtions = @()
+  $FeatureAdditions = @()
   for ($x = -1; $x -lt $randomNotes; $x++) {
-    $FeatureAddtions += Write-GLIPParagraph -Length (get-random -minimum 10 -maximum 20)
+    $FeatureAdditions += Write-GLIPParagraph -Length (get-random -minimum 10 -maximum 20)
   }
   $BugFixes = @()
   for ($x = -1; $x -lt $randomNotes; $x++) {
@@ -28,7 +27,7 @@ BeforeAll {
     Scope           = "test"
     Description     = "test"
     Notes           = "test"
-    FeatureAddtions = $FeatureAddtions
+    FeatureAdditions = $FeatureAdditions
     BugFixes        = $BugFixes
     FeatureNotes    = $FeatureNotes
     BreakingChanges = $BreakingChanges
