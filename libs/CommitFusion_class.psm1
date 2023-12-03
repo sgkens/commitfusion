@@ -5,7 +5,7 @@ class CommitFusion{
     [string[]] $Notes
     [String]   $Styledbody
     [String]   $Footer
-    [string[]] $FeatureAddtions
+    [string[]] $FeatureAdditions
     [string[]] $Bugfixes
     [string[]] $Breakingchanges
     [string[]] $Featurenotes
@@ -88,7 +88,7 @@ class CommitFusion{
         [Bool]      $Footer = $false,
         [String]    $GitUser = $Null,
         [String]    $GitGroup = $null,
-        [string[]]  $FeatureAddtions = $null,
+        [string[]]  $FeatureAdditions = $null,
         [string[]]  $bugfixes = $null,
         [string[]]  $FeatureNotes = $null,
         [string[]]  $BreakingChanges = $null
@@ -103,7 +103,7 @@ class CommitFusion{
         $this.featurenotes = $featurenotes
         $this.gituser = $gituser
         $this.gitgroup = $gitgroup
-        $this.FeatureAddtions = $FeatureAddtions
+        $this.FeatureAdditions = $FeatureAdditions
         $this.bugfixes = $bugfixes
 
         if($Description.length -eq 0){# char count seems to work better than $null, i dont really like null
@@ -139,25 +139,25 @@ class CommitFusion{
     hidden [void] ConstructMessage(){
 
         <#- Feature Addtions-#>
-        if($null -ne $this.FeatureAddtions){
+        if($null -ne $this.FeatureAdditions){
             # Add if branch is not null
-            $FeatureAddtionsVar = "$($this.GetEmoji("miscmojis","glowing_star")) FEATURE ADDTIONS: `n"
-            $FeatureAddtionsVar += "`n"
+            $FeatureAdditionsVar = "$($this.GetEmoji("miscmojis","glowing_star")) FEATURE ADDTIONS: `n"
+            $FeatureAdditionsVar += "`n"
             [int]$index = 1
-            foreach ($faddtion in $this.FeatureAddtions) {
-                if($this.FeatureAddtions.count -ne $index -and $this.FeatureAddtions.count -ne 1){
-                    $FeatureAddtionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion \`n"
+            foreach ($faddtion in $this.FeatureAdditions) {
+                if($this.FeatureAdditions.count -ne $index -and $this.FeatureAdditions.count -ne 1){
+                    $FeatureAdditionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion \`n"
                 }
                 else{
-                    $FeatureAddtionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion ..🖊"
+                    $FeatureAdditionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion ..🖊"
                 }
                 $index++
             }
             $index = $null
-            $FeatureAddtionsVar += "`n"
-            $this.FeatureAddtions = "$FeatureAddtionsVar`n`n"
+            $FeatureAdditionsVar += "`n"
+            $this.FeatureAdditions = "$FeatureAdditionsVar`n`n"
         }
-        else{ $this.FeatureAddtions = "" }
+        else{ $this.FeatureAdditions = "" }
 
         <# BUGFIXES #>
         if($null -ne $this.bugfixes){
@@ -267,7 +267,7 @@ class CommitFusion{
             Description     = " $($this.Description)"
             Body            = "$($this.styledbody)"
             Footer          = "$($this.footer)"
-            BreakingChanges = "`n$($this.FeatureAddtions)$($this.BugFixes)$($this.FeatureNotes)$($this.BreakingChanges)`n"
+            BreakingChanges = "`n$($this.FeatureAdditions)$($this.BugFixes)$($this.FeatureNotes)$($this.BreakingChanges)`n"
         }
         $this.ConstructMessageObject = $StringParts
 
