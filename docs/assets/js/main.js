@@ -20,6 +20,9 @@ window.onload = function() {
   //   },
   // });
 
+  // Development 
+  var development = false
+
   // Get all details elements
   const detailsElements = document.querySelectorAll(".accordion details");
   let typed1;
@@ -434,7 +437,7 @@ window.onload = function() {
   });
 
   var menu = document.getElementById("menu");
-  if (menu) {
+  if (menu && development === true) {
     switch (document.location.pathname) {
       case "/":
         console.log("Nav to Index");
@@ -448,7 +451,9 @@ window.onload = function() {
 
       case "/installation":
         console.log("Nav to Installation");
-        document.getElementById("installation").classList.add("button-page-active");
+        document
+          .getElementById("installation")
+          .classList.add("button-page-active");
         break;
 
       case "/cmdlets":
@@ -457,6 +462,39 @@ window.onload = function() {
         break;
 
       case "/examples":
+        console.log("Nav to examples");
+        document.getElementById("examples").classList.add("button-page-active");
+        break;
+
+      default:
+        console.log("Nav to features");
+    }
+  }
+  else{
+    switch (document.location.pathname) {
+      case "/commitfusion":
+        console.log("Nav to Index");
+        document.getElementById("about").classList.add("button-page-active");
+        break;
+
+      case "/commitfusion/features":
+        console.log("Nav to features");
+        document.getElementById("features").classList.add("button-page-active");
+        break;
+
+      case "/commitfusion/installation":
+        console.log("Nav to Installation");
+        document
+          .getElementById("installation")
+          .classList.add("button-page-active");
+        break;
+
+      case "/commitfusion/cmdlets":
+        console.log("Nav to cmdlets");
+        document.getElementById("cmdlets").classList.add("button-page-active");
+        break;
+
+      case "/commitfusion/examples":
         console.log("Nav to examples");
         document.getElementById("examples").classList.add("button-page-active");
         break;

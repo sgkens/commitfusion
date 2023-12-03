@@ -1,4 +1,4 @@
-repository: sgkens/slate-fusion
+repository: pages-themes/slate
 #author: # [name, email, web]
 remote_theme: pages-themes/slate@v0.2.0
 title: [CommitFusion] 
@@ -8,10 +8,12 @@ custom:
   logo:         'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/logo-black-v2.svg' 
   dateupdated:  'Tuesday, 28 November 2023 8:26:40 PM' 
   license:      'https://img.shields.io/badge/MIT-License-blue?style=flat&logo=unlicense&color=#36013f' 
-  version:      'https://img.shields.io/badge/version-v0.3.1-blue?style=flat&logo=Version&color=%23004481'
+  version:      'https://img.shields.io/powershellgallery/v/commitfusion?include_prereleases&logo=powershell&label=Version&logoColor=white'
   choco:        'https://img.shields.io/chocolatey/dt/commitfusion?style=flat&logo=Chocolatey&labelColor=darkmagenta&color=gray'
   psgallary:    'https://img.shields.io/powershellgallery/dt/commitfusion?style=flat&logo=powershell&labelColor=blue&color=gray'
-
+  codefactor:   'https://www.codefactor.io/repository/github/sgkens/commitfusion/badge'
+  prod:         '/commitfusion' # Dev / github pages /reponame
+  # dev:         '/'
   
 #google_analytics: [Your Google Analytics tracking ID]
 plugins:
