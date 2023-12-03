@@ -4,7 +4,7 @@
 RootModule    = 'CommitFusion.psm1'
 
 # Version number of this module.
-ModuleVersion     = '0.3.1.0'
+ModuleVersion     = '0.3.2.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -22,7 +22,7 @@ CompanyName = 'davilion'
 Copyright = '2023 sgkens. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Commit-Fusion - Conventional Commit Generator'
+Description = 'Conventional Commit Message Generator'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '7.0'
@@ -108,10 +108,10 @@ PrivateData = @{
         ProjectUri = 'https://github.com/sgkens/commitfusion.git'
 
         # A URL to an icon representing this module.
-        IconUri  = 'https://gitlab.lab.davilion.online.tk/sgkens/resources/-/blob/main/modules/CommitFusion/dist/v1/ccommits-logo_GitIcon_51.20dpi.png'
+        IconUri  = 'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/commitfusion-icon-x128.png'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'https://gitlab.lab.davilion.online.tk/powershell/commitfusion/-/blob/main/Releases.md'
+        ReleaseNotes = 'https://github.com/sgkens/commitfusion'
 
         # Prerelease string of this module
         # Prerelease = 'beta'
@@ -127,7 +127,7 @@ PrivateData = @{
 } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-# HelpInfoURI = ''
+HelpInfoURI = 'https://github.com/sgkens/commitfusion/blob/main/README.md'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''

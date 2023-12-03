@@ -1,2 +1,2 @@
-set-location .\docs
+set-location ..\docs
 bundle exec jekyll serve --livereload

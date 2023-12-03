@@ -1,0 +1,6 @@
+Switch Environments
+
+Main.js
+    -> Change Development to false
+_config.yaml
+    -> Change - Uncommit dev and comment prod vs versa

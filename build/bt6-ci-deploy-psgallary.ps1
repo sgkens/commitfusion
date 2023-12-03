@@ -5,11 +5,10 @@ $ModuleManifest = Test-ModuleManifest -path ".\dist\$ModuleName\$ModuleName`.psd
 
 #---CONFIG----------------------------
 
-
 #------------------------------------
 publish-Module `
   -path ".\dist\$modulename" `
-  -Repository 'psgallary' `
+  -Repository 'psgallery' `
   -NuGetApiKey $PSGAL_API_KEY `
   -projecturi $ModuleManifest.ProjectUri `
   -licenseuri $ModuleManifest.LicenseUri `

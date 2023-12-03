@@ -7,22 +7,63 @@ $ModuleManifest = Test-ModuleManifest -path .\dist\$modulename\$modulename.psd1
 
 #----Special Config Choco --------------------------------
 # Choco supports markdown nuget and psgallary done
-$Additional_descriptions = @"
-*CommitFusion* is a PowerShell module crafted to streamline the creation of well-organized and uniform commit messages in adherence to the [🧷Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) for your `git` repository.
-
-A custom version of the [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) (accessible at [🧷gitmoji.dev](https://gitmoji.dev)) is used to define the emojis, scope, and default description of the commit string.
+$Additional_descriptions = @'
+***CommitFusion*** is a **PowerShell** module designed to streamline the process of generating *Conventional Commits Messages* in `git`. Commit messages are constructed using the [🧷Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) standard, and uses [🧷gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) see [🧷gitmoji.dev](https://gitmoji.dev), The module allows the construction of a custimized commit message with a number of options.
 
 ### Features
 
-- Conventional Commit specification.
-- Custom commit Types.
-- Customizable Commit Messages.
-- Changelog auto-updater.
-- Semver(*Semantic Versioning specification*).
-- Emoji parser.
-- Gitmoji parser.
-- Auto Commit
-"@
+🪶 Conventional Commits Standard
+🪶 Customizable Commit Message
+🪶 Semver Versioning Generator
+🪶 Changelog Auto-update with Markdown Auto-format
+🪶 Gitmoji Custom Schema
+
+## 🎾 Using Commitfusion
+
+Retrive list of available commit types
+
+``````powershell
+Get-CommitTypes
+``````
+
+Retrive list of available commit types.
+
+``````powershell
+Get-CommitTypes -Semver patch
+Get-CommitTypes -Semver minor
+Get-CommitTypes -Semver major
+Get-CommitTypes -Semver nosemver
+``````
+
+Creating a new feature` commit.
+
+``````powershell
+# Default Returns ]string]
+``````
+
+Assuming you have staged files, you can use the following to commit the changes:
+
+``````powershell
+# Apply Commit
+New-Commit @params | Set-Commit -Confirm
+# Apply Commit and write to changelog file 
+New-Commit @params | Format-FusionMD | Update-Changelog -logfile path\to\file | Set-Commit -Confirm
+``````
+
+Generate Semver version base on you commits
+
+``````powershell
+# generate SemVer Version returns psobject
+Get-GitAutoVersion | select version
+# only string
+(Get-GitAutoVersion).Version
+``````
+
+### Default avaliable commit types
+
+> Types are found at $moduleroot/libs/commitfusion.types.json
+'@
+
 #----Special Config Choco --------------------------------
 $NuSpecParams = @{
   path=".\dist\$ModuleName"
@@ -31,6 +72,7 @@ $NuSpecParams = @{
   Author = $ModuleManifest.Author
   Description = "$($ModuleManifest.Description)"
   ProjectUrl = $ModuleManifest.PrivateData.PSData.ProjectUri
+  IconUrl = 'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/commitfusion-icon-x128.png' 
   License = "MIT"
   company = $ModuleManifest.CompanyName
   Tags = $ModuleManifest.Tags
@@ -42,8 +84,9 @@ $NuSpecParamsChoco = @{
   ModuleName = $ModuleName
   ModuleVersion = $ModuleManifest.Version -replace "\.\d+$",""
   Author = $ModuleManifest.Author
-  Description   = "$($ModuleManifest.Description)"
+  Description   = "$($ModuleManifest.Description) `n`n $Additional_descriptions"
   ProjectUrl = $ModuleManifest.PrivateData.PSData.ProjectUri
+  IconUrl  = 'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/commitfusion-icon-x128.png' 
   License = "MIT"
   company = $ModuleManifest.CompanyName
   Tags = $ModuleManifest.Tags

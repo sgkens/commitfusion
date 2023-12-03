@@ -1,2 +1,0 @@
-o- https://github.com/github/gemoji/blob/master/db/emoji.json used for emoi codex
-o- used for git mojis

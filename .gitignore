@@ -1,4 +1,6 @@
-test/
 dist/
 docs/_site/
-CHANGELOG-Test.md
+Gemfile.lock
+testResults.xml
+coverage.xml
+.vscode/
