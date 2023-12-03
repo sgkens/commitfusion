@@ -1,0 +1,41 @@
+o- https://github.com/github/gemoji/blob/master/db/emoji.json used for emoi codex
+o- used for git mojis
+
+Update
+
+BugFix:
+
+    
+Todo
+    + Add spectre-console  for formatted outputs, make this i to format-table
+        + Format-Spectre - Make this the default for get-emoji, get-emoji in text, get-ciset, getcisetfusion and perhaps get-autoversion
+    + IO overhead operations thats not required 
+        + reading/writing template file to disk, use variable instead write template file current has 5 IO operations
+        + Replace with variables or just use the class variables holding the commit string
+    + Add confirm prompt and the ability to bypass -bypass for set-commit
+    + Add logtastic as console loger was module is released
+    + Add ShellDock for commits to run in runspace - reason, serves not purpose
+    + add confirm to commmit 
+    + add mirror to getia and gethub
+    + change cmdlet get-cisetfusion to Get-CommitTypes
+    + Change New-Conventionalcommit to New-Commit
+
+Update - Documentation
+    - Updated Jeklly - used github pages themes and customized
+    - Customized CSS
+    - Added Javascript Menu Controller
+    - Added Typed.js Example
+    - Added Active Page javascript controller
+    - Added Examples, download methods, installation guide, detailed cmdlets examples, and module overview
+    - Configured Gem file and bunlde start script
+    - Added Custom Code Block CSS 
+    - Added Custom Googlefonts
+Update 
+    - 
+
+
+
+TODO::
+
+Update- Add this script to appvoir 
+

@@ -1,0 +1,33 @@
+name: Test Coveralls
+
+on:
+  push:
+    branches:
+      - main  # Replace with the main branch name if needed
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Run tests and generate coverage report
+        run: make test-coverage
+
+      - name: Upload coverage report to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: |
+          npm install -g coveralls
+          coveralls
