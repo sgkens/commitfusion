@@ -10,6 +10,7 @@ pester_test:
   tags:
     - windows
   script:
+    - echo "Running tests -> pester_test"
     - pwsh
     - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallery' -confirm:$false
     - Import-Module -name pester -RequiredVersion '5.5.0'
@@ -21,6 +22,7 @@ pester_test_coverage:
   tags:
     - windows
   script:
+    - echo "Running tests -> pester_test_coverage"
     - pwsh
     - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallery' -confirm:$false
     - Import-Module -name pester -RequiredVersion '5.5.0'
@@ -35,6 +37,7 @@ script_analyzer:
   tags:
     - windows
   script:
+    - echo "Running tests -> script_analyzer"
     - pwsh
     - find-module -name PSScriptAnalyzer -Repository PSGallery | install-module -Scope CurrentUser -Force -SkipPublisherCheck
     - Import-Module -Name PSScriptAnalyzer   
@@ -49,7 +52,7 @@ build_module:
   tags:
     - windows
   rules:
-    - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh
     - Find-Module -name 'psmpacker' -repository 'powershell' | install-Module -force
@@ -66,7 +69,7 @@ create_nuget:
   tags:
     - windows
   rules:
-    - if: '$CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh.exe
     - find-Module -Repository 'powershell' -Name 'nupsforge' | Install-module -force
@@ -86,7 +89,7 @@ deploy_gitlab:
     - pwsh.exe
     - .\build\bt3-ci-deploy-pushtogitlab.ps1
   rules:
-    - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
     - ./dist/*
@@ -101,7 +104,7 @@ deploy_proget:
     - pwsh.exe
     - .\build\bt4-ci-deploy-pushtoproget.ps1
   rules:
-    - if: '$CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
   artifacts:
     paths:
     - ./dist/*
