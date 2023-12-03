@@ -315,25 +315,25 @@ pipeline and version
 
 /*Download Links */
 .zip_download_link{
-  background: url(/assets/images/zip-file.png) no-repeat center;
+  background: url(../assets/images/zip-file.png) no-repeat center;
   background-size: 70%;
   padding: 0px;
   margin: 0px;
   transition: 0.2s ease-in-out;
 }
 .zip_download_link:hover{
-  background: url(/assets/images/zip-file-a.png) no-repeat center;
+  background: url(../assets/images/zip-file-a.png) no-repeat center;
   background-size: 73%;
   opacity: 0.6;
 }
 .tar_download_link{
-  background: url(/assets/images/tar-file.png) no-repeat center;
+  background: url(../assets/images/tar-file.png) no-repeat center;
   transition: 0.2s ease-in-out;
   background-size: 70%;
   margin-left: -15px;
 }
 .tar_download_link:hover{
-  background: url(/assets/images/tar-file-a.png) no-repeat center;
+  background: url(../assets/images/tar-file-a.png) no-repeat center;
   background-size: 73%;
   opacity: 0.6;
 }
