@@ -1,8 +1,20 @@
 <div id ="menu" class="menu">
-  <a href="/"><button id="about" class="button-29" role="button">About</button></a>
+
+  {% if site.custom.prod %}
+    <a href="{{ site.custom.prod }}"><button id="about" class="button-29" role="button">About</button></a>
+    <a href="{{ site.custom.prod }}/features"><button id="features" class="button-29" role="button">Features</button></a>
+    <a href="{{ site.custom.prod }}/installation"><button id="installation" class="button-29" role="button">Installation</button></a>
+    <a href="{{ site.custom.prod }}/cmdlets"><button id="cmdlets" class="button-29" role="button">Cmdlets</button></a>
+    <a href="{{ site.custom.prod }}/examples"><button id="examples" class="button-29" role="button">Examples</button></a>
+  {% endif %}
+
+  {% if site.custom.dev %}
+    <a href="/"><button id="about" class="button-29" role="button">About</button></a>
     <a href="/features"><button id="features" class="button-29" role="button">Features</button></a>
-  <a href="installation"><button id="installation" class="button-29" role="button">Installation</button></a>
-  <a href="cmdlets"><button id="cmdlets" class="button-29" role="button">Cmdlets</button></a>
-  <a href="examples"><button id="examples" class="button-29" role="button">Examples</button></a>
+    <a href="/installation"><button id="installation" class="button-29" role="button">Installation</button></a>
+    <a href="/cmdlets"><button id="cmdlets" class="button-29" role="button">Cmdlets</button></a>
+    <a href="/examples"><button id="examples" class="button-29" role="button">Examples</button></a>
+  {% endif %}
+
 </div>
 

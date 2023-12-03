@@ -17,7 +17,7 @@ Import-Module -Name commitfusion
 Download the latest release from the [**Releases**](https://github.com/sgkens/commitfusion/releases) page.
 ### 📦 Package Repositories
 
-[<img src="https://img.shields.io/badge/psgal-v0.3.1-yellow?style=for-the-badge&logo=Powershell&labelColor=blue&color=gray"/>](https://www.powershellgallery.com/packages/commitfusion/0.4.3) <img src="https://img.shields.io/powershellgallery/dt/commitfusion?label=Downloads&style=for-the-badge">
+[<img src="https://img.shields.io/powershellgallery/v/commitfusion?include_prereleases&style=for-the-badge&logo=powershell"/>](https://www.powershellgallery.com/packages/commitfusion/0.4.3) <img src="https://img.shields.io/powershellgallery/dt/commitfusion?label=Downloads&style=for-the-badge">
 
 ```powershell
 # Install The Module from the PsGal
@@ -30,7 +30,7 @@ Import-Module -Name commitfusion
 > *Note!*  
 > You may need to `Set-ExecutionPolicy` to `RemoteSigned` or `Unrestricted` to install from the PSGallary.
 
-[<img src="https://img.shields.io/badge/Choco-v0.3.1-yellow?style=for-the-badge&logo=Chocolatey&labelColor=darkmagenta&color=gray"/>](https://Chocolatory.org/sgkens/commitfusion)  <img src="https://img.shields.io/chocolatey/dt/commitfusion?label=Downloads&style=for-the-badge">
+[<img src="https://img.shields.io/chocolatey/v/commitfusion?style=for-the-badge&logo=chocolatey"/>](https://Chocolatory.org/sgkens/commitfusion) <img src="https://img.shields.io/chocolatey/dt/commitfusion?label=Downloads&style=for-the-badge">
 
 
 ```powershell
@@ -46,5 +46,5 @@ Import-Module -Name commitfusion
 
 
 <div align="right">
-  <a href="cmdlets"> Using Commitfusion's cmdlets </a>
+  <a href="commitfusion/cmdlets"> Using Commitfusion's cmdlets </a>
 </div>

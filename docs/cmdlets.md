@@ -28,7 +28,7 @@ Commitfusion provides a number cmdlets to help with the creation of conventional
 
 2. **Scope** `[string]` The Scope of the commit, User specified, placed between brackets after the `Type` - <span style="color:green;">OPTIONAL</span>
 3. **Description** `[string]` The Commit Description, User specified, placed after the `scope` - <span style="color:magenta;">PARAMERTER REQUIRED</span>
-4. **Body** `[string[]]` Array of text and will ouput under the `NOTES:` area inside the body - <span style="color:green;">OPTIONAL</span>
+4. **Notes** `[string[]]` Array of text and will ouput under the `NOTES:` area inside the body - <span style="color:green;">OPTIONAL</span>
 5. **BugFixes** `[string[]]` Array of text and will ouput under the `BUG FIXES:` area inside the body - <span style="color:green;">OPTIONAL</span>
 6. **FeatureNotes** `[string[]]` Array of text and will ouput under the `FEATURE NOTES:` area inside the body, - <span style="color:green;">OPTIONAL</span>
 7. **FeatureAddtions** `[string[]]` Array of text and will ouput under the `FEATURE ADDTIONS:` area inside the body - <span style="color:green;">OPTIONAL</span>
@@ -48,7 +48,7 @@ New-Commit -Type feat -Description "Added new feature"
 New-Commit -Type feat `
                        -Description "Added new feature" `
                        -Scope "add" `
-                       -Body "Note 1","Note 2" `
+                       -Notes "Note 1","Note 2" `
                        -BugFixes "BugFixes 1","BugFixes 2" `
                        -FeatureNotes "FeatureNotes 1","FeatureNotes 2" `
                        -FeatureAddtions "FeatureAddtions 1","FeatureAddtions 2" `
@@ -109,7 +109,7 @@ The function currently takes `0` parameters. It reads the output from `New-Commi
 New-Commit -Type feat `
                        -Description "Added new feature" `
                        -Scope "add" `
-                       -Body "Note 1","Note 2" `
+                       -Notes "Note 1","Note 2" `
                        -BugFixes "BugFixes 1","BugFixes 2" `
                        -FeatureNotes "FeatureNotes 1","FeatureNotes 2" `
                        -FeatureAddtions "FeatureAddtions 1","FeatureAddtions 2" `
@@ -177,7 +177,7 @@ New-Commit -Type feat `
 New-Commit New-Commit -Type feat `
                        -Description "Added new feature" `
                        -Scope "add" `
-                       -Body "Note 1","Note 2" `
+                       -Notes "Note 1","Note 2" `
                        -BugFixes "BugFixes 1","BugFixes 2" `
                        -FeatureNotes "FeatureNotes 1","FeatureNotes 2" `
                        -FeatureAddtions "FeatureAddtions 1","FeatureAddtions 2" `
@@ -202,6 +202,7 @@ This function takes `0` **Parameters**, it will parse the git log see [**semver-
 git log with no `semver` tags in the git log
 
 ```powershell
+# Object
 Get-GitAutoVersion
 
 # just property 
@@ -214,9 +215,17 @@ Get-GitAutoVersion | Select-Object -Property Version
 > #### *Will Ouput*
 
 ```bash
+# object
 Version Parsedlines
 ------- -----------
 0.1.0   3
+
+# string
+0.1.0
+
+# string
+0.1.0
+
 ```
 <a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
 
@@ -319,4 +328,4 @@ Get-CiSetFusion -NoSemver -NoRender | Select-Object -First 10 | FT -Wrap
 ## Get-CommitFusionModuleInstance
 **Get-CommitFusionModuleInstance** takes `0` Parameters and will return the module instance initiated at module import. See `$moduleroot/libs/cmdlets/Get-CommitFusionModuleInstance.psm1`, used by all the cmdlets to interact with the class instance.
 
-<a href="/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
+<a href="commitfusion/cmdlets#toc"><i class="fa-solid fa-circle-up"></i></a>
