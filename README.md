@@ -8,12 +8,16 @@
 <a href="https://gitlab.lab.davilion.online/powershell/ccommits/-/commits/main">
   <img src="https://gitlab.snowlab.tk/powershell/ccommits/badgesmain/coverage.svg">
 </a>
+<!--Code Factor-->
+<a href="https://www.codefactor.io/repository/github/sgkens/commitfusion/">
+  <img src="https://www.codefactor.io/repository/github/sgkens/commitfusion/badge">
+</a>
 <!--Choco-->
-<a href="https://chocolatory.org/sgkens/commitfusion">
-  <img src="https://img.shields.io/chocolatey/dt/commitfusion?label=Choco">
+<a href="https://community.chocolatey.org/packages/davilion.commitfusion">
+  <img src="https://img.shields.io/chocolatey/dt/davilion.commitfusion?label=Choco">
 </a>
 <!--[psgallary]-->
-<a href="https://psgallary.com">
+<a href="https://www.powershellgallery.com/packages/commitfusion">
   <img src="https://img.shields.io/powershellgallery/dt/commitfusion?label=psgallary">
 </a>
 
@@ -25,7 +29,8 @@
 
 <!--Pipline-->
 <a href="https://gitlab.lab.davilion.online/powershell/logtastic">
-  <img src="https://img.shields.io/gitlab/pipeline-status/powershell%2Flogtastic?gitlab_url=https%3A%2F%2Fgitlab.snowlab.tk&branch=main&logo=gitlab&label=build">
+  <img src="https://img.shields.io/gitlab/pipeline-status/powershell%2Fcommitfusion?gitlab_url=https%3A%2F%2Fgitlab.lab.davilion.online%2F&branch=main&logo=gitlab&label=pipeline
+">
 </a>
 <!--Release-->
 <a href="https://gitlab.lab.davilion.online/powershell/ccommits/-/releases">
@@ -96,5 +101,3 @@ $version = "v_$((Get-GitAutoVersion).Version)"
 ### Default avaliable commit types
 
 > Types are found at`$moduleroot/libs/commitfusion.types.json
-
-# 📌 Changelog
