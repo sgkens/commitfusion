@@ -21,11 +21,11 @@
   <img src="https://img.shields.io/powershellgallery/dt/commitfusion?label=psgallary">
 </a>
 
-***CommitFusion*** is a **PowerShell** module designed to streamline the process of generating *Conventional Commits Messages* in `git`. Commit messages are constructed using the [🧷Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) standard, and uses [🧷gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) see [🧷gitmoji.dev](https://gitmoji.dev), The module allows the construction of a custimized commit message with a number of options.
+***CommitFusion*** is a **PowerShell** module designed to streamline the process of generating *Conventional Commits Messages* in `git`. Commit messages are constructed using the 🧷[Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) standard, and uses 🧷[gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) see 🧷[gitmoji.dev](https://gitmoji.dev), The module allows the construction of a custimized commit message with a number of options.
 
 ## 📒 Documentaiton
 
-[🔗 https://pages.github.com/sgkens/commitfusion]()
+#### 🔗[https://sgkens.github.io/commitfusion](https://sgkens.github.io/commitfusion/)
 
 <!--Pipline-->
 <a href="https://gitlab.lab.davilion.online/powershell/logtastic">
