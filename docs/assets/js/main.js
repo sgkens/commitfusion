@@ -472,29 +472,27 @@ window.onload = function() {
   }
   else{
     switch (document.location.pathname) {
-      case "/":
+      case "/commitfusion/":
         console.log("Nav to Index");
         document.getElementById("about").classList.add("button-page-active");
         break;
 
-      case "/features":
+      case "/commitfusion/features":
         console.log("Nav to features");
         document.getElementById("features").classList.add("button-page-active");
         break;
 
-      case "/install":
+      case "/commitfusion/install":
         console.log("Nav to Installation");
-        document
-          .getElementById("install")
-          .classList.add("button-page-active");
+        document.getElementById("install").classList.add("button-page-active");
         break;
 
-      case "/cmdlets":
+      case "/commitfusion/cmdlets":
         console.log("Nav to cmdlets");
         document.getElementById("cmdlets").classList.add("button-page-active");
         break;
 
-      case "/examples":
+      case "/commitfusion/examples":
         console.log("Nav to examples");
         document.getElementById("examples").classList.add("button-page-active");
         break;
