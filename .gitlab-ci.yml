@@ -64,7 +64,7 @@ build_module:
     - ./coverage.xml
 
 # Create Nuget Package Stage
-create_nuget:
+create_nuget_Package:
   stage: build
   tags:
     - windows
@@ -81,7 +81,7 @@ create_nuget:
     - ./coverage.xml
 
 # Deploy GitLab Package Stage
-deploy_gitlab:
+deploy_gitlab_package:
   stage: deploylocal
   tags:
     - windows
@@ -96,7 +96,7 @@ deploy_gitlab:
     - ./coverage.xml
 
 # Deploy Proget Packages Stage
-deploy_proget:
+deploy_proget_packages:
   stage: deploylocal
   tags:
     - windows
@@ -111,7 +111,7 @@ deploy_proget:
     - ./coverage.xml
 
 # Deploy Chocolatey Package Stage
-deploy_chocolatey:
+deploy_chocolatey_package:
   stage: deploy
   tags:
     - windows
@@ -126,7 +126,7 @@ deploy_chocolatey:
     - ./coverage.xml
 
 # Deploy PSGallary Package Stage
-deploy_psgallary:
+deploy_psgal_package:
   stage: deploy
   tags:
     - windows
@@ -137,13 +137,18 @@ deploy_psgallary:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploylocal" && $CI_BUILD_STATUS == "success"'
 
 # Create Release Stage
-create_release:
+create_tag:
   stage: release
   tags:
     - windows
   script: 
     - pwsh.exe
-    - Compress-Archive -Path .\ -DestinationPath Build.gz
+    - install-module -name commitfusion -force | import-module -force
+    - $semver_version = (Get-GitAutoVersion).version
+    - git config --global user.name "${GITLAB_NAME}"
+    - git config --global user.email "${GITLAB_EMAIL}"
+    - git tag "$semver_version"
+    - git push --tags http://${$GITLAB_API_KEY}@$https://gitlab.lab.davilion.online/powershell/commitfusion.git HEAD:main
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploy" && $CI_BUILD_STATUS == "success"'
   artifacts:
