@@ -1,27 +1,41 @@
-using module libs\CommitFusion_class.psm1
-using module libs\cmdlets\Get-CommitFusionModuleInstance.psm1
+<#
+* Root module for NuPSForge
+#>
 using module libs\cmdlets\New-CommitFusion.psm1
+using module libs\cmdlets\Get-CommitFusionModuleInstance.psm1
 using module libs\cmdlets\New-Commit.psm1
 using module libs\cmdlets\Get-CiSet.psm1
 using module libs\cmdlets\Get-CommitTypes.psm1
 using module libs\cmdlets\Get-Emoji.psm1
 using module libs\cmdlets\Get-EmojiIndex.psm1
-using module libs\cmdlets\Format-FusionMD.psm1
 using module libs\cmdlets\Get-GitAutoVersion.psm1
+using module libs\cmdlets\Format-FusionMD.psm1
 using module libs\cmdlets\Update-ChangeLog.psm1
 using module libs\cmdlets\Set-Commit.psm1
 
-Export-ModuleMember -Function New-CommitFusion,
-                              Get-CommitFusionModuleInstance,
-                              New-Commit,
-                              Get-CiSet,
-                              Get-CommitTypes,
-                              Get-Emoji,
-                              Get-EmojiIndex,
-                              Get-GitAutoVersion,
-                              Format-FusionMD,
-                              Update-Changelog,
-                              Set-Commit
+<#
+* Exported Functions Object -> array 
+#>
+$ExortModuleMember = @{
+    function = @(
+        "New-CommitFusion",
+        "Get-CommitFusionModuleInstance",
+        "New-Commit",
+        "Get-CiSet",
+        "Get-CommitTypes",
+        "Get-Emoji",
+        "Get-EmojiIndex",
+        "Get-GitAutoVersion",
+        "Format-FusionMD",
+        "Update-Changelog",
+        "Set-Commit"
+    )
+}
+
+<#
+* Exported Functions
+#>
+Export-ModuleMember @ExortModuleMember
 
 
 <#
@@ -34,7 +48,6 @@ Export-ModuleMember -Function New-CommitFusion,
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ? NOTES
-This Module is still in development and is not ready for production use.
 @Colorful comments vscode url: 
 - #? https://marketplace.visualstudio.com/items?itemName=bierner.colorful-comments
 
@@ -50,7 +63,7 @@ This Module is still in development and is not ready for production use.
         ^- Type parameter input validation parsed from commitfusion.json allows dynamic updating of the commit types
         ^- Scope (UserDefined) - Allows for user defined scopes
         ^- Description Default(commitfusion.json > DesCription or (user defined) - Allows for user defined descriptions))
-        ^- Body
+        ^- Body(Notes)
             ^- Notes(Default Body) - Change body to Notes
             ^- Breaking Changes
             ^- FeatureNotes
@@ -60,11 +73,11 @@ This Module is still in development and is not ready for production use.
     ? DEPENDANCIES:
         ~ ColorTune - Embedded in this module
         ~ Write-Inexco #? Colortune Replaces this #TODO: Replace and use SimpleSpectreWrapper and ColorTune
-        ? powerunicode - Embedded in this module
-        ! SimpleSpectreWrapper - Embedded in this module
-    ^ BUILD ENV---: BUILD: Powershellcore 7.3.1
+        ? powerunicode - Embedded in this module - Not used at this time
+        ! SimpleSpectreWrapper - Embedded in this module - pending implementation
+    ^ BUILD ENV---: BUILD: Powershellcore 7.4.0 - Windows 11, Pester 5.5.0, PSScriptAnalyzer(LATEST) 1.21.1
     ^ SUPPORTED VERSIONS
-        Powerhshell 5.1^
-        Powershell 7.^
-        Powershellcore(linux) 7.^
+        Powerhshell 5.1^ - Pending Test
+    *   Powershell 7.^
+        Powershellcore(linux) 7.^ - Pending Test
 #>

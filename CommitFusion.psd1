@@ -1,10 +1,10 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule    = 'CommitFusion.psm1'
+RootModule    = "commitfusion.psm1"
 
 # Version number of this module.
-ModuleVersion     = '0.3.2.0'
+ModuleVersion     = '0.4.0.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -19,7 +19,7 @@ Author = 'Garvey k. Snow'
 CompanyName = 'davilion'
 
 # Copyright statement for this module
-Copyright = '2023 sgkens. All rights reserved.'
+Copyright = '2023 Garvey k. Snow. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Conventional Commit Message Generator'
@@ -99,16 +99,16 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'automation', 'git', 'conventional-commits', 'conventional', 'commits', 'commit', 'free', 'free-ware','github','gitlab'
+        Tags = 'automation', 'git', 'conventional-commit', 'conventional', 'commit', 'free', 'free-ware','module','powershell','powershellcore', 'tool', 'utility', 'utility-module', 'utility-tool'
 
         # A URL to the license for this module.
-        LicenseUri = 'https://choosealicense.com/licenses/mit'
+        LicenseUrl = 'https://choosealicense.com/licenses/mit'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/sgkens/commitfusion.git'
+        ProjectUrl = 'https://github.com/sgkens/commitfusion'
 
         # A URL to an icon representing this module.
-        IconUri  = 'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/commitfusion-icon-x128.png'
+        IconUrl  = 'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/commitfusion-icon-x128.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = 'https://github.com/sgkens/commitfusion'
@@ -117,10 +117,24 @@ PrivateData = @{
         # Prerelease = 'beta'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-        # RequireLicenseAcceptance = $false
+        RequireLicenseAcceptance = $false
 
         # External dependent modules of this module
         # ExternalModuleDependencies = @()
+
+        Docsurl          = 'https://pages.gitlab.io/sgkens/commitfusion'
+
+        # MailingListUrl
+        MailingListUrl   = 'https://github.com/sgkens/commitfusion/issues'
+    
+        # projectSourceUrl
+        projectSourceUrl = 'https://github.com/sgkens/commitfusion'
+
+        # bugTrackerUrl 
+        bugTrackerUrl    = 'https://github.com/sgkens/commitfusion/issues'
+
+        # Summary
+        Summary          = 'Commitfusion generates a conventional commit message based on the commit type and the scope of the commit.'
 
     } # End of PSData hashtable
 
