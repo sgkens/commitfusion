@@ -28,6 +28,7 @@ New-Commit -Type feat -Description "CommitFusion PowerShell class library" -Foot
 - Footer
 - Gituser
 - Gitgroup
+- ForMarkdown
 
 .OUTPUTS
 psobject or String
@@ -81,11 +82,15 @@ Function New-Commit {
         [Parameter(Mandatory = $false)]
         [string[]]$BreakingChanges,
 
-        [Parameter(Mandatory = $false, valuefrompipeline = $true)]
+        [Parameter(Mandatory = $false)]
         [switch]$AsString,
 
-        [Parameter(Mandatory = $false, valuefrompipeline = $true)]
-        [switch]$AsObject
+        [Parameter(Mandatory = $false)]
+        [switch]$AsObject,
+
+        [Parameter(Mandatory = $false)]
+        [switch]$ForMarkdown
+
     )
 
     process {
@@ -107,19 +112,26 @@ Function New-Commit {
         if ($Footer -ne $true) {
             $Footer = $null
         }
-        if ($GitUser -eq $null) {
+        if ($null -eq $GitUser) {
             $GitUser = $null
         }
-        if ($GitGroup -eq $null) {
+        if ($null -eq $GitGroup) {
             $GitGroup = $null
         }
-        if ($Scope -eq $null) {
+        if ($null -eq $Scope) {
             $Scope = $null
         }
         if ($AsString -and $AsObject) {
             throw "Cannot use both -AsString and -AsObject"
         }
-        
+
+        if($ForMarkdown -eq $true) {
+            $forMarkDown = $true
+        }
+        else {
+            $forMarkDown = $null
+        }
+
         (Get-CommitFusionModuleInstance).ConventionalCommit(
             $Type,
             $Scope,
@@ -131,7 +143,9 @@ Function New-Commit {
             $FeatureAdditions,
             $BugFixes,
             $FeatureNotes,
-            $BreakingChanges);
+            $BreakingChanges,
+            $forMarkDown
+            );
 
         if ($AsString) {
             return (Get-CommitFusionModuleInstance).AsStringForCommit()

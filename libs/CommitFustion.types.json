@@ -40,7 +40,7 @@
             ]
         },
         {
-            "type": "Remove",
+            "type": "remove",
             "emoji": "🔥",
             "description": "Remove code or files.",
             "name": "fire",
@@ -78,8 +78,6 @@
         {
             "type": "perf",
             "emoji": "⚡️",
-            "entity": "&#x26a1;",
-            "code": ":zap:",
             "description": "Improve performance.",
             "name": "zap",
             "semver": "patch",
@@ -90,7 +88,7 @@
             ]
         },
         {
-            "type": "test",
+            "type": "tests",
             "emoji": "✅",
             "description": "Add tests.",
             "name": "white_check_mark",
@@ -114,7 +112,7 @@
             ]
         },
         {
-            "type": "ci",
+            "type": "cicd",
             "emoji": "👷",
             "description": "Add / Update Continuous integration.",
             "name": "construction_worker",
@@ -202,16 +200,16 @@
             "emoji": "🚩",
             "description": "Add, update, or remove feature flags.",
             "name": "triangular-flag-on-post",
-            "semver": "",
+            "semver": null,
             "cfa": [
                 {
-                    "action": ""
+                    "action": "@flag-action"
                 }
             ]
         },
         {
             "type": "improve",
-            "emoji": "🎨",
+            "emoji": "🛠️",
             "description": "Improve structure / format of the code.",
             "name": "hammer_and_wrench",
             "semver": "patch",
@@ -271,7 +269,7 @@
         },
         {
             "type": "refactor", 
-            "emoji": "♻️",
+            "emoji": "♻️ ",
             "description": "Refactor code.",
             "name": "recycle",
             "semver": null,
@@ -355,7 +353,7 @@
         },
         {
             "type": "deadcode",
-            "emoji": "⚰️",
+            "emoji": "⚰️ ",
             "description": "Remove dead code.",
             "name": "coffin",
             "semver": null,
@@ -368,7 +366,7 @@
         },
         {
             "type": "Depre",
-            "emoji": "🗑️",
+            "emoji": "🗑️ ",
             "description": "Remove deprecate code.",
             "name": "wastebasket",
             "semver": null,
@@ -702,18 +700,6 @@
             ]
         },
         {
-            "type": "flag",
-            "emoji": "🚩",
-            "description": "Add, update, or remove feature flags.",
-            "name": "triangular-flag-on-post",
-            "semver": "patch",
-            "cfa": [
-                {
-                    "action": "make-feature-flag"
-                }
-            ]
-        },
-        {
             "type": "idea",
             "emoji": "🌱",
             "description": "Implement / Test Idea",
@@ -797,6 +783,7 @@
             ]
         },
         {
+            "type": "validation",
             "emoji": "🦺",
             "description": "Add or update code related to validation.",
             "name": "safety-vest",
