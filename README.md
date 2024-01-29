@@ -1,50 +1,52 @@
-# <img width="25" src="https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/commitfusion-logo-x128.png"/> **CommitFusion** *Powerhell Module*
+# <img width="32" src="https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/commitfusion-logo-x128.png"/> **CommitFusion**
+
+*Powerhell Module*
+
 
 <!--license-->
-<a href="https://github.com/sgkens/commitfusion/">
-  <img src="https://img.shields.io/badge/MIT-License-blue?style=&logo=unlicense&color=%23004481"></a>
-<!--coverage-->
+<a href="https://github.com/sgkens/commitfusion/blob/main/LICENSE">
+<img src="https://img.shields.io/badge/license-mit-blue?style=flat&logo=unlicense&label=License&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a><!--Code-Factor-->
+<a href="https://www.codefactor.io/repository/github/sgkens/commitfusion">
+<img src="https://img.shields.io/codefactor/grade/github/sgkens/commitfusion?style=flat&logo=codefactor&label=codefactor&logoColor=75%2C0%2C130%2C1&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a><!--coverage-->
 <a href="https://coveralls.io/github/sgkens/commitfusion">
-  <img src="https://img.shields.io/coverallsCoverage/github/sgkens/commitfusion?branch=main"></a>
-<!--Code Factor-->
-<a href="https://www.codefactor.io/repository/github/sgkens/commitfusion/">
-  <img src="https://www.codefactor.io/repository/github/sgkens/commitfusion/badge"></a>
+<img src="https://img.shields.io/coverallsCoverage/github/sgkens/commitfusion?style=flat&logo=coveralls&label=coveralls&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a>
 
 ***CommitFusion*** is a **PowerShell** module designed to streamline the process of generating *Conventional Commits Messages* in `git`. Commit messages are constructed using the 🧷[Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) standard, and uses 🧷[gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) see 🧷[gitmoji.dev](https://gitmoji.dev), The module allows the construction of a custimized commit message with a number of options.
 
-[toc]
 
-## 🟪 Documentaiton
 
-#### 🌐[https://sgkens.github.io/commitfusion](https://sgkens.github.io/commitfusion/)
+|📓 Documentaiton|[https://sgkens.github.io/commitfusion](https://sgkens.github.io/commitfusion/)|
+|-|-|
 
-<!--Pipline-->
-<a href="https://gitlab.lab.davilion.online/powershelvl/commitfusion/-/pipelines">
-  <img src="https://gitlab.lab.davilion.online/powershell/commitfusion/badges/main/pipeline.svg
-"></a>
-<!--Release-->
-<a href="https://gitlab.lab.davilion.online/powershell/ccommits/-/releases">
-  <img src="https://gitlab.lab.davilion.online/powershell/commitfusion/-/badges/release.svg"></a>
+##### 
 
-## 🟩 Module Features
+|🪀 BUILD|📔 RELEASES|
+|-|-|
+|<a href="https://ci.appveyor.com/project/sgkens%2FCommitFusion"><img src="https://img.shields.io/appveyor/build/sgkens%2FCommitFusion/main?style=for-the-badge&logo=appveyor&label=appveyor&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a>|<a href="https://github.com/commitfusion/tags"><img src="https://img.shields.io/github/v/tag/sgkens%2FCommitFusion?style=for-the-badge&logo=semanticrelease&label=release tags&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a>|
+|<a href="https%3a%2f%2fgitlab.lab.davilion.online/powershell%2FCommitFusion/-/pipelines"><img src="https://img.shields.io/gitlab/pipeline-status/powershell%2FCommitFusion?gitlab_url=https%3a%2f%2fgitlab.lab.davilion.online&branch=main&style=for-the-badge&logo=gitlab&logoColor=rgba(75%2C0%2C130%2C1)&label=gitlab&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"/></a>|<a href="https://community.chocolatey.org/packages/commitfusion"><img src="https://img.shields.io/chocolatey/v/commitfusion?style=for-the-badge&logo=chocolatey&label=chocolatey&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a>|
+||<a href="https://www.powershellgallery.com/packages/commitfusion"><img src="https://img.shields.io/powershellgallery/v/commitfusion?style=for-the-badge&logo=powershell&label=psgallery&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"/></a>|
+
+
+## 🟪 Module Features
 
   - Conventional Commits Standard
-  - Customizable Commit Message with a number of options:
-      - Types (***CommitType***) eg:`feat: `
-      - Scope (***Scope in brackets***) eg: `✨feat(scope): `
-      - Descrption (***Default|Custom***).
-      - Build (***Based on CommitType***) eg: `🧰 Build: patch` 
-          - Git messages can be parsed with `Get-GitAutoVersion` to generate *Samantic Version Number*(**semver**)
-      - Notes (***Array of strings***)
-      - Feature Additions (***Array of strings***)
-      - Feature Notes (***Array of strings***)
-      - BugFixes (***Array of strings***)
-      - GitUser (***GitUser Account Name***)
-      - GitGroup (***if your repository sites in `/group/repo.git`***)
-      - Footer (**Custom footer**)
-  - Semver Versioning Generator
-  - Changelog Auto-update with Markdown Auto-format
-  - Gitmoji Custom Schema (misc)
+  - Customizable Commit Messages with a variaty of options:
+      - » Type (***CommitType***) eg:`feat: `
+      - » Scope (***Scope in brackets***) eg: `✨feat(scope): `
+      - » Descrption (***Default|Custom***).
+      - » Build (***Based on CommitType***) eg: `🧰 Build: patch` 
+          - Git messages can be parsed with `Get-GitAutoVersion` to generate *Samantic Version Number*(**semver**) based on git commit history.
+      - » Notes (***Array of strings***)
+      - » Feature Additions (***Array of strings***)
+      - » Feature Notes (***Array of strings***)
+      - » BugFixes (***Array of strings***)
+      - » GitUser (***GitUser Account Name***)
+      - » GitGroup (***if your repository sits in `/group/repo.git`***)
+      - » Footer (**Custom footer**)
+  - Semantic Versioning(**Semver**) Version Generator
+  - Changelog Auto updater with Markdown Auto-format
+  - Gitmoji Custom Schema (miscellaneous functions cmdlets)
+  - Unicode Emoticons (miscellaneous cmdlets)
 
 🔻**Conventional Commit Template**🔻
 <pre>
@@ -55,11 +57,12 @@
   NOTES [e]:
     [e] Note 1
     [e] Note 2
-    [e] ...
+    ...
 
   [e] BREAKING CHANGES
     [e] Change 1
-    [e] Change 2 ...[e]
+    [e] Change 2 
+    ...
 
   [e] FEATURE ADDTIONS
     [e] Addtion 1
@@ -67,29 +70,34 @@
 
   [e] FEATURE NOTES
     [e] Feature Note 1
-    [e] Feature Note 2...[e]
+    [e] Feature Note 2
+    ...
 
   [e] BUG FIXES
     [e] Fix 1
-    [e] Fix 2...[e]
+    [e] Fix 2
+    ...
 
   [e] GitUser @ [e] DateTime
 </pre>
 
-## 🟦 Cmdlets
+## 🟪 Cmdlets
 |Command |--|
 |-|-|
-|🔸 **`New-Commit`** | The primary `cmdlet` to interact with this module |
-|🔸 **`New-CommitFusion`** | Returns an instance of CommitFusion |
-|🔸 **`Get-Emoji`** | The primary `cmdlet` to interact with this module |
-|🔸 **`Get-EmojiInex`** | The primary `cmdlet` to interact with this module |
-|🔸 **`Get-CiSet`** | The primary `cmdlet` to interact with this module |
-|🔸`Get-CiSetFustion`| The primary `cmdlet` to interact with this module |
-|🔸`New-Commit`| The primary `cmdlet` to interact with this module |
+|🔹 **`New-Commit`** | Build Commit string base on inputs and return *type* `[string]` |
+|🔹 **`Set-Commit`** | Applies the commit messages `git commit $fusionmessage`|
+|🔹 **`New-CommitFusion`** | Returns an instance of `[CommitFusion]` class |
+|🔹 **`Get-Emoji`** | Get Emojis **filter** by `name` and `type` |
+|🔹 **`Get-EmojiInex`** | Return Emoji index as a`[psobject]` or `table format` |
+|🔹 **`Get-CiSet`** | Return CiSet from `$moduleroot\libs\gitmojis.json` |
+|🔹 **`Get-CiSetFustion`** | Return CiSetFusion from `$moduleroot\libs\CommitFustion.types.json` |
+|🔹 **`Format-FusionMD`** | Parses the commit string and adds markdown formatting |
+|🔹 **`Update-ChangeLog`** | Writes commit message to specified file |
+|🔹 **`Get-GitAutoversion`** | Generates `semver` version return as `[psobject]` |
 
 
 
-## 🟦 Using Commit Fusion.'''''
+## 🟪 Using Commit Fusion.
 
 🔹 Retrive list of available commit types.
 
@@ -127,7 +135,7 @@ New-Commit -[Type [String]]
            -[AsObject [Switch|Bool]]
 ```
 
-🔹 Assuming you have staged files, you can use the following to commit the changes:
+🔹 Assuming you have staged files, Use `Set-Commit -Confirm` to Apply the commit message.
 
 ```powershell
 # Apply Commit
@@ -148,12 +156,12 @@ $version = "v_$((Get-GitAutoVersion).Version)"
 ```
 
 
-## 🟦 Changing default Commit Types
+## 🟪 Changing default Commit Types
 > If you would like to change the default `types`, `description`, and `emotocons`:
 > Types `.json` file are found at `$moduleroot/libs/commitfusion.types.json`\
 > 
 
-🔸**Example** : 
+🔹**Example** : 
 
 ```json
 {
@@ -178,7 +186,7 @@ $version = "v_$((Get-GitAutoVersion).Version)"
 }     
 ```
 
-### Todo's
+#### Todo's
   - [ ] 💠 Add support for importing custom commits types from a specified json file.
   - [ ] 💠 Implement `SimpleSpectreWrapper` to parse and format psobject to spectre table.
   - [ ] 💠 Add support for **no-emojis**. only `ascii`.
