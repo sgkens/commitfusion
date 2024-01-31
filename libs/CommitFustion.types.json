@@ -330,7 +330,7 @@
         {
             "type": "resources",
             "emoji": "🚚",
-            "description": "Move or rename resources (e.g.: files, paths, routes).",
+            "description": "Move or rename",
             "name": "truck",
             "semver": null,
             "cfa": [
