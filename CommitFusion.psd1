@@ -4,7 +4,7 @@
 RootModule    = "commitfusion.psm1"
 
 # Version number of this module.
-ModuleVersion     = '0.4.0.0'
+ModuleVersion     = '0.5.1.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -99,7 +99,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'automation', 'git', 'conventional-commit', 'conventional', 'commit', 'free', 'free-ware','module','powershell','powershellcore', 'tool', 'utility', 'utility-module', 'utility-tool'
+        Tags = 'automation', 'git', 'conventional-commit', 'conventional', 'commit', 'free', 'free-ware','module','powershell','powershellcore', 'tool', 'utility', 'utility-module'
 
         # A URL to the license for this module.
         LicenseUrl = 'https://choosealicense.com/licenses/mit'

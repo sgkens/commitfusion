@@ -1,5 +1,5 @@
 <#
-* Root module for NuPSForge
+* Root modules for CommitFusion
 #>
 using module libs\cmdlets\New-CommitFusion.psm1
 using module libs\cmdlets\Get-CommitFusionModuleInstance.psm1
@@ -13,10 +13,15 @@ using module libs\cmdlets\Format-FusionMD.psm1
 using module libs\cmdlets\Update-ChangeLog.psm1
 using module libs\cmdlets\Set-Commit.psm1
 
+$global:_commitfusion = @{
+    rootpath = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
+}
+$global:_commitfusion.rootpath
+
 <#
 * Exported Functions Object -> array 
 #>
-$ExortModuleMember = @{
+$ModuleMembers = @{
     function = @(
         "New-CommitFusion",
         "Get-CommitFusionModuleInstance",
@@ -35,7 +40,7 @@ $ExortModuleMember = @{
 <#
 * Exported Functions
 #>
-Export-ModuleMember @ExortModuleMember
+Export-ModuleMember @ModuleMembers
 
 
 <#
