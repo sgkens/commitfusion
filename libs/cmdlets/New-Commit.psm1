@@ -50,6 +50,9 @@ Function New-Commit {
                     throw "Invalid Type '$($_)', please use one of the following values: $((Get-CommitTypes -Raw).type -join ',')"
                 }
             })]
+        [ValidateSet({
+            (Get-CommitTypes -Raw).type
+        })]
         [string]$Type,
 
         [Parameter(Mandatory = $false, Position = 1)]
