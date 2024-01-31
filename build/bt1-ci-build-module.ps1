@@ -5,7 +5,7 @@ $moduleName  = "commitfusion"
 # Include
 $Files       = "commitfusion.psm1", "commitfusion.psd1", "LICENSE", "icon.png"
 $folders     = "libs"
-$exclude     = "Issue#1.txt"
+$exclude     = ""
 
 #---CONFIG----------------------------
 
@@ -20,3 +20,5 @@ Build-Module -SourcePath .\ `
              -FoldersToCopy $folders `
              -Manifest `
              -Version $AutoVersion
+
+if(!(Test-Path -Path .\dist\$moduleName\tools)) { mkdir .\dist\$moduleName\tools }

@@ -6,10 +6,10 @@ $pesterConfig = New-PesterConfiguration -hashtable @{
   CodeCoverage = @{ 
     Enabled               = $true
     OutputFormat          = 'JaCoCo'
-    OutputPath            = 'Coverage.xml'
+    OutputPath            = 'coverage.xml'
     OutputEncoding        = 'utf8'
-    CoveragePercentTarget = 85
-    path                  = ".\libs\*.psm1",".\*.psm1"
+    CoveragePercentTarget = 90
+    path                  = ".\libs\*.psm1",".\commitfusion.psm1"
   }
   Run = @{
     # PassThru = $true

@@ -14,7 +14,7 @@ $NugetProjectPath = "api/v4/projects/$projectid/packages/nuget/index.json"
 
 try {
   Write-host -foregroundcolor yellow "Attempting to Register Gitlab: $gitlab_uri@$Gitlab_Username"
-  dotnet nuget add source $gitlab_uri/$NugetProjectPath --name gitlab --username $GitLab_Username --password $PROGET_API_KEY
+  dotnet nuget add source $gitlab_uri/$NugetProjectPath --name gitlab --username $GitLab_Username --password $ENV:GITLAB_API_KEY
   Write-host -foregroundcolor green "Complete"
 }
 catch [system.exception] {
