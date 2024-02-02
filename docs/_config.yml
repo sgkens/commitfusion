@@ -1,8 +1,8 @@
 repository: pages-themes/slate
 #author: # [name, email, web]
 remote_theme: pages-themes/slate@v0.2.0
-title: [CommitFusion] 
-description: [Conventional Commit Message Generator]
+title: CommitFusion 
+description: Conventional Commit Message Generator
 show_downloads: true  # ["true" or "false" (unquoted) to indicate whether to provide a download URL]
 custom:
   logo:         'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/logo-black-v2.svg' 
