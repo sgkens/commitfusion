@@ -172,19 +172,28 @@ class CommitFusion {
        .--------------------------. #>
     hidden [void] ConstructMessage(){
         
-        [int]$indent = 7 <# indent for notes/feature notes/bug fixes/breaking changes #>
-        [int]$paragraph_length = 80 # position for notes/feature notes/bug fixes/breaking changes
-        [string]$separator = "─" <# separator for notes/feature notes/bug fixes/breaking changes #>
-        [string]$note_bullet = $this.GetEmoji("miscmojis", "small_blue_diamond") <# bullet for notes/feature notes/bug fixes/breaking changes #>
-        [string]$feat_bullet = $this.GetEmoji("miscmojis", "yellow_circle") <# bullet for notes/feature notes/bug fixes/breaking changes #>
-        [string]$bugfix_bullet = $this.GetEmoji("miscmojis", "bug") <# bullet for notes/feature notes/bug fixes/breaking changes #>
-        [string]$bChanges_bullet = $this.GetEmoji("miscmojis", "small_orange_diamond") <# bullet for notes/feature notes/bug fixes/breaking changes #>
+        [int]$indent             = 7 <# indent for notes/feature notes/bug fixes/breaking changes #>
+        [int]$paragraph_length   = 80 # position for notes/feature notes/bug fixes/breaking changes
+        # emotocons - Bullet points
+        [string]$separator       = "─" <# separator for notes/feature notes/bug fixes/breaking changes #>
+        [string]$note_bullet     = $this.GetEmoji("miscmojis", "small_blue_diamond") <# bullet for notes #>
+        [string]$feat_bullet     = $this.GetEmoji("miscmojis", "glowing_star") <# bullet for feature notes 🪰 🪲 🦀#>
+        [string]$bugfix_bullet   = $this.GetEmoji("miscmojis", "microbe") <# bullet for bug fixes #>
+        [string]$bChanges_bullet = $this.GetEmoji("miscmojis", "name_badge") <# bullet for breaking changes 📛🅱 ❗#>
+        [string]$Fnote_bullet    = $this.GetEmoji("miscmojis", "large_blue_diamond") <# bullet for feature notes #>
+        # emotocons - Section header Icons
+        [string]$note_header_icon = $this.GetEmoji("miscmojis", "luggage") # notes
+        [string]$feat_header_icon = $this.GetEmoji("miscmojis", "shooting_star") # feature notes
+        [string]$bugfix_header_icon = $this.GetEmoji("miscmojis", "crab") # bug fixes
+        [string]$bChanges_header_icon = $this.GetEmoji("miscmojis", "hollow_red_circle") # breaking changes
+        [string]$Fnote_header_icon = $this.GetEmoji("miscmojis", "yarn") # feature notes
+
         <#- |--- Feature Addtions Block ---|
             Contain logic for adding feature additions to the commit message
         -#>
         if($null -ne $this.FeatureAdditions){
             # Add if branch is not null
-            $FeatureAdditionsBody = "$($this.GetEmoji("miscmojis","glowing_star")) Feature Additions: `n`n"
+            $FeatureAdditionsBody = "$feat_header_icon Feature Additions: `n`n"
             [int]$index = 1
             foreach ($faddtion in $this.FeatureAdditions) {
                 $indented_feat = new-paragraph -Position $paragraph_length -Indent $indent -String "$faddtion" # indent the string block
@@ -211,8 +220,8 @@ class CommitFusion {
             Contain logic for adding bug fixes to the commit message
         -#>
         if($null -ne $this.bugfixes){
-            # Add if branch is not null
-            $bugfixesBody = "$($this.GetEmoji("miscmojis","lady_beetle")) Bug Fixes: `n`n"
+            # Add if branch is not null move t
+            $bugfixesBody = "$bugfix_header_icon Bug Fixes: `n`n"
             [int]$index = 1
             foreach($bfixes in $this.bugfixes){
                 $indented_bugfix = new-paragraph -Position $paragraph_length -Indent $indent -String "$bfixes" # indent the string block
@@ -243,14 +252,14 @@ class CommitFusion {
         -#>
         if($null -ne $this.breakingChanges){
             # Add if branch is not null
-            $breakingChangesBody = "$($this.GetEmoji("miscmojis","hollow_red_circle")) Breaking Changes: `n`n"
+            $breakingChangesBody = "$bChanges_header_icon Breaking Changes: `n`n"
             [int]$index = 1
             foreach ($bchange in $this.breakingChanges) {
                 $indented_bchange = new-paragraph -Position $paragraph_length -Indent $indent -String "$bchange" # indent the string block
                 # all breakingChanges except the last one
                 if($this.breakingChanges.count -ne $index -and $this.breakingChanges.count -ne 1){
-                    $breakingChanges_content = "$(" " * $indent)$note_bullet$separator$indented_bchange $(if($this.ForMarkDown){'\'}else{''})`n"
-                    $breakingChanges_content_formatted = $breakingChanges_content -replace "$note_bullet(\s{$indent})", "$note_bullet"
+                    $breakingChanges_content = "$(" " * $indent)$bChanges_bullet$separator$indented_bchange $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $breakingChanges_content_formatted = $breakingChanges_content -replace "$bChanges_bullet(\s{$indent})", "$bChanges_bullet"
                     $breakingChangesBody += "$breakingChanges_content_formatted"
                 }
                 # last breakingChanges
@@ -270,27 +279,27 @@ class CommitFusion {
             Contain logic for adding feature notes to the commit message
         -#>
         if($null -ne $this.featurenotes){
-            $featurenotesBody = "$($this.GetEmoji("miscmojis","blue_book")) Feature Notes: `n`n"
+            $featurenotesBody = "$fnote_header_icon Feature Notes: `n`n"
             [int]$index = 1
             foreach($fnote in $this.FeatureNotes){ 
                 $indented_fnote = new-paragraph -Position $paragraph_length -Indent $indent -String "$fnote" # indent the string block
                 # all FeatureNotes except the last one
                 if($this.FeatureNotes.count -ne $index -and $this.FeatureNotes.count -ne 1){
-                    $featurenote_content = "$(" " * $indent)$note_bullet$separator$indented_fnote $(if($this.ForMarkDown){'\'}else{''})`n"
-                    $featurenote_content_formatted = $featurenote_content -replace "$note_bullet(\s{$indent})", "$note_bullet"
+                    $featurenote_content = "$(" " * $indent)$fnote_bullet$separator$indented_fnote $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $featurenote_content_formatted = $featurenote_content -replace "$fnote_bullet(\s{$indent})", "$fnote_bullet"
                     $featurenotesBody += "$featurenote_content_formatted"
                 }
                 # last FeatureNote
                 else{
-                    $featurenote_content = "$(" " * $indent)$note_bullet$separator$indented_fnote `n"
-                    $featurenote_content_formatted = $featurenote_content -replace "$note_bullet(\s{$indent})", "$note_bullet"
+                    $featurenote_content = "$(" " * $indent)$fnote_bullet$separator$indented_fnote `n"
+                    $featurenote_content_formatted = $featurenote_content -replace "$fnote_bullet(\s{$indent})", "$fnote_bullet"
                     $featurenotesBody += "$featurenote_content_formatted"
                 }
                 $index++
             }
             $index = $null
             
-            $featurenotesBody = $featurenotesBody -replace "$(" "*$indent)$($note_bullet)$separator$(" "*$indent)", "$(" "*($indent-4))$($note_bullet)$separator$(' ')"
+            $featurenotesBody = $featurenotesBody -replace "$(" "*$indent)$($fnote_bullet)$separator$(" "*$indent)", "$(" "*($indent-4))$($fnote_bullet)$separator$(' ')"
             $this.featurenotes = "`n$featurenotesBody`n"
         }
         else{ $this.featurenotes = "" }
@@ -301,13 +310,12 @@ class CommitFusion {
         }else{ 
             $AutoBuildState = ""
         }
-
+        [string]$bodyvar = "$AutoBuildState" # pre append the auto build state
         <#- |--- NOTES ---| 
             Contain logic for adding notes to the commit message
         -#>
-        [string]$bodyvar = "$AutoBuildState" # pre append the auto build state
         if ($null -ne $this.notes -and $this.notes.count -ne 0) {
-            $bodyvar += "`n$($this.GetEmoji("miscmojis","memo")) Notes: `n`n" # pre append the notes header
+            $bodyvar += "`n$note_header_icon Notes: `n`n" # pre append the notes header
         } 
         [int]$index = 1
         foreach($Note in $this.Notes){
@@ -337,7 +345,7 @@ class CommitFusion {
             $this.footer = ""
         }
         # Message object to be returned
-        #  $($this.emojiinex.where({$_.label -eq "cyclone"}).char)— #? Start Tag
+        #  $($this.emojiinex.where({$_.label -eq "cyclone"}).char)— #? Start Tag 
         [PSObject]$StringParts = @{
 
             Type            = "$($this.CFConfig.ciset.where({$_.Type -eq $this.type}).emoji) $($this.Type)"
