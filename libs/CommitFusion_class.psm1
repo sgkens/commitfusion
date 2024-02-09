@@ -17,7 +17,7 @@ class CommitFusion {
     [String]   $BodyBullet
     [String]   $GitUser
     [String]   $GitGroup
-    [String]   $DateNow
+    # [String]   $DateNow
     [String]   $MessageStringFormatted
     [String]   $GitNameSpace
     [PSObject] $CFConfig
@@ -37,7 +37,7 @@ class CommitFusion {
        .--------------------------. #>
     CommitFusion(){
         # CONSTRUCTOR -------------------------------------------------------------------
-        $this.DateNow = (Get-Date).ToString('h:mmtt, dddd d\t\h MMMM yyyy')
+        # $this.DateNow = (Get-Date).ToString('h:mmtt, dddd d\t\h MMMM yyyy')
         $this.ModuleRoot = (Get-Item -Path $PSScriptRoot).FullName
         $OutputEncoding = [System.Text.Encoding]::UTF8
         try{
@@ -340,7 +340,7 @@ class CommitFusion {
         $this.styledbody = $bodyvar
                 
         if($this.footer -ne $false){
-            $this.footer = "$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $($this.DateNow)"
+            $this.footer = "$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $((Get-Date).ToString('h:mmtt, dddd d\t\h MMMM yyyy'))"
         }else{
             $this.footer = ""
         }
