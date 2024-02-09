@@ -1,3 +1,4 @@
+using module ..\CommitTypeAttribute.psm1
 <#
 .SYNOPSIS
 New-Commit is used to generate a new Conventional Commit message and return it as and object, string, or string with markdown syntax
@@ -41,17 +42,17 @@ Function New-Commit {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
-        # valuedateset Dynamic values
-        [ValidateScript({
-                if ($_ -in (Get-CommitTypes -Raw).type) {
-                    $true
-                }
-                else {
-                    throw "Invalid Type '$($_)', please use one of the following values: $((Get-CommitTypes -Raw).type -join ',')"
-                }
-            })]
-        [ValidateSet({
-            (Get-CommitTypes -Raw).type
+        # valuedate Dynamic values
+        [CommitTypeAttribute()]
+        # Tab Complete Dynamic values
+        [ArgumentCompleter({
+            param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+            # Get the valid commit types
+            $validTypes = (Get-CommitTypes -Raw).type
+            # Return the types that match the word to complete
+            $validTypes | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {
+                New-Object -Type System.Management.Automation.CompletionResult -ArgumentList $_, $_, 'ParameterValue', $_
+            }
         })]
         [string]$Type,
 
