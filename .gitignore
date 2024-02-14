@@ -4,3 +4,5 @@ Gemfile.lock
 testResults.xml
 coverage.xml
 .vscode/
+.idea/*
+/tools/VERIFICATIONS.txt
