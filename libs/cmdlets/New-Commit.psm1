@@ -42,10 +42,10 @@ Function New-Commit {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
-        # valuedate Dynamic values
+        # Custom Attribute : valudate Dynamic values
         [CommitTypeAttribute()]
         # Tab Complete Dynamic values
-        [ArgumentCompleter({
+        [ArgumentCompleter({ # ArgumentCompleter can be named anything
             param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
             # Get the valid commit types
             $validTypes = (Get-CommitTypes -Raw).type
