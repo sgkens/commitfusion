@@ -29,7 +29,7 @@ class CommitFusion {
     [bool]     $ForMarkDown
 
 
-    <# .--eeeeeeeeeeeeeeeee----------inf------------.
+    <# .------------inf------------.
        - Constructor
        -------------
        - Initialize CommitFusion class with constructor method
@@ -172,15 +172,15 @@ class CommitFusion {
        .--------------------------. #>
     hidden [void] ConstructMessage(){
         
-        [int]$indent             = 7 <# indent for notes/feature notes/bug fixes/breaking changes #>
+        [int]$indent             = 4 <# indent for notes/feature notes/bug fixes/breaking changes #>
         [int]$paragraph_length   = 80 # position for notes/feature notes/bug fixes/breaking changes
         # emotocons - Bullet points
-        [string]$separator       = "─" <# separator for notes/feature notes/bug fixes/breaking changes #>
-        [string]$note_bullet     = $this.GetEmoji("miscmojis", "small_blue_diamond") <# bullet for notes #>
-        [string]$feat_bullet     = $this.GetEmoji("miscmojis", "glowing_star") <# bullet for feature notes 🪰 🪲 🦀#>
-        [string]$bugfix_bullet   = $this.GetEmoji("miscmojis", "microbe") <# bullet for bug fixes #>
-        [string]$bChanges_bullet = $this.GetEmoji("miscmojis", "name_badge") <# bullet for breaking changes 📛🅱 ❗#>
-        [string]$Fnote_bullet    = $this.GetEmoji("miscmojis", "large_blue_diamond") <# bullet for feature notes #>
+        [string]$separator       = " " <# separator for notes/feature notes/bug fixes/breaking changes #>
+        [string]$note_bullet     = "-"# $this.GetEmoji("miscmojis", "small_blue_diamond") <# bullet for notes #>
+        [string]$feat_bullet     = "-"# $this.GetEmoji("miscmojis", "glowing_star") <# bullet for feature notes 🪰 🪲 🦀#>
+        [string]$bugfix_bullet   = "-"# $this.GetEmoji("miscmojis", "microbe") <# bullet for bug fixes #>
+        [string]$bChanges_bullet = "-"# $this.GetEmoji("miscmojis", "name_badge") <# bullet for breaking changes 📛🅱 ❗#>
+        [string]$Fnote_bullet    = "-"# $this.GetEmoji("miscmojis", "large_blue_diamond") <# bullet for feature notes #>
         # emotocons - Section header Icons
         [string]$note_header_icon = $this.GetEmoji("miscmojis", "luggage") # notes
         [string]$feat_header_icon = $this.GetEmoji("miscmojis", "shooting_star") # feature notes
@@ -199,12 +199,12 @@ class CommitFusion {
                 $indented_feat = new-paragraph -Position $paragraph_length -Indent $indent -String "$faddtion" # indent the string block
                 # all bugfixes except the last one
                 if($this.FeatureAdditions.count -ne $index -and $this.FeatureAdditions.count -ne 1){
-                    $FeatureAdditions_content = "$(" " * $indent)$feat_bullet$separator$indented_feat $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $FeatureAdditions_content = "  $feat_bullet$separator$indented_feat $(if($this.ForMarkDown){'\'}else{''})`n"
                     $FeatureAdditions_content_formatted = $FeatureAdditions_content -replace "$feat_bullet(\s{$indent})", "$feat_bullet"
                     $FeatureAdditionsBody += "$FeatureAdditions_content_formatted"
                 }
                 else{
-                    $FeatureAdditions_content = "$(" " * $indent)$feat_bullet$separator$indented_feat `n"
+                    $FeatureAdditions_content = "  $feat_bullet$separator$indented_feat `n"
                     $FeatureAdditions_content_formatted = $FeatureAdditions_content -replace "$feat_bullet(\s{$indent})", "$feat_bullet"
                     $FeatureAdditionsBody += "$FeatureAdditions_content_formatted"
                 }
@@ -228,13 +228,13 @@ class CommitFusion {
                 # all bugfixes except the last one
                 if($this.bugfixes.count -ne $index -and $this.bugfixes.count -ne 1){
                    # $bugfixessBody += "   $($this.GetEmoji("miscmojis","yellow_green")) $bfixes $(if($this.ForMarkDown){'\'}else{''})`n"
-                    $bugfixes_content = "$(" " * $indent)$bugfix_bullet$separator$indented_bugfix $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $bugfixes_content = "  $bugfix_bullet$separator$indented_bugfix $(if($this.ForMarkDown){'\'}else{''})`n"
                     $breakingChanges_content_formatted = $bugfixes_content -replace "$bugfix_bullet(\s{$indent})", "$bugfix_bullet"
                     $bugfixesBody += "$breakingChanges_content_formatted"
                 }
                 # last bugfix
                 else{
-                    $bugfixes_content = "$(" " * $indent)$bugfix_bullet$separator$indented_bugfix `n"
+                    $bugfixes_content = "  $bugfix_bullet$separator$indented_bugfix `n"
                     $bugfixes_content_formatted = $bugfixes_content -replace "$bugfix_bullet(\s{$indent})", "$bugfix_bullet"
                     $bugfixesBody += "$bugfixes_content_formatted"
                 }
@@ -258,13 +258,13 @@ class CommitFusion {
                 $indented_bchange = new-paragraph -Position $paragraph_length -Indent $indent -String "$bchange" # indent the string block
                 # all breakingChanges except the last one
                 if($this.breakingChanges.count -ne $index -and $this.breakingChanges.count -ne 1){
-                    $breakingChanges_content = "$(" " * $indent)$bChanges_bullet$separator$indented_bchange $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $breakingChanges_content = "  $bChanges_bullet$separator$indented_bchange $(if($this.ForMarkDown){'\'}else{''})`n"
                     $breakingChanges_content_formatted = $breakingChanges_content -replace "$bChanges_bullet(\s{$indent})", "$bChanges_bullet"
                     $breakingChangesBody += "$breakingChanges_content_formatted"
                 }
                 # last breakingChanges
                 else{
-                    $breakingChanges_content = "$(" " * $indent)$bChanges_bullet$separator$indented_bchange `n"
+                    $breakingChanges_content = "  $bChanges_bullet$separator$indented_bchange `n"
                     $breakingChanges_content_formatted = $breakingChanges_content -replace "$bChanges_bullet(\s{$indent})", "$bChanges_bullet"
                     $breakingChangesBody += "$breakingChanges_content_formatted"
                 }
@@ -285,13 +285,13 @@ class CommitFusion {
                 $indented_fnote = new-paragraph -Position $paragraph_length -Indent $indent -String "$fnote" # indent the string block
                 # all FeatureNotes except the last one
                 if($this.FeatureNotes.count -ne $index -and $this.FeatureNotes.count -ne 1){
-                    $featurenote_content = "$(" " * $indent)$fnote_bullet$separator$indented_fnote $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $featurenote_content = "  $fnote_bullet$separator$indented_fnote $(if($this.ForMarkDown){'\'}else{''})`n"
                     $featurenote_content_formatted = $featurenote_content -replace "$fnote_bullet(\s{$indent})", "$fnote_bullet"
                     $featurenotesBody += "$featurenote_content_formatted"
                 }
                 # last FeatureNote
                 else{
-                    $featurenote_content = "$(" " * $indent)$fnote_bullet$separator$indented_fnote `n"
+                    $featurenote_content = "  $fnote_bullet$separator$indented_fnote `n"
                     $featurenote_content_formatted = $featurenote_content -replace "$fnote_bullet(\s{$indent})", "$fnote_bullet"
                     $featurenotesBody += "$featurenote_content_formatted"
                 }
@@ -323,13 +323,13 @@ class CommitFusion {
             # all notes except the last one
             if($this.Body.count -ne $index -and $this.Notes.count -ne 1) {
 
-                $bodyvar_body = "$(" " * $indent)$note_bullet$separator$indented_note $(if($this.ForMarkDown){'\'}else{''})`n"
+                $bodyvar_body = "  $note_bullet$separator$indented_note $(if($this.ForMarkDown){'\'}else{''})`n"
                 $bodyvar_formatted = $bodyvar_body -replace "$note_bullet(\s{$indent})", "$note_bullet"
                 $bodyvar += "$bodyvar_formatted"
             }
             # last note
             else{
-                $bodyvar_body = "$(" " * $indent)$note_bullet$separator$indented_note`n"
+                $bodyvar_body = "  $note_bullet$separator$indented_note`n"
                 $bodyvar_formatted = $bodyvar_body -replace "$note_bullet(\s{$indent})", "$note_bullet"
                 $bodyvar += "$bodyvar_formatted"
             }

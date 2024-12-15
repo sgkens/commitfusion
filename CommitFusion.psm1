@@ -12,11 +12,11 @@ using module libs\cmdlets\Get-GitAutoVersion.psm1
 using module libs\cmdlets\Format-FusionMD.psm1
 using module libs\cmdlets\Update-ChangeLog.psm1
 using module libs\cmdlets\Set-Commit.psm1
+using module libs\cmdlets\Get-ReleaseNotes.psm1
 
 $global:_commitfusion = @{
     rootpath = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 }
-$global:_commitfusion.rootpath
 
 <#
 * Exported Functions Object -> array 
@@ -33,7 +33,8 @@ $ModuleMembers = @{
         "Get-GitAutoVersion",
         "Format-FusionMD",
         "Update-Changelog",
-        "Set-Commit"
+        "Set-Commit",
+        "Get-ReleaseNotes"
     )
 }
 
