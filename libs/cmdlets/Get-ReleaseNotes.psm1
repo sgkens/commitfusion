@@ -74,7 +74,7 @@ function Get-ReleaseNotes {
         [Parameter(Mandatory = $false)]
         [switch]$Notes,
         [Parameter(Mandatory = $false)]
-        [switch]$FeaturesNotes,
+        [switch]$FeatureNotes,
         [Parameter(Mandatory = $false)]
         [switch]$BreakingChanges,
         [Parameter(Mandatory = $false)]
@@ -96,23 +96,15 @@ function Get-ReleaseNotes {
         [switch]$OnlyMessageHead
     )
     begin {
-        [hashtable]$categories = @{}
 
-        if ($Notes) {
-            $categories['Notes:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
-        }
-        if ($FeaturesNotes) {
-            $categories['Feature Notes:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
-        }
-        if ($FeaturesUpdates) {
-            $categories['Feature Notes:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
-        }
-        if ($BreakingChanges) {
-            $categories['Breaking Changes:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
-        }
-        if ($FeatureAdditions) {
-            $categories['Feature Additions:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
-        }
+        [hashtable]$categories = @{}
+        $categories['Notes:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
+        $categories['Feature Additions:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
+        $categories['Feature Notes:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
+        $categories['Feature Updates:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
+        $categories['Breaking Changes:'] = @{ entry = @(); strippedLine = ''; commitid = '' }
+
+        # Function to generate commit link: Internal function
         function generate_commit_link([string]$commitid) {
             if ($CommitLinkPrefix -eq "github") { $CommitLinkPrefix = "github.com" }
             elseif ($CommitLinkPrefix -eq "gitlab") { $CommitLinkPrefix = "gitlab.com" }
@@ -124,6 +116,7 @@ function Get-ReleaseNotes {
             $link = "[$commitid_small]($commitLinkUrl)"
             return $link
         }
+
     }
     process {
         # Get the current branch name
@@ -160,8 +153,6 @@ function Get-ReleaseNotes {
             [string]$commitLinkUrl = $null
             $gitLog -split "`n"| ForEach-Object {
                 
-
-
                 $line = $_.Trim()
 
                 # check if commit is in main/master and ignore
@@ -170,21 +161,24 @@ function Get-ReleaseNotes {
                 # Ignore empty lines
                 if ([string]::IsNullOrWhiteSpace($line)) { return }
 
-                # Debugging: Print the current line being processed
-                Write-debug "processing line: '$line'"
-
                 # Check if the line contains a commit hash and set it as the current commit
                 if ($line -match "\b[0-9a-f]{40}\b") {
                     $current_commit = $line
                     Write-Debug "----[ setting commit tag to: $current_commit"
+                    return
                 }
 
-                # Check if the line matches one of the predefined categories (with or without emoji)
-                # Ensure the line is a valid category by checking that it ends with a colon
+                # Check if the line matches one of the predefined categories
                 $strippedLine = Remove-Emojis -inputString $line
-                if ($categories.Keys -contains $strippedLine) {
-                    Write-debug "valid category detected on line: $strippedLine"  
-                    $currentCategory = $strippedLine # Set the current category from the line eg Notes:, Feature Notes: etc
+                
+                # Sort categories by length in descending order to match most specific first
+                $sortedCategories = $categories.Keys | Sort-Object -Property Length -Descending
+                
+                $matchedCategory = $sortedCategories | Where-Object { $strippedLine -eq $_ } | Select-Object -First 1
+                
+                if ($matchedCategory) {
+                    Write-Debug "valid category detected on line: $strippedLine"
+                    $currentCategory = $matchedCategory
                     $categories[$currentCategory]['strippedLine'] = $strippedLine
                     $categories[$currentCategory]['commitid'] = $current_commit
                     $currentEntry = $null
@@ -192,7 +186,7 @@ function Get-ReleaseNotes {
                 }
 
                 # If the line belongs to the current category and starts with " - ", start a new entry
-                if ($currentCategory -and $line -match "^- ") {
+                if ($currentCategory -and $line -match "^- .*") {
                     Write-debug "adding new entry to $currentCategory`: $line"
                     $currentEntry = $line.Trim()
                     if ($CommitLink) { $commitLinkUrl = generate_commit_link($current_commit) }
@@ -216,6 +210,7 @@ function Get-ReleaseNotes {
                     Write-debug "possible Second paragraph found and appending to $($currentCategory['strippedLine'])`: $line"
                     return
                 }
+
             }
 
             # Debugging: Print the hashtable content after processing
@@ -229,14 +224,37 @@ function Get-ReleaseNotes {
             [string]$markdown = ""
             foreach ($category in $categories.GetEnumerator()) {
                 Write-Debug "Processing category: $($category.Key)"
-    
-                # Check if the category has entries
-                if ($category.value.Count -gt 0) {
+                if ($Notes -eq $true -and $category.Key -eq "Notes:") {
                     $markdown += "## $($category.Key)`n`n"
+                    foreach ($entry in $category.value['entry']) {
+                        $markdown += " $entry`n"
+                    }
                 }
-                foreach ($entry in $category.value['entry']) {
-                    $markdown += " $entry`n"
+                if ($FeatureNotes -eq $true -and $category.Key -eq "Feature Notes:") {
+                    $markdown += "## $($category.Key)`n`n"
+                    foreach ($entry in $category.value['entry']) {
+                        $markdown += " $entry`n"
+                    }
                 }
+                if ($FeatureAdditions -eq $true -and $category.Key -eq "Feature Additions:") {
+                    $markdown += "## $($category.Key)`n`n"
+                    foreach ($entry in $category.value['entry']) {
+                        $markdown += " $entry`n"
+                    }
+                }
+                if ($FeatureUpdates -eq $true -and $category.Key -eq "Feature Updates:") {
+                    $markdown += "## $($category.Key)`n`n"
+                    foreach ($entry in $category.value['entry']) {
+                        $markdown += " $entry`n"
+                    }
+                }
+                if ($BreakingChanges -eq $true -and $category.Key -eq "Breaking Changes:") {
+                    $markdown += "## $($category.Key)`n`n"
+                    foreach ($entry in $category.value['entry']) {
+                        $markdown += " $entry`n"
+                    }
+                }
+                $markdown += "`n"
             }
         }
         # return object or markdown not use if OnlyMessageHead is true
@@ -249,8 +267,8 @@ function Get-ReleaseNotes {
 }
 
 $cmdletconfig = @{
-    function = "Get-ReleaseNotes"
-    alias    = "grn"
+    function = 'Get-ReleaseNotes'
+    alias    = 'grn' 
 }
 
 Export-ModuleMember @cmdletconfig
