@@ -1,8 +1,9 @@
 dist/
 docs/_site/
-Gemfile.lock
+docs/Gemfile.lock
 testResults.xml
 coverage.xml
 .vscode/
-.idea/*
-/tools/VERIFICATIONS.txt
+.idea/
+tools/VERIFICATIONS.txt
+test/commitfusion-test-repo/.git/
