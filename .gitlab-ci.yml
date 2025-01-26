@@ -1,16 +1,17 @@
 stages:
-  - tests
+  - test
   - build
   - deploylocal
   - deploy
+  - tag
   - release
 
 pester_test:
-  stage: tests
+  stage: test
   tags:
     - windows
   script:
-    - echo "Running tests -> pester_test"
+    - echo "Running test -> pester_test"
     - pwsh
     - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallery' -confirm:$false
     - Import-Module -name pester -RequiredVersion '5.5.0'
@@ -18,11 +19,11 @@ pester_test:
 
 # Pester Test Stage
 pester_test_coverage:
-  stage: tests
+  stage: test
   tags:
     - windows
   script:
-    - echo "Running tests -> pester_test_coverage"
+    - echo "Running test -> pester_test_coverage"
     - pwsh
     - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallery' -confirm:$false
     - Import-Module -name pester -RequiredVersion '5.5.0'
@@ -33,12 +34,12 @@ pester_test_coverage:
 
 # Script Analyzer Test Stage
 script_analyzer:
-  stage: tests
+  stage: test
   tags:
     - windows
   script:
-    - echo "Running tests -> script_analyzer"
-    - pwsh
+    - echo "Running test -> script_analyzer"
+    - pwsh.exe
     - find-module -name PSScriptAnalyzer -Repository PSGallery | install-module -Scope CurrentUser -Force -SkipPublisherCheck
     - Import-Module -Name PSScriptAnalyzer   
     - .\build\bt1-p2-ci-test-pssa.ps1
@@ -52,7 +53,7 @@ build_module:
   tags:
     - windows
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "test" && $CI_BUILD_STATUS == "success"'
   script:
     - pwsh
     - Find-Module -name 'psmpacker' -repository 'powershell' | install-Module -force
@@ -69,9 +70,9 @@ create_nuget_Package:
   tags:
     - windows
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "test" && $CI_BUILD_STATUS == "success"'
   script:
-    - pwsh.exe
+    - pwsh
     - find-Module -Repository 'powershell' -Name 'nupsforge' | Install-module -force
     - Import-Module -Name 'nupsforge' -force
     - .\build\bt2-ci-create-packages.ps1
@@ -86,7 +87,8 @@ deploy_gitlab_package:
   tags:
     - windows
   script:
-    - pwsh.exe
+    - pwsh
+    - Install-Module -Name csverify -force | Import-module -force
     - .\build\bt3-ci-deploy-pushtogitlab.ps1
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
