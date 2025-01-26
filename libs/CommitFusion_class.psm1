@@ -1,4 +1,5 @@
 using module psparagraph/psparagraph.psm1 # for indenting the notes section
+
 class CommitFusion {
 
     [String]   $Type # valuedateset Dynamic values
@@ -427,14 +428,15 @@ class CommitFusion {
         - GetEmoji
         --------
         - Description: Return the imported getmojis or miscmojis as a 
-                     psobject frome getmojis.json or miscmojis.json
-                     based on the provided emoji name.
+                       psobject frome getmojis.json or miscmojis.json
+                       based on the provided emoji name.
         - @Params: [String] $set, [String] $name
         - @Return: [String]
         .--------------------------. #>
     [String] GetEmoji([String]$set, [String]$name){
 
         [String]$SetHolder = ""
+
         switch ($set) {
             "miscmojis" { $SetHolder = $this.EmojiIndex.where({ $_.label -eq $name }).char }
             "gitmojis" { $SetHolder = $this.gitmojiIndex.gitmojis.where({ $_.name -eq $name }).emoji }
@@ -442,24 +444,25 @@ class CommitFusion {
         }
 
         return $SetHolder
-
     }
 
     <#  .------------inf------------.
         - GetEmojiIndex
         - Description: Return the imported getmojis or miscmojis as a 
-                     psobject from getmojis.json or miscmojis.json.
+                       psobject from getmojis.json or miscmojis.json.
         - @Params: [String] $set
         - @Return: [PSObject]
         .--------------------------. #>
     [PSObject] GetEmojiIndex([String]$set){
 
         [PSObject]$IndexHolder = $null
+
         switch ($set) {
             "miscmojis" { $IndexHolder = $this.EmojiIndex }
             "gitmojis" { $IndexHolder = $this.gitmojiIndex.gitmojis }
             default { $IndexHolder = $this.EmojiIndex }
         }
+
         return $IndexHolder
 
     }
@@ -498,6 +501,7 @@ class CommitFusion {
     [String] WriteTemplateFile(){
 
         $this.ForMarkDown = $true
+
         # Check for git installation
         if ($null -eq (Get-Command git -ErrorAction SilentlyContinue)) {
             Write-Host "Git is not installed, please install git and try again"
@@ -516,6 +520,7 @@ class CommitFusion {
                 Write-Error "Error: $($_.exception.message)"
                 exit
             }
+
             <# 
                 Thought pattern
             ? --------------
@@ -525,6 +530,7 @@ class CommitFusion {
                 output the contents back to the file which can be then written to actual changelog file
                 ! NOTE !
             #> 
+
             try{
                 # Get the content of the template file 
                 $this.AsString() | Out-File -FilePath "$($this.ModuleRoot)\template.md" -Encoding utf8
@@ -534,6 +540,7 @@ class CommitFusion {
                 Write-Error "Error: $($_.exception.message)"
                 exit
             }
+
             #~ MARDOWN INJECTION
             #~ - Inject the markdown tags into the content
             #~ - inject commit id and url link
@@ -543,12 +550,17 @@ class CommitFusion {
             $MessageString = ""
             # $ciset_list = ($this.CFConfig.ciset.properties.name) -join "|"
             #Catch the AB emoji and commit id emoji
+            
             $AutoBuildEmoji = $this.GetEmoji("miscmojis", "toolbox")
             $CommitIdEmoji = $this.GetEmoji("miscmojis", "id_button")
+            
             if($null -ne $this.GitNameSpace){ $namespace = $this.GitNameSpace}
             else{$namespace = ""}
+            
             for($i = -1; $i -lt $ExplodedContent.count; $i++ ){
+
                 if($ExplodedContent[$i] -match "(--------commit-id--------)"){
+
                     # if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
                     #         $AutoBuildState = "[$AutoBuildEmoji]» <kbd>$($this.CFConfig.ciset.where({$_.type -match $this.type}).semver)</kbd>"
                     # }else{ 
@@ -562,6 +574,7 @@ class CommitFusion {
                     #       - github https://github.com/(name|group)/(repo-name)/commit/(commit-id)
                     #       - bitbucket https://bitbucket.org/(name|group)/(repo-name)/commits/(commit-id)
                     #       - gitlab self hosted https://gitlab.(domain)/(name|group)/(repo-name)/-/commit/(commit-id)
+
                     switch($this.gitsource){                           
                         'github' { 
                             $MessageString += "`n> [$CommitIdEmoji]» [$ShortedCommitid](https://github.com/$($namespace)/$RepoName/-/commit/$CommitId)"
