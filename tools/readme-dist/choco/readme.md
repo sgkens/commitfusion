@@ -1,6 +1,10 @@
 <!--license-->
 <a href="https://github.com/sgkens/commitfusion/blob/main/LICENSE">
-<img src="https://img.shields.io/badge/license-mit-blue?style=flat&logo=unlicense&label=License&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)">
+<img src="https://img.shields.io/badge/license-mit-blue?style=flat&logo=unlicense&label=License&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a><!--Code-Factor-->
+<a href="https://www.codefactor.io/repository/github/sgkens/commitfusion">
+<img src="https://img.shields.io/codefactor/grade/github/sgkens/commitfusion?style=flat&logo=codefactor&label=codefactor&logoColor=75%2C0%2C130%2C1&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a><!--coverage-->
+<a href="https://coveralls.io/github/sgkens/commitfusion">
+<img src="https://img.shields.io/coverallsCoverage/github/sgkens/commitfusion?style=flat&logo=coveralls&label=coveralls&logoColor=rgba(75%2C0%2C130%2C1)&labelColor=rgba(138%2C43%2C226%2C1)&color=rgba(106%2C90%2C205%2C1)"></a>
 
 ***CommitFusion*** is a **PowerShell** module designed to streamline the process of generating *Conventional Commits Messages* in `git`. Commit messages are constructed using the 🧷[Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) standard, and uses 🧷[gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) see 🧷[gitmoji.dev](https://gitmoji.dev), The module allows the construction of a custimized commit message with a number of options.
 
