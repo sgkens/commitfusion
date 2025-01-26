@@ -1,21 +1,23 @@
-# <i class="fa-solid fa-window-maximize" style="color: #d07711;"></i> Installation Methods
+# <i class="fa-solid fa-window-maximize" style="color: #d07711;"></i> How to install
 
 ### 💾 Source
 
-🎫 Clone the repository from GitHub `git clone https://github.com/sgkens/commitfusion.git` \
-🎫 Open a *PowerShell* session and navigate to the cloned repository directory. \
-🎫 **Run** the *Module Import* via the command below:
+- ***Step 1*** Clone the repository from GitHub `git clone https://github.com/sgkens/commitfusion.git`
+- ***Step 2*** Open a *PowerShell* session and navigate to the cloned repository directory. \
+- ***Step 3*** `Run` the Module Import via the command below:
 
 ```powershell
-# Import the module
+# Clone the repository
 git clone https://github.com/sgkens/commitfusion.git
+# Change Directory to the cloned repository
 cd commitfusion
+# Run Import the module
 Import-Module -Name commitfusion
+# Check the module is imported
 Get-Module -Name CommitFustion
 
-# Check imported Module Functions
-Get-Module -Name commitfusion | Select-Object -expand ExportedFunctions
-Get-Module -Name commitfusion | select-object version
+# Check imported Module Functions & Aliases
+Get-Module -Name commitfusion | Select-Object -expand ExportedFunctions,ExportedAliases
 ```
 
 ### 💼 Releases
@@ -51,5 +53,12 @@ Import-Module -Name commitfusion
 
 
 <div align="right">
-  <a href="/cmdlets"> Using Commitfusion's cmdlets </a>
+
+  {% if site.custom.prod %}
+  <a href="/commitfusion/cmdlets"> Using Commitfusion > </a>
+  {% endif %}
+  {% if site.custom.dev %}
+  <a href="/cmdlets"> Using Commitfusion > </a>
+  {% endif %}
+
 </div>

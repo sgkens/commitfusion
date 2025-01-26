@@ -1,43 +1,24 @@
-# <i class="fa-solid fa-code" style="color: #04376a;"></i> Examples
+# Cmdlet Examples
 
 ---
 
 <div class="toc">
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i><a href="#new-commit-examples"> New-Commit Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#set-commit-example"> Set-Commit Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#format-fusionmd-example"> Format-FustionMD Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#update-changelog-example"> Update-ChangeLog Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-gitautoversion-example"> Get-GitAutoVersion Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-ciset-example"> Get-CiSet Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-committypes-example"> Get-CommitTypes Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji-example"> Get-Emoji Examples</a></li>
-  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emojiindex-example"> get-EmojiIndex Examples</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i><a href="#new-commit"> New-Commit</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#set-commit"> Set-Commit</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#format-fusionmd"> Format-FustionMD</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#update-changelog "> Update-ChangeLog</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-gitautoversion"> Get-GitAutoVersion</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-ciset"> Get-CiSet</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-committypes"> Get-CommitTypes</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emoji"> Get-Emoji</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-Get-ReleaseNotes"> Get-ReleaseNotes</a></li>
+  <li class="mtoc"><i class="fa-solid fa-gears" style="color: #2c5caf;"></i> <a href="#get-emojiindex"> Get-EmojiIndex</a></li>
 </div>
 
 
-### Importing the module
+### New-Commit
+Gernerate a *chore* commit message with the `2` *required* parameters `Type` and `Description`
 
-```powershell
-# Import the CommitFusion module if from PSGallary or chocolatey
-Import-Module CommitFusion
-
-# OTHER IMPORT METHODS
-
-# Import the module from the cloned repository
-Import-Module -Name .\CommitFusion.psd1
-
-# or use the .psm1 file
-Import-Module -Name .\CommitFusion.psm1
-
-# Embed the module into your powershell profile
-using module .\CommitFusion.psm1
-```
-
-### New-Commit Examples
-
-<i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *chore* Commit Message **Minimum Parameters**
-
-> Generate a *chore* commit message with the `2` *required* parameters `Type` and `Description`
 
 ```powershell
 New-Commit -Type chore
@@ -50,8 +31,7 @@ Will Ouput:
 ```
 ---
 
-<i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *docs* `type` Commit Message
-> Generate a *docs* type commit message add *notes*
+Generate a *docs* type commit message add *notes*
 
 > **Note:** The `-Footer` switch is used to include the footer, use `-GitUser` to include the git user in the footer after `@`
 
@@ -71,6 +51,7 @@ Will Ouput:
 
 👤 @sgkens 📅 10:25AM, Monday 31th July 2023
 ```
+Generate a *bugfix* commit message with `scope`. the bugfix type `semver` property is `patch` and is automatically included.
 
 <i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> *BugFix* `type` Commit Message
 > Generate a *bugfix* commit message with `scope`. the bugfix type `semver` property is `patch` and is automatically included.
@@ -205,7 +186,7 @@ New-Commit @params | Format-FusionMD
 
 ### Update-Changelog Example
 
-<i class="fa-solid fa-terminal" style="color: #fcc43f;"></i>Update-Changelog - Adding Commit Message to changelog
+<i class="fa-solid fa-terminal" style="color: #fcc43f;"></i> Update-Changelog - Adding Commit Message to changelog
 
 > Adding Commit Message to changelog, you can **PIPE** `New-Commit` into `Format-FusionMD` into `Update-ChangeLog -logfile $file` by default the file is `changelog.md` if you want to change the file name you can use the `-logfile` parameter. Message is pre-pended to the file
 
