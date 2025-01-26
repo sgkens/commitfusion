@@ -64,7 +64,7 @@ Describe "cmdlets" {
   }
   
   it "New-Commit -AsString - Should Return String" {
-    (New-Commit -type "feat" -Notes "safas" -description "test" -AsString).gettype().name   | should -be String
+    (New-Commit -type "feat" -Notes "safas" -description "test" -AsString -footer -gituser 'gituser' -gitgroup 'gitgroup' -scope 'thescope').gettype().name   | should -be String
   }
 
   it "Update-Changelog - Should Return [string] match 'response: success'" {

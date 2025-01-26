@@ -11,9 +11,9 @@ $cs1 = New-Object CommitFusion
 $randomNotes = get-random -minimum 1 -maximum 10
 $Description = Write-GLIPParagraph -Length (get-random -minimum 3 -maximum 10)
 
-$body = @()
+$notes = @()
 for($x=-1;$x -lt $randomNotes;$x++){
-        $body += Write-GLIPParagraph -Length (get-random -minimum 10 -maximum 20)
+        $notes += Write-GLIPParagraph -Length (get-random -minimum 10 -maximum 20)
 }
 $FeatureAddtions = @()
 for($x=-1;$x -lt $randomNotes;$x++){
@@ -36,14 +36,16 @@ $cc.ConventionalCommit(
         "Deadcode", # Specifies the purpose or nature of the commit, #! 1
         "removed", # Specifies the scope of the commit, #! 2
         $Description, # Provides a succinct description of the change #! 3
-        $body, #! 4
+        $notes, #! 4
         $true, # Footer is optional #! 5
         "sgkens", # Specifies the author of the commit #! 6
         "PowerShell",  # Specifies gitlab|github group for use with commit string url generation #! 7
         $FeatureAddtions, #! 8
         $BugFixes, #! 9
         $FeatureNotes, #! 10
-        $BreakingChanges #! 11a
+        $BreakingChanges, #! 11
+        $false # for mardown
+
 )
 
 Write-host -ForegroundColor green "##########------------[No Feature BugFixes, Feature Addtions feature notes, Breaking Changes ]------#############"
@@ -51,14 +53,15 @@ $cs1.ConventionalCommit(
         "feature", # Specifies the purpose or nature of the commit, #! 1
         "New Feature", # Specifies the scope of the commit, #! 2
         $Description, # Provides a succinct description of the change #! 3
-        $body, #! 4
+        $notes, #! 4
         $false, # Footer is optional #! 5
         "sgkens", # Specifies the author of the commit #! 6
         "PowerShell", # Specifies gitlab|github group for use with commit string url generation #! 7
-        $null,#$FeatureAddtions, #! 8
+        $null, #$FeatureAddtions, #! 8
         $null, #$BugFixes, #! 9
         $null, #$FeatureNotes, #! 10
-        $null #$BreakingChanges #! 11
+        $null,  #$BreakingChanges #! 11
+        $false # for mardown
 )
 $cs1.AsString()
 $cs1.AsStringForCommit()
