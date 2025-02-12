@@ -19,6 +19,7 @@ class CommitFusion {
     [String]   $GitUser
     [String]   $GitGroup
     # [String]   $DateNow
+    [string]   $SemanticVersion
     [String]   $MessageStringFormatted
     [String]   $GitNameSpace
     [PSObject] $CFConfig
@@ -115,6 +116,7 @@ class CommitFusion {
         [string[]]  $bugfixes = $null,
         [string[]]  $FeatureNotes = $null,
         [string[]]  $BreakingChanges = $null,
+        [string]    $SemanticVersion,
         [bool]      $ForMarkdown = $false ){
 
         $this.type = $type
@@ -129,6 +131,7 @@ class CommitFusion {
         $this.FeatureAdditions = $FeatureAdditions
         $this.bugfixes = $bugfixes
         $this.ForMarkDown = $ForMarkdown
+        $this.SemanticVersion = $SemanticVersion
 
         # char count seems to work better than $null, i dont really like null
         if($Description.length -eq 0){ 
@@ -306,11 +309,27 @@ class CommitFusion {
         else{ $this.featurenotes = "" }
 
         <# BUILD SEMVER TYPE #>
-        if($null -ne $this.CFConfig.ciset.where({$_.type -match "^($($this.type))"}).semver){
-            $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -eq $this.type}).semver)`n"
-        }else{ 
-            $AutoBuildState = ""
+        [string]$AutoBuildState = "" 
+        switch ($this.SemanticVersion) {
+            'major' {
+                $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: major`n"
+            }
+            'minor' {
+                $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: minor`n"
+            }
+            'patch' {
+                    $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: patch`n"
+            }
+            default {
+                if($null -ne $this.CFConfig.ciset.where({$_.type -match "^($($this.type))"}).semver){
+                    $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -eq $this.type}).semver)`n"
+                }
+                else { 
+                    $AutoBuildState = ""
+                }
+            }
         }
+       
         [string]$bodyvar = "$AutoBuildState" # pre append the auto build state
         <#- |--- NOTES ---| 
             Contain logic for adding notes to the commit message
