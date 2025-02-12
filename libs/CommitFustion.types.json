@@ -68,7 +68,7 @@
             "emoji": "💄",
             "description": "Update style.",
             "name": "lipstick",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -80,7 +80,7 @@
             "emoji": "⚡️",
             "description": "Improve performance.",
             "name": "zap",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -104,7 +104,7 @@
             "emoji": "📦",
             "description": "Build.",
             "name": "package",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -140,7 +140,7 @@
             "emoji": "⏪",
             "description": "Revert changes to previous commit",
             "name": "rewind",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -212,7 +212,7 @@
             "emoji": "🛠️",
             "description": "Improve structure / format of the code.",
             "name": "hammer_and_wrench",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -224,7 +224,7 @@
             "emoji": "🚑️",
             "description": "Critical hotfix.",
             "name": "ambulance",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -260,7 +260,7 @@
             "emoji": "🔒️",
             "description": "Fix security issues.",
             "name": "lock",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -284,7 +284,7 @@
             "emoji": "➕",
             "description": "Add a dependency.",
             "name": "heavy-plus-sign",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -296,7 +296,7 @@
             "emoji": "➖",
             "description": "Remove a dependency.",
             "name": "heavy-minus-sign",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -308,7 +308,7 @@
             "emoji": "🔧",
             "description": "Add or update configuration files.",
             "name": "wrench",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -320,7 +320,7 @@
             "emoji": "✏️",
             "description": "Fix typos.",
             "name": "pencil2",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -344,7 +344,7 @@
             "emoji": "🩹",
             "description": "Simple fix for a non-critical issue.",
             "name": "adhesive-bandage",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -429,7 +429,7 @@
             "emoji": "⏬",
             "description": "Downgrade dependencies.",
             "name": "fast-down-button",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -441,7 +441,7 @@
             "emoji": "⏫",
             "description": "Upgrade dependencies.",
             "name": "fast-up-button",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -453,7 +453,7 @@
             "emoji": "📌",
             "description": "Pin dependencies to specific versions.",
             "name": "pushpin",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -537,7 +537,7 @@
             "emoji": "👽️",
             "description": "Update code due to external API changes.",
             "name": "alien",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -597,7 +597,7 @@
             "emoji": "🗃️",
             "description": "Perform database related changes.",
             "name": "card-file-box",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
