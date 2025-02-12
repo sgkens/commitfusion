@@ -353,7 +353,7 @@
         },
         {
             "type": "deadcode",
-            "emoji": "⚰️ ",
+            "emoji": "⚰️",
             "description": "Remove dead code.",
             "name": "coffin",
             "semver": null,
@@ -393,7 +393,7 @@
             "emoji": "🧱",
             "description": "Infrastructure related changes.",
             "name": "bricks",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -465,7 +465,7 @@
             "emoji": "🌐",
             "description": "Internationalization and localization.",
             "name": "globe-with-meridians",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -501,7 +501,7 @@
             "emoji": "📈",
             "description": "Add or update analytics or track code.",
             "name": "chart-with-upwards-trend",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -561,7 +561,7 @@
             "emoji": "🍱",
             "description": "Add or update assets.",
             "name": "bento",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -573,7 +573,7 @@
             "emoji": "♿️",
             "description": "Improve accessibility.",
             "name": "wheelchair",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -645,7 +645,7 @@
             "emoji": "🚸",
             "description": "Improve user experience / usability.",
             "name": "children-crossing",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -668,7 +668,7 @@
             "emoji": "⚗️",
             "description": "Perform experiments.",
             "name": "alembic",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -680,7 +680,7 @@
             "emoji": "🔍️",
             "description": "Improve SEO.",
             "name": "mag",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -692,7 +692,7 @@
             "emoji": "🏷️",
             "description": "Add or update types.",
             "name": "label",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -716,7 +716,7 @@
             "emoji": "💫",
             "description": "Add or update animations and transitions.",
             "name": "animation",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -752,7 +752,7 @@
             "emoji": "👔",
             "description": "Add or update business logic.",
             "name": "necktie",
-            "semver": "patch",
+            "semver": null,
             "cfa": [
                 {
                     "action": ""
@@ -789,6 +789,30 @@
             "name": "safety-vest",
             "semver": null,
             "cfa":[
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "graphics",
+            "emoji": "🎬",
+            "description": "Add or update graphics.",
+            "name": "clapper-board",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "validation",
+            "emoji": "🛟",
+            "description": "Add or update code related to validation.",
+            "name": "safety-vest",
+            "semver": null,
+            "cfa": [
                 {
                     "action": ""
                 }

@@ -87,6 +87,10 @@ Function New-Commit {
         [string[]]$BreakingChanges,
 
         [Parameter(Mandatory = $false)]
+        [validateSet('major', 'minor', 'patch', IgnoreCase = $true)]
+        [string]$SemVer,
+
+        [Parameter(Mandatory = $false)]
         [switch]$AsString,
 
         [Parameter(Mandatory = $false)]
@@ -128,7 +132,9 @@ Function New-Commit {
         if ($AsString -and $AsObject) {
             throw "Cannot use both -AsString and -AsObject"
         }
-
+        if($null -eq $SemVer){
+            $SemVer = $null
+        }
         if($ForMarkdown -eq $true) {
             $forMarkDown = $true
         }
@@ -148,6 +154,7 @@ Function New-Commit {
             $BugFixes,
             $FeatureNotes,
             $BreakingChanges,
+            $SemVer,
             $forMarkDown
             );
 
