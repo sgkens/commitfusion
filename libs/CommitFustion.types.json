@@ -29,9 +29,9 @@
         },
         {
             "type": "fix",
-            "emoji": "🐛",
-            "description": "Fixed bugs.",
-            "name": "bug",
+            "emoji": "🩹",
+            "description": "Fixed a problem.",
+            "name": "adhesive-bandage",
             "semver": "patch",
             "cfa": [
                 {
@@ -332,18 +332,6 @@
             "emoji": "🚚",
             "description": "Move or rename",
             "name": "truck",
-            "semver": null,
-            "cfa": [
-                {
-                    "action": ""
-                }
-            ]
-        },
-        {
-            "type": "fix-s",
-            "emoji": "🩹",
-            "description": "Simple fix for a non-critical issue.",
-            "name": "adhesive-bandage",
             "semver": null,
             "cfa": [
                 {
