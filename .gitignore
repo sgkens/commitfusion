@@ -1,9 +1,12 @@
 dist
 tools/commit-helper.ps1
 tools/VERIFICATION.txt
+tools/CHANGELOG-Test.md
 build.env
 coverage.xml
 testResults.xml
 libs/help_metadata
+libs/template.md
+libs/template-final.md
 automator-devops
 libs/help_metadata
