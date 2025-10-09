@@ -13,6 +13,8 @@ using module libs\cmdlets\Format-FusionMD.psm1
 using module libs\cmdlets\Update-ChangeLog.psm1
 using module libs\cmdlets\Set-Commit.psm1
 using module libs\cmdlets\Get-ReleaseNotes.psm1
+using module libs\cmdlets\Enable-CommitFusionEmojis.psm1
+using module libs\cmdlets\Disable-CommitFusionEmojis.psm1
 
 $global:_commitfusion = @{
     rootpath = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
@@ -34,7 +36,9 @@ $ModuleMembers = @{
         "Format-FusionMD",
         "Update-Changelog",
         "Set-Commit",
-        "Get-ReleaseNotes"
+        "Get-ReleaseNotes",
+        "Enable-CommitFusionEmojis",
+        "Disable-CommitFusionEmojis"
     )
 }
 
