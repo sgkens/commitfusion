@@ -1,4 +1,4 @@
-import-module -name .\commitfusion.psd1
+import-module -name .\
 import-module -name .\tools\GLIPParagraph\Write-GLIPParagraph.psm1
 
 BeforeAll {
