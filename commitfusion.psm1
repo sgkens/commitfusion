@@ -10,7 +10,7 @@ using module libs\cmdlets\Get-Emoji.psm1
 using module libs\cmdlets\Get-EmojiIndex.psm1
 using module libs\cmdlets\Get-GitAutoVersion.psm1
 using module libs\cmdlets\Format-FusionMD.psm1
-using module libs\cmdlets\Update-ChangeLog.psm1
+using module libs\cmdlets\Update-Changelog.psm1
 using module libs\cmdlets\Set-Commit.psm1
 using module libs\cmdlets\Get-ReleaseNotes.psm1
 using module libs\cmdlets\Enable-CommitFusionEmojis.psm1
