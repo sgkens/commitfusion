@@ -1,0 +1,810 @@
+{
+    "templateName": "default",
+    "templateDescription": "commitfusion-ciset",
+    "templateVersion": "1.0.0",
+    "ciset": [
+        {
+            "Type": "changes",
+            "emoji": "💥",
+            "description": "Introduce breaking changes.",
+            "name": "boom",
+            "semver": "major",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "feat",
+            "emoji": "✨",
+            "description": "Introduce new features.",
+            "name": "sparkles",
+            "semver": "minor",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "fix",
+            "emoji": "🩹",
+            "description": "Fixed a problem.",
+            "name": "adhesive-bandage",
+            "semver": "patch",
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "remove",
+            "emoji": "🔥",
+            "description": "Remove code or files.",
+            "name": "fire",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "docs",
+            "emoji": "📝",
+            "description": "Update Documentation.",
+            "name": "memo",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "style",
+            "emoji": "💄",
+            "description": "Update style.",
+            "name": "lipstick",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "perf",
+            "emoji": "⚡️",
+            "description": "Improve performance.",
+            "name": "zap",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "tests",
+            "emoji": "✅",
+            "description": "Add tests.",
+            "name": "white_check_mark",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "build",
+            "emoji": "📦",
+            "description": "Build.",
+            "name": "package",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "cicd",
+            "emoji": "👷",
+            "description": "Add / Update Continuous integration.",
+            "name": "construction_worker",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "chore",
+            "emoji": "🔧",
+            "description": "Add / Update Tooling, Generic commit",
+            "name": "wrench",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "revert",
+            "emoji": "⏪",
+            "description": "Revert changes to previous commit",
+            "name": "rewind",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "bookmark",
+            "emoji": "🔖",
+            "description": "Release / Version tags.",
+            "name": "bookmark",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": "make-bookmark-tag"
+                }
+            ]
+        },
+        {
+            "type": "wip",
+            "emoji": "🚧",
+            "description": "Work in progress.",
+            "name": "construction",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "gitignore",
+            "emoji": "🙈",
+            "description": "Add / Update a .gitignore file.",
+            "name": "see-no-evil",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "gitsubmodule",
+            "emoji": "🧮",
+            "description": "Add / Update git submodules",
+            "name": "see-no-evil",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "flag",
+            "emoji": "🚩",
+            "description": "Add, update, or remove feature flags.",
+            "name": "triangular-flag-on-post",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": "@flag-action"
+                }
+            ]
+        },
+        {
+            "type": "improve",
+            "emoji": "🛠️",
+            "description": "Improve structure / format of the code.",
+            "name": "hammer_and_wrench",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "hotfix",
+            "emoji": "🚑️",
+            "description": "Critical hotfix.",
+            "name": "ambulance",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "Type": "deploy",
+            "emoji": "🚀",
+            "description": "Deploy stuff.",
+            "name": "rocket",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "Type": "project",
+            "emoji": "🎉",
+            "description": "Begin a project.",
+            "name": "tada",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "Type": "security",
+            "emoji": "🔒️",
+            "description": "Fix security issues.",
+            "name": "lock",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "refactor", 
+            "emoji": "♻️ ",
+            "description": "Refactor code.",
+            "name": "recycle",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "depadd",
+            "emoji": "➕",
+            "description": "Add a dependency.",
+            "name": "heavy-plus-sign",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "depdell",
+            "emoji": "➖",
+            "description": "Remove a dependency.",
+            "name": "heavy-minus-sign",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "config",
+            "emoji": "🔧",
+            "description": "Add or update configuration files.",
+            "name": "wrench",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "typos",
+            "emoji": "✏️",
+            "description": "Fix typos.",
+            "name": "pencil2",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "resources",
+            "emoji": "🚚",
+            "description": "Move or rename",
+            "name": "truck",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "deadcode",
+            "emoji": "⚰️",
+            "description": "Remove dead code.",
+            "name": "coffin",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+
+        },
+        {
+            "type": "Depre",
+            "emoji": "🗑️ ",
+            "description": "Remove deprecate code.",
+            "name": "wastebasket",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "concurrency",
+            "emoji": "🧵",
+            "description": "Add or update code related to multithreading or concurrency.",
+            "name": "thread",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "Infra",
+            "emoji": "🧱",
+            "description": "Infrastructure related changes.",
+            "name": "bricks",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "compiler",
+            "emoji": "🚨",
+            "description": "Fix compiler / linter warnings.",
+            "name": "rotating-light",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "cifix",
+            "emoji": "💚",
+            "description": "Fix CI Build.",
+            "name": "green-heart",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "depdown",
+            "emoji": "⏬",
+            "description": "Downgrade dependencies.",
+            "name": "fast-down-button",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "depup",
+            "emoji": "⏫",
+            "description": "Upgrade dependencies.",
+            "name": "fast-up-button",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "depfix",
+            "emoji": "📌",
+            "description": "Pin dependencies to specific versions.",
+            "name": "pushpin",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "globloc",
+            "emoji": "🌐",
+            "description": "Internationalization and localization.",
+            "name": "globe-with-meridians",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "Type": "init",
+            "emoji": "🎉",
+            "description": "Begin a project.",
+            "name": "tada",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "secrets",
+            "emoji": "🔐",
+            "description": "Add or update secrets.",
+            "name": "closed-lock-with-key",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "analytics",
+            "emoji": "📈",
+            "description": "Add or update analytics or track code.",
+            "name": "chart-with-upwards-trend",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type":"scripts",
+            "emoji": "🔨",
+            "description": "Add or update development scripts.",
+            "name": "hammer",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "merge",
+            "emoji": "🔀",
+            "description": "Merge branches.",
+            "name": "twisted-rightwards-arrows",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "api-update",
+            "emoji": "👽️",
+            "description": "Update code due to external API changes.",
+            "name": "alien",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "license",
+            "emoji": "📄",
+            "description": "Add or update license.",
+            "name": "page-facing-up",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "assets",
+            "emoji": "🍱",
+            "description": "Add or update assets.",
+            "name": "bento",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "Access",
+            "emoji": "♿️",
+            "description": "Improve accessibility.",
+            "name": "wheelchair",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type" : "commets",
+            "emoji": "💡",
+            "description": "Add or update comments in source code.",
+            "name": "bulb",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "db",
+            "emoji": "🗃️",
+            "description": "Perform database related changes.",
+            "name": "card-file-box",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type":"logAdd",
+            "emoji": "🔊",
+            "description": "Add or update logs.",
+            "name": "loud-sound",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type":"logRemove",
+            "emoji": "🔇",
+            "description": "Remove logs.",
+            "name": "mute",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type" : "contrib",
+            "emoji": "👥",
+            "description": "Add or update contributor(s).",
+            "name": "busts-in-silhouette",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "usability",
+            "emoji": "🚸",
+            "description": "Improve user experience / usability.",
+            "name": "children-crossing",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {   "type": "mock",
+            "emoji": "🤡",
+            "description": "Mock things.",
+            "name": "clown-face",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "experiment",
+            "emoji": "⚗️",
+            "description": "Perform experiments.",
+            "name": "alembic",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "seo",
+            "emoji": "🔍️",
+            "description": "Improve SEO.",
+            "name": "mag",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "types",
+            "emoji": "🏷️",
+            "description": "Add or update types.",
+            "name": "label",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "idea",
+            "emoji": "🌱",
+            "description": "Implement / Test Idea",
+            "name": "seedling",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type":"animation",
+            "emoji": "💫",
+            "description": "Add or update animations and transitions.",
+            "name": "animation",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "inspect",
+            "emoji": "🧐",
+            "description": "Data exploration/inspection.",
+            "name": "monocle-face",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "test-fail",
+            "emoji": "🧪",
+            "description": "Add a failing test.",
+            "name": "test-tube",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type":"Buslogic",
+            "emoji": "👔",
+            "description": "Add or update business logic.",
+            "name": "necktie",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type":"check",
+            "emoji": "🩺",
+            "description": "Add or update healthcheck.",
+            "name": "stethoscope",
+            "semver": null, 
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {   "type": "sponsor",
+            "emoji": "💸",
+            "description": "Add sponsorships or money related infrastructure.",
+            "name": "money-with-wings",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "validation",
+            "emoji": "🦺",
+            "description": "Add or update code related to validation.",
+            "name": "safety-vest",
+            "semver": null,
+            "cfa":[
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "graphics",
+            "emoji": "🎬",
+            "description": "Add or update graphics.",
+            "name": "clapper-board",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        },
+        {
+            "type": "validation",
+            "emoji": "🛟",
+            "description": "Add or update code related to validation.",
+            "name": "safety-vest",
+            "semver": null,
+            "cfa": [
+                {
+                    "action": ""
+                }
+            ]
+        }
+    ]
+}
