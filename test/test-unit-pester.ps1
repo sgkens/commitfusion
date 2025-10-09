@@ -1,5 +1,5 @@
-import-module -name .\
-import-module -name .\tools\GLIPParagraph\Write-GLIPParagraph.psm1
+Import-Module -name .\commitfusion.psd1
+Import-Module -name .\tools\GLIPParagraph\Write-GLIPParagraph.psm1
 
 BeforeAll {
   $Notes = @()
