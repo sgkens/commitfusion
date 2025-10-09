@@ -1,0 +1,102 @@
+/*
+Additional text colors
+=========================
+*/
+
+// Bright colors 4bit 16 base colors
+.text-color-bright-red {color: #ff0000;}
+.text-color-bright-green {color: #00ff00;}
+.text-color-bright-blue {color: #0000ff;}
+.text-color-bright-yellow {color: #ffff00;}
+.text-color-bright-cyan {color: #00ffff;}
+.text-color-bright-magenta {color: #ff00ff;}
+.text-color-white {color: #ffffff;}
+.text-color-black {color: #000000;}
+.text-color-gray {color: #808080;}e
+.text-color-bright-gray {color: #d3d3d3;}
+.text-color-magenta {color: #8b008b;}
+.text-color-cyan {color: #008b8b;} 
+.text-color-red {color: #8b0000;}
+.text-color-green {color: #006400;}
+.text-color-blue {color: #00008b;}
+.text-color-yellow {color: #b8860b;}
+
+// 246 colors 8bit 
+// System colors (16)
+.text-color-ansi-0 {color: #000000;} // Black
+.text-color-ansi-1 {color: #800000;} // Maroon
+.text-color-ansi-2 {color: #008000;} // Green
+.text-color-ansi-3 {color: #808000;} // Olive
+.text-color-ansi-4 {color: #000080;} // Navy
+.text-color-ansi-5 {color: #800080;} // Purple
+.text-color-ansi-6 {color: #008080;} // Teal
+.text-color-ansi-7 {color: #c0c0c0;} // Silver
+.text-color-ansi-8 {color: #808080;} // Gray
+.text-color-ansi-9 {color: #ff0000;} // Red
+.text-color-ansi-10 {color: #00ff00;} // Lime
+.text-color-ansi-11 {color: #ffff00;} // Yellow
+.text-color-ansi-12 {color: #0000ff;}eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee // Blue
+.text-color-ansi-13 {color: #ff00ff;} // Fuchsia
+.text-color-ansi-14 {color: #00ffff;} // Aqua
+.text-color-ansi-15 {color: #ffffff;} // White
+
+// 6x6x6 color cube (216 colors)
+// Red variations
+.text-color-ansi-196 {color: #ff0000;}
+.text-color-ansi-197 {color: #ff005f;}
+.text-color-ansi-198 {color: #ff0087;}
+.text-color-ansi-199 {color: #ff00af;}
+.text-color-ansi-200 {color: #ff00d7;}
+.text-color-ansi-201 {color: #ff00ff;}
+
+// Green variations
+.text-color-ansi-46 {color: #00ff00;}
+.text-color-ansi-47 {color: #00ff5f;}
+.text-color-ansi-48 {color: #00ff87;}
+.text-color-ansi-49 {color: #00ffaf;}
+.text-color-ansi-50 {color: #00ffd7;}
+.text-color-ansi-51 {color: #00ffff;}
+
+// Blue variations
+.text-color-ansi-21 {color: #0000ff;}
+.text-color-ansi-27 {color: #005fff;}
+.text-color-ansi-33 {color: #0087ff;}
+.text-color-ansi-39 {color: #00afff;}
+.text-color-ansi-45 {color: #00d7ff;}
+.text-color-ansi-51 {color: #00ffff;}
+
+// Grayscale (24 colors)
+.text-color-ansi-232 {color: #080808;}
+.text-color-ansi-233 {color: #121212;}
+.text-color-ansi-234 {color: #1c1c1c;}
+.text-color-ansi-235 {color: #262626;}
+.text-color-ansi-236 {color: #303030;}
+.text-color-ansi-237 {color: #3a3a3a;}
+.text-color-ansi-238 {color: #444444;}
+.text-color-ansi-239 {color: #4e4e4e;}
+.text-color-ansi-240 {color: #585858;}
+.text-color-ansi-241 {color: #626262;}
+.text-color-ansi-242 {color: #6c6c6c;}
+.text-color-ansi-243 {color: #767676;}
+.text-color-ansi-244 {color: #808080;}
+.text-color-ansi-245 {color: #8a8a8a;}
+.text-color-ansi-246 {color: #949494;}
+.text-color-ansi-247 {color: #9e9e9e;}
+.text-color-ansi-248 {color: #a8a8a8;}
+.text-color-ansi-249 {color: #b2b2b2;}
+.text-color-ansi-250 {color: #bcbcbc;}
+.text-color-ansi-251 {color: #c6c6c6;}
+.text-color-ansi-252 {color: #d0d0d0;}
+.text-color-ansi-253 {color: #dadada;}
+.text-color-ansi-254 {color: #e4e4e4;}
+.text-color-ansi-255 {color: #eeeeee;}
+
+// Common mixed colors
+.text-color-ansi-178 {color: #d7af00;} // Gold
+.text-color-ansi-142 {color: #afaf00;} // Dark Gold
+.text-color-ansi-214 {color: #ffaf00;} // Orange
+.text-color-ansi-208 {color: #ff8700;} // Dark Orange
+.text-color-ansi-147 {color: #afafff;} // Light Purple
+.text-color-ansi-139 {color: #af87af;} // Light Magenta
+.text-color-ansi-109 {color: #87afaf;} // Light Cyan
+.text-color-ansi-108 {color: #87af87;} // Light Green

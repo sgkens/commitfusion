@@ -28,7 +28,7 @@ if($ModuleManifest){
   if(Get-command choco){
     write-host "Checking if Chocolatey is installed, skipping install"
     write-host "Pushing to chocolatey: .\dist\choco\$nupkgFileName"
-    choco push ".\dist\choco\$nupkgFileName" --source $ProGet_chocInstance --apikey $PROGET_API_KEY
+    choco push ".\dist\choco\$nupkgFileName" --source $ProGet_chocInstance --apikey $ENV:PROGET_API_KEY
     write-host "Pushed to chocolatey $nupkgFileName - Complete"
   }
   else{
@@ -40,7 +40,7 @@ if($ModuleManifest){
   if(Get-command nuget.exe){
     write-host "Checking if Nuget is installed, skipping install"
     write-host "Pushing to Nuget: .\dist\nuget\$nupkgFileName"
-    nuget push ".\dist\nuget\$nupkgFileName" -source $ProGet_nugetInstace -apikey $PROGET_API_KEY
+    nuget push ".\dist\nuget\$nupkgFileName" -source $ProGet_nugetInstace -apikey $ENV:PROGET_API_KEY
     write-host "Pushed to Nuget $nupkgFileName - Complete"
   }
   else{
@@ -64,9 +64,9 @@ if($ModuleManifest){
   publish-Module `
     -path ".\dist\$ModuleName" `
     -Repository $ProGet_PSGalInstance `
-    -NuGetApiKey $PROGET_API_KEY `
-    -projecturi $ModuleManifest.ProjectUri `
-    -licenseuri $ModuleManifest.LicenseUri `
+    -NuGetApiKey $ENV:PROGET_API_KEY `
+    -projecturi $ModuleManifest.PrivateData.PSData.ProjectUrl `
+    -licenseuri $ModuleManifest.PrivateData.PSData.LicenseUrl `
     -IconUri 'https://gitlab.snowlab.tk/sgkens/resources/-/blob/raw/modules/CommitFusion/dist/v1/ccommits-logo_GitIcon_51.20dpi.png' `
     -ReleaseNotes $ModuleManifest.ReleaseNotes `
     -Tags $ModuleManifest.Tags `

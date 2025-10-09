@@ -1,33 +1,58 @@
-repository: pages-themes/slate
-#author: # [name, email, web]
-remote_theme: pages-themes/slate@v0.2.0
-title: [CommitFusion] 
-description: [Conventional Commit Message Generator]
-show_downloads: true  # ["true" or "false" (unquoted) to indicate whether to provide a download URL]
-custom:
-  logo:         'https://raw.githubusercontent.com/sgkens/resources/main/modules/CommitFusion/dist/v2/logo-black-v2.svg' 
-  dateupdated:  'Tuesday, 28 November 2023 8:26:40 PM' 
-  license:      'https://img.shields.io/badge/MIT-License-blue?style=flat&logo=unlicense&color=#36013f' 
-  version:      'https://img.shields.io/powershellgallery/v/commitfusion?include_prereleases&logo=powershell&label=Version&logoColor=white'
-  choco:        'https://img.shields.io/chocolatey/dt/commitfusion?style=flat&logo=Chocolatey&labelColor=darkmagenta&color=gray'
-  psgallary:    'https://img.shields.io/powershellgallery/dt/commitfusion?style=flat&logo=powershell&labelColor=blue&color=gray'
-  codefactor:   'https://www.codefactor.io/repository/github/sgkens/commitfusion/badge'
-  prod:         '/commitfusion' # Dev / github pages /reponame
-  # dev:         '/'
-  
-#google_analytics: [Your Google Analytics tracking ID]
-plugins:
-  - jekyll-remote-theme # add this line to the plugins list if you already have one
-  - jekyll-avatar
-  - jekyll-sitemap
-  - jekyll-optional-front-matter
-  - jekyll-gist
+title: Commitfusion
+description: Conventional Commit Message Generator
+theme: just-the-docs
+color_scheme: dark
+logo: "/assets/images/commitfusion-logo-banner.png"
+# favicon_ico: "favicon.ico"
+
+search_enabled: true
+heading_anchors: true
+last_edit_timestamp: true 
+last_edit_time_format: "%b %e %Y at %I:%M %p"
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on gitlab."
+gh_edit_repository: "https://gitlab.com/phellams/commitfusion" # the github URL for your repo
+gh_edit_branch: "main" # the branch that your docs is served from
+# gh_edit_source: docs # the source that your files originate from
+gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+
+footer_content: "Copyright &copy; 2025 Garvey K. Snow. Distributed by an <a href=\"https://github.com/phellams/commitfusion/tree/main/LICENSE.txt\">MIT license.</a>"
+
+# addtions call outs 
+#   see: https://just-the-docs.github.io/just-the-docs/docs/configuration/#addtions-callouts
+callouts:
+  info:
+    title: Info
+    color: oceanblue # mapped to $blue-000 and $blue-400 for highlight ./_sass/addtions/colors.scss
+  required:
+    title: Required
+    color: red # mapped to $tigerorange-000 and $tigerorange-400 for highlight ./_sass/addtions/colors.scss
+  dependancies:
+    title: Dependencies
+    color: lavender # mapped to $-000 and $orange-400 for highlight ./_sass/addtions/colors.scss
+  note:
+    title: Note
+    color: tealblue # mapped to $green-000 and $green-400 for highlight ./_sass/addtions/colors.scss
+  warning:
+    title: Warning
+    color: honey # mapped to $purple-000 and $purple-400 for highlight ./_sass/addtions/colors.scss
+  assumpstion:
+    title: Assumpstion
+    color: tealblue # mapped to $purple-000 and $purple-400 for highlight ./_sass/addtions/colors.scss
+  caviat:
+    title: Caviat
+    color: dusk # mapped to $purple-000 and $purple-400 for highlight ./_sass/addtions/colors.scss
+  debug:
+    title: Debug
+    color: leafgreen # mapped to $red-000 and $red-400 for highlight ./_sass/addtions/addtions/.scss
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-defaults:
-  -
-    scope:
-      path:            "assets/**/*.pdf"
-    values:
-      sitemap:         false
+
+url: https://commitfusion.github.io
+
+aux_links:
+  "<box-icon type='logo' name='github' color='white' size='sm'></box-icon>&nbsp Github": https://github.com/phellams/commitfusion
+  "<box-icon type='logo' name='gitlab' color='orange' size='sm'></box-icon>&nbsp Gitlab": https://gitlab.com/phellams/commitfusion
+  "<img src='https://img.shields.io/badge/mit-license-cyan?style=for-the-badge'/>": https://github.com/phellams/commitfusion/blob/main/LICENSE.txt
+

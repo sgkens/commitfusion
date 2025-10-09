@@ -6474,18 +6474,6 @@
     "unicode": "#1F9F3"
   },
   {
-    "name": "luggage",
-    "label": "luggage",
-    "char": "🧳",
-    "unicode": "#1F9F3"
-  },
-  {
-    "name": "luggage",
-    "label": "luggage",
-    "char": "🧳",
-    "unicode": "#1F9F3"
-  },
-  {
     "name": "hourglass done",
     "label": "hourglass_done",
     "char": "⌛",
@@ -6802,12 +6790,6 @@
     "label": "glowing_star",
     "char": "🌟",
     "unicode": "#1F31F"
-  },
-  {
-    "name": "shooting star",
-    "label": "shooting_star",
-    "char": "🌠",
-    "unicode": "#1F320"
   },
   {
     "name": "shooting star",

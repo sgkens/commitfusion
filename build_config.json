@@ -1,0 +1,30 @@
+{
+    "modulename": "commitfusion",
+    "releasetype": "public",
+    "gituser": "sgkens",
+    "gitgroup": "phellams",
+    "gitlabid": "",
+    "gitlabid_public": "66524031",
+    "license": "MIT",
+    "iconurl": "https://raw.githubusercontent.com/phellams/phellams-general-resources/main/logos/commitfusion/dist/png/commitfusion-logo-512x512.png",
+    "phwriter": true,
+    "phwriter_source": "https://gitlab.com/phellams/commitfusion/-/blob/main/readme.md",
+    "pester_test_files": [
+        ".\\libs\\*.psm1", 
+        ".\\*.psm1"       
+    ], 
+    "modulefiles": [
+        "commitfusion.psm1",
+        "commitfusion.psd1",
+        "LICENSE",
+        "icon.png",
+        "readme.md",
+        "readme.txt"
+    ],
+    "modulefolders": [
+        "libs"
+    ],
+    "moduleexclude": [
+        "commit-helper.ps1"
+    ]
+}

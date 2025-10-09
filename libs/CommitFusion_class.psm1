@@ -1,5 +1,8 @@
-class CommitFusion{
-    [String]   $Type
+using module psparagraph/psparagraph.psm1 # for indenting the notes section
+
+class CommitFusion {
+
+    [String]   $Type # valuedateset Dynamic values
     [String]   $Scope
     [String]   $Description
     [string[]] $Notes
@@ -15,7 +18,8 @@ class CommitFusion{
     [String]   $BodyBullet
     [String]   $GitUser
     [String]   $GitGroup
-    [String]   $DateNow
+    # [String]   $DateNow
+    [string]   $SemanticVersion
     [String]   $MessageStringFormatted
     [String]   $GitNameSpace
     [PSObject] $CFConfig
@@ -24,26 +28,31 @@ class CommitFusion{
     [String]   $FusionConfigPath
     [PSObject] $IconSet
     [string]   $GitSource
-    # hidden [psobject] $puc # Hide this from the user
-    # hidden [psobject] $gmo # Hide this from the user
-    # CONSTRACTOR BASE ------
+    [bool]     $ForMarkDown
+    [bool]     $EmojiEnabled
+
+
+    <# .------------inf------------.
+       - Constructor
+       -------------
+       - Initialize CommitFusion class with constructor method
+       - @param none
+       .--------------------------. #>
     CommitFusion(){
         # CONSTRUCTOR -------------------------------------------------------------------
-        $this.DateNow = (Get-Date).ToString('h:mmtt, dddd d\t\h MMMM yyyy')
+        # $this.DateNow = (Get-Date).ToString('h:mmtt, dddd d\t\h MMMM yyyy')
         $this.ModuleRoot = (Get-Item -Path $PSScriptRoot).FullName
         $OutputEncoding = [System.Text.Encoding]::UTF8
         try{
             $content_GitMojiIndex = Get-Content -path "$PSScriptroot\gitmojis.json" -Raw
-            $content_EmojiIndex = Get-Content -Path "$PSScriptroot\Unicode-Index.json" -Raw
-            $content_CFConfig = Get-Content -Path "$PSScriptroot\CommitFustion.types.json" -Raw
-            # $cc.StringCleaner() # This still returns igredular white spaces with-in object with output to console
-            # Not a breaking issue but kinda annoying
-            # TODO: Fix these issue
+            $content_EmojiIndex = Get-Content -Path "$PSScriptroot\unicode-index.json" -Raw
+            $content_CFConfig = Get-Content -Path "$PSScriptroot\commitfustion.types.json" -Raw
             # TODO: implimented .net lib json parser to fix this issue
             # TODO: Use SimpleSpectreWrapper to fix this issue and .trim() the output
             $this.GitMojiIndex = $content_GitMojiIndex | ConvertFrom-Json
             $this.EmojiIndex = $content_EmojiIndex | ConvertFrom-Json
             $this.CFConfig = $content_CFConfig | ConvertFrom-Json
+            $this.EmojiEnabled = $true # Set default emoji enabled
 
             #$this.EmojiIndex = Get-Content -Path "$($this.ModuleRoot)\Unicode-Index.json" -Raw | ConvertFrom-Json
             #$this.CFConfig = Get-Content -Path "$($this.ModuleRoot)\CommitFustion.json" -Raw | ConvertFrom-Json
@@ -79,10 +88,27 @@ class CommitFusion{
     #         exit
     #     }
     # }
-
-    ConventionalCommit(
-        [String]    $Type,
-        [String]    $Scope = $null,
+    <# .------------inf------------.
+        - Constructor
+        -------------
+        - Generate a commit message object
+        - @param Type [String] - Type of commit
+        - @param Scope [String] - Scope of commit
+        - @param Description [String] - Description of commit
+        - @param Notes [String[]] - Notes of commit
+        - @param Footer [Bool] - Footer of commit
+        - @param GitUser [String] - Git user name
+        - @param GitGroup [String] - Git group name
+        - @param FeatureAdditions [String[]] - Feature additions
+        - @param Bugfixes [String[]] - Bug fixes
+        - @param FeatureNotes [String[]] - Feature notes
+        - @param BreakingChanges [String[]] - Breaking changes
+        - @param ForMarkdown [Bool] - For markdown
+        - @return [string]
+    .--------------------------. #>
+    [void]ConventionalCommit(
+        [String]    $Type, 
+        [String]    $Scope = $null, 
         [String]    $Description = $null,
         [string[]]  $Notes = $null,
         [Bool]      $Footer = $false,
@@ -91,8 +117,9 @@ class CommitFusion{
         [string[]]  $FeatureAdditions = $null,
         [string[]]  $bugfixes = $null,
         [string[]]  $FeatureNotes = $null,
-        [string[]]  $BreakingChanges = $null
-    ){
+        [string[]]  $BreakingChanges = $null,
+        [string]    $SemanticVersion,
+        [bool]      $ForMarkdown = $false ){
 
         $this.type = $type
         $this.scope = $scope
@@ -105,9 +132,16 @@ class CommitFusion{
         $this.gitgroup = $gitgroup
         $this.FeatureAdditions = $FeatureAdditions
         $this.bugfixes = $bugfixes
+        $this.ForMarkDown = $ForMarkdown
+        $this.SemanticVersion = $SemanticVersion
 
-        if($Description.length -eq 0){# char count seems to work better than $null, i dont really like null
-            $this.description = ($this.CFConfig.ciset | Where-object {$_.type -eq "$($this.type)"}).description
+        # char count seems to work better than $null, i dont really like null
+        if($Description.length -eq 0){ 
+            $this.description = ( 
+                $this.CFConfig.ciset | Where-object {
+                    $_.type -eq "$($this.type)"
+                }
+            ).description
         }
 
         # checks if gituser is present if not use gitgroup
@@ -132,134 +166,208 @@ class CommitFusion{
         }
         
 
-        # Call the ConstructMessage method to build the commit message object
+        # populate the commit message object
         $this.ConstructMessage();
     }
-
+    <# .------------inf------------.
+       - ConstructMessage
+       ------------------
+       - Generates the commit message object and sets the object properties
+       - @param none
+       - @return none
+       .--------------------------. #>
     hidden [void] ConstructMessage(){
+        
+        [int]$indent             = 4 <# indent for notes/feature notes/bug fixes/breaking changes #>
+        [int]$paragraph_length   = 80 # position for notes/feature notes/bug fixes/breaking changes
+        # emotocons - Bullet points
+        [string]$separator       = " " <# separator for notes/feature notes/bug fixes/breaking changes #>
+        [string]$note_bullet     = "-"# $this.GetEmoji("miscmojis", "small_blue_diamond") <# bullet for notes #>
+        [string]$feat_bullet     = "-"# $this.GetEmoji("miscmojis", "glowing_star") <# bullet for feature notes 🪰 🪲 🦀#>
+        [string]$bugfix_bullet   = "-"# $this.GetEmoji("miscmojis", "microbe") <# bullet for bug fixes #>
+        [string]$bChanges_bullet = "-"# $this.GetEmoji("miscmojis", "name_badge") <# bullet for breaking changes 📛🅱 ❗#>
+        [string]$Fnote_bullet    = "-"# $this.GetEmoji("miscmojis", "large_blue_diamond") <# bullet for feature notes #>
+        # emotocons - Section header Icons
+        [string]$note_header_icon = $this.GetEmoji("miscmojis", "luggage") # notes
+        [string]$feat_header_icon = $this.GetEmoji("miscmojis", "shooting_star") # feature notes
+        [string]$bugfix_header_icon = $this.GetEmoji("miscmojis", "crab") # bug fixes
+        [string]$bChanges_header_icon = $this.GetEmoji("miscmojis", "hollow_red_circle") # breaking changes
+        [string]$Fnote_header_icon = $this.GetEmoji("miscmojis", "yarn") # feature notes
 
-        <#- Feature Addtions-#>
+        <#- |--- Feature Addtions Block ---|
+            Contain logic for adding feature additions to the commit message
+        -#>
         if($null -ne $this.FeatureAdditions){
             # Add if branch is not null
-            $FeatureAdditionsVar = "$($this.GetEmoji("miscmojis","glowing_star")) FEATURE ADDTIONS: `n"
-            $FeatureAdditionsVar += "`n"
+            $FeatureAdditionsBody = "$feat_header_icon Feature Additions: `n`n"
             [int]$index = 1
             foreach ($faddtion in $this.FeatureAdditions) {
+                $indented_feat = new-paragraph -Position $paragraph_length -Indent $indent -String "$faddtion" # indent the string block
+                # all bugfixes except the last one
                 if($this.FeatureAdditions.count -ne $index -and $this.FeatureAdditions.count -ne 1){
-                    $FeatureAdditionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion \`n"
+                    $FeatureAdditions_content = "  $feat_bullet$separator$indented_feat $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $FeatureAdditions_content_formatted = $FeatureAdditions_content -replace "$feat_bullet(\s{$indent})", "$feat_bullet"
+                    $FeatureAdditionsBody += "$FeatureAdditions_content_formatted"
                 }
                 else{
-                    $FeatureAdditionsVar += "$($this.GetEmoji("miscmojis","roasted_sweet_potato")) $faddtion ..🖊"
+                    $FeatureAdditions_content = "  $feat_bullet$separator$indented_feat `n"
+                    $FeatureAdditions_content_formatted = $FeatureAdditions_content -replace "$feat_bullet(\s{$indent})", "$feat_bullet"
+                    $FeatureAdditionsBody += "$FeatureAdditions_content_formatted"
                 }
                 $index++
             }
             $index = $null
-            $FeatureAdditionsVar += "`n"
-            $this.FeatureAdditions = "$FeatureAdditionsVar`n`n"
+            $FeatureAdditionsBody = $FeatureAdditionsBody -replace "$(" "*$indent)$($feat_bullet)$separator$(" "*$indent)", "$(" "*($indent-4))$($feat_bullet)$separator$(' ')"
+            $this.FeatureAdditions = "`n$FeatureAdditionsBody`n"
         }
         else{ $this.FeatureAdditions = "" }
 
-        <# BUGFIXES #>
+        <#- |--- bugfixes Block ---| 
+            Contain logic for adding bug fixes to the commit message
+        -#>
         if($null -ne $this.bugfixes){
-
-            # Add if branch is not null
-            $bugfixessVar = "$($this.GetEmoji("miscmojis","bug")) BUG FIXES: `n"
-            $bugfixessVar += "`n"
+            # Add if branch is not null move t
+            $bugfixesBody = "$bugfix_header_icon Bug Fixes: `n`n"
             [int]$index = 1
             foreach($bfixes in $this.bugfixes){
+                $indented_bugfix = new-paragraph -Position $paragraph_length -Indent $indent -String "$bfixes" # indent the string block
+                # all bugfixes except the last one
                 if($this.bugfixes.count -ne $index -and $this.bugfixes.count -ne 1){
-                    $bugfixessVar += "$($this.GetEmoji("miscmojis","microbe")) $bfixes \`n"
-                }else{
-                    $bugfixessVar += "$($this.GetEmoji("miscmojis","microbe")) $bfixes ..🖊"
+                   # $bugfixessBody += "   $($this.GetEmoji("miscmojis","yellow_green")) $bfixes $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $bugfixes_content = "  $bugfix_bullet$separator$indented_bugfix $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $breakingChanges_content_formatted = $bugfixes_content -replace "$bugfix_bullet(\s{$indent})", "$bugfix_bullet"
+                    $bugfixesBody += "$breakingChanges_content_formatted"
+                }
+                # last bugfix
+                else{
+                    $bugfixes_content = "  $bugfix_bullet$separator$indented_bugfix `n"
+                    $bugfixes_content_formatted = $bugfixes_content -replace "$bugfix_bullet(\s{$indent})", "$bugfix_bullet"
+                    $bugfixesBody += "$bugfixes_content_formatted"
                 }
                 $index++
             }
             $index = $null
-            $bugfixessVar += "`n"
-            $this.bugfixes = "$bugfixessVar`n`n"
+            $bugfixesBody = $bugfixesBody -replace "$(" "*$indent)$($bugfix_bullet)$separator$(" "*$indent)", "$(" "*($indent-4))$($bugfix_bullet)$separator$(' ')"
+            $this.bugfixes = "`n$bugfixesBody`n"
         }
         else{$this.bugfixes = ""}
 
-        <# /**----------o
-                ~breakingChanges     \
-                ^--------------------/
-                ♦-| Parses the breaking changes string & feature changes string
-                    inject emoji's from jason file based on matched
-                    !Later Will allow for theme support
-                    !NOTE! - H tags are not removed but rendered in the git commit message
-                             GitLab does not support H tags in commit messages but returnes it in the 
-                             Commit page when viewing the commit
-                             ~ Check and test with gitlab
-                    */#>
-        <# BREAKING CHANGES #>
+        <#- 
+           |--- BREAKING CHANGES ---|
+            Contain logic for adding breaking changes to the commit message 
+        -#>
         if($null -ne $this.breakingChanges){
             # Add if branch is not null
-            $breakingChangesVar = "$($this.GetEmoji("miscmojis","anger_symbol")) BREAKING CHANGES: `n"
-            $breakingChangesVar += "`n"
+            $breakingChangesBody = "$bChanges_header_icon Breaking Changes: `n`n"
             [int]$index = 1
             foreach ($bchange in $this.breakingChanges) {
+                $indented_bchange = new-paragraph -Position $paragraph_length -Indent $indent -String "$bchange" # indent the string block
+                # all breakingChanges except the last one
                 if($this.breakingChanges.count -ne $index -and $this.breakingChanges.count -ne 1){
-                    $breakingChangesVar += "$($this.GetEmoji("miscmojis","firecracker")) $bchange \`n"
+                    $breakingChanges_content = "  $bChanges_bullet$separator$indented_bchange $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $breakingChanges_content_formatted = $breakingChanges_content -replace "$bChanges_bullet(\s{$indent})", "$bChanges_bullet"
+                    $breakingChangesBody += "$breakingChanges_content_formatted"
                 }
+                # last breakingChanges
                 else{
-                    $breakingChangesVar += "$($this.GetEmoji("miscmojis","firecracker")) $bchange ..🖊"
+                    $breakingChanges_content = "  $bChanges_bullet$separator$indented_bchange `n"
+                    $breakingChanges_content_formatted = $breakingChanges_content -replace "$bChanges_bullet(\s{$indent})", "$bChanges_bullet"
+                    $breakingChangesBody += "$breakingChanges_content_formatted"
                 }
                 $index++
             }
             $index = $null
-            $breakingChangesVar += "`n"
-            $this.BreakingChanges = "$breakingChangesVar`n`n"
-        }else{$this.BreakingChanges = ""}
+            $breakingChangesBody = $breakingChangesBody -replace "$(" "*$indent)$($bChanges_bullet)$separator$(" "*$indent)", "$(" "*($indent-4))$($bChanges_bullet)$separator$(' ')"
+            $this.BreakingChanges = "`n$breakingChangesBody`n"
+        }else{ $this.BreakingChanges = "" }
                 
-        <# FEATURE CHANGES #>
+        <#- |--- FEATURE CHANGES ---| 
+            Contain logic for adding feature notes to the commit message
+        -#>
         if($null -ne $this.featurenotes){
-            $featurenotesBody = "$($this.GetEmoji("miscmojis","test_tube")) FEATURE UPDATES: `n"
-            $featurenotesBody += "`n"
+            $featurenotesBody = "$fnote_header_icon Feature Notes: `n`n"
             [int]$index = 1
-            foreach($fnote in $this.FeatureNotes){
-                if($this.FeatureNotes.count -ne $index -and $this.FeatureNotes.count -ne 1){ 
-                    $featurenotesBody += "$($this.GetEmoji("miscmojis","hammer")) $fnote \`n"
-                }else{
-                    $featurenotesBody += "$($this.GetEmoji("miscmojis","hammer")) $fnote ..🖊"
+            foreach($fnote in $this.FeatureNotes){ 
+                $indented_fnote = new-paragraph -Position $paragraph_length -Indent $indent -String "$fnote" # indent the string block
+                # all FeatureNotes except the last one
+                if($this.FeatureNotes.count -ne $index -and $this.FeatureNotes.count -ne 1){
+                    $featurenote_content = "  $fnote_bullet$separator$indented_fnote $(if($this.ForMarkDown){'\'}else{''})`n"
+                    $featurenote_content_formatted = $featurenote_content -replace "$fnote_bullet(\s{$indent})", "$fnote_bullet"
+                    $featurenotesBody += "$featurenote_content_formatted"
+                }
+                # last FeatureNote
+                else{
+                    $featurenote_content = "  $fnote_bullet$separator$indented_fnote `n"
+                    $featurenote_content_formatted = $featurenote_content -replace "$fnote_bullet(\s{$indent})", "$fnote_bullet"
+                    $featurenotesBody += "$featurenote_content_formatted"
                 }
                 $index++
             }
             $index = $null
-            $featurenotesBody += "`n"
-            $this.featurenotes = "$featurenotesBody`n`n"
+            
+            $featurenotesBody = $featurenotesBody -replace "$(" "*$indent)$($fnote_bullet)$separator$(" "*$indent)", "$(" "*($indent-4))$($fnote_bullet)$separator$(' ')"
+            $this.featurenotes = "`n$featurenotesBody`n"
         }
-        else{$this.featurenotes = ""}
+        else{ $this.featurenotes = "" }
 
-        <#& INJECT LIST NOTES INTO COMMIT BODY #> 
-
-        if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
-            $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -eq $this.type}).semver)`n"
-        }else{ 
-            $AutoBuildState = ""
+        <# BUILD SEMVER TYPE #>
+        [string]$AutoBuildState = "" 
+        switch ($this.SemanticVersion) {
+            'major' {
+                $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: major`n"
+            }
+            'minor' {
+                $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: minor`n"
+            }
+            'patch' {
+                    $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: patch`n"
+            }
+            default {
+                if($null -ne $this.CFConfig.ciset.where({$_.type -match "^($($this.type))"}).semver){
+                    $AutoBuildState = "`n$($this.GetEmoji("miscmojis","toolbox")) Build: $($this.CFConfig.ciset.where({$_.type -eq $this.type}).semver)`n"
+                }
+                else { 
+                    $AutoBuildState = ""
+                }
+            }
         }
-        [string]$bodyvar = "$AutoBuildState"
-        if($null -ne $this.notes -and $this.notes.count -ne 0){
-            $bodyvar += "`n$($this.GetEmoji("miscmojis","scroll")) NOTES: `n`n"
-        }
+       
+        [string]$bodyvar = "$AutoBuildState" # pre append the auto build state
+        <#- |--- NOTES ---| 
+            Contain logic for adding notes to the commit message
+        -#>
+        if ($null -ne $this.notes -and $this.notes.count -ne 0) {
+            $bodyvar += "`n$note_header_icon Notes: `n`n" # pre append the notes header
+        } 
         [int]$index = 1
         foreach($Note in $this.Notes){
+            $indented_note = new-paragraph -Position $paragraph_length -Indent $indent -String "$note" # indent the string block
+            # all notes except the last one
             if($this.Body.count -ne $index -and $this.Notes.count -ne 1) {
-                $bodyvar += "$($this.GetEmoji("miscmojis","pencil"))  $Note \`n"
-                
-            }else{
-                $bodyvar += "$($this.GetEmoji("miscmojis","pencil"))  $Note ..🖊"
+
+                $bodyvar_body = "  $note_bullet$separator$indented_note $(if($this.ForMarkDown){'\'}else{''})`n"
+                $bodyvar_formatted = $bodyvar_body -replace "$note_bullet(\s{$indent})", "$note_bullet"
+                $bodyvar += "$bodyvar_formatted"
+            }
+            # last note
+            else{
+                $bodyvar_body = "  $note_bullet$separator$indented_note`n"
+                $bodyvar_formatted = $bodyvar_body -replace "$note_bullet(\s{$indent})", "$note_bullet"
+                $bodyvar += "$bodyvar_formatted"
             }
             $index++
         }
-        $this.styledbody = "$bodyvar"
+        # Remove the first 3 spaces from the body so paragraphs are not indented with emoji
+        $bodyvar = $bodyvar -replace "$(" "*$indent)$($note_bullet)$separator$(" "*$indent)", "$(" "*($indent-4))$($note_bullet)$separator$(' ')"
+        $this.styledbody = $bodyvar
                 
         if($this.footer -ne $false){
-            $this.footer = "$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $($this.DateNow)"
+            $this.footer = "$($this.EmojiIndex.where({$_.label -eq "bust_in_silhouette"}).char) @$($this.gituser) $($this.EmojiIndex.where({$_.label -eq "calendar"}).char) $((Get-Date).ToString('h:mmtt, dddd d\t\h MMMM yyyy'))"
         }else{
             $this.footer = ""
         }
         # Message object to be returned
-        #  $($this.emojiinex.where({$_.label -eq "cyclone"}).char)— #? Start Tag
+        #  $($this.emojiinex.where({$_.label -eq "cyclone"}).char)— #? Start Tag 
         [PSObject]$StringParts = @{
 
             Type            = "$($this.CFConfig.ciset.where({$_.Type -eq $this.type}).emoji) $($this.Type)"
@@ -273,14 +381,14 @@ class CommitFusion{
 
     }
 
-    # Returns the commit message as a string
-    # ? Get-CommitMessage raw commit message
-    # ? for use with Format-FusionMD cmlet
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: Private::AsStringForCommit
-        Description: Returns the commit string without emojis and added formatting
-        Return: [String] 
-                                                                 #>
+    <# .------------inf------------.
+       - AsString private method
+       -------------------------
+       - Generates the commit message as a string from the 'ConstructMessageObject' object
+         default return for New-Commit cmdlet
+       - @param none
+       - @return [string]
+       .--------------------------. #>                                                            #>
     hidden [String] AsString(){
 
         $ConstructMessage = $this.ConstructMessageObject
@@ -293,12 +401,12 @@ class CommitFusion{
         return $ConstructMessage_contruct.TrimEnd()
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: Private::AsStringForCommit
-        Description: Returns the commit string without emojis and added 
-                     formatting.
-        Return: [String] 
-                                                                 #>
+    <# .------------inf------------.
+       - AsStringForCommit private method
+       - Returns the commit string without emojis and added formatting.
+       - @param none
+       - @return [string]
+       .--------------------------. #>                                                            #>
     hidden [String] AsStringForCommit(){
 
         $ConstructMessage = $this.ConstructMessageObject
@@ -311,39 +419,45 @@ class CommitFusion{
         return $ConstructMessage_contruct.TrimEnd()
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: Private::AsRawString
-        Description: Returns the commit string join by newline
-        Return: [String] 
-                                                                 #>
+    <#  .------------inf------------.
+        - AsRawString
+        -----------
+        - Description: Returns the commit string join by newline
+        - @param none
+        - @Return: [String] 
+        .---------------------------.#>
     [string] AsRawString() {
 
         return $this.ConstructMessageObject.ToString() -join "`n"
 
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: AsObject
-        Description: Returns the commit message as an object.
-        Return: [PSObject] 
-                                                                 #>
+    <# .------------inf------------.
+        - AsObject
+        ----------
+        - Description: Returns the commit message as an object.
+        - @param none
+        - @Return: [PSObject] 
+       .--------------------------. #>
     [PSObject] AsObject(){
 
         return $this.ConstructMessageObject
 
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: GetEmoji
-        Description: Return the imported getmojis or miscmojis as a 
-                     psobject from getmojis.json or miscmojis.json
-                     based on the provided emoji name.
-        Params: [String] $set, [String] $name
-        Return: [String]
-                                                                 #>
+    <#  .------------inf------------.
+        - GetEmoji
+        --------
+        - Description: Return the imported getmojis or miscmojis as a 
+                       psobject frome getmojis.json or miscmojis.json
+                       based on the provided emoji name.
+        - @Params: [String] $set, [String] $name
+        - @Return: [String]
+        .--------------------------. #>
     [String] GetEmoji([String]$set, [String]$name){
 
         [String]$SetHolder = ""
+
         switch ($set) {
             "miscmojis" { $SetHolder = $this.EmojiIndex.where({ $_.label -eq $name }).char }
             "gitmojis" { $SetHolder = $this.gitmojiIndex.gitmojis.where({ $_.name -eq $name }).emoji }
@@ -351,58 +465,90 @@ class CommitFusion{
         }
 
         return $SetHolder
-
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: GetEmojiIndex
-        Description: Return the imported getmojis or miscmojis as a 
-                     psobject from getmojis.json or miscmojis.json.
-        Params: [String] $set
-        Return: [PSObject]
-                                                                 #>
+    <#  .------------inf------------.
+        - GetEmojiIndex
+        - Description: Return the imported getmojis or miscmojis as a 
+                       psobject from getmojis.json or miscmojis.json.
+        - @Params: [String] $set
+        - @Return: [PSObject]
+        .--------------------------. #>
     [PSObject] GetEmojiIndex([String]$set){
 
         [PSObject]$IndexHolder = $null
+
         switch ($set) {
             "miscmojis" { $IndexHolder = $this.EmojiIndex }
             "gitmojis" { $IndexHolder = $this.gitmojiIndex.gitmojis }
             default { $IndexHolder = $this.EmojiIndex }
         }
+
         return $IndexHolder
 
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: GetCiSet
-        Description: Returns list of gitmojis from gitmoji.json as 
-                     an object.
-        Return: [pscustomobject]
-                                                                 #>
+    <#  .------------inf------------.
+        - GetCiSet
+        ----------
+        - Description: Returns list of gitmojis from gitmoji.json as an object.
+        - @param none
+        - @Return: [pscustomobject]
+       .--------------------------. #>
     [pscustomobject[]] GetCiSet(){ 
                 
         return $this.GitMojiIndex.gitmojis
         
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        Method: GetCiSetFusion
-        Description: Returns the CommitFusion Ci-Set as an object
-        Return: [pscustomobject]
-                                                                 #>
+    <#  .------------inf------------.
+        - GetCiSetFusion
+        - Description: Returns the CommitFusion Ci-Set as an object
+        - @param none
+        - @Return: [pscustomobject]
+        .--------------------------. #>
     [pscustomobject[]] GetCiSetFusion(){ 
                 
         return $this.CFConfig.ciset
         
     }
 
-    <#  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    <#  .------------inf------------.
+        - DisableEmojis
+        - Description: Sets the emoji class var to false
+        - @param none
+        - @Return: [pscustomobject]
+        .--------------------------. #>
+    [void] DisableEmojis(){
+
+        $this.EmojiEnabled = $false
+    }
+   
+    <#  .------------inf------------.
+        - EnableEmojis
+        - Description: Sets the emoji class var to true
+        - @param none
+        - @Return: [pscustomobject]
+        .--------------------------. #>
+    [void] EnableEmojis(){
+        
+        $this.EmojiEnabled = $true
+    }
+
+    [string]CleanEmojis([string]$string){
+        $emojiPattern = '[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF]'
+        $result = $string -replace $emojiPattern, ''
+        return $result.ToString()
+    }
+    <#  .------------inf------------.
         Method: WriteTemplateFile
         Description: Write commit template to .md template file, 
                      returns json string when complete
         Return: [String]
-                                                                 #>
+        .--------------------------. #>
     [String] WriteTemplateFile(){
+
+        $this.ForMarkDown = $true
 
         # Check for git installation
         if ($null -eq (Get-Command git -ErrorAction SilentlyContinue)) {
@@ -422,16 +568,17 @@ class CommitFusion{
                 Write-Error "Error: $($_.exception.message)"
                 exit
             }
+
             <# 
                 Thought pattern
             ? --------------
                 Write the content to a .md file directory specified by the user
                 read the contents back from the file and inject markdown tags
-            ~ instead of using $varibale in memory*
+            ~ instead use $varibale in memory*
                 output the contents back to the file which can be then written to actual changelog file
                 ! NOTE !
-
             #> 
+
             try{
                 # Get the content of the template file 
                 $this.AsString() | Out-File -FilePath "$($this.ModuleRoot)\template.md" -Encoding utf8
@@ -441,6 +588,7 @@ class CommitFusion{
                 Write-Error "Error: $($_.exception.message)"
                 exit
             }
+
             #~ MARDOWN INJECTION
             #~ - Inject the markdown tags into the content
             #~ - inject commit id and url link
@@ -450,12 +598,17 @@ class CommitFusion{
             $MessageString = ""
             # $ciset_list = ($this.CFConfig.ciset.properties.name) -join "|"
             #Catch the AB emoji and commit id emoji
+            
             $AutoBuildEmoji = $this.GetEmoji("miscmojis", "toolbox")
             $CommitIdEmoji = $this.GetEmoji("miscmojis", "id_button")
+            
             if($null -ne $this.GitNameSpace){ $namespace = $this.GitNameSpace}
             else{$namespace = ""}
+            
             for($i = -1; $i -lt $ExplodedContent.count; $i++ ){
+
                 if($ExplodedContent[$i] -match "(--------commit-id--------)"){
+
                     # if($null -ne $this.CFConfig.ciset.where({$_.type -match $this.type}).semver){
                     #         $AutoBuildState = "[$AutoBuildEmoji]» <kbd>$($this.CFConfig.ciset.where({$_.type -match $this.type}).semver)</kbd>"
                     # }else{ 
@@ -469,6 +622,7 @@ class CommitFusion{
                     #       - github https://github.com/(name|group)/(repo-name)/commit/(commit-id)
                     #       - bitbucket https://bitbucket.org/(name|group)/(repo-name)/commits/(commit-id)
                     #       - gitlab self hosted https://gitlab.(domain)/(name|group)/(repo-name)/-/commit/(commit-id)
+
                     switch($this.gitsource){                           
                         'github' { 
                             $MessageString += "`n> [$CommitIdEmoji]» [$ShortedCommitid](https://github.com/$($namespace)/$RepoName/-/commit/$CommitId)"

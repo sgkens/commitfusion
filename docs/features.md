@@ -1,70 +1,108 @@
-
-# <i class="fa-solid fa-cubes" style="color: #d07711;"></i> Module Features
-
+---
+layout: default
+title: Features
+nav_order: 3
+description: "Module Features"
+permalink: /features
 ---
 
-#### Conventional Commit
+# CommitFusion Features
 
-- CommitFusion adheres to The [🧷Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/).
+CommitFusion implements the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) with enhanced features including notes, feature tracking, and emoji support via [gitmoji](https://gitmoji.dev).
 
-#### Gitmoji Custom Schema
+## Core Features
 
-- Commits in CommitFusion utilize a slightly modified version of the [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) see [🧷gitmoji.dev](https://gitmoji.dev).
+### 🔄 Git Integration
+- Seamless commit application with `Set-Commit`
+- Automatic Git user information retrieval
+- Repository state validation
+- Changelog management
 
-#### Customizable Commit Message
+### ⚡ PowerShell Integration
+- Rich tab completion for commit types
+- Strict parameter validation
+- Full pipeline support
+- PSScriptAnalyzer compliance
 
-- Generate fully customizable commit messages. The message is broken up into several subparts: *Type*, *Scope*, *Description*, *Body* ( **Notes**, **FeatureNotes**, **FeatureAddtions**, **BugFixes**, **BreakingChanges** ), and *Footer*.
+### 🎨 Enhanced Commit Messages
 
-- Commit Message can either be applied using See: [*Set-Commit*](/cmdlets#set-commit) or formatted in markdown and added to a file ie `CHANGELOG.md` using See: [*Format-FusionMD*](/cmdlets#format-fusionmd), or simply output to the console.
+CommitFusion generates structured commit messages with the following components:
 
-  > Commit Message Layout *[e]*=(gitmoji)
+```text
+📝 type(scope): description
 
-  ```text
-  [e] Type(Scope): Description
+🏗️ Build: semver
 
-  [e] Build: Semver(Major|Minor|Patch)
+📋 Notes:
+  - Note details
+  - Additional information
 
-  NOTES [e]:
-    [e] Note 1
-    [e] Note 2
+✨ Feature Additions:
+  - New feature 1
+  - New feature 2
 
-  [e] BREAKING CHANGES
-    [e] Change 1
-    [e] Change 2 ...[e]
-  [e] FEATURE ADDTIONS
-    [e] Addtion 1
-    [e] Addtion 2...[e]
-  [e] FEATURE NOTES
-    [e] Note 1
-    [e] Note 2...[e]
-  [e] BUG FIXES
-    [e] Fix 1
-    [e] Fix 2...[e]
+🐛 Bug Fixes:
+  - Fix description
+  - Issue resolution
 
-  [e] GitUser @ [e] DateTime
-  ```
+⚠️ Breaking Changes:
+  - Major change 1
+  - Migration notes
 
-####  Changelog Auto-Update:
+👤 @username 📅 timestamp
+```
 
-- Commit messages are optionaly written to a template file see [*Format-FusionMD*](/cmdlets#format-fusionmd) and joined with the current contents of the `CHANGELOG.md` or **specified** file name if the `-LogFile` switch is used.
+### 📊 Version Management
 
-#### Semver Version Generator:
+Automatic semantic versioning based on commit types:
 
-- The `GitAutoVersion` function performs a reverse parse of `git log --pretty=format:"%s%n%b"` and using regular expressions to determine the appropriate version increment for your build. The possible increments are "**major**," "**minor**," "**patch**," or `0.1.0` if no suitable increment is found.
+| Type | Version Bump | Example |
+|------|--------------|---------|
+| breaking | major | 1.0.0 → 2.0.0 |
+| feat | minor | 1.0.0 → 1.1.0 |
+| fix | patch | 1.0.0 → 1.0.1 |
 
-  > #### 🥏 Function Logic
-    - If "*patch*" is parsed, `Get-GiAutoVersion` increments the patch number (***++patch***), or if already at the latest patch, it resets the patch to `0`.
-    - If "*minor*" is parsed, the minor number is incremented (***++minor***), and the patch and minor numbers are reset to `0`.
-    - If "*major*" is parsed, the major number is incremented (***++major***), and it never resets back to `0`.
+## Advanced Features
 
-#### Gitmoji Index:
+### 📝 Markdown Integration
 
-- Parses [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) icon set, returns `PSObject`, Miscellaneous function.
+- Convert commits to Markdown format
+- Automatic changelog updates
+- Custom template support
+- Pipeline-friendly formatting
 
-####  Unicode Emoji Index:
+### 🎯 Semantic Version Analysis
 
-- Parses scraped version of [🧷unicode.org](https://unicode.org/emoji/charts/emoji-list.html) icon set, returns `PSObject`, Miscellaneous function.
+`Get-GitAutoVersion` analyzes commit history to determine version increments:
 
-<div align="right">
-  <a href="/install"> Installing Commit Fusion </a>
-</div>
+- **Major**: Breaking changes (resets minor & patch)
+- **Minor**: New features (resets patch)
+- **Patch**: Bug fixes and small changes
+
+### 🎨 Emoji Support
+
+Two comprehensive emoji collections:
+
+1. **Gitmoji Integration**
+   - Standard git-specific emojis
+   - Based on [gitmojis schema](https://github.com/carloscuesta/gitmoji)
+
+2. **Unicode Emoji Support**
+   - Full unicode emoji catalog
+   - Sourced from [unicode.org](https://unicode.org/emoji/charts/emoji-list.html)
+
+## Usage Example
+
+```powershell
+New-Commit -Type feat -Description "Add OAuth support" `
+          -Scope auth `
+          -Notes "Requires API key" `
+          -FeatureAdditions @(
+              "OAuth 2.0 flow",
+              "Token refresh"
+           ) |
+Format-FusionMD |
+Update-Changelog
+```
+
+[Back to top](#){: .btn .btn-purple} [Installing CommitFusion](/install){: .btn .btn-purple}

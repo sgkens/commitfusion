@@ -1,0 +1,275 @@
+{"0": {
+    "doc": "Get-CommitFusionModuleInstance",
+    "title": "Get-CommitFusionModuleInstance",
+    "content": ". Get-CommitFusionModuleInstance takes 0 Parameters and will return the module instance initiated at module import. See $moduleroot/libs/cmdlets/Get-CommitFusionModuleInstance.psm1, used by all the cmdlets to interact with the class instance. 🟢 Syntax . Get-CommitFusionModuleInstance . 🟠 Parameter List . | None | . 🟣 For Example: . Get-CommitFusionModuleInstance . ",
+    "url": "/cmdlets/get-commitfusionmoduleinstance",
+    
+    "relUrl": "/cmdlets/get-commitfusionmoduleinstance"
+  },"1": {
+    "doc": "Commit Types",
+    "title": "Default Commit Types",
+    "content": ". The default list of commit types for commit fusion . | Type | Description | Emoji | . | changes | Introduce breaking changes. | &#128165; | . | feat | Introduce new features. | ✨ | . | fix | Fixed a problem. | &#129657; | . | remove | Remove code or files. | &#128293; | . | docs | Update Documentation. | &#128221; | . | style | Update style. | &#128132; | . | perf | Improve performance. | ⚡️ | . | tests | Add tests. | ✅ | . | build | Build. | &#128230; | . | cicd | Add / Update Continuous integration. | &#128119; | . | chore | Add / Update Tooling, Generic commit | &#128295; | . | revert | Revert changes to previous commit | ⏪ | . | bookmark | Release / Version tags. | &#128278; | . | wip | Work in progress. | &#128679; | . | gitignore | Add / Update a .gitignore file. | &#128584; | . | gitsubmodule | Add / Update git submodules | &#129518; | . | flag | Add, update, or remove feature flags. | &#128681; | . | improve | Improve structure / format of the code. | &#128736;️ | . | hotfix | Critical hotfix. | &#128657;️ | . | deploy | Deploy stuff. | &#128640; | . | project | Begin a project. | &#127881; | . | security | Fix security issues. | &#128274;️ | . | refactor | Refactor code. | ♻️ | . | depadd | Add a dependency. | ➕ | . | depdell | Remove a dependency. | ➖ | . | config | Add or update configuration files. | &#128295; | . | typos | Fix typos. | ✏️ | . | resources | Move or rename | &#128666; | . | deadcode | Remove dead code. | ⚰️ | . | Depre | Remove deprecate code. | &#128465;️ | . | concurrency | Add or update code related to multithreading or concurrency. | &#129525; | . | Infra | Infrastructure related changes. | &#129521; | . | compiler | Fix compiler / linter warnings. | &#128680; | . | cifix | Fix CI Build. | &#128154; | . | depdown | Downgrade dependencies. | ⏬ | . | depup | Upgrade dependencies. | ⏫ | . | depfix | Pin dependencies to specific versions. | &#128204; | . | globloc | Internationalization and localization. | &#127760; | . | init | Begin a project. | &#127881; | . | secrets | Add or update secrets. | &#128272; | . | analytics | Add or update analytics or track code. | &#128200; | . | scripts | Add or update development scripts. | &#128296; | . | merge | Merge branches. | &#128256; | . | api-update | Update code due to external API changes. | &#128125;️ | . | license | Add or update license. | &#128196; | . | assets | Add or update assets. | &#127857; | . | Access | Improve accessibility. | ♿️ | . | commets | Add or update comments in source code. | &#128161; | . | db | Perform database related changes. | &#128451;️ | . | logAdd | Add or update logs. | &#128266; | . | logRemove | Remove logs. | &#128263; | . | contrib | Add or update contributor(s). | &#128101; | . | usability | Improve user experience / usability. | &#128696; | . | mock | Mock things. | &#129313; | . | experiment | Perform experiments. | ⚗️ | . | seo | Improve SEO. | &#128269;️ | . | types | Add or update types. | &#127991;️ | . | idea | Implement / Test Idea | &#127793; | . | animation | Add or update animations and transitions. | &#128171; | . | inspect | Data exploration/inspection. | &#129488; | . | test-fail | Add a failing test. | &#129514; | . | Buslogic | Add or update business logic. | &#128084; | . | check | Add or update healthcheck. | &#129658; | . | sponsor | Add sponsorships or money related infrastructure. | &#128184; | . | validation | Add or update code related to validation. | &#129466; | . | graphics | Add or update graphics. | &#127916; | . | validation | Add or update code related to validation. | &#128735; | . Back to top . CommitFusion Cmdlets ",
+    "url": "/commit-types#default-commit-types",
+    
+    "relUrl": "/commit-types#default-commit-types"
+  },"2": {
+    "doc": "Commit Types",
+    "title": "Commit Types",
+    "content": " ",
+    "url": "/commit-types",
+    
+    "relUrl": "/commit-types"
+  },"3": {
+    "doc": "Examples",
+    "title": "CommitFusion Examples",
+    "content": "This guide provides practical examples for using CommitFusion cmdlets. All examples follow the Conventional Commits specification. ",
+    "url": "/examples#commitfusion-examples",
+    
+    "relUrl": "/examples#commitfusion-examples"
+  },"4": {
+    "doc": "Examples",
+    "title": "Table of Contents",
+    "content": ". | CommitFusion Examples . | New-Commit Examples . | Basic Usage | Documentation Commits | Bug Fix Commits | Feature Commits | . | Working with Changelogs . | Update Changelog with New Commit | Commit Types and Versioning | . | Working with Emojis | Release Notes . | Generate release notes with notes | Generate release notes with all params | . | Version Management . | Get current version info: | . | Complete Pipeline Example | . | . ",
+    "url": "/examples#table-of-contents",
+    
+    "relUrl": "/examples#table-of-contents"
+  },"5": {
+    "doc": "Examples",
+    "title": "New-Commit Examples",
+    "content": "Basic Usage . Generate a simple chore commit: . New-Commit -Type chore -Description \"Update dependencies\" . Output: . 🔧 chore: Update dependencies . Documentation Commits . Create a documentation commit with notes and footer: . $params = @{ Type = \"docs\" Description = \"Update API documentation\" Scope = \"api\" Notes = @(\"Added authentication examples\", \"Fixed typos\") GitUser = \"sgkens\" Footer = $true } New-Commit @params . Output: . 📝 docs(api): Update API documentation 🧳 Notes: - Added authentication examples - Fixed typos 👤 @sgkens 📅 7:48PM, Thursday 2th October 2025 . Bug Fix Commits . Create a bug fix commit with scope and fixes: . New-Commit -Type fix -Description \"Fix memory leak\" -Scope \"#234\" -BugFixes \"Memory leak in authentication handler\" . Output: . 🐛 fix(#234): Fix memory leak 🧰 Build: patch 🐛 BUGFIXES: 🦠 Memory leak in authentication handler ..🖊 . Feature Commits . Add a new feature with multiple components: . $featureParams = @{ Type = \"feat\" Description = \"Add OAuth support\" Scope = \"auth\" Notes = @(\"Requires API key\", \"Rate limited to 1000 requests/hour\") FeatureAdditions = @( \"OAuth 2.0 authentication flow\", \"Token refresh mechanism\" ) GitUser = \"sgkens\" Footer = $true } New-Commit @featureParams . ",
+    "url": "/examples#new-commit-examples",
+    
+    "relUrl": "/examples#new-commit-examples"
+  },"6": {
+    "doc": "Examples",
+    "title": "Working with Changelogs",
+    "content": "Update Changelog with New Commit . # Create and update changelog in one pipeline New-Commit @params | Format-FusionMD | Update-Changelog -LogFile changelog.md . Commit Types and Versioning . List all major version change types: . Get-CISetFusion -Major . List all patch version change types: . Get-CISetFusion -Patch . ",
+    "url": "/examples#working-with-changelogs",
+    
+    "relUrl": "/examples#working-with-changelogs"
+  },"7": {
+    "doc": "Examples",
+    "title": "Working with Emojis",
+    "content": "Get specific Git emoji: . Get-Emoji -Type gitmojis -Name bug # Returns: 🐛 . Get specific miscellaneous emoji: . Get-Emoji -Type miscmojis -Name person # Returns: 🧑 . ",
+    "url": "/examples#working-with-emojis",
+    
+    "relUrl": "/examples#working-with-emojis"
+  },"8": {
+    "doc": "Examples",
+    "title": "Release Notes",
+    "content": "Generate release notes with notes . Get-ReleaseNotes -Notes . Output: . ## Notes: - Note 1 - Note 2 ## Feature Notes: - FeatureNotes 1 - FeatureNotes 2 ## Breaking Changes: - BreakingChanges 1 - BreakingChanges 2 ## Feature Additions: - FeatureAddtions 1 - FeatureAddtions 2 . Generate release notes with all params . Get-ReleaseNotes -Notes -FeaturesNotes -BreakingChanges -FeatureAdditions -CommitLink -CommitLinkPrefix github.com/ -NameSpace GitUser . Output: . ## Notes: - Note 1 [commidhash](github.com/sgkens/GitUser/commit/commidhash) - Note 2 [commidhash](github.com/sgkens/GitUser/commit/commidhash) ## Feature Notes: - FeatureNotes 1 [commidhash](github.com/sgkens/GitUser/commit/commidhash) - FeatureNotes 2 [commidhash](github.com/sgkens/GitUser/commit/commidhash) ## Breaking Changes: - BreakingChanges 1 [commidhash](github.com/sgkens/GitUser/commit/commidhash) - BreakingChanges 2 [commidhash](github.com/sgkens/GitUser/commit/commidhash) ## Feature Additions: - FeatureAddtions 1 [commidhash](github.com/sgkens/GitUser/commit/commidhash) - FeatureAddtions 2 [commidhash](github.com/sgkens/GitUser/commit/commidhash) ## Bug Fixes: - BugFixes 1 [commidhash](github.com/sgkens/GitUser/commit/commidhash) - BugFixes 2 [commidhash](github.com/sgkens/GitUser/commit/commidhash) . ",
+    "url": "/examples#release-notes",
+    
+    "relUrl": "/examples#release-notes"
+  },"9": {
+    "doc": "Examples",
+    "title": "Version Management",
+    "content": "Get current version info: . Get-GitAutoVersion . Get version number only: . (Get-GitAutoVersion).Version . ",
+    "url": "/examples#version-management",
+    
+    "relUrl": "/examples#version-management"
+  },"10": {
+    "doc": "Examples",
+    "title": "Complete Pipeline Example",
+    "content": "Here’s a complete example showing all features working together: . $commitParams = @{ Type = \"feat\" Description = \"Implement OAuth2\" Scope = \"auth\" Notes = @( \"Requires environment configuration\", \"Updates security policy\" ) FeatureAdditions = @( \"OAuth2 authentication flow\", \"Automatic token refresh\" ) GitUser = \"sgkens\" Footer = $true } New-Commit @commitParams | Format-FusionMD | Update-Changelog -LogFile changelog.md | Set-Commit . ",
+    "url": "/examples#complete-pipeline-example",
+    
+    "relUrl": "/examples#complete-pipeline-example"
+  },"11": {
+    "doc": "Examples",
+    "title": "Examples",
+    "content": " ",
+    "url": "/examples",
+    
+    "relUrl": "/examples"
+  },"12": {
+    "doc": "Features",
+    "title": "CommitFusion Features",
+    "content": "CommitFusion implements the Conventional Commits specification with enhanced features including notes, feature tracking, and emoji support via gitmoji. ",
+    "url": "/features#commitfusion-features",
+    
+    "relUrl": "/features#commitfusion-features"
+  },"13": {
+    "doc": "Features",
+    "title": "Core Features",
+    "content": "🔄 Git Integration . | Seamless commit application with Set-Commit | Automatic Git user information retrieval | Repository state validation | Changelog management | . ⚡ PowerShell Integration . | Rich tab completion for commit types | Strict parameter validation | Full pipeline support | PSScriptAnalyzer compliance | . 🎨 Enhanced Commit Messages . CommitFusion generates structured commit messages with the following components: . 📝 type(scope): description 🏗️ Build: semver 📋 Notes: - Note details - Additional information ✨ Feature Additions: - New feature 1 - New feature 2 🐛 Bug Fixes: - Fix description - Issue resolution ⚠️ Breaking Changes: - Major change 1 - Migration notes 👤 @username 📅 timestamp . 📊 Version Management . Automatic semantic versioning based on commit types: . | Type | Version Bump | Example | . | breaking | major | 1.0.0 → 2.0.0 | . | feat | minor | 1.0.0 → 1.1.0 | . | fix | patch | 1.0.0 → 1.0.1 | . ",
+    "url": "/features#core-features",
+    
+    "relUrl": "/features#core-features"
+  },"14": {
+    "doc": "Features",
+    "title": "Advanced Features",
+    "content": "📝 Markdown Integration . | Convert commits to Markdown format | Automatic changelog updates | Custom template support | Pipeline-friendly formatting | . 🎯 Semantic Version Analysis . Get-GitAutoVersion analyzes commit history to determine version increments: . | Major: Breaking changes (resets minor &amp; patch) | Minor: New features (resets patch) | Patch: Bug fixes and small changes | . 🎨 Emoji Support . Two comprehensive emoji collections: . | Gitmoji Integration . | Standard git-specific emojis | Based on gitmojis schema | . | Unicode Emoji Support . | Full unicode emoji catalog | Sourced from unicode.org | . | . ",
+    "url": "/features#advanced-features",
+    
+    "relUrl": "/features#advanced-features"
+  },"15": {
+    "doc": "Features",
+    "title": "Usage Example",
+    "content": "New-Commit -Type feat -Description \"Add OAuth support\" ` -Scope auth ` -Notes \"Requires API key\" ` -FeatureAdditions @( \"OAuth 2.0 flow\", \"Token refresh\" ) | Format-FusionMD | Update-Changelog . Back to top Installing CommitFusion . ",
+    "url": "/features#usage-example",
+    
+    "relUrl": "/features#usage-example"
+  },"16": {
+    "doc": "Features",
+    "title": "Features",
+    "content": " ",
+    "url": "/features",
+    
+    "relUrl": "/features"
+  },"17": {
+    "doc": "Format-FusionMD",
+    "title": "Format-FusionMD",
+    "content": ". The function currently takes 0 parameters. It reads the output from New-Commit and formats it into Markdown format ready for documentation or changelog updates. 🟢 Syntax . Format-FusionMD [-WriteTemplateFile] &lt;switch&gt; . 🟣 For Example: . New-Commit -Type feat ` -Description \"Added new feature\" ` -Scope \"add\" ` -Notes \"Note 1\",\"Note 2\" ` -BugFixes \"BugFixes 1\",\"BugFixes 2\" ` -FeatureNotes \"FeatureNotes 1\",\"FeatureNotes 2\" ` -FeatureAdditions \"FeatureAddtions 1\",\"FeatureAddtions 2\" ` -BreakingChanges \"BreakingChanges 1\",\"BreakingChanges 2\" ` -GitUser \"GitUser\" ` -GitGroup \"GitGroup\" ` -Footer | Format-FusionMD . 🟣 Will Ouput . ## 🎯-✨ feat(add): Added new feature &gt; [🧰]» &lt;kbd&gt;MINOR&lt;/kbd&gt; 🧳 Notes: - Note 1 - Note 2 🌠 Feature Additions: - FeatureAddtions 1 - FeatureAddtions 2 | 🦀 Bug Fixes: | ------------ | - BugFixes 1 - BugFixes 2 🧶 Feature Notes: - FeatureNotes 1 - FeatureNotes 2 | ⭕ Breaking Changes: | ------------------- | - BreakingChanges 1 - BreakingChanges 2 👤 @GitUser 📅 5:05PM, Thursday 2th October 2025 . ",
+    "url": "/cmdlets/format-fusionmd",
+    
+    "relUrl": "/cmdlets/format-fusionmd"
+  },"18": {
+    "doc": "Get-CiSet",
+    "title": "Get-CiSet",
+    "content": ". Get-CiSet parses 🧷carloscuesta gitmojis Schema JSON file and return as a PSObject, making it helpful if you wish to utilize custom types in your commit messages. The $moduleroot/libs/Gitmojis.json file serves as a reference, but you have the flexibility to customize it according to your preferences, as long as the schema remains consistent. Additionally, it’s worth noting that the type and cfa additions are the same as those found in the $moduleroot/libs/CommitFusion.types.json file. 🟢 Syntax . Get-CiSet . 🟠 Parameter List . | None | . 🟣 For Example: . Get-CiSet | Select-Object -First 10 | FT -Wrap . 🟣 Will Output: . name description semver code entity emoji ---- ----------- ------ ---- ------ ----- art Improve structure / format of the code. :art: &amp;#x1f3a8; 🎨 zap Improve performance. patch :zap: &amp;#x26a1; ⚡️ fire Remove code or files. :fire: &amp;#x1f525; 🔥 bug Fix a bug. patch :bug: &amp;#x1f41b; 🐛 ambulance Critical hotfix. patch :ambulance: &amp;#128657; 🚑️ sparkles Introduce new features. minor :sparkles: &amp;#x2728; ✨ memo Add or update documentation. :memo: &amp;#x1f4dd; 📝 rocket Deploy stuff. :rocket: &amp;#x1f680; 🚀 lipstick Add or update the UI and style files. patch :lipstick: &amp;#ff99cc; 💄 tada Begin a project. :tada: &amp;#127881; 🎉 . ",
+    "url": "/cmdlets/get-ciset",
+    
+    "relUrl": "/cmdlets/get-ciset"
+  },"19": {
+    "doc": "Get-CommitTypes",
+    "title": "Get-CommitTypes",
+    "content": ". Get-CommitTypes* Takes 4 optional Parameters, it will parse and write to console the types from the $moduleroot/libs/commitFusion.types.json file. The types can be further filtered by the following parameters: . 🟢 Syntax . Get-CommitTypes [-NoSemver] [-Major] &lt;switch&gt; [-Minor] &lt;switch&gt; [-Patch] &lt;switch&gt; . 🟠 Parameter List . 🔴Required Parameter 🔘Optional Parameter . | Required | Parameter Name | Type | Description | . | 🔘 | NoSemver | [switch] | Filters types without semantic versioning. | . | 🔘 | Major | [switch] | Filters types of major version changes. | . | 🔘 | Minor | [switch] | Filters types of minor version changes. | . | 🔘 | Patch | [switch] | Filters types of patch version changes. | . If no parameters are specified, it will return all the types. If you would like to return the PSObject as this function renders the result using Spectre.Console via SimpleSpectreWrapper, you can use the -raw parameter to return the PSObject instead. Type description semver cfa emoji ---- ----------- ------ --- ----- changes Introduce breaking changes. major {@{action=}} 💥 feat Introduce new features. minor {@{action=}} ✨ fix Fixed bugs. patch {@{action=}} 🐛 docs Update Documentation. {@{action=}} 📝 style Update style. patch {@{action=}} 💄 perf Improve performance. patch {@{action=}} ⚡️ test Add tests. {@{action=}} ✅ build Build. patch {@{action=}} 📦 ci Continuous integration. {@{action=}} 👷 chore Tooling, Generic commit {@{action=}} 🔧 revert Revert changes. patch {@{action=}} ⏪ bookmark Release / Version tags. {@{action=}} 🔖 wip Work in progress. {@{action=}} 🚧 gitignore Add or update a .gitignore file. {@{action=}} 🙈 flag Add, update, or remove feature flags. {@{action=}} 🚩 improve Improve structure / format of the code. patch {@{action=}} 🎨 hotfix Critical hotfix. patch {@{action=}} 🚑️ deploy Deploy stuff. {@{action=}} 🚀 project Begin a project. {@{action=}} 🎉 security Fix security issues. patch {@{action=}} 🔒️ refactor Refactor code. {@{action=}} ♻️ depadd Add a dependency. patch {@{action=}} ➕ depdell Remove a dependency. patch {@{action=}} ➖ config Add or update configuration files. patch {@{action=}} 🔧 typos Fix typos. patch {@{action=}} ✏️ resources Move or rename resources (e.g.: files, paths, routes). {@{action=}} 🚚 fix-s Simple fix for a non-critical issue. patch {@{action=}} 🩹 deadcode Remove dead code. {@{action=}} ⚰️ Depre Remove deprecate code. {@{action=}} 🗑️ concurrency Add or update code related to multithreading or concurrency. {@{action=}} 🧵 Infra Infrastructure related changes. patch {@{action=}} 🧱 . Note! You can modify the $moduleroot/libs/CommitFusion.json file to add your own types, using the GitMojis. See New-Commit Types for more information. ",
+    "url": "/cmdlets/get-committypes",
+    
+    "relUrl": "/cmdlets/get-committypes"
+  },"20": {
+    "doc": "Get-Emoji",
+    "title": "Get-Emoji",
+    "content": " ",
+    "url": "/cmdlets/get-emoji",
+    
+    "relUrl": "/cmdlets/get-emoji"
+  },"21": {
+    "doc": "Get-Emoji",
+    "title": "Overview",
+    "content": "Gets emojis from either the GitMojis.json or miscmojis.json configuration files. You can retrieve all emojis of a specific type or search for a particular emoji by name. ",
+    "url": "/cmdlets/get-emoji#overview",
+    
+    "relUrl": "/cmdlets/get-emoji#overview"
+  },"22": {
+    "doc": "Get-Emoji",
+    "title": "Syntax",
+    "content": "Get-Emoji [ -t|Type ] &lt;string(gitmojis|miscmojis)&gt; [-n|Name] &lt;string&gt; . ",
+    "url": "/cmdlets/get-emoji#syntax",
+    
+    "relUrl": "/cmdlets/get-emoji#syntax"
+  },"23": {
+    "doc": "Get-Emoji",
+    "title": "Parameters",
+    "content": "| Parameter | Type | Required | Description | . | -Type | String | Yes | Specifies the emoji collection to use: either miscmojis or gitmojis | . | -Name | String | No | The name of the specific emoji to return. If omitted, returns all emojis of the specified type | . ",
+    "url": "/cmdlets/get-emoji#parameters",
+    
+    "relUrl": "/cmdlets/get-emoji#parameters"
+  },"24": {
+    "doc": "Get-Emoji",
+    "title": "Examples",
+    "content": "Example 1: Get a specific Git emoji . Get-Emoji -Type gitmojis -Name bug . Returns the bug emoji from the gitmojis collection. Example 2: List all miscellaneous emojis . Get-Emoji -Type miscmojis . Returns all emojis from the miscmojis collection. ",
+    "url": "/cmdlets/get-emoji#examples",
+    
+    "relUrl": "/cmdlets/get-emoji#examples"
+  },"25": {
+    "doc": "Get-Emoji",
+    "title": "Notes",
+    "content": ". | The emoji collections are stored in JSON format | Case-insensitive search is supported for the -Name parameter | Returns $null if no matching emoji is found | . ",
+    "url": "/cmdlets/get-emoji#notes",
+    
+    "relUrl": "/cmdlets/get-emoji#notes"
+  },"26": {
+    "doc": "Get-GitAutoVersion",
+    "title": "Get-GitAutoVersion",
+    "content": ". This function takes 0 Parameters, it will parse the git log see semver-version-generator for more information on the logic of function. 🟢 Syntax . Get-GitAutoVersion . 🟠 Parameter List . | None | . 🟣 For Example: . # Object Get-GitAutoVersion # just property Get-GitAutoVersion | Select-Object -Property Version # or just method (Get-GitAutoVersion).Version . 🟣 Will Ouput: . # object Version Parsedlines ------- ----------- 0.1.0 3 # string 0.1.0 # string 0.1.0 . ",
+    "url": "/cmdlets/get-gitautoversion",
+    
+    "relUrl": "/cmdlets/get-gitautoversion"
+  },"27": {
+    "doc": "Get-ReleaseNotes",
+    "title": "Get-ReleaseNotes",
+    "content": ". Parses the git log and returns the release notes in markdown format. 🟢 Syntax . Get-ReleaseNotes [-Notes] &lt;switch&gt; [-FeaturesNotes] &lt;switch&gt; [-BreakingChanges] &lt;switch&gt; [-FeatureAdditions] &lt;switch&gt; [-CommitLink] &lt;switch&gt; [-CommitLinkPrefix] &lt;string&gt; [-NameSpace] &lt;string&gt; [-AsObject] &lt;switch&gt; . 🟠 Parameter List . 🔴Required Parameter 🔘Optional Parameter . | Required | Parameter Name | Type | Description | . | 🔘 | Notes | [string] | The Scope of the commit, User specified, placed between brackets after the Type | . | 🔘 | FeaturesNotes | [string] | The Commit Description, User specified, placed after the scope. | . | 🔘 | BreakingChanges | [string] | Array of text and will ouput under the NOTES: area inside the body. | . | 🔘 | FeatureAdditions | [string] | Array of text and will ouput under the BUG FIXES: area inside the body. | . | 🔘 | CommitLink | [string] | Use with footer and the generated commit link when using Format-FustionMD cmdlet. | . | 🔘 | CommitLinkPrefix | [string] | Use with footer and the generated commit link when using Format-FustionMD cmdlet. | . | 🔘 | NameSpace | [string] | Use with footer and the generated commit link when using Format-FustionMD cmdlet. | . | 🔘 | AsObject | [switch] | Display SemVer if specified will output SemVer. | . 🟣 For Example: . Get-ReleaseNotes -Notes -FeaturesNotes -BreakingChanges -FeatureAdditions -CommitLink -CommitLinkPrefix github.com/ -NameSpace GitUser . 🟣 Will Ouput: . ## Notes: - Note 1 - Note 2 ## Feature Notes: - FeatureNotes 1 - FeatureNotes 2 ## Breaking Changes: - BreakingChanges 1 - BreakingChanges 2 ## Feature Additions: - FeatureAddtions 1 - FeatureAddtions 2 . ",
+    "url": "/cmdlets/get-releasenotes",
+    
+    "relUrl": "/cmdlets/get-releasenotes"
+  },"28": {
+    "doc": "Home",
+    "title": "CommitFusion",
+    "content": "A PowerShell module that simplifies generating Conventional Commit Messages for git repositories. Get Started View on GitHub . ",
+    "url": "/#commitfusion",
+    
+    "relUrl": "/#commitfusion"
+  },"29": {
+    "doc": "Home",
+    "title": "Overview",
+    "content": "CommitFusion helps you create standardized commit messages that follow the Conventional Commits specification. The module enhances the standard by including additional sections: . | 📝 Notes | ✨ Feature Notes | ➕ Feature Additions | 🔧 Fixes | 🐛 Bug Fixes | ❗ Breaking Changes | 👤 Footer (with GitUser and timestamp) | . Additionally, CommitFusion integrates modified gitmoji support to add visual context to your commits, if Emotocons are not your thing simply disable them, via New-Commit -NoEmojis paramete. or by use the dedicated cmdlets Enable-CommitFusionEmojis and Disable-CommitFusionEmojis. before using New-Commit or Set-Commit respectively. ",
+    "url": "/#overview",
+    
+    "relUrl": "/#overview"
+  },"30": {
+    "doc": "Home",
+    "title": "Quick Start",
+    "content": "1. Installation . Install directly from the PowerShell Gallery: . Install-Module -Name 'CommitFusion' -Scope CurrentUser Import-Module CommitFusion . 2. Basic Usage . View available commit types: . Get-CommitTypes . Generate a commit message: . New-Commit -Type 'feat' -Scope 'ui' -Description 'add new dashboard component' -Notes 'Implemented responsive design' . Commit changes with the generated message: . New-Commit -Type 'fix' -Scope 'api' -Description 'resolve authentication issue' -Notes 'Fixed token validation' | Set-Commit -Confirm . ",
+    "url": "/#quick-start",
+    
+    "relUrl": "/#quick-start"
+  },"31": {
+    "doc": "Home",
+    "title": "Documentation",
+    "content": "For detailed usage instructions and examples, check out our documentation pages. ",
+    "url": "/#documentation",
+    
+    "relUrl": "/#documentation"
+  },"32": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "/",
+    
+    "relUrl": "/"
+  },"33": {
+    "doc": "Cmdlets",
+    "title": "Cmdlets",
+    "content": ". This page contains a list of functions/cmdlets for commitfusion . ",
+    "url": "/cmdlets",
+    
+    "relUrl": "/cmdlets"
+  },"34": {
+    "doc": "Installation",
+    "title": "Installation",
+    "content": ". The CommitFusion module can be installed in a number of ways: . | Powershell Gallery | Chocolatey | Git Clone | GitLab Packages | Manual download and installation | . Source . | Clone the repository from GitHub git clone https://gitlab.com/phellams/commitfusion.git | Open a PowerShell session and navigate to the cloned repository directory. \\ | Run the Module Import via the command below: | . # Clone the repository git clone https://github.com/phellams/commitfusion.git # Change Directory to the cloned repository cd commitfusion # Run Import the module Import-Module -Name commitfusion # Check the module is imported Get-Module -Name commitFustion # Check imported Module Functions &amp; Aliases Get-Module -Name commitfusion | Select-Object -expand ExportedFunctions,ExportedAliases . Releases . Download the latest release from the Releases page. Package Repositories . # Install The Module from the PsGal Install-Module -Name commitfusion -MinimumVersion 0.3.1 # Import Module into you powershell session Import-Module -Name commitfusion . You may need to Set-ExecutionPolicy to RemoteSigned or Unrestricted to install from the Powershell Gallery. # Install The Module from the PsGal choco install davilion.commitfusion --version 0.3.1 # Import Module into you powershell session Import-Module -Name commitfusion . How-to install choco.exe! Installing Chocolatey Package Repository How to Install🧷https://chocolatey.org/install . Back to top See Features . ",
+    "url": "/install",
+    
+    "relUrl": "/install"
+  },"35": {
+    "doc": "New-Commit",
+    "title": "New-Commit",
+    "content": ". This cmdlet takes 11 Parameters, 2 of which are Mandatory type and Description. 🟢 Syntax . New-Commit [-Type] &lt;string&gt; [-Scope] &lt;string&gt; [-Description] &lt;string&gt; [-Notes] &lt;string[]&gt; [-BugFixes] &lt;string[]&gt; [-FeatureNotes] &lt;string[]&gt; [-FeatureAddtions] &lt;string[]&gt; [-BreakingChanges] &lt;string[]&gt; [-Footer] &lt;switch&gt; [-GitUser] &lt;string&gt; [-GitGroup] &lt;string&gt; [-SemVer] &lt;switch&gt; [-NoEmoji] &lt;switch&gt; . 🟠 Parameter List . 🔴Required Parameter 🔘Optional Parameter . | Required | Parameter Name | Type | Description | . | 🔴 | Type | [String] | Parameter values are imported from $moduleroot/libs/CommitFustion.json at module Import. | . | 🔘 | Scope | [string] | The Scope of the commit, User specified, placed between brackets after the Type | . | 🔘 | Description | [string] | The Commit Description, User specified, placed after the scope. | . | 🔘 | Notes | [string[]] | Array of text and will ouput under the NOTES: area inside the body. | . | 🔘 | BugFixes | [string[]] | Array of text and will ouput under the BUG FIXES: area inside the body. | . | 🔘 | FeatureNotes | [string[]] | Array of text and will ouput under the FEATURE NOTES: area inside the body. | . | 🔘 | BreakingChanges | [string[]] | Array of text and will ouput under the BREAKING CHANGES: area inside the body. | . | 🔘 | FeatureAddtions | [string[]] | Array of text and will ouput under the FEATURE ADDTIONS: area inside the body. | . | 🔘 | Footer | [switch] | Display Footer if specified will output GitUser and DateTime. | . | 🔘 | GitUser | [String] | Use with footer and the generated commit link when using Format-FustionMD cmdlet. | . | 🔘 | GitGroup | [string] | Use to generated commit link when using the Format-FustionMD cmdlet . | . | 🔘 | SemVer | [switch] | Display SemVer if specified will output SemVer. | . Additional types can be added to ./moduleroot/libs/CommitFustion.types.json file if needed. Schema follows Gitmojis Schema, gitmoji.dev with additional type and cfa added to the object array items. Example: . # Minimal Required Parameters Example New-Commit -Type feat -Description \"Added new feature\" # All Parameters Example # Feat, Changes, Fix by default has semver added to commit New-Commit -Type feat ` -Description \"Added new feature\" ` -Scope \"add\" ` -Notes \"Note 1\",\"Note 2\" ` -BugFixes \"BugFixes 1\",\"BugFixes 2\" ` -FeatureNotes \"FeatureNotes 1\",\"FeatureNotes 2\" ` -FeatureAddtions \"FeatureAddtions 1\",\"FeatureAddtions 2\" ` -BreakingChanges \"BreakingChanges 1\",\"BreakingChanges 2\" ` -GitUser \"GitUser\" ` -GitGroup \"GitGroup\" ` -Footer . Will Ouput . ## 🎯-✨ feat(add): Added new feature &gt; [🧰]» &lt;kbd&gt;MINOR&lt;/kbd&gt; 🧳 Notes: - Note 1 - Note 2 🌠 Feature Additions: - FeatureAddtions 1 - FeatureAddtions 2 🦀 Bug Fixes: |-| - BugFixes 1 - BugFixes 2 🧶 Feature Notes: - FeatureNotes 1 - FeatureNotes 2 ⭕ Breaking Changes: |-| - BreakingChanges 1 - BreakingChanges 2 👤 @GitUser 📅 11:36PM, Thursday 9th October 2025 . ",
+    "url": "/cmdlets/new-commit",
+    
+    "relUrl": "/cmdlets/new-commit"
+  },"36": {
+    "doc": "New-CommitFusion",
+    "title": "New-CommitFusion",
+    "content": ". New-CommitFusion 0 Parameters it will return a new instance of the commit fusion class. if you want to use the commitfusion_class.psm1 lib directly see $moduleroot/libs/commitfusion_class.lib for more information. 🟢 Syntax . New-CommitFusion . 🟠 Parameter List . | None | . 🟣 For Example . $commitfusion = New-CommitFusion $commitfusion | Get-Member Name MemberType Definition ---- ---------- ---------- AsObject Method psobject AsObject() AsRawString Method string AsRawString() CleanEmojis Method string CleanEmojis(string string) ConventionalCommit Method void ConventionalCommit(string Type, string Scope, string Description, string[] Notes, bool Footer, string GitUser, string GitGrou… DisableEmojis Method void DisableEmojis() EnableEmojis Method void EnableEmojis() Equals Method bool Equals(System.Object obj) GetCiSet Method psobject[] GetCiSet() GetCiSetFusion Method psobject[] GetCiSetFusion() GetEmoji Method string GetEmoji(string set, string name) GetEmojiIndex Method psobject GetEmojiIndex(string set) GetHashCode Method int GetHashCode() GetType Method type GetType() ToString Method string ToString() WriteClMessage Method string WriteClMessage(string file) WriteTemplateFile Method string WriteTemplateFile() BodyBullet Property string BodyBullet {get;set;} BodyIndention Property string BodyIndention {get;set;} Breakingchanges Property string[] Breakingchanges {get;set;} Bugfixes Property string[] Bugfixes {get;set;} CFConfig Property psobject CFConfig {get;set;} ConstructMessageObject Property psobject ConstructMessageObject {get;set;} Description Property string Description {get;set;} EmojiEnabled Property bool EmojiEnabled {get;set;} EmojiIndex Property psobject EmojiIndex {get;set;} FeatureAdditions Property string[] FeatureAdditions {get;set;} Featurenotes Property string[] Featurenotes {get;set;} Footer Property string Footer {get;set;} ForMarkDown Property bool ForMarkDown {get;set;} FusionConfigPath Property string FusionConfigPath {get;set;} GitGroup Property string GitGroup {get;set;} GitMojiIndex Property psobject GitMojiIndex {get;set;} GitNameSpace Property string GitNameSpace {get;set;} GitSource Property string GitSource {get;set;} GitUser Property string GitUser {get;set;} IconSet Property psobject IconSet {get;set;} MessageStringFormatted Property string MessageStringFormatted {get;set;} ModuleRoot Property string ModuleRoot {get;set;} Notes Property string[] Notes {get;set;} Scope Property string Scope {get;set;} SemanticVersion Property string SemanticVersion {get;set;} Styledbody Property string Styledbody {get;set;} Type Property string Type {get;set;} . ",
+    "url": "/cmdlets/new-commitfusion",
+    
+    "relUrl": "/cmdlets/new-commitfusion"
+  },"37": {
+    "doc": "Set-Commit",
+    "title": "Set-Commit",
+    "content": ". Set-Commit takes 2 Optional Parameters, will simple run git commit -m $commitmessage and will use the output from New-Commit as the commit message. | You are in a git repository | You have staged files | . 🟢 Syntax . Set-commit [-AsStringForCommit &lt;string&gt;] [-Test] &lt;switch&gt; [-Confirm] &lt;switch&gt; . 🟠 Parameter List . 🔴Required Parameter 🔘Optional Parameter . | Required | Parameter Name | Type | Description | . | 🔘 | Test | [switch] | Display Test if specified will output Test. | . | 🔘 | Confirm | [switch] | Display Confirm if specified will output Confirm. | . 🟣 For Example: . New-Commit -Type feat -Description \"Updated module logic\" | Set-Commit -Confirm -confirm . ",
+    "url": "/cmdlets/set-commit",
+    
+    "relUrl": "/cmdlets/set-commit"
+  },"38": {
+    "doc": "Update-ChangeLog",
+    "title": "Update-ChangeLog",
+    "content": ". Takes the output of Format-FustionMD and appends it to the Changelog File. 🟢 Syntax . Update-ChangeLog [-logfile] &lt;string&gt; . 🟠 Parameter List . 🔴Required Parameter 🔘Optional Parameter . | Required | Parameter Name | Type | Description | . | 🔴 | logfile | [string] | The relative path to the changelog file. If not specified, it will look for CHANGELOG.md in the current directory. If the file is not found, it will create one. The function will attempt to pre-pend the output from Format-FusionMD to the file. | . 🟣 For Example: . New-Commit -Type feat ` -Description \"Added new feature\" ` -Scope \"add\" ` -Notes \"Note 1\",\"Note 2\" ` -BugFixes \"BugFixes 1\",\"BugFixes 2\" ` -FeatureNotes \"FeatureNotes 1\",\"FeatureNotes 2\" ` -FeatureAddtions \"FeatureAddtions 1\",\"FeatureAddtions 2\" ` -BreakingChanges \"BreakingChanges 1\",\"BreakingChanges 2\" ` -GitUser \"GitUser\" ` -GitGroup \"GitGroup\" ` -Footer | Format-FusionMD | Update-ChangeLog -logfile \"CHANGELOG.md\" . ",
+    "url": "/cmdlets/Update-ChangeLog",
+    
+    "relUrl": "/cmdlets/Update-ChangeLog"
+  }
+}

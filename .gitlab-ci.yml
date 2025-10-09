@@ -1,164 +1,338 @@
+#---------------------------------------------
+# Default values for all jobs unless overridden
+default:
+  image: docker.io/sgkens/phellams-automator:2.5.1
+  tags:
+    - docker
+  artifacts:
+    paths:
+      - ./dist
+      - ./coverage.xml
+      - ./build.env
+    #expire_in: 1 week
+  before_script:
+      - |
+        git fetch --all
+        git clone https://gitlab.com/phellams/automator-devops.git
+        git config --global --add safe.directory ./
+
+#---------------------------------------------
+# Define the stages of the pipeline
 stages:
-  - tests
+  - test
   - build
-  - deploylocal
-  - deploy
   - release
-
-pester_test:
-  stage: tests
-  tags:
-    - windows
-  script:
-    - echo "Running tests -> pester_test"
-    - pwsh
-    - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallery' -confirm:$false
-    - Import-Module -name pester -RequiredVersion '5.5.0'
-    - invoke-Pester -Script .\test\Test-Unit-Pester.ps1 -CI || exit 1
-
-# Pester Test Stage
-pester_test_coverage:
-  stage: tests
-  tags:
-    - windows
-  script:
-    - echo "Running tests -> pester_test_coverage"
-    - pwsh
-    - install-module -name 'pester' -RequiredVersion '5.5.0' -Repository 'psgallery' -confirm:$false
-    - Import-Module -name pester -RequiredVersion '5.5.0'
-    - invoke-Pester -Script .\build\bt0-ci-test-pester.ps1 -CI || exit 1
-  artifacts:
-    paths:
-    - ./coverage.xml
-
-# Script Analyzer Test Stage
-script_analyzer:
-  stage: tests
-  tags:
-    - windows
-  script:
-    - echo "Running tests -> script_analyzer"
-    - pwsh
-    - find-module -name PSScriptAnalyzer -Repository PSGallery | install-module -Scope CurrentUser -Force -SkipPublisherCheck
-    - Import-Module -Name PSScriptAnalyzer   
-    - .\build\bt1-p2-ci-test-pssa.ps1
-  artifacts:
-    paths:
-    - ./coverage.xml
-
-# Build Module Stage
-build_module:
-  stage: build
-  tags:
-    - windows
+  - deploy
+#---------------------------------------------
+# Define pipeline-wide workflow control
+workflow:
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
-  script:
-    - pwsh
-    - Find-Module -name 'psmpacker' -repository 'powershell' | install-Module -force
-    - import-module -name 'psmpacker'
-    - .\build\bt1-ci-build-module.ps1
-  artifacts:
-    paths:
-    - ./dist/*
-    - ./coverage.xml
+    - when: always
 
-# Create Nuget Package Stage
-create_nuget:
-  stage: build
-  tags:
-    - windows
+#---------------------------------------------
+# Define job templates for reuse (via YAML anchors)
+.test_template: &test_template
+  stage: test
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "tests" && $CI_BUILD_STATUS == "success"'
-  script:
-    - pwsh.exe
-    - find-Module -Repository 'powershell' -Name 'nupsforge' | Install-module -force
-    - Import-Module -Name 'nupsforge' -force
-    - .\build\bt2-ci-create-packages.ps1
-  artifacts:
-    paths:
-    - ./dist/*
-    - ./coverage.xml
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"'
+      when: on_success
 
-# Deploy GitLab Package Stage
-deploy_gitlab:
-  stage: deploylocal
-  tags:
-    - windows
-  script:
-    - pwsh.exe
-    - .\build\bt3-ci-deploy-pushtogitlab.ps1
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
-  artifacts:
-    paths:
-    - ./dist/*
-    - ./coverage.xml
-
-# Deploy Proget Packages Stage
-deploy_proget:
-  stage: deploylocal
-  tags:
-    - windows
-  script:
-    - pwsh.exe
-    - .\build\bt4-ci-deploy-pushtoproget.ps1
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "build" && $CI_BUILD_STATUS == "success"'
-  artifacts:
-    paths:
-    - ./dist/*
-    - ./coverage.xml
-
-# Deploy Chocolatey Package Stage
-deploy_chocolatey:
+.deploy_template: &deploy_template
   stage: deploy
-  tags:
-    - windows
-  script:
-    - pwsh.exe
-    - .\build\BT5-CI-deploy-PushToChoco.ps1
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploylocal" && $CI_BUILD_STATUS == "success"'
-  artifacts:
-    paths:
-    - ./dist/*
-    - ./coverage.xml
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
 
-# Deploy PSGallary Package Stage
-deploy_psgallary:
-  stage: deploy
-  tags:
-    - windows
-  script:
-    - pwsh.exe
-    - .\build\bt6-ci-deploy-psgallary.ps1
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploylocal" && $CI_BUILD_STATUS == "success"'
-
-# Create Release Stage
-create_release:
+.release_template: &release_template
   stage: release
-  tags:
-    - windows
-  script: 
-    - pwsh.exe
-    - Compress-Archive -Path .\ -DestinationPath Build.gz
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploy" && $CI_BUILD_STATUS == "success"'
-  artifacts:
-    paths:
-      - Build.gz
-      - ./dist/*
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
 
-# Deploy Coverage to Coverails.io Stage
-deploy_coverage:
-  stage: release
-  tags:
-    - windows
+
+#---------------------------------------------
+#! || Test Stage ||
+#==============================================
+#  ?- pester: Run Pester tests
+#  ?- pester_coverage: Run Pester tests with coverage
+#  ?- analyzer: Run ScriptAnalyzer for static code analysis
+#  ?- coverage: Generate code coverage report
+#---------------------------------------------
+pester:
+  <<: *test_template
   script:
-    - pwsh.exe
-    - .\bt8-ci-deploy-coveralls-report.ps1
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_BUILD_STAGE == "deploy" && $CI_BUILD_STATUS == "success"'
+    - |
+      pwsh -c Invoke-Pester -Script ./test/test-unit-pester.ps1 -CI || exit 1
 
+pester_coverage:
+  <<: *test_template
+  needs:
+    - job: pester
+      artifacts: false
+  script:
+    - |
+      pwsh -c Invoke-Pester -Script ./automator-devops/scripts/test/test-pester-before-build.ps1 -CI || exit 1
+
+#---------------------------------------------
+# ! || Build Stage ||
+#==============================================
+# ?- build: Build the module using psmpacker
+# ?- nupkg_packages: Create NuGet packages
+#---------------------------------------------
+psmpacker_build:
+  stage: build
+  needs:
+    - job: pester
+      artifacts: false
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/build/build-module.ps1 || exit 1
+      
+analyzer:
+  stage: build
+  needs:
+    - job: psmpacker_build
+      artifacts: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/test/test-sa-before-build.ps1
+
+# psgallery, gitlab, github, proget(psgallery,nuget)
+nupsforge_general_nuget_package:
+  stage: build
+  needs:
+    - job: psmpacker_build
+      artifacts: true
+    - job: analyzer
+      artifacts: false
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/build/build-package-generic-nuget.ps1 || exit 1
+
+nupsforge_chocolatey_nupsec_file:
+  stage: build
+  needs:
+    - job: psmpacker_build
+      artifacts: true
+    - job: analyzer
+      artifacts: false
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/build/build-nuspec-choco.ps1 || exit 1
+
+mono_chocolatey_package:
+  stage: build
+  image: docker.io/chocolatey/choco:v2.5.1
+  tags:
+    - docker
+  needs:
+    - job: psmpacker_build
+      artifacts: true
+    - job: nupsforge_chocolatey_nupsec_file
+      artifacts: true
+    - job: analyzer
+      artifacts: false
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  before_script:
+    - |
+      echo "Install git cli"
+      apt-get update
+      apt-get install -y git
+      git clone https://gitlab.com/phellams/automator-devops.git
+  script:
+    - |
+      chmod +x ./automator-devops/scripts/build/build-package-choco.sh || exit 1
+      ./automator-devops/scripts/build/build-package-choco.sh || exit 1
+
+zip_build:
+  stage: build
+  needs:
+    - job: nupsforge_general_nuget_package
+      artifacts: true
+    - job: analyzer
+      artifacts: false
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/build/build-package-psgallery.ps1 || exit 1
+
+#---------------------------------------------
+# ! || Release Stage ||
+#==============================================
+# ?- git_tag: Create GitLab tag from the current commit
+# ?- mirror: Mirror the module to GitHub and GitLab which includes tags howver mirrors do not have releases
+# ?- release: Create a release from the tag - gitlab
+# ?- release: Create a release from the tag - github
+#---------------------------------------------
+# using curl to upload artifacts
+upload_artifacts:
+  <<: *release_template
+  needs:
+   - job: psmpacker_build
+     artifacts: true
+   - job: zip_build
+     artifacts: true
+   - job: nupsforge_general_nuget_package
+     artifacts: true
+   - job: mono_chocolatey_package
+     artifacts: true
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/deploy/deploy-artifacts.ps1 || exit 1
+      
+# Create Git tag from the current commit
+git_tag:
+  <<: *release_template
+  needs:
+    - job: upload_artifacts
+      artifacts: false
+    - job: psmpacker_build
+      artifacts: true
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/release/create-tag.ps1 || exit 1
+
+# Mirror the repository to GitHub and GitLab
+mirror_pointer_github:
+  <<: *release_template
+  needs:
+    - job: git_tag
+      artifacts: false
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/release/mirror-create-pointers.ps1 || exit 1
+
+# mirror_pointer_gitlab:
+#   <<: *release_template
+#   needs:
+#     - job: git_tag
+#       artifacts: false
+#   script:
+#     - ./build/scripts/mirror-pointer-gitlab.ps1
+
+gitlab_release:
+  <<: *release_template
+  needs:
+    - job: psmpacker_build
+      artifacts: true
+    - job: upload_artifacts
+      artifacts: true
+    - job: git_tag
+      artifacts: false
+
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/release/release-from-tag-gitlab.ps1 || exit 1
+
+# github_release:
+#   <<: *release_template
+#   needs:
+#     - job: nupsforge_general_nuget_package
+#       artifacts: true
+#     - job: git_tag
+#       artifacts: false
+#     - job: mirror_pointer_github
+#       artifacts: false
+#     - job: gitlab_release
+#       artifacts: false
+#   script:
+#     - |
+#       pwsh
+#       ./build/scripts/release/release-from-tag-github.ps1 || exit 1
+
+codecov_release_coverage:
+  <<: *release_template 
+  needs: 
+    - job: pester_coverage
+      artifacts: true
+    - job: git_tag
+      artifacts: false
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/release/release-codecov-report.ps1 || exit 1
+  
+
+# coveralls_release_coverage:
+#   <<: *release_template 
+#   needs: 
+#     - job: pester_coverage
+#       artifacts: true
+#   script:
+#     - ./automator-devops/scripts/release/release-codecov-report.ps1
+
+#---------------------------------------------
+# ! || Deploy Stage ||
+#==============================================
+upload_gitlab_package:
+  <<: *deploy_template
+  needs:
+    - job: nupsforge_general_nuget_package
+      artifacts: true
+    - job: gitlab_release
+      artifacts: false
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/deploy/deploy-gitlab.ps1 || exit 1
+
+# proget_nuget:
+#   <<: *deploy_template
+#   needs:
+#     - job: nupsforge_general_nuget_package
+#       artifacts: true
+#   script:
+#     - ./automator-devops/scripts/deploy-proget.ps1
+
+# Deploy Chocolatey package via choco push
+upload_chocolatey:
+  <<: *deploy_template
+  image: docker.io/chocolatey/choco:v2.5.1
+  needs:
+    - job: psmpacker_build
+      artifacts: true
+    - job: mono_chocolatey_package
+      artifacts: true
+    - job: gitlab_release
+      artifacts: false
+  tags:
+    - docker
+  before_script:
+    - |
+      echo "Install git cli"
+      apt-get update
+      apt-get install -y git
+      git clone https://gitlab.com/phellams/automator-devops.git
+  script:
+    - |
+      chmod +x ./automator-devops/scripts/deploy/deploy-choco.sh || exit 1
+      ./automator-devops/scripts/deploy/deploy-choco.sh || exit 1
+      
+
+# Deploy PSGallery module via zip and Publish modules
+upload_psgallery:
+  <<: *deploy_template
+  needs:
+   - job: zip_build
+     artifacts: true
+   - job: psmpacker_build
+     artifacts: true
+   - job: gitlab_release
+     artifacts: false
+  script:
+    - |
+      pwsh -c ./automator-devops/scripts/deploy/deploy-psgallary.ps1 || exit 1

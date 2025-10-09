@@ -1,3 +1,4 @@
+using module ..\CommitTypeAttribute.psm1
 <#
 .SYNOPSIS
 New-Commit is used to generate a new Conventional Commit message and return it as and object, string, or string with markdown syntax
@@ -28,6 +29,7 @@ New-Commit -Type feat -Description "CommitFusion PowerShell class library" -Foot
 - Footer
 - Gituser
 - Gitgroup
+- ForMarkdown
 
 .OUTPUTS
 psobject or String
@@ -40,15 +42,18 @@ Function New-Commit {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
-        # valuedateset Dynamic values
-        [ValidateScript({
-                if ($_ -in (Get-CommitTypes -Raw).type) {
-                    $true
-                }
-                else {
-                    throw "Invalid Type '$($_)', please use one of the following values: $((Get-CommitTypes -Raw).type -join ',')"
-                }
-            })]
+        # Custom Attribute : valudate Dynamic values
+        [CommitTypeAttribute()]
+        # Tab Complete Dynamic values
+        [ArgumentCompleter({ # ArgumentCompleter can be named anything
+            param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+            # Get the valid commit types
+            $validTypes = (Get-CommitTypes -Raw).type
+            # Return the types that match the word to complete
+            $validTypes | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {
+                New-Object -Type System.Management.Automation.CompletionResult -ArgumentList $_, $_, 'ParameterValue', $_
+            }
+        })]
         [string]$Type,
 
         [Parameter(Mandatory = $false, Position = 1)]
@@ -81,11 +86,22 @@ Function New-Commit {
         [Parameter(Mandatory = $false)]
         [string[]]$BreakingChanges,
 
-        [Parameter(Mandatory = $false, valuefrompipeline = $true)]
+        [Parameter(Mandatory = $false)]
+        [validateSet('major', 'minor', 'patch', IgnoreCase = $true)]
+        [string]$SemVer,
+
+        [Parameter(Mandatory = $false)]
         [switch]$AsString,
 
-        [Parameter(Mandatory = $false, valuefrompipeline = $true)]
-        [switch]$AsObject
+        [Parameter(Mandatory = $false)]
+        [switch]$AsObject,
+
+        [Parameter(Mandatory = $false)]
+        [switch]$ForMarkdown,
+
+        [parameter(Mandatory = $false)]
+        [switch]$NoEmoji
+
     )
 
     process {
@@ -107,19 +123,28 @@ Function New-Commit {
         if ($Footer -ne $true) {
             $Footer = $null
         }
-        if ($GitUser -eq $null) {
+        if ($null -eq $GitUser) {
             $GitUser = $null
         }
-        if ($GitGroup -eq $null) {
+        if ($null -eq $GitGroup) {
             $GitGroup = $null
         }
-        if ($Scope -eq $null) {
+        if ($null -eq $Scope) {
             $Scope = $null
         }
         if ($AsString -and $AsObject) {
             throw "Cannot use both -AsString and -AsObject"
         }
-        
+        if($null -eq $SemVer){
+            $SemVer = $null
+        }
+        if($ForMarkdown -eq $true) {
+            $forMarkDown = $true
+        }
+        else {
+            $forMarkDown = $null
+        }
+
         (Get-CommitFusionModuleInstance).ConventionalCommit(
             $Type,
             $Scope,
@@ -131,16 +156,28 @@ Function New-Commit {
             $FeatureAdditions,
             $BugFixes,
             $FeatureNotes,
-            $BreakingChanges);
+            $BreakingChanges,
+            $SemVer,
+            $forMarkDown
+            );
 
         if ($AsString) {
-            return (Get-CommitFusionModuleInstance).AsStringForCommit()
+            if ((Get-CommitFusionModuleInstance).EmojiEnabled -eq $false) {
+                return (Get-CommitFusionModuleInstance).CleanEmojis((Get-CommitFusionModuleInstance).AsStringForCommit())
+            }else{
+                return (Get-CommitFusionModuleInstance).AsStringForCommit() 
+            }  
         }
         if ($AsObject) {
             return (Get-CommitFusionModuleInstance).AsObject()
         }
         if (-not $AsString -and -not $AsObject) {
-            return (Get-CommitFusionModuleInstance).AsStringForCommit()
+            if ((Get-CommitFusionModuleInstance).EmojiEnabled -eq $false) {
+                return (Get-CommitFusionModuleInstance).CleanEmojis((Get-CommitFusionModuleInstance).AsStringForCommit())
+            }
+            else {
+                return (Get-CommitFusionModuleInstance).AsStringForCommit() 
+            }
         }
     }
     end {
