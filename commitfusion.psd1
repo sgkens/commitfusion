@@ -1,7 +1,7 @@
 @{
 
     RootModule             = "commitfusion.psm1"
-    ModuleVersion          = '0.9.2'
+    ModuleVersion          = '0.9.3'
     CompatiblePSEditions   = @()
     GUID                   = 'c7e7262e-8c66-4c0d-9454-9927449c2927'
     Author                 = 'Garvey k. Snow'
