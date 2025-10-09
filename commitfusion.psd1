@@ -69,34 +69,7 @@ CommitFusion helps you create standardized commit messages that follow the [Conv
 - 👤 Footer (with GitUser and timestamp)
 
 Additionally, CommitFusion integrates modified [gitmoji](https://gitmoji.dev) support to add visual context to your commits, if Emotocons are not your thing simply disable them, via `New-Commit -NoEmojis` paramete. or by use the dedicated cmdlets `Enable-CommitFusionEmojis` and `Disable-CommitFusionEmojis`. before using `New-Commit` or `Set-Commit` respectively.
-
-## Quick Start
-
-### 1. Installation
-
-Install directly from the PowerShell Gallery:
-
-```powershell
-Install-Module -Name 'CommitFusion' -Scope CurrentUser
-Import-Module CommitFusion
-```
-
-### 2. Basic Usage
-
-View available commit types:
-```powershell
-Get-CommitTypes
-```
-
-Generate a commit message:
-```powershell
-New-Commit -Type 'feat' -Scope 'ui' -Description 'add new dashboard component' -Notes 'Implemented responsive design'
-```
-
-Commit changes with the generated message:
-```powershell
-New-Commit -Type 'fix' -Scope 'api' -Description 'resolve authentication issue' -Notes 'Fixed token validation' | Set-Commit -Confirm
-```
+Commit -Type 'fix' -Scope 'api' -Description 'resolve authentication issue' -Notes 'Fixed token validation' | Set-Commit -Confirm
 "@
         }
     }
