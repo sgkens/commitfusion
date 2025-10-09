@@ -93,7 +93,11 @@ function Get-ReleaseNotes {
         [Parameter(Mandatory = $false)]
         [switch]$AsObject,
         [Parameter(Mandatory = $false)]
-        [switch]$OnlyMessageHead
+        [switch]$OnlyMessageHead,
+        [Parameter(Mandatory = $false)]
+        [switch]$AheadOnly,
+        [Parameter(Mandatory = $false)]
+        [string]$MainBranch
     )
     begin {
 
@@ -117,6 +121,10 @@ function Get-ReleaseNotes {
             return $link
         }
 
+        if(!$MainBranch){
+            $MainBranch = "main"
+        }
+
     }
     process {
         # Get the current branch name
@@ -127,7 +135,12 @@ function Get-ReleaseNotes {
         # return as an array and exit
         if ($OnlyMessageHead) {
             $commitArray = @()
-            $gitLog = git log $currentBranch --pretty=format:"%s"
+            $gitlab = $null
+            if($AheadOnly){
+                $gitLog = git log origin/$MainBranch.. --pretty=format:"%s"
+            }else{
+                $gitLog = git log $currentBranch --pretty=format:"%s"
+            }
             foreach ($line in $gitLog) {
                 $line = $line.Trim()
                 # control mardown new dot points with correct spacing
@@ -136,7 +149,12 @@ function Get-ReleaseNotes {
             return $commitArray
         }
         else {
-            $gitLog = git log $currentBranch --pretty=format:"%H%n%B" # Full commit message body
+            if ($AheadOnly) {
+                $gitLog = git log origin/$MainBranch.. --pretty=format:"%H%n%B" 
+            }
+            else {
+                $gitLog = git log $currentBranch --pretty=format:"%H%n%B" 
+            }
 
             # if branch is not main or master, get git log from brain main/master
             if ($currentBranch -ne "main" -or $currentBranch -ne "master") {
@@ -224,31 +242,31 @@ function Get-ReleaseNotes {
             [string]$markdown = ""
             foreach ($category in $categories.GetEnumerator()) {
                 Write-Debug "Processing category: $($category.Key)"
-                if ($Notes -eq $true -and $category.Key -eq "Notes:") {
+                if ($Notes -eq $true -and $category.Key -eq "Notes:" -and $category.value['entry'].Count -gt 0) {
                     $markdown += "## $($category.Key)`n`n"
                     foreach ($entry in $category.value['entry']) {
                         $markdown += " $entry`n"
                     }
                 }
-                if ($FeatureNotes -eq $true -and $category.Key -eq "Feature Notes:") {
+                if ($FeatureNotes -eq $true -and $category.Key -eq "Feature Notes:" -and $category.value['entry'].Count -gt 0) {
                     $markdown += "## $($category.Key)`n`n"
                     foreach ($entry in $category.value['entry']) {
                         $markdown += " $entry`n"
                     }
                 }
-                if ($FeatureAdditions -eq $true -and $category.Key -eq "Feature Additions:") {
+                if ($FeatureAdditions -eq $true -and $category.Key -eq "Feature Additions:" -and $category.value['entry'].Count -gt 0) {
                     $markdown += "## $($category.Key)`n`n"
                     foreach ($entry in $category.value['entry']) {
                         $markdown += " $entry`n"
                     }
                 }
-                if ($FeatureUpdates -eq $true -and $category.Key -eq "Feature Updates:") {
+                if ($FeatureUpdates -eq $true -and $category.Key -eq "Feature Updates:" -and $category.value['entry'].Count -gt 0) {
                     $markdown += "## $($category.Key)`n`n"
                     foreach ($entry in $category.value['entry']) {
                         $markdown += " $entry`n"
                     }
                 }
-                if ($BreakingChanges -eq $true -and $category.Key -eq "Breaking Changes:") {
+                if ($BreakingChanges -eq $true -and $category.Key -eq "Breaking Changes:" -and $category.value['entry'].Count -gt 0) {
                     $markdown += "## $($category.Key)`n`n"
                     foreach ($entry in $category.value['entry']) {
                         $markdown += " $entry`n"

@@ -1,4 +1,5 @@
 using module ..\CommitTypeAttribute.psm1
+using module .\private\remove-emojis.psm1
 <#
 .SYNOPSIS
 New-Commit is used to generate a new Conventional Commit message and return it as and object, string, or string with markdown syntax
@@ -97,7 +98,10 @@ Function New-Commit {
         [switch]$AsObject,
 
         [Parameter(Mandatory = $false)]
-        [switch]$ForMarkdown
+        [switch]$ForMarkdown,
+
+        [parameter(Mandatory = $false)]
+        [switch]$NoEmoji
 
     )
 
@@ -159,13 +163,22 @@ Function New-Commit {
             );
 
         if ($AsString) {
-            return (Get-CommitFusionModuleInstance).AsStringForCommit()
+            if ((Get-CommitFusionModuleInstance).EmojiEnabled -eq $false) {
+                return (Get-CommitFusionModuleInstance).CleanEmojis((Get-CommitFusionModuleInstance).AsStringForCommit())
+            }else{
+                return (Get-CommitFusionModuleInstance).AsStringForCommit() 
+            }  
         }
         if ($AsObject) {
             return (Get-CommitFusionModuleInstance).AsObject()
         }
         if (-not $AsString -and -not $AsObject) {
-            return (Get-CommitFusionModuleInstance).AsStringForCommit()
+            if ((Get-CommitFusionModuleInstance).EmojiEnabled -eq $false) {
+                return (Get-CommitFusionModuleInstance).CleanEmojis((Get-CommitFusionModuleInstance).AsStringForCommit())
+            }
+            else {
+                return (Get-CommitFusionModuleInstance).AsStringForCommit() 
+            }
         }
     }
     end {

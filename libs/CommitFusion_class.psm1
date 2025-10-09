@@ -29,6 +29,7 @@ class CommitFusion {
     [PSObject] $IconSet
     [string]   $GitSource
     [bool]     $ForMarkDown
+    [bool]     $EmojiEnabled
 
 
     <# .------------inf------------.
@@ -51,6 +52,7 @@ class CommitFusion {
             $this.GitMojiIndex = $content_GitMojiIndex | ConvertFrom-Json
             $this.EmojiIndex = $content_EmojiIndex | ConvertFrom-Json
             $this.CFConfig = $content_CFConfig | ConvertFrom-Json
+            $this.EmojiEnabled = $true # Set default emoji enabled
 
             #$this.EmojiIndex = Get-Content -Path "$($this.ModuleRoot)\Unicode-Index.json" -Raw | ConvertFrom-Json
             #$this.CFConfig = Get-Content -Path "$($this.ModuleRoot)\CommitFustion.json" -Raw | ConvertFrom-Json
@@ -511,6 +513,33 @@ class CommitFusion {
         
     }
 
+    <#  .------------inf------------.
+        - DisableEmojis
+        - Description: Sets the emoji class var to false
+        - @param none
+        - @Return: [pscustomobject]
+        .--------------------------. #>
+    [void] DisableEmojis(){
+
+        $this.EmojiEnabled = $false
+    }
+   
+    <#  .------------inf------------.
+        - EnableEmojis
+        - Description: Sets the emoji class var to true
+        - @param none
+        - @Return: [pscustomobject]
+        .--------------------------. #>
+    [void] EnableEmojis(){
+        
+        $this.EmojiEnabled = $true
+    }
+
+    [string]CleanEmojis([string]$string){
+        $emojiPattern = '[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF]'
+        $result = $string -replace $emojiPattern, ''
+        return $result.ToString()
+    }
     <#  .------------inf------------.
         Method: WriteTemplateFile
         Description: Write commit template to .md template file, 
