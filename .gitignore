@@ -1,9 +1,7 @@
-dist/
-docs/_site/
-docs/Gemfile.lock
-testResults.xml
+dist
+tools/commit-helper.ps1
+tools/VERIFICATION.txt
+build.env
 coverage.xml
-.vscode/
-.idea/
-tools/VERIFICATIONS.txt
-test/commitfusion-test-repo/.git/
+testResults.xml
+libs/help_metadata
