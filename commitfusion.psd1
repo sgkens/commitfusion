@@ -48,7 +48,7 @@
             LicenseUrl                 = 'https://choosealicense.com/licenses/mit'
             ProjectUrl                 = 'https://gitlab.com/phellams/commitfusion'
             IconUrl                    = 'https://raw.githubusercontent.com/phellams/phellams-general-resources/main/logos/commitfusion/dist/png/commitfusion-logo-512x512.png'
-            ReleaseNotes               = 'https://gitlab.com/phellams/commitfusion'
+            ReleaseNotes               = @()
             Prerelease                 = 'beta'
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
