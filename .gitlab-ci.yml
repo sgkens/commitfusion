@@ -14,6 +14,7 @@ default:
       - |
         git fetch --all
         git clone https://gitlab.com/phellams/automator-devops.git
+        git config --global --add safe.directory ./
 
 #---------------------------------------------
 # Define the stages of the pipeline
