@@ -1,4 +1,4 @@
-using module private/remove-emojis.psm1
+using module private/Remove-Emojis.psm1
 
 <#
     .SYNOPSIS 
