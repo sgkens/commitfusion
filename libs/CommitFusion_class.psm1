@@ -45,8 +45,8 @@ class CommitFusion {
         $OutputEncoding = [System.Text.Encoding]::UTF8
         try{
             $content_GitMojiIndex = Get-Content -path "$PSScriptroot\gitmojis.json" -Raw
-            $content_EmojiIndex = Get-Content -Path "$PSScriptroot\Unicode-Index.json" -Raw
-            $content_CFConfig = Get-Content -Path "$PSScriptroot\CommitFustion.types.json" -Raw
+            $content_EmojiIndex = Get-Content -Path "$PSScriptroot\unicode-index.json" -Raw
+            $content_CFConfig = Get-Content -Path "$PSScriptroot\commitfustion.types.json" -Raw
             # TODO: implimented .net lib json parser to fix this issue
             # TODO: Use SimpleSpectreWrapper to fix this issue and .trim() the output
             $this.GitMojiIndex = $content_GitMojiIndex | ConvertFrom-Json
