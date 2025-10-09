@@ -1,5 +1,4 @@
 using module ..\CommitTypeAttribute.psm1
-using module .\private\remove-emojis.psm1
 <#
 .SYNOPSIS
 New-Commit is used to generate a new Conventional Commit message and return it as and object, string, or string with markdown syntax
