@@ -1,7 +1,7 @@
 @{
 
     RootModule             = "commitfusion.psm1"
-    ModuleVersion          = '0.9.6'
+    ModuleVersion          = '0.9.7'
     CompatiblePSEditions   = @()
     GUID                   = 'c7e7262e-8c66-4c0d-9454-9927449c2927'
     Author                 = 'Garvey k. Snow'
@@ -48,7 +48,7 @@
             LicenseUrl                 = 'https://choosealicense.com/licenses/mit'
             ProjectUrl                 = 'https://gitlab.com/phellams/commitfusion'
             IconUrl                    = 'https://raw.githubusercontent.com/phellams/phellams-general-resources/main/logos/commitfusion/dist/png/commitfusion-logo-512x512.png'
-            ReleaseNotes               = 'https://gitlab.com/phellams/commitfusion'
+            ReleaseNotes               = @()
             Prerelease                 = 'beta'
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
