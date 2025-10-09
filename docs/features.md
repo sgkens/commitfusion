@@ -1,84 +1,108 @@
-
-#  Module Features
-
+---
+layout: default
+title: Features
+nav_order: 3
+description: "Module Features"
+permalink: /features
 ---
 
-#### <i class="fa-regular fa-paper-plane" style="color: #63E6BE;"></i> Conventional Commit
+# CommitFusion Features
 
-Commit Messages follows the [🧷Conventional Commits specification](https://www.onventionalcommits.org/en/v1.0.0/) standard with added sections to the body that include ***Notes***, ***Feature Notes***, ***Feature Additions***, ***Fixes***, ***Bug Fixes***, ***Beaking Changes*** and ***Footer*** containing the `GitUser` and the log date. this module imployes the use of emoji's see: [🧷gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) and [🧷gitmoji.dev](https://gitmoji.dev).
+CommitFusion implements the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) with enhanced features including notes, feature tracking, and emoji support via [gitmoji](https://gitmoji.dev).
 
-#### <i class="fa-regular fa-paper-plane" style="color: #63E6BE;"></i> Gitmoji Custom Schema
+## Core Features
 
-Commits in CommitFusion utilize a modified version of the [🧷gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) see [🧷gitmoji.dev](https://gitmoji.dev).
+### 🔄 Git Integration
+- Seamless commit application with `Set-Commit`
+- Automatic Git user information retrieval
+- Repository state validation
+- Changelog management
 
-#### <i class="fa-regular fa-paper-plane" style="color: #63E6BE;"></i> Customizable Commit Message
+### ⚡ PowerShell Integration
+- Rich tab completion for commit types
+- Strict parameter validation
+- Full pipeline support
+- PSScriptAnalyzer compliance
 
-Generate fully customizable commit messages. The message is broken up into several subparts: ***Notes***, ***Feature Notes***, ***Feature Additions***, ***Fixes***, ***Bug Fixes***, ***Beaking Changes*** and ***Footer*** 
+### 🎨 Enhanced Commit Messages
 
-Commit Message can either be applied using : [*Set-Commit*](/commitfusion/cmdlets#set-commit) or formatted in markdown and added to a file ie `CHANGELOG.md` using See: [*Format-FusionMD*](/commitfusion/cmdlets#format-fusionmd), or simply output to the console.
+CommitFusion generates structured commit messages with the following components:
 
-🔹 **Commit Message Layout:**
-> *[e]*=utf8-emotocon
+```text
+📝 type(scope): description
 
-  ```text
-  [e] Type(Scope): Description
+🏗️ Build: semver
 
-  [e] Build: Semver(Major|Minor|Patch)
+📋 Notes:
+  - Note details
+  - Additional information
 
-  [e] Notes:
-    - <Note>
-    - <Note>  
+✨ Feature Additions:
+  - New feature 1
+  - New feature 2
 
-  [e] Feature Notes: << Might change to Updates instead, dont need two notes
-    - <feature>
-    - <feature>
+🐛 Bug Fixes:
+  - Fix description
+  - Issue resolution
 
-  [e] Feature Additions:
-    - <additions>
-    - <additions>
+⚠️ Breaking Changes:
+  - Major change 1
+  - Migration notes
 
-  [e] Feature Updates: << add to commitfition class
-    - <updates>
-    - <updates>
+👤 @username 📅 timestamp
+```
 
-  [e] Bug Fixes:
-    - <bugfix>
-    - <bugfix>
+### 📊 Version Management
 
-  [e] Fixes: << add to commitfition class
-    - <fix>
-    - <fix>
+Automatic semantic versioning based on commit types:
 
-  [e] GitUser @ [e] DateTime
-  ```
+| Type | Version Bump | Example |
+|------|--------------|---------|
+| breaking | major | 1.0.0 → 2.0.0 |
+| feat | minor | 1.0.0 → 1.1.0 |
+| fix | patch | 1.0.0 → 1.0.1 |
 
-#### <i class="fa-regular fa-paper-plane" style="color: #63E6BE;"></i> Output Commit Message as Markdown:
+## Advanced Features
 
-> 🥝Remove Note for production Note! 
-> Change Format-FusionMD to Format-Markdown
+### 📝 Markdown Integration
 
-> 🥝Remove Note for production Note! 
-> Perhaps Decom Format-FusionMD and just use Get-ReleaseNotes, Format-FusionMD converts the Commit String to a markdown string, Get-ReleaseNotes convertts the gitlog to a string and joins the commits together, so perhaps keep format-fusionmd as the logic and function is different.
+- Convert commits to Markdown format
+- Automatic changelog updates
+- Custom template support
+- Pipeline-friendly formatting
 
-Commit messages are optionaly written to a template file see [*Format-FusionMD*](/cmdlets#format-fusionmd) and joined with the current contents of the `CHANGELOG.md` or **specified** file name if the `-LogFile` switch is used.
+### 🎯 Semantic Version Analysis
 
-#### <i class="fa-regular fa-paper-plane" style="color: #63E6BE;"></i>   Semantic(***semver***) Version Generator:
+`Get-GitAutoVersion` analyzes commit history to determine version increments:
 
-`Get-GitAutoVersion` performs a reverse parse of `git log --pretty=format:"%s%n%b"` and using regular expressions to determine the appropriate version increment for your build. The possible increments are "**major**," "**minor**," "**patch**," or `0.1.0` if no suitable increment is found.
+- **Major**: Breaking changes (resets minor & patch)
+- **Minor**: New features (resets patch)
+- **Patch**: Bug fixes and small changes
 
-> #### 🥏 Function Logic
-  - If "*patch*" is parsed, `Get-GiAutoVersion` increments the patch number (***++patch***), or if already at the latest patch, it resets the patch to `0`.
-  - If "*minor*" is parsed, the minor number is incremented (***++minor***), and the patch and minor numbers are reset to `0`.
-  - If "*major*" is parsed, the major number is incremented (***++major***), and it never resets back to `0`.
+### 🎨 Emoji Support
 
-#### Gitmoji Index:
+Two comprehensive emoji collections:
 
-- Parses [🧷carloscuesta gitmojis Schema](https://github.com/carloscuesta/gitmoji/blob/master/packages/gitmojis/src/gitmojis.json) icon set, returns `PSObject`, Miscellaneous function.
+1. **Gitmoji Integration**
+   - Standard git-specific emojis
+   - Based on [gitmojis schema](https://github.com/carloscuesta/gitmoji)
 
-####  Unicode Emoji Index:
+2. **Unicode Emoji Support**
+   - Full unicode emoji catalog
+   - Sourced from [unicode.org](https://unicode.org/emoji/charts/emoji-list.html)
 
-- Parses scraped version of [🧷unicode.org](https://unicode.org/emoji/charts/emoji-list.html) icon set, returns `PSObject`, Miscellaneous function.
+## Usage Example
 
-<div align="right">
-  <a href="/commitfusion/install"> Installing Commit Fusion </a>
-</div>
+```powershell
+New-Commit -Type feat -Description "Add OAuth support" `
+          -Scope auth `
+          -Notes "Requires API key" `
+          -FeatureAdditions @(
+              "OAuth 2.0 flow",
+              "Token refresh"
+           ) |
+Format-FusionMD |
+Update-Changelog
+```
+
+[Back to top](#){: .btn .btn-purple} [Installing CommitFusion](/install){: .btn .btn-purple}

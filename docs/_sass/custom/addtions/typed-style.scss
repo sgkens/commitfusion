@@ -1,0 +1,27 @@
+/*
+Typed Js Styling for rogue for jekyll base16.dark theme
+*/
+.typed {
+    overflow: hidden;
+    min-height: 300px;
+    border-top: 10px solid gray;
+}
+
+.typed .poweredby {
+    position: relative;
+    font-size: 12px;
+    border-left: 10px solid rgba(199, 38, 38, 0.647);
+    padding: 2px;
+
+}
+
+/*Typed Tab*/
+.accordion>details>p {
+    display: block !important;
+    overflow: hidden !important;
+}
+
+.accordion>details>div {
+    display: block !important;
+    overflow: hidden !important;
+}
