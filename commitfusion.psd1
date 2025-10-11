@@ -55,6 +55,7 @@
             # CHOCOLATE ---------------------
             LicenseUri                 = 'https://choosealicense.com/licenses/mit'
             ProjectUri                 = 'https://gitlab.com/phellams/commitfusion.git'
+            IconUri                    = 'https://raw.githubusercontent.com/phellams/phellams-general-resources/main/logos/commitfusion/dist/png/commitfusion-logo-512x512.png'
             Docsurl                    = 'https://pages.gitlab.io/phellams/commitfusion'
             MailingListUrl             = 'https://gitlab.com/phellams/commitfusion/issues'
             projectSourceUrl           = 'https://gitlab.com/phellams/commitfusion'
