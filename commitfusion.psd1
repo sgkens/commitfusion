@@ -1,7 +1,7 @@
 @{
 
     RootModule             = "commitfusion.psm1"
-    ModuleVersion          = '0.9.7'
+    ModuleVersion          = '0.9.8'
     CompatiblePSEditions   = @()
     GUID                   = 'c7e7262e-8c66-4c0d-9454-9927449c2927'
     Author                 = 'Garvey k. Snow'
@@ -10,9 +10,9 @@
     Description            = 'Conventional Commit Message Generator'
     PowerShellVersion      = '7.0'
     PowerShellHostName     = ''
-    PowerShellHostVersion  = ''
+    PowerShellHostVersion  = '' 
     DotNetFrameworkVersion = ''
-    ClrVersion             = ''
+    ClrVersion             = '00.0.01'
     ProcessorArchitecture  = ''
     RequiredModules        = @()
     RequiredAssemblies     = @()
@@ -52,6 +52,9 @@
             Prerelease                 = 'beta'
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
+            # CHOCOLATE ---------------------
+            LicenseUri                 = 'https://choosealicense.com/licenses/mit'
+            ProjectUri                 = 'https://gitlab.com/phellams/commitfusion.git'
             Docsurl                    = 'https://pages.gitlab.io/phellams/commitfusion'
             MailingListUrl             = 'https://gitlab.com/phellams/commitfusion/issues'
             projectSourceUrl           = 'https://gitlab.com/phellams/commitfusion'
@@ -72,6 +75,7 @@ Additionally, CommitFusion integrates modified [gitmoji](https://gitmoji.dev) su
 Commit -Type 'fix' -Scope 'api' -Description 'resolve authentication issue' -Notes 'Fixed token validation' | Set-Commit -Confirm
 "@
         }
+        # CHOCOLATE ---------------------
     }
     HelpInfoURI            = 'https://gitlab.com/phellams/commitfusion/blob/main/README.md'
     DefaultCommandPrefix   = ''
