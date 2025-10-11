@@ -1,7 +1,7 @@
 @{
 
     RootModule             = "commitfusion.psm1"
-    ModuleVersion          = '0.9.8'
+    ModuleVersion          = '0.9.9'
     CompatiblePSEditions   = @()
     GUID                   = 'c7e7262e-8c66-4c0d-9454-9927449c2927'
     Author                 = 'Garvey k. Snow'
@@ -55,6 +55,7 @@
             # CHOCOLATE ---------------------
             LicenseUri                 = 'https://choosealicense.com/licenses/mit'
             ProjectUri                 = 'https://gitlab.com/phellams/commitfusion.git'
+            IconUri                    = 'https://raw.githubusercontent.com/phellams/phellams-general-resources/main/logos/commitfusion/dist/png/commitfusion-logo-512x512.png'
             Docsurl                    = 'https://pages.gitlab.io/phellams/commitfusion'
             MailingListUrl             = 'https://gitlab.com/phellams/commitfusion/issues'
             projectSourceUrl           = 'https://gitlab.com/phellams/commitfusion'
