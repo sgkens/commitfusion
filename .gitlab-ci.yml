@@ -36,18 +36,36 @@ workflow:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"'
       when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - "docs/**/*"
+        - "**/*.md"
+      when: never 
+    - when: on_success 
 
 .deploy_template: &deploy_template
   stage: deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - "docs/**/*"
+        - "**/*.md"
+      when: never
+    - when: on_success 
 
 .release_template: &release_template
   stage: release
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - "docs/**/*"
+        - "**/*.md"
+      when: never 
+    - when: on_success
 
 
 #---------------------------------------------
